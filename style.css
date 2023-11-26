@@ -83,7 +83,9 @@ section{
 }
 
 .home-img img{
+    margin-left: 1rem;
     width: 35vw;
+    border-radius: 20px;
     animation: floatImage 3s ease-in-out infinite;
 }
 
@@ -171,6 +173,7 @@ span {
 
 .about-img img{
     width: 35vw;
+    border-radius: 20px;
 }
 
 .heading{
