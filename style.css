@@ -13,10 +13,10 @@
 
 :root{
     /* Set 1 */
-    /* --bg-color: #76dfff;
+    --bg-color: #5aaac3;
     --second-bg-color: #e3c19f;
     --text-color: #000000;
-    --main-color: rgb(100, 47, 0); */
+    --main-color: rgb(100, 47, 0);
     
     /* Set 2 */
     /* --bg-color: #3498db;
@@ -29,18 +29,18 @@
     --second-bg-color: #6a4e01;
     --text-color: #000000;
     --main-color: #e4c087; */
-    
-    /* Set 4 - GOOFY*/
-    /* --bg-color: #008080;
-    --second-bg-color: #b13328;
-    --text-color: #000000;
-    --main-color: #ffd900; */
 
     /* Set 5  - Snowy vibe*/
-    --bg-color: #3498db;
+    /* --bg-color: #3498db;
     --second-bg-color: #08729f;
     --text-color: #000000;
-    --main-color: #ffffff;
+    --main-color: #ffffff; */
+
+    /* Set 1 */
+    /* --bg-color: #00929a;
+    --second-bg-color: #001049;
+    --text-color: #ffffff;
+    --main-color: rgb(255, 255, 255); */
     
 
 }
