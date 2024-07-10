@@ -30,7 +30,7 @@ window.onscroll = () => {
     /*==================== sticky navbar ====================*/
     let header = document.querySelector('header');
 
-    header.classList.toggle('sticky', window.scrollY >100);
+    header.classList.toggle('sticky', window.scrollY >10);
 
     /*==================== remove toggle icon and novbar when click on navbar link (scroll) ====================*/
     menuIcon.classList.remove('bx-x');
