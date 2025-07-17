@@ -40,13 +40,13 @@ export const StarBackground = () => {
     };
 
     const generateMeteors = () => {
-        const numberOfMeteors = 3;
+        const numberOfMeteors = Math.random() * 7;
         const newMeteors = [];
 
         for (let i = 0; i < numberOfMeteors; i++) {
             newMeteors.push({
                 id: i,
-                size: Math.random() * 1 + 1,
+                size: Math.random() * 2,
                 x: Math.random() * 100,
                 y: Math.random() * 20, // start from the top
                 animationDelay: Math.random() * 15 + 5, // random delay for each meteor
