@@ -1,3 +1,6 @@
-export const cn = () => {
-    return "This is a utility function to combine class names.";
+import {clsx} from 'clsx'
+import { twMerge } from 'tailwind-merge';
+
+export const cn = (...inputs) => {
+    return twMerge(clsx(inputs));
 }
