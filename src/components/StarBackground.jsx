@@ -46,7 +46,7 @@ export const StarBackground = () => {
         for (let i = 0; i < numberOfMeteors; i++) {
             newMeteors.push({
                 id: i,
-                size: Math.random() * 2,
+                size: Math.random() * 4,
                 x: Math.random() * 100,
                 y: Math.random() * 20, // start from the top
                 animationDelay: Math.random() * 15 + 5, // random delay for each meteor
@@ -73,6 +73,7 @@ export const StarBackground = () => {
                     }}
                 />
             ))}
+
             {meteors.map((meteor) => (
                 <div
                     key={meteor.id}
