@@ -6,12 +6,14 @@ import { SkillsSections } from "../components/SkillsSections";
 import { ProjectsSection } from "../components/ProjectsSection";
 import { ContactSection } from "../components/ContactSection";
 import { Footer } from "../components/Footer";
+import { CloudBackground } from "../components/CloudBackground";
 
 export const Home = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
         {/* Background Effects */}
         <StarBackground />
+        <CloudBackground />
         
         {/* Navbar */}
         <NavBar />

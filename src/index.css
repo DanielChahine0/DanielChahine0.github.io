@@ -10,6 +10,7 @@
 
   --color-card: var(--card);
 
+  --animate-move-clouds: move-clouds 2s linear infinite;
   --animat-float: float 6s ease-in-out infinite;
   --animate-flash: flash 2s linear infinite;
   --animate-pulse-subtle: pulse-subtle 4s ease-in-out infinite;
@@ -20,6 +21,15 @@
   --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
   --animate-meteor: meteor 5s linear infinite;
 
+
+  @keyframes move-clouds {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
 
   @keyframes float {
     0%,
@@ -180,6 +190,12 @@
   box-shadow: 0 0 10px 2px #ffffff66;
 }
 
+@utility cloud {
+  @apply absolute bg-black rounded-full;
+  /* rgba(255, 255, 255, 0.2) => #ffffff33 */
+  box-shadow: 0 0 10px 2px #ffffff33;
+}
+
 @utility meteor {
   @apply absolute bg-linear-to-r from-white via-white to-transparent rounded-full;
   /* rgba(255, 255, 255, 0.3) => #ffffff4d */
@@ -209,6 +225,16 @@
   .dark .star {
     opacity: 1 !important;
     pointer-events: auto;
+  }
+  
+  .cloud {
+    opacity: 1 !important;
+    pointer-events: auto;
+  }
+
+  .dark .cloud {
+    opacity: 0 !important;
+    pointer-events: none;
   }
   
 }
