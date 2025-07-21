@@ -293,12 +293,12 @@
   }
   
   .cloud-random-1 {
-    animation: cloud-move-1 7s ease-in-out infinite;
+    animation: cloud-move-1 18s ease-in-out infinite;
   }
   .cloud-random-2 {
-    animation: cloud-move-2 10s ease-in-out infinite;
+    animation: cloud-move-2 24s ease-in-out infinite;
   }
   .cloud-random-3 {
-    animation: cloud-move-3 12s ease-in-out infinite;
+    animation: cloud-move-3 30s ease-in-out infinite;
   }
 }
