@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils'
 import { X, Menu } from 'lucide-react';
 import { useEffect, useState } from 'react'
+import { ThemeToggle } from './ThemeToggle'; // Import the ThemeToggle component
 
 const navItems = [
     { name: 'Home', href: '#hero' },
@@ -47,23 +48,26 @@ export const NavBar = () => {
                 </a>
 
                 {/* Desktop Version */}
-                <div className='hidden md:flex space-x-8'>
+                <div className='hidden md:flex items-center space-x-8'>
                     {navItems.map((item,key) => (
                         <a href={item.href} key={key} className='text-foreground/80 hover:text-primary transition-colors duration-200'>
                             {item.name}
                         </a>
                     ))}
+                    <ThemeToggle /> {/* Add ThemeToggle to desktop nav */}
                 </div>
         
                 {/* Mobile Version */}
-                
-                 <button
-                    onClick={() => setIsMenuOpen((prev) => !prev)}
-                    className="md:hidden p-2 text-foreground z-50"
-                    aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
-                >
-                    {isMenuOpen ? <X size={24} /> : <Menu size={24} />}{" "}
-                </button>
+                <div className="flex items-center md:hidden">
+                    <ThemeToggle /> {/* Add ThemeToggle to mobile view */}
+                    <button
+                        onClick={() => setIsMenuOpen((prev) => !prev)}
+                        className="p-2 text-foreground z-50"
+                        aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
+                    >
+                        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
+                </div>
                 
                 <div className={cn(
                     "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col",
@@ -83,11 +87,7 @@ export const NavBar = () => {
                         ))}
                     </div>
                 </div>
-                
-
             </div>
-
-
         </nav>
     );
 }

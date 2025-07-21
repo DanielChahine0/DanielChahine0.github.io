@@ -4,9 +4,13 @@ export const AboutSection = () => {
     return (
     <section id="about" className="py-24 px-4 position-relative">
         <div className="container mx-auto max-w-5xl">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-                About <span className="text-primary">Me</span>
-            </h2>
+            <div className="text-center flex flex-row items-center justify-center mb-12 gap-2">
+                <User size={45} className="text-primary"/>
+                <h2 className="text-3xl md:text-4xl font-bold">
+                    About Me
+                </h2>
+            </div>
+            
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div className="space-y-6">
