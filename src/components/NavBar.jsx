@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { ThemeToggle } from './ThemeToggle'; // Import the ThemeToggle component
 
 const navItems = [
-    { name: 'Home', href: '#hero' },
     { name: 'About', href: '#about' },
     { name: 'Experience', href: '#experience' },
     { name: 'Projects', href: '#projects' },
@@ -34,27 +33,27 @@ export const NavBar = () => {
         <nav 
             className= {cn(
                 "fixed w-full z-40 transition-all duration-300",
-                isScrolled ? "py-3 bg-background/80 backdrop-blur-md shadow-xs" : "py-5"
+                isScrolled ? "py-2 bg-background/80 backdrop-blur-md shadow-xs" : "py-4"
             )}
         >
-            <div className='container flex items-center justify-between'>
+            <div className='container flex items-center justify-between px-2'> {/* Adjust padding here */}
                 <a 
-                    className='text-xl font-bold text-primary flex items-center'
-                    href="#hero"
+                    className='text-2xl font-bold flex items-center hover:scale-105 transition-transform duration-300' // Adjust margin here
+                    href="#"
                 >
                     <span className='relative z-10'>
-                        <span className='text-glow text-foreground'>Daniel Chahine</span>
+                        <span className='text-glow'>Daniel Chahine</span>
                     </span>
                 </a>
 
                 {/* Desktop Version */}
-                <div className='hidden md:flex items-center space-x-8'>
-                    {navItems.map((item,key) => (
+                <div className='hidden md:flex items-center space-x-6'>
+                    {navItems.map((item, key) => (
                         <a href={item.href} key={key} className='text-foreground/80 hover:text-primary transition-colors duration-200'>
                             {item.name}
                         </a>
                     ))}
-                    <ThemeToggle /> {/* Add ThemeToggle to desktop nav */}
+                    <ThemeToggle />
                 </div>
         
                 {/* Mobile Version */}

@@ -20,6 +20,7 @@
   --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
   --animate-meteor: meteor 5s linear infinite;
 
+
   @keyframes float {
     0%,
     100% {
@@ -197,4 +198,17 @@
     animation: flash 5s linear infinite;
     box-shadow: 0 0 10px 0.5px #22c55e, 0 0 2px 1px #22c55e;
   }
+
+  /* Hide stars in light mode */
+  .star {
+    opacity: 0 !important;
+    pointer-events: none;
+  }
+
+  /* Show stars in dark mode */
+  .dark .star {
+    opacity: 1 !important;
+    pointer-events: auto;
+  }
+  
 }
