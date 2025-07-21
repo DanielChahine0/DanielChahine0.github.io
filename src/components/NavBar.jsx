@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { X, Menu } from 'lucide-react';
+import { X, Menu, CodeXml } from 'lucide-react';
 import { useEffect, useState } from 'react'
 import { ThemeToggle } from './ThemeToggle'; // Import the ThemeToggle component
 
@@ -31,18 +31,28 @@ export const NavBar = () => {
 
     return (
         <nav 
-            className= {cn(
+            className={cn(
                 "fixed w-full z-40 transition-all duration-300",
-                isScrolled ? "py-2 bg-background/80 backdrop-blur-md shadow-xs" : "py-4"
+                isScrolled
+                    ? "pt-5"
+                    : "py-4"
             )}
         >
-            <div className='container flex items-center justify-between px-2'> {/* Adjust padding here */}
+            <div className={cn(
+                'container flex items-center justify-between px-5 py-2 transition-all duration-300',
+                isScrolled
+                    ? "w-6/7 mx-auto rounded-lg bg-primary/30 backdrop-blur-lg shadow-inner"
+                    : "w-full"
+            )}>
                 <a 
-                    className='text-2xl font-bold flex items-center hover:scale-105 transition-transform duration-300' // Adjust margin here
+                    className='text-4xl font-bold flex items-center hover:scale-105 transition-transform duration-300'
                     href="#"
                 >
-                    <span className='relative z-10'>
-                        <span className='text-glow'>Daniel Chahine</span>
+                    <span className='relative z-10 flex items-center gap-2'>
+                        <CodeXml size={isScrolled ? 45 : 45}/>
+                        <span className="text-3xl">
+                            Daniel Chahine
+                        </span>
                     </span>
                 </a>
 

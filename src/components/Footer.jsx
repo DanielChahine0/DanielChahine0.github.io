@@ -7,7 +7,7 @@ export const Footer = () => {
             <div 
                 className={cn(
                     "w-4/5 flex flex-col sm:flex-row mx-auto items-center sm:justify-between gap-5",
-                    "rounded-lg bg-primary/20 px-5 py-3 shadow-inner",
+                    "rounded-lg bg-primary/30 px-5 py-3 shadow-inner backdrop-blur-lg",
                 )}
             >
                 <p className="flex items-center gap-3 font-medium text-foreground">
