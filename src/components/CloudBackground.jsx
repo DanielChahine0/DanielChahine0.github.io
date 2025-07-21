@@ -12,12 +12,14 @@ export const CloudBackground = () => {
         const newClouds = [];
 
         for (let i = 0; i < numberOfClouds; i++) {
+            const rand = Math.ceil(Math.random() * 3);
             newClouds.push({
                 id: i,
                 size: Math.random() * 50 + 20, // size between 20px and 70px
                 x: Math.random() * 100,
                 y: Math.random() * 100,
-                animationDuration: 2 // duration between 20 and 50 seconds
+                animationDuration: Math.random() * 30 + 20, // duration between 20 and 50 seconds
+                animationClass: `cloud-random-${rand}`
             });
         }
 
@@ -29,7 +31,7 @@ export const CloudBackground = () => {
             {clouds.map((cloud) => (
                 <div 
                     key={cloud.id}
-                    className='cloud animate-move-clouds'
+                    className={`cloud ${cloud.animationClass}`}
                     style={{
                         width: cloud.size + "px",
                         height: cloud.size + "px",
