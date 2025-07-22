@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Coda:wght@400;700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -190,6 +191,7 @@
   body {
     @apply bg-background text-foreground transition-colors duration-300;
     font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: 'Coda', Arial, sans-serif; /* Changed to Coda */
   }
 }
 
@@ -301,4 +303,8 @@
   .cloud-random-3 {
     animation: cloud-move-3 30s ease-in-out infinite;
   }
+}
+
+@utility custom-inline-hover {
+  @apply inline-block transition-transform duration-200 hover:scale-105;
 }
