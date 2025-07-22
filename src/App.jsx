@@ -1,17 +1,18 @@
-import { BrowserRouter, Route, Routes } from "react-router"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Home } from "./pages/Home"
 import { NotFound } from "./pages/NotFound"
+import { Timeline } from "./pages/Timeline"
 import { Toaster } from "@/components/ui/toaster"
 
 function App() {
-
   return (
     <>
-    <Toaster />
+      <Toaster />
       <BrowserRouter>
         <Routes>
           <Route index element={<Home />} />
-          // When the path is *, it will render the NotFound component
+          <Route path="/timeline" element={<Timeline />} />
+          {/* When the path is *, it will render the NotFound component */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -2,13 +2,14 @@ import { cn } from '@/lib/utils'
 import { X, Menu, CodeXml } from 'lucide-react';
 import { useEffect, useState } from 'react'
 import { ThemeToggle } from './ThemeToggle'; // Import the ThemeToggle component
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 const navItems = [
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
-    { name: 'Resume', href: '#' },
+    { name: 'Timeline', href: '/timeline', isRoute: true },
+    { name: 'Skills', href: '#skills', isRoute: false },
+    { name: 'Projects', href: '#projects', isRoute: false },
+    { name: 'Contact', href: '#contact', isRoute: false },
+    { name: 'Resume', href: '#', isRoute: false },
 ]
 
 export const NavBar = () => {
@@ -44,9 +45,9 @@ export const NavBar = () => {
                     ? "w-6/7 mx-auto rounded-lg bg-primary/30 backdrop-blur-xl shadow-inner"
                     : "w-full"
             )}>
-                <a 
+                <Link 
                     className='text-4xl font-bold flex items-center hover:scale-105 transition-transform duration-300'
-                    href="#"
+                    to="/"
                 >
                     <span className='relative z-10 flex items-center gap-2'>
                         <CodeXml size={isScrolled ? 45 : 45}/>
@@ -54,21 +55,35 @@ export const NavBar = () => {
                             Daniel Chahine
                         </span>
                     </span>
-                </a>
+                </Link>
 
                 {/* Desktop Version */}
                 <div className='hidden md:flex items-center space-x-6'>
                     {navItems.map((item, key) => (
-                        <a href={item.href} key={key} className='text-foreground/80 hover:text-primary transition-colors duration-200'>
-                            {item.name}
-                        </a>
+                        item.isRoute ? (
+                            <Link 
+                                to={item.href} 
+                                key={key} 
+                                className='text-foreground/80 hover:text-primary transition-colors duration-200'
+                            >
+                                {item.name}
+                            </Link>
+                        ) : (
+                            <a 
+                                href={item.href} 
+                                key={key} 
+                                className='text-foreground/80 hover:text-primary transition-colors duration-200'
+                            >
+                                {item.name}
+                            </a>
+                        )
                     ))}
                     <ThemeToggle />
                 </div>
         
                 {/* Mobile Version */}
                 <div className="flex items-center md:hidden">
-                    <ThemeToggle /> {/* Add ThemeToggle to mobile view */}
+                    <ThemeToggle />
                     <button
                         onClick={() => setIsMenuOpen((prev) => !prev)}
                         className="p-2 text-foreground z-50"
@@ -84,15 +99,26 @@ export const NavBar = () => {
                     isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
                 )}>
                     <div className='flex flex-col space-y-8 text-xl'>
-                        {navItems.map((item,key) => (
-                            <a 
-                                href={item.href} 
-                                key={key} 
-                                className='text-foreground/80 hover:text-primary transition-colors duration-200'
-                                onClick={() => setIsMenuOpen(false)}
-                            >
-                                {item.name}
-                            </a>
+                        {navItems.map((item, key) => (
+                            item.isRoute ? (
+                                <Link 
+                                    to={item.href} 
+                                    key={key} 
+                                    className='text-foreground/80 hover:text-primary transition-colors duration-200'
+                                    onClick={() => setIsMenuOpen(false)}
+                                >
+                                    {item.name}
+                                </Link>
+                            ) : (
+                                <a 
+                                    href={item.href} 
+                                    key={key} 
+                                    className='text-foreground/80 hover:text-primary transition-colors duration-200'
+                                    onClick={() => setIsMenuOpen(false)}
+                                >
+                                    {item.name}
+                                </a>
+                            )
                         ))}
                     </div>
                 </div>
