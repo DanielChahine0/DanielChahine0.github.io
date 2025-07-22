@@ -161,7 +161,7 @@
 
     --card: #ffffff;               /* hsl(0, 0%, 100%) */
 
-    --primary: #004cff;            /* hsl(178, 75%, 51%) */
+    --primary: #003ac0;            /* hsl(178, 75%, 51%) */
     --primary-foreground: #f6f8fa; /* hsl(210, 40%, 98%) */
 
     --border: #e3e7ef;             /* hsl(214, 32%, 91%) */
@@ -173,7 +173,7 @@
 
     --card: #151a2a;               /* hsl(222, 47%, 8%) */
 
-    --primary: #003ece;            /* hsl(250, 65%, 65%) */
+    --primary: #1057ff;            /* hsl(250, 65%, 65%) */
     --primary-foreground: #e0e4ef; /* hsl(213, 31%, 91%) */
 
     --border: #2a3042;             /* hsl(217, 33%, 20%) */

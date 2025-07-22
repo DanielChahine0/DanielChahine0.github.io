@@ -41,20 +41,71 @@ export const HeroSection = () => {
                         className="h-full w-full max-h-72 max-w-xs rounded-md object-cover shadow-lg transition-transform duration-300 hover:scale-[1.02]"
                     />
                 </div>
+                
                 {/* Content */}
                 <div className="space-y-4 md:col-span-2 flex flex-col justify-center">
                     <h1 className="flex items-center gap-3 text-3xl font-bold md:text-4xl mb-2">
                         <span>Hey, I'm</span> <span className="text-primary">Daniel Chahine</span>
                     </h1>
                     <p className="text-left text-base leading-relaxed">
-                        I'm a student and programmer based out of Toronto. I like to make cool projects when I'm bored.
+                        I'm Daniel Chahine — a Computer scienctist based in Toronto
+                        with over 6 years of coding experience under my belt and a 
+                        habit of turning late-night ideas into working software.
                     </p>
                     <p className="text-left text-base leading-relaxed">
-                        Some of my more notable projects are ProjectNameAnotherProject and more. Most of my work is centered around backend development or system administration. Some sites that I run include foodle as well as a bunch of others.
+                        Some of my favorite creations include <a
+                                className="text-primary font-bold underline underline-offset-1.5 hover:underline-offset-3"
+                                href="https://github.com/DanielChahine0/Webapp-TrueTrade"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                    TrueTrade
+                            </a>, an AI-powered trading app with Tinder-style swipes; <a
+                                className="text-primary font-bold underline underline-offset-1.5 hover:underline-offset-3"
+                                href="https://github.com/DanielChahine0/Webapp-Think_Board"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                    ThinkBoard
+                            </a>, a real-time MERN note-taking platform; <a
+                                className="text-primary font-bold underline underline-offset-1.5 hover:underline-offset-3"
+                                href="https://github.com/DanielChahine0/Webapp-MyCalendar"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                    MyCalendar
+                            </a>, a self-hosted Google Calendar-style web app; and <a 
+                                className="text-primary font-bold underline underline-offset-1.5 hover:underline-offset-3"
+                                href="https://github.com/EECS3311F24/project-fit-coach"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                >
+                                    FitCoach
+                            </a>, a holistic fitness tracker.
                     </p>
+
                     <p className="text-left text-base leading-relaxed">
-                        Outside of software, I enjoy playing Ultimate frisbee, photographyorganizing/participating at/mentoring hackathons and spending time with my dog, Bella. I also have a passion for exploring the world in general! Feel free to <a href="#" className="underline text-primary">book a chat</a> if you'd like to connect.
+                        Outside the code editor, you'll find me playing <a 
+                            className="text-primary font-bold underline underline-offset-1.5 hover:underline-offset-3" 
+                            href="https://www.chess.com/member/danielthegm"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Chess
+                        </a>
+                        , performing Chopin on the piano, 
+                        competing in hackathons, and exploring the nature.
+                        I also love <a
+                            className="text-primary font-bold underline underline-offset-1.5 hover:underline-offset-3"
+                            href="https://liftoffrank.com/dani.ch"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                                Working Out
+                            </a>
+                        , and staying active through fitness, travelling, and learning new skills.
                     </p>
+
+                    <p className="text-left text-base leading-relaxed">
+                        Always down to talk tech, side projects, or travel adventures — feel free to reach out!
+                    </p>
+
                     <div className="flex flex-wrap gap-4 pt-2 items-center">
                         {socials.map((social) => (
                             <a
