@@ -1,9 +1,32 @@
-import { User, Github, Linkedin, Mail, ArrowDown, Instagram } from "lucide-react";
+import { ArrowDown } from "lucide-react";
+import { Mail } from "lucide-react"
+import { FiGithub, FiLinkedin, FiInstagram } from "react-icons/fi";
 
 export const HeroSection = () => {
 
-    // Dynamic image path depending on the theme
-    
+    const socials = [
+        {
+            icon: <FiGithub className="w-5 h-5" />,
+            name: "GitHub",
+            link: "https://github.com/DanielChahine0",
+        },
+        {
+            icon: <FiLinkedin className="w-5 h-5" />,
+            name: "LinkedIn",
+            link: "https://linkedin.com/in/DanielChahine",
+        },
+        {
+            icon: <FiInstagram className="w-5 h-5" />,
+            name: "Instagram",
+            link: "https://instagram.com/dxni.ch",
+        },
+        {
+            icon: <Mail className="w-5 h-5" />,
+            name: "Email",
+            link: "mailto:Chahinedaniel0@email.com",
+        },
+    ];
+
     return (
         <section 
             id="hero" 
@@ -27,45 +50,24 @@ export const HeroSection = () => {
                         I'm a student and programmer based out of Toronto. I like to make cool projects when I'm bored.
                     </p>
                     <p className="text-left text-base leading-relaxed">
-                        Some of my more notable projects are <a href="#" className="underline text-primary">ProjectName</a>, <a href="#" className="underline text-primary">AnotherProject</a>, and more. Most of my work is centered around backend development or system administration. Some sites that I run include <a href="#" className="underline text-primary">metropolis</a>, <a href="#" className="underline text-primary">mCTF</a>, <a href="#" className="underline text-primary">MCPT</a>, <a href="#" className="underline text-primary">foodle</a> as well as a bunch of others.
+                        Some of my more notable projects are ProjectNameAnotherProject and more. Most of my work is centered around backend development or system administration. Some sites that I run include foodle as well as a bunch of others.
                     </p>
                     <p className="text-left text-base leading-relaxed">
-                        Outside of software, I enjoy playing Ultimate frisbee, <a href="#" className="underline text-primary">photography</a>, organizing/participating at/mentoring hackathons and spending time with my dog, Bella (<a href="#bella" className="underline text-primary">see below</a>). I also have a passion for exploring the world in general! Feel free to <a href="#" className="underline text-primary">book a chat</a> if you'd like to connect.
+                        Outside of software, I enjoy playing Ultimate frisbee, photographyorganizing/participating at/mentoring hackathons and spending time with my dog, Bella. I also have a passion for exploring the world in general! Feel free to <a href="#" className="underline text-primary">book a chat</a> if you'd like to connect.
                     </p>
                     <div className="flex flex-wrap gap-4 pt-2 items-center">
-                        <a
-                            href="https://github.com/DanielChahine0"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-primary inline-flex items-center gap-1.5 text-sm transition-colors"
-                        >
-                            <Github className="w-5 h-5" />
-                            GitHub
-                        </a>
-                        <a
-                            href="https://linkedin.com/in/DanielChahine"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-primary inline-flex items-center gap-1.5 text-sm transition-colors"
-                        >
-                            <Linkedin className="w-5 h-5" />
-                            LinkedIn
-                        </a>
-                        <a
-                            href="https://instagram.com/dxni.ch"
-                            className="hover:text-primary inline-flex items-center gap-1.5 text-sm transition-colors"
-                        >
-                            <Instagram className="w-5 h-5" />
-                            Instagram
-                        </a>
-                        
-                        <a
-                            href="mailto:Chahinedaniel0@email.com"
-                            className="hover:text-primary inline-flex items-center gap-1.5 text-sm transition-colors"
-                        >
-                            <Mail className="w-5 h-5" />
-                            Email
-                        </a>
+                        {socials.map((social) => (
+                            <a
+                                key={social.name}
+                                href={social.link}
+                                target={social.link.startsWith("http") ? "_blank" : undefined}
+                                rel={social.link.startsWith("http") ? "noopener noreferrer" : undefined}
+                                className="hover:text-primary inline-flex items-center gap-1.5 text-sm transition-colors"
+                            >
+                                {social.icon}
+                                {social.name}
+                            </a>
+                        ))}
                     </div>
                 </div>
             </div>

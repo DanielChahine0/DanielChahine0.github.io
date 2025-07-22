@@ -1,7 +1,9 @@
-import { Github, Instagram, Linkedin, Mail, MapPin, Phone, Send, Twitter } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
+import { FiGithub, FiLinkedin, FiInstagram } from "react-icons/fi";
+import { SiLeetcode } from "react-icons/si";
+import { SiDevpost } from "react-icons/si";
 
 export const ContactSection = () => {
 
@@ -67,7 +69,7 @@ export const ContactSection = () => {
                                     </h4>
                                     <a href="tel:+11234567890"
                                        className="text-muted-foreground hover:text-primary transition-colors">
-                                        +1(123)-456-7890
+                                        +1 (416) 209-2420
                                     </a>
                                 </div>
                             </div>
@@ -92,19 +94,23 @@ export const ContactSection = () => {
                             <h4 className="font-medium mb-4">Connect with me</h4>
                             <div className="flex space-x-4 justify-center">
                                 <a href="https://www.linkedin.com/in/danielchahine/" target="_blank">
-                                    <Linkedin />
-                                </a>
-
-                                <a href="https://twitter.com/your_twitter" target="_blank">
-                                    <Twitter />
+                                    <FiLinkedin size={35}/>
                                 </a>
                                 
                                 <a href="https://github.com/DanielChahine0" target="_blank">
-                                    <Github />
+                                    <FiGithub  size={35}/>
                                 </a>
 
-                                <a href="https://instagram.com/your_instagram" target="_blank">
-                                    <Instagram />
+                                <a href="https://instagram.com/dxni.ch" target="_blank">
+                                    <FiInstagram  size={35}/>
+                                </a>
+
+                                <a href="https://leetcode.com/u/Chahinedaniel/" target="_blank">
+                                    <SiLeetcode  size={35}/>
+                                </a>
+
+                                <a href="https://devpost.com/chahinedaniel0" target="_blank">
+                                    <SiDevpost  size={35}/>
                                 </a>
                             </div>
                         </div>

@@ -1,4 +1,7 @@
-import { ArrowUp, Github, Linkedin, Instagram, Mail } from "lucide-react";
+import { ArrowUp, Mail } from "lucide-react";
+import { FiGithub, FiLinkedin, FiInstagram } from "react-icons/fi";
+import { SiLeetcode } from "react-icons/si";
+import { SiDevpost } from "react-icons/si";
 import { cn } from '@/lib/utils';
 
 export const Footer = () => {
@@ -18,13 +21,13 @@ export const Footer = () => {
 
                 <div className="flex items-center gap-4">
                     <a href="https://github.com/DanielChahine0" target="_blank" className="text-foreground hover:text-primary transition-colors">
-                        <Github size={25} />
+                        <FiGithub size={25} />
                     </a>
                     <a href="https://www.linkedin.com/in/danielchahine" target="_blank" className="text-foreground hover:text-primary transition-colors">
-                        <Linkedin size={25} />
+                        <FiLinkedin size={25} />
                     </a>
                     <a href="http://instagram.com/dxni.ch" target="_blank" className="text-foreground hover:text-primary transition-colors">
-                        <Instagram size={25} />
+                        <FiInstagram size={25} />
                     </a>
                     <a href="mailto:chahinedaniel0@gmail.com" className="text-foreground hover:text-primary transition-colors">
                         <Mail size={25} />
