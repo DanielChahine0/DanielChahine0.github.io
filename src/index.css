@@ -246,9 +246,9 @@
 }
 
 @utility cloud {
-  @apply absolute bg-black rounded-full;
-  box-shadow: 0 0 10px 2px #ffffff33;
+  @apply absolute bg-[#d9e7ff] rounded-full ; 
   animation: var(--animate-cloud-move);
+  filter: blur(1px)
 }
 
 @utility meteor {
