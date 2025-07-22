@@ -5,10 +5,10 @@ import { ThemeToggle } from './ThemeToggle'; // Import the ThemeToggle component
 
 const navItems = [
     { name: 'About', href: '#about' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Projects', href: '#projects' },
     { name: 'Skills', href: '#skills' },
+    { name: 'Projects', href: '#projects' },
     { name: 'Contact', href: '#contact' },
+    { name: 'Resume', href: '#' },
 ]
 
 export const NavBar = () => {
@@ -41,7 +41,7 @@ export const NavBar = () => {
             <div className={cn(
                 'container flex items-center justify-between px-5 py-2 transition-all duration-300',
                 isScrolled
-                    ? "w-6/7 mx-auto rounded-lg bg-primary/30 backdrop-blur-lg shadow-inner"
+                    ? "w-6/7 mx-auto rounded-lg bg-primary/30 backdrop-blur-xl shadow-inner"
                     : "w-full"
             )}>
                 <a 
@@ -50,7 +50,7 @@ export const NavBar = () => {
                 >
                     <span className='relative z-10 flex items-center gap-2'>
                         <CodeXml size={isScrolled ? 45 : 45}/>
-                        <span className="text-3xl">
+                        <span className="text-2xl">
                             Daniel Chahine
                         </span>
                     </span>
