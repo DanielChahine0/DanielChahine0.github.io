@@ -38,7 +38,7 @@ export const HeroSection = () => {
                     <img 
                         src="/photos/HeroPhoto.png" 
                         alt="Daniel Chahine" 
-                        className="h-full w-full max-h-72 max-w-xs rounded-md object-cover shadow-lg transition-transform duration-300 hover:scale-[1.02]"
+                        className="h-full w-full max-w-xs rounded-md object-cover shadow-lg transition-transform duration-300 hover:scale-[1.02]"
                     />
                 </div>
                 
@@ -48,31 +48,31 @@ export const HeroSection = () => {
                         <span>Hey, I'm</span> <span className="text-primary">Daniel Chahine</span>
                     </h1>
                     <p className="text-left text-base leading-relaxed">
-                        I'm Daniel Chahine — a Computer scienctist based in Toronto
-                        with over 6 years of coding experience under my belt and a 
+                        I'm a Computer Science student and a Software Engineering enthusiast
+                        based in <a href="#contact" className="inline-block transition-transform duration-200 hover:scale-105">Toronto</a> with over 6 years of coding experience under my belt and a 
                         habit of turning late-night ideas into working software.
                     </p>
                     <p className="text-left text-base leading-relaxed">
                         Some of my favorite creations include <a
-                                className="text-primary font-bold underline underline-offset-1.5 hover:underline-offset-3"
+                                className="text-primary font-bold underline underline-offset-1.5 inline-block transition-transform duration-200 hover:scale-105"
                                 href="https://github.com/DanielChahine0/Webapp-TrueTrade"
                                 target="_blank"
                                 rel="noopener noreferrer">
                                     TrueTrade
                             </a>, an AI-powered trading app with Tinder-style swipes; <a
-                                className="text-primary font-bold underline underline-offset-1.5 hover:underline-offset-3"
+                                className="text-primary font-bold underline underline-offset-1.5 inline-block transition-transform duration-200 hover:scale-105"
                                 href="https://github.com/DanielChahine0/Webapp-Think_Board"
                                 target="_blank"
                                 rel="noopener noreferrer">
                                     ThinkBoard
                             </a>, a real-time MERN note-taking platform; <a
-                                className="text-primary font-bold underline underline-offset-1.5 hover:underline-offset-3"
+                                className="text-primary font-bold underline underline-offset-1.5 inline-block transition-transform duration-200 hover:scale-105"
                                 href="https://github.com/DanielChahine0/Webapp-MyCalendar"
                                 target="_blank"
                                 rel="noopener noreferrer">
                                     MyCalendar
                             </a>, a self-hosted Google Calendar-style web app; and <a 
-                                className="text-primary font-bold underline underline-offset-1.5 hover:underline-offset-3"
+                                className="text-primary font-bold underline underline-offset-1.5 inline-block transition-transform duration-200 hover:scale-105"
                                 href="https://github.com/EECS3311F24/project-fit-coach"
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -83,7 +83,7 @@ export const HeroSection = () => {
 
                     <p className="text-left text-base leading-relaxed">
                         Outside the code editor, you'll find me playing <a 
-                            className="text-primary font-bold underline underline-offset-1.5 hover:underline-offset-3" 
+                            className="text-primary font-bold underline underline-offset-1.5 inline-block transition-transform duration-200 hover:scale-105" 
                             href="https://www.chess.com/member/danielthegm"
                             target="_blank"
                             rel="noopener noreferrer"
@@ -93,7 +93,7 @@ export const HeroSection = () => {
                         , performing Chopin on the piano, 
                         competing in hackathons, and exploring the nature.
                         I also love <a
-                            className="text-primary font-bold underline underline-offset-1.5 hover:underline-offset-3"
+                            className="text-primary font-bold underline underline-offset-1.5 inline-block transition-transform duration-200 hover:scale-105"
                             href="https://liftoffrank.com/dani.ch"
                             target="_blank"
                             rel="noopener noreferrer">
