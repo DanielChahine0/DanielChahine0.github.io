@@ -3,12 +3,12 @@ import { ArrowRight, ExternalLink, Github } from "lucide-react";
 const projects = [
     {
         id: 1,
-        title: 'Project 1',
-        description: 'This is a brief description of Project One.',
+        title: 'Think Board',
+        description: 'A full-stack web application for capturing notes, brainstorming ideas, and organizing projects in real time.',
         image: '/projects/project1.png',
         tags: ['React', 'JavaScript', 'CSS'],
-        link: 'https://example.com/project-one',
-        githubUrl: '#',
+        link: 'https://webapp-think-board.onrender.com/',
+        githubUrl: 'https://github.com/DanielChahine0/Webapp-Think_Board',
     },
     {
         id: 2,

@@ -15,6 +15,8 @@ const navItems = [
 export const NavBar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [isHovered, setIsHovered] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -30,6 +32,22 @@ export const NavBar = () => {
 
     }, []);
 
+    const handleMouseMove = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        setMousePosition({
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top,
+        });
+    };
+
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    };
+
     return (
         <nav 
             className={cn(
@@ -40,13 +58,40 @@ export const NavBar = () => {
             )}
         >
             <div className={cn(
-                'container flex items-center justify-between px-5 py-2 transition-all duration-300',
+                'container flex items-center justify-between px-5 py-2 transition-all duration-300 relative overflow-hidden',
                 isScrolled
                     ? "w-6/7 mx-auto rounded-lg bg-primary/30 backdrop-blur-xl shadow-inner"
                     : "w-full"
-            )}>
+            )}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            >
+                {/* Additional glow layer - only when scrolled */}
+                <div
+                    className={cn(
+                        "absolute pointer-events-none transition-opacity duration-75 z-0",
+                        isHovered && isScrolled ? "opacity-75" : "opacity-0"
+                    )}
+                    style={{
+                        left: mousePosition.x - 60,
+                        top: mousePosition.y - 60,
+                        width: 120,
+                        height: 120,
+                        background: `radial-gradient(
+                            circle,
+                            rgba(255, 255, 255, 0.22) 55%,
+                            rgba(255, 255, 255, 0.12) 60%,
+                            transparent 810%
+                        )`,
+                        borderRadius: '50%',
+                        transform: 'translate3d(0, 0, 0)',
+                        filter: 'blur(12px)',
+                    }}
+                />
+
                 <Link 
-                    className='text-4xl font-bold flex items-center hover:scale-105 transition-transform duration-300'
+                    className='text-4xl font-bold flex items-center hover:scale-105 transition-transform duration-300 relative z-10'
                     to="/"
                 >
                     <span className='relative z-10 flex items-center gap-2'>
@@ -58,13 +103,13 @@ export const NavBar = () => {
                 </Link>
 
                 {/* Desktop Version */}
-                <div className='hidden md:flex items-center space-x-6'>
+                <div className='hidden md:flex items-center space-x-6 relative z-10'>
                     {navItems.map((item, key) => (
                         item.isRoute ? (
                             <Link 
                                 to={item.href} 
                                 key={key} 
-                                className='text-foreground/80 hover:text-primary transition-colors duration-200'
+                                className='text-foreground/80 transition-transform duration-300 hover:scale-120'
                             >
                                 {item.name}
                             </Link>
@@ -72,21 +117,25 @@ export const NavBar = () => {
                             <a 
                                 href={item.href} 
                                 key={key} 
-                                className='text-foreground/80 hover:text-primary transition-colors duration-200'
+                                className='text-foreground/80 transition-transform duration-300 hover:scale-120'
                             >
                                 {item.name}
                             </a>
                         )
                     ))}
-                    <ThemeToggle />
+                    <span className="hover:scale-130 transition-transform duration-300">
+                        <ThemeToggle />
+                    </span>
                 </div>
         
                 {/* Mobile Version */}
-                <div className="flex items-center md:hidden">
-                    <ThemeToggle />
+                <div className="flex items-center md:hidden relative z-10">
+                    <span className="hover:scale-130 transition-transform duration-300">
+                        <ThemeToggle />
+                    </span>
                     <button
                         onClick={() => setIsMenuOpen((prev) => !prev)}
-                        className="p-2 text-foreground z-50"
+                        className="p-2 text-foreground z-50 hover:scale-130 transition-transform duration-300"
                         aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
                     >
                         {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -102,7 +151,7 @@ export const NavBar = () => {
                 {/* Close button inside overlay */}
                 <button
                     onClick={() => setIsMenuOpen(false)}
-                    className="absolute top-6 right-6 p-2 text-foreground"
+                    className="absolute top-6 right-6 p-2 text-foreground hover:scale-130 transition-transform duration-300"
                     aria-label="Close Menu"
                 >
                     <X size={32} />
@@ -113,7 +162,7 @@ export const NavBar = () => {
                             <Link 
                                 to={item.href} 
                                 key={key} 
-                                className='text-foreground/80 hover:text-primary transition-colors duration-200'
+                                className='text-foreground/80 transition-transform duration-300 hover:scale-120'
                                 onClick={() => setIsMenuOpen(false)}
                             >
                                 {item.name}
@@ -122,7 +171,7 @@ export const NavBar = () => {
                             <a 
                                 href={item.href} 
                                 key={key} 
-                                className='text-foreground/80 hover:text-primary transition-colors duration-200'
+                                className='text-foreground/80 transition-transform duration-300 hover:scale-120'
                                 onClick={() => setIsMenuOpen(false)}
                             >
                                 {item.name}
