@@ -30,7 +30,7 @@ export const ContactSection = () => {
     return (
         <section 
             id="contact"
-            className="py-24 px-4 relative bg-secondary/30"
+            className="py-10 px-4 relative bg-secondary/30"
         >
             <div className="container mx-auto max-w-5xl">
                 <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
@@ -42,6 +42,39 @@ export const ContactSection = () => {
                 </p>
 
                 <div className="space-y-8">
+                    
+                    {/* Contact Information */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8">
+                        <div className="flex flex-col items-center space-y-2 text-center">
+                            <Mail className="w-6 h-6 md:w-8 md:h-8 text-primary" />
+                            <p className="text-sm md:text-base font-medium">Email</p>
+                            <a 
+                                href="mailto:chahinedaniel0@gmail.com" 
+                                className="text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors"
+                            >
+                                chahinedaniel0@gmail.com
+                            </a>
+                        </div>
+                        
+                        <div className="flex flex-col items-center space-y-2 text-center">
+                            <Phone className="w-6 h-6 md:w-8 md:h-8 text-primary" />
+                            <p className="text-sm md:text-base font-medium">Phone</p>
+                            <a 
+                                href="tel:+1234567890" 
+                                className="text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors"
+                            >
+                                +1 (416) 209-2420
+                            </a>
+                        </div>
+                        
+                        <div className="flex flex-col items-center space-y-2 text-center">
+                            <MapPin className="w-6 h-6 md:w-8 md:h-8 text-primary" />
+                            <p className="text-sm md:text-base font-medium">Location</p>
+                            <p className="text-xs md:text-sm text-muted-foreground">
+                                Toronto, Canada
+                            </p>
+                        </div>
+                    </div>
                     
                     <div className="pt-8">
                         <h4 className="font-medium mb-4 text-center">Connect with me</h4>

@@ -6,10 +6,8 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 const navItems = [
     { name: 'Timeline', href: '/timeline', isRoute: true },
-    { name: 'Skills', href: '#skills', isRoute: false },
-    { name: 'Projects', href: '#projects', isRoute: false },
+    { name: 'Resume', href: '/files/resume.pdf', isRoute: false, download: true },
     { name: 'Contact', href: '#contact', isRoute: false },
-    { name: 'Resume', href: '#', isRoute: false },
 ]
 
 export const NavBar = () => {
@@ -118,6 +116,7 @@ export const NavBar = () => {
                                 href={item.href} 
                                 key={key} 
                                 className='text-foreground/80 transition-transform duration-300 hover:scale-120'
+                                {...(item.download ? { download: true } : {})}
                             >
                                 {item.name}
                             </a>
@@ -173,6 +172,7 @@ export const NavBar = () => {
                                 key={key} 
                                 className='text-foreground/80 transition-transform duration-300 hover:scale-120'
                                 onClick={() => setIsMenuOpen(false)}
+                                {...(item.download ? { download: true } : {})}
                             >
                                 {item.name}
                             </a>

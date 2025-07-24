@@ -1,89 +1,98 @@
-import { useState } from 'react';
+
 import { cn } from '@/lib/utils';
-// Import icons from react-icons
-import { 
-    SiJavascript, 
-    SiHtml5, 
-    SiCss3, 
-    SiReact, 
-    SiNodedotjs, 
-    SiPython, 
-    SiMysql, 
-    SiGit,
-    SiCplusplus,
-    SiC,
-} from 'react-icons/si';
-import { FaJava } from "react-icons/fa";
-import { PiFileCSharpDuotone } from "react-icons/pi";
-import { RiJavaLine } from "react-icons/ri";
-import { DiPostgresql } from "react-icons/di";
 
-const skills = [
-    // Programming languages
-    { name: 'Python', icon: <SiPython size={32} />, category: 'Programming' },
-    { name: 'Java', icon: <FaJava size={32} />, category: 'Programming' },
-    { name: 'JavaScript', icon: <SiJavascript size={32} />, category: 'Programming' },
-    { name: 'C++', icon: <SiCplusplus size={32} />, category: 'Programming' },
-    { name: 'C#', icon: <PiFileCSharpDuotone size={32} />, category: 'Programming' },
-    { name: 'C', icon: <SiC size={32} />, category: 'Programming' },
+// Map base color to hover color class
+const hoverColorMap = {
+    'bg-blue-500': 'hover:bg-blue-500',
+    'bg-yellow-400': 'hover:bg-yellow-400',
+    'bg-green-500': 'hover:bg-green-500',
+    'bg-blue-600': 'hover:bg-blue-600',
+    'bg-cyan-500': 'hover:bg-cyan-500',
+    'bg-gray-600': 'hover:bg-gray-600',
+    'bg-orange-500': 'hover:bg-orange-500',
+    'bg-blue-400': 'hover:bg-blue-400',
+    'bg-indigo-500': 'hover:bg-indigo-500',
+    'bg-cyan-400': 'hover:bg-cyan-400',
+    'bg-red-500': 'hover:bg-red-500',
+    'bg-purple-500': 'hover:bg-purple-500',
+    'bg-gray-700': 'hover:bg-gray-700',
+    'bg-green-600': 'hover:bg-green-600',
+    'bg-yellow-500': 'hover:bg-yellow-500',
+    'bg-orange-600': 'hover:bg-orange-600',
+    'bg-purple-600': 'hover:bg-purple-600',
+    'bg-green-400': 'hover:bg-green-400',
+    'bg-pink-500': 'hover:bg-pink-500',
+    'bg-orange-400': 'hover:bg-orange-400',
+    'bg-gray-500': 'hover:bg-gray-500',
+};
 
-    // Full Stack
-    { name: 'HTML', icon: <SiHtml5 size={32} />, category: 'Full Stack' },
-    { name: 'CSS', icon: <SiCss3 size={32} />, category: 'Full Stack' },
-    { name: 'React', icon: <SiReact size={32} />, category: 'Full Stack' },
-    { name: 'Node.js', icon: <SiNodedotjs size={32} />, category: 'Full Stack' },
-    { name: 'Express.js', icon: <SiNodedotjs size={32} />, category: 'Full Stack' },
-    
-
-    // Database
-    { name: 'MySQL', icon: <SiMysql size={32} />, category: 'Database' },
-    { name: 'PostgreSQL', icon: <DiPostgresql size={32} />, category: 'Database' },
-
-    // Frameworks
-    { name: 'JavaFX', icon: <RiJavaLine size={32} />, category: 'Frameworks' },
-    { name: 'Git', icon: <SiGit size={32} />, category: 'Frameworks' },
-];
-
-const categories = ["All", "Full Stack", "Programming", "Database", "Frameworks"];
+const skillsData = {
+    "Languages": [
+        { name: 'TypeScript', color: 'bg-blue-400' },
+        { name: 'JavaScript', color: 'bg-yellow-400' },
+        { name: 'Python', color: 'bg-green-500' },
+        { name: 'C++', color: 'bg-blue-600' },
+        { name: 'Go', color: 'bg-cyan-500' },
+        { name: 'Bash', color: 'bg-gray-600' },
+        { name: 'HTML', color: 'bg-orange-500' },
+        { name: 'CSS', color: 'bg-blue-400' },
+        { name: 'SQL', color: 'bg-indigo-500' },
+    ],
+    "Technologies": [
+        { name: 'React', color: 'bg-cyan-400' },
+        { name: 'Angular', color: 'bg-red-500' },
+        { name: 'LitElement', color: 'bg-purple-500' },
+        { name: 'Three.js', color: 'bg-gray-700' },
+        { name: 'Node.js', color: 'bg-green-600' },
+        { name: 'Express', color: 'bg-yellow-500' },
+        { name: 'Jest', color: 'bg-orange-600' },
+        { name: 'Unity', color: 'bg-purple-600' },
+        { name: 'Qt', color: 'bg-green-400' },
+    ],
+    "Creative": [
+        { name: 'Figma', color: 'bg-pink-500' },
+        { name: 'Illustrator', color: 'bg-orange-500' },
+        { name: 'Procreate', color: 'bg-purple-500' },
+        { name: 'Houdini', color: 'bg-orange-600' },
+        { name: 'Motion 5', color: 'bg-purple-600' },
+        { name: 'Autodesk Inventor', color: 'bg-red-500' },
+        { name: 'MS PowerPoint', color: 'bg-orange-400' },
+    ],
+    "Dev Tools": [
+        { name: 'Git', color: 'bg-gray-500' },
+        { name: 'VSCode', color: 'bg-blue-500' },
+        { name: 'Postman', color: 'bg-orange-500' },
+    ]
+};
 
 export const SkillsSections = () => {
-    const [activeCategory, setActiveCategory] = useState("All"); 
-    const filteredSkills = skills.filter((skill) => 
-        activeCategory === "All" || skill.category === activeCategory);
-
     return (
         <section id="skills" className="py-24 px-4 relative bg-secondary/30">
-            <div className="container mx-auto max-w-5xl">
-                <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">My Skills</h2>
+            <div className="container mx-auto max-w-6xl">
+                <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center">Skills</h2>
 
-                <div className="flex flex-wrap justify-center gap-4 mb-12">
-                    {categories.map((category, key) => (
-                        <button 
-                            key={key} 
-                            className={cn(
-                                'px-5 py-2 rounded-full transition-colors duration-300 capitalize',
-                                activeCategory === category ? 'bg-primary text-primary-foreground' : 'bg-secondary/70 text-foreground hover:bg-secondary/80'
-                            )}
-                            onClick={() => setActiveCategory(category)}
-                        >
-                            {category}
-                        </button>
-                    ))}
-                </div>
-
-                <div
-                    className="grid gap-3"
-                    style={{
-                        gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))"
-                    }}
-                >
-                    {filteredSkills.map((skill, key) => (
-                        <div key={key} className="bg-card p-6 rounded-lg shadow-xs card-hover">
-                            <div className="flex items-center gap-3 justify-center">
-                                <span>{skill.icon}</span>
-                                <h3 className="font-semibold text-lg">
-                                    {skill.name}
-                                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+                    {Object.entries(skillsData).map(([category, skills]) => (
+                        <div key={category} className="space-y-6">
+                            <h3 className="text-xl md:text-2xl font-semibold text-left">
+                                {category}
+                            </h3>
+                            <div className="flex flex-wrap gap-3">
+                                {skills.map((skill, index) => (
+                                    <span
+                                        key={index}
+                                        className={cn(
+                                            // Less rounding, more rectangular
+                                            "px-4 py-2 rounded-md font-medium text-sm md:text-base",
+                                            // Use nav/footer background for default
+                                            "bg-primary/30 transition-all duration-300 ease-in-out hover:scale-105 hover:font-bold cursor-default",
+                                            // Only show color on hover (explicit for Tailwind JIT)
+                                            hoverColorMap[skill.color]
+                                        )}
+                                    >
+                                        {skill.name}
+                                    </span>
+                                ))}
                             </div>
                         </div>
                     ))}
