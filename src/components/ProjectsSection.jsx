@@ -6,27 +6,27 @@ const projects = [
         title: 'Think Board',
         description: 'A full-stack web application for capturing notes, brainstorming ideas, and organizing projects in real time.',
         image: '/projects/project1.png',
-        tags: ['React', 'JavaScript', 'CSS'],
+        tags: ['React', 'JavaScript', 'Express', 'MongoDB'],
         link: 'https://webapp-think-board.onrender.com/',
         githubUrl: 'https://github.com/DanielChahine0/Webapp-Think_Board',
     },
     {
         id: 2,
-        title: 'Project 2',
-        description: 'This is a brief description of Project One.',
+        title: 'My Calendar',
+        description: 'A modern calendar application inspired by Google Calendar, designed for scheduling and event management.',
         image: '/projects/project2.png',
-        tags: ['React', 'JavaScript', 'CSS'],
-        link: 'https://example.com/project-one',
-        githubUrl: '#',
+        tags: ['JavaScript', 'PHP', 'CSS', 'PostgreSQL', 'XAMPP'],
+        link: 'https://example.com/',
+        githubUrl: 'https://github.com/DanielChahine0/Webapp-MyCalendar',
     },
     {
         id: 3,
-        title: 'Project 3',
-        description: 'This is a brief description of Project One.',
+        title: 'Fit Coach',
+        description: 'A fitness tracker that monitors calories, workouts, and progress, including features for coaches.',
         image: '/projects/project3.png',
-        tags: ['React', 'JavaScript', 'CSS'],
+        tags: ['HTML', 'JavaScript', 'CSS', 'Python', 'Flask'],
         link: 'https://example.com/project-one',
-        githubUrl: '#',
+        githubUrl: 'https://github.com/EECS3311F24/project-fit-coach',
     }
 
 ]
@@ -40,7 +40,8 @@ export const ProjectsSection = () => {
                 </h2>
 
                 <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-                    here is a selection of my recent work. Each project showcases my skills and creativity in web development.
+                    A selection of my recent work that showcases my skills in web development using 
+                    React, Javascript, NodeJS, Express, PHP, HTML, and CSS.
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -74,6 +75,7 @@ export const ProjectsSection = () => {
                                             target="_blank">
                                         <ExternalLink size={20}/> 
                                         </a>
+
                                         <a 
                                             href={project.githubUrl} 
                                             target="_blank"
@@ -89,8 +91,8 @@ export const ProjectsSection = () => {
                 </div>
 
                 <div className="text-center mt-12">
-                    <a className="cosmic-button w-fit flex items-center mx-auto gap-2" href="https://github.com/DanielChahine0" target="_blank">
-                        Check My Github <ArrowRight size={16}/>
+                    <a className="cosmic-button w-fit flex items-center mx-auto gap-2" href="" target="_blank">
+                        View all my Projects <ArrowRight size={16}/>
                     </a>
                 </div>
             </div>
