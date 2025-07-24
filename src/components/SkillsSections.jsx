@@ -2,23 +2,23 @@
 import { cn } from '@/lib/utils';
 
 const skillColors = [
-    'bg-blue-400',
-    'bg-yellow-400',
-    'bg-green-500',
-    'bg-blue-600',
-    'bg-cyan-500',
-    'bg-orange-500',
-    'bg-indigo-500',
-    'bg-cyan-400',
-    'bg-red-500',
-    'bg-purple-500',
-    'bg-green-600',
-    'bg-yellow-500',
-    'bg-orange-600',
-    'bg-purple-600',
-    'bg-green-400',
-    'bg-pink-500',
-    'bg-orange-400',
+    'hover:bg-blue-400',
+    'hover:bg-yellow-400',
+    'hover:bg-green-500',
+    'hover:bg-blue-600',
+    'hover:bg-cyan-500',
+    'hover:bg-orange-500',
+    'hover:bg-indigo-500',
+    'hover:bg-cyan-400',
+    'hover:bg-red-500',
+    'hover:bg-purple-500',
+    'hover:bg-green-600',
+    'hover:bg-yellow-500',
+    'hover:bg-orange-600',
+    'hover:bg-purple-600',
+    'hover:bg-green-400',
+    'hover:bg-pink-500',
+    'hover:bg-orange-400',
 ];
 
 const skillsData = {
@@ -93,7 +93,7 @@ export const SkillsSections = () => {
                                             "px-5 py-2 rounded-lg hover:rounded-2xl text-sm md:text-base",
                                             "bg-primary/30 transition-all duration-300 ease-in-out hover:scale-105 cursor-default",
                                             "shadow-md outline-2 outline-primary/40",
-                                            `hover:${skillColorMap[skill]}`
+                                            skillColorMap[skill]
                                         )}
                                     >
                                         {skill}
