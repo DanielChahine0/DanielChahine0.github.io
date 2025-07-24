@@ -1,5 +1,18 @@
 import { ArrowRight, ExternalLink, Github } from "lucide-react";
 
+function handleSpotlight(e, id) {
+    const spotlight = document.getElementById('spotlight-' + id);
+    if (!spotlight) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    spotlight.style.background = `radial-gradient(circle 120px at ${x}px ${y}px, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 60%, transparent 100%)`;
+}
+function removeSpotlight(id) {
+    const spotlight = document.getElementById('spotlight-' + id);
+    if (spotlight) spotlight.style.background = 'none';
+}
+
 const projects = [
     {
         id: 1,
@@ -46,7 +59,8 @@ export const ProjectsSection = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {projects.map((project, key) => (
-                        <div key={key} className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover">
+                        <div key={key} className="group gradient-border overflow-hidden shadow-xs card-hover spotlight-hover" onMouseMove={e => handleSpotlight(e, 'project-' + key)} onMouseLeave={() => removeSpotlight('project-' + key)}>
+                            <div className="spotlight-layer" id={'spotlight-project-' + key}></div>
                             <div className="h-48 overflow-hidden">
                                 <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
                             </div >

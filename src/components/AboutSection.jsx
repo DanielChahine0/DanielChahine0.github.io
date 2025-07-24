@@ -1,8 +1,21 @@
 import { Briefcase, Code, User } from "lucide-react";
 
+function handleSpotlight(e, id) {
+    const spotlight = document.getElementById('spotlight-' + id);
+    if (!spotlight) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    spotlight.style.background = `radial-gradient(circle 120px at ${x}px ${y}px, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 60%, transparent 100%)`;
+}
+function removeSpotlight(id) {
+    const spotlight = document.getElementById('spotlight-' + id);
+    if (spotlight) spotlight.style.background = 'none';
+}
+
 export const AboutSection = () => {
     return (
-    <section id="about" className="py-24 px-2 relative">
+    <section id="about" className="py-5 px-2 relative">
         <div className="container mx-auto max-w-6xl">
             <div className="text-center flex flex-row items-center justify-center mb-12 gap-2">
                 <User size={45} className="text-primary"/>
@@ -62,9 +75,10 @@ export const AboutSection = () => {
                     {/* Right side content */}
                     
 
-                    <div className="gradient-border card-hover p-6">
+                    <div className="gradient-border card-hover spotlight-hover p-6" onMouseMove={e => handleSpotlight(e, 'about-1')} onMouseLeave={() => removeSpotlight('about-1')}>
+                        <div className="spotlight-layer" id="spotlight-about-1"></div>
                         <div className="flex items-start gap-4">
-                            <div className="p-3 rounded-full bg-primary/10">
+                            <div className="p-3 rounded-full bg-primary/10 outline-2 outline-primary">
                                 <Briefcase className="h-6 w-6 text-primary" />
                             </div>
                             <div className="text-left">
@@ -76,9 +90,10 @@ export const AboutSection = () => {
                         </div>
                     </div>
 
-                    <div className="gradient-border card-hover p-6">
+                    <div className="gradient-border card-hover spotlight-hover p-6" onMouseMove={e => handleSpotlight(e, 'about-2')} onMouseLeave={() => removeSpotlight('about-2')}>
+                        <div className="spotlight-layer" id="spotlight-about-2"></div>
                         <div className="flex items-start gap-4">
-                            <div className="p-3 rounded-full bg-primary/10">
+                            <div className="p-3 rounded-full bg-primary/10 outline-2 outline-primary">
                                 <User className="h-6 w-6 text-primary" />
                             </div>
                             <div className="text-left">
@@ -90,9 +105,10 @@ export const AboutSection = () => {
                         </div>
                     </div>
 
-                    <div className="gradient-border card-hover p-6">
+                    <div className="gradient-border card-hover spotlight-hover p-6" onMouseMove={e => handleSpotlight(e, 'about-3')} onMouseLeave={() => removeSpotlight('about-3')}>
+                        <div className="spotlight-layer" id="spotlight-about-3"></div>
                         <div className="flex items-start gap-4">
-                            <div className="p-3 rounded-full bg-primary/10">
+                            <div className="p-3 rounded-full bg-primary/10 outline-2 outline-primary">
                                 <Code className="h-6 w-6 text-primary" />
                             </div>
                             <div className="text-left">
