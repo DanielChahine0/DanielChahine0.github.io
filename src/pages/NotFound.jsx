@@ -1,5 +1,9 @@
+import { PageTransition } from "../components/PageTransition";
+
 export const NotFound = () => {
   return (
-    <div>NotFound</div>
+    <PageTransition>
+      <div>NotFound</div>
+    </PageTransition>
   );
 }

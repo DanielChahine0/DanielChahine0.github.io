@@ -7,10 +7,11 @@ import { ProjectsSection } from "../components/ProjectsSection";
 import { ContactSection } from "../components/ContactSection";
 import { Footer } from "../components/Footer";
 import { CloudBackground } from "../components/CloudBackground";
+import { PageTransition } from "../components/PageTransition";
 
 export const Home = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <PageTransition className="min-h-screen bg-background text-foreground overflow-x-hidden">
         {/* Background Effects */}
         <StarBackground />
         <CloudBackground />
@@ -29,6 +30,6 @@ export const Home = () => {
 
         {/* Footer */}
         <Footer />
-    </div>
+    </PageTransition>
   );
 }

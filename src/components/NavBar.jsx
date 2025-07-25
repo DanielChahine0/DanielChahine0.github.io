@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils'
 import { X, Menu, CodeXml } from 'lucide-react';
 import { useEffect, useState } from 'react'
 import { ThemeToggle } from './ThemeToggle'; // Import the ThemeToggle component
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link, useNavigate } from 'react-router-dom'; // Import Link and useNavigate from react-router-dom
 
 const navItems = [
     { name: 'Timeline', href: '/timeline', isRoute: true },
@@ -15,6 +15,7 @@ export const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const [isHovered, setIsHovered] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -44,6 +45,16 @@ export const NavBar = () => {
 
     const handleMouseLeave = () => {
         setIsHovered(false);
+    };
+
+    const handleNavigation = (href, isRoute = false) => {
+        if (isRoute) {
+            // Add a small delay for smooth transition
+            setTimeout(() => {
+                navigate(href);
+            }, 50);
+        }
+        setIsMenuOpen(false);
     };
 
     return (
@@ -88,9 +99,9 @@ export const NavBar = () => {
                     }}
                 />
 
-                <Link 
-                    className='text-4xl font-bold flex items-center hover:scale-105 transition-transform duration-300 relative z-10'
-                    to="/"
+                <button 
+                    className='text-4xl font-bold flex items-center hover:scale-105 transition-transform duration-300 relative z-10 bg-transparent border-none cursor-pointer'
+                    onClick={() => handleNavigation('/', true)}
                 >
                     <span className='relative z-10 flex items-center gap-2'>
                         <CodeXml size={isScrolled ? 45 : 45}/>
@@ -98,19 +109,19 @@ export const NavBar = () => {
                             Daniel Chahine
                         </span>
                     </span>
-                </Link>
+                </button>
 
                 {/* Desktop Version */}
                 <div className='hidden md:flex items-center space-x-6 relative z-10'>
                     {navItems.map((item, key) => (
                         item.isRoute ? (
-                            <Link 
-                                to={item.href} 
+                            <button
+                                onClick={() => handleNavigation(item.href, true)} 
                                 key={key} 
-                                className='text-foreground/80 transition-transform duration-300 hover:scale-120'
+                                className='text-foreground/80 transition-transform duration-300 hover:scale-120 cursor-pointer bg-transparent border-none'
                             >
                                 {item.name}
-                            </Link>
+                            </button>
                         ) : (
                             <a 
                                 href={item.href} 
@@ -158,14 +169,13 @@ export const NavBar = () => {
                 <div className='flex flex-col space-y-8 text-xl'>
                     {navItems.map((item, key) => (
                         item.isRoute ? (
-                            <Link 
-                                to={item.href} 
+                            <button
+                                onClick={() => handleNavigation(item.href, true)} 
                                 key={key} 
-                                className='text-foreground/80 transition-transform duration-300 hover:scale-120'
-                                onClick={() => setIsMenuOpen(false)}
+                                className='text-foreground/80 transition-transform duration-300 hover:scale-120 cursor-pointer bg-transparent border-none text-xl'
                             >
                                 {item.name}
-                            </Link>
+                            </button>
                         ) : (
                             <a 
                                 href={item.href} 
