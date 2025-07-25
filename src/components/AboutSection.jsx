@@ -62,12 +62,14 @@ export const AboutSection = () => {
                         and <strong className="custom-inline-hover">data visualization</strong>.
                     </p>
                     <div className="flex flex-col md:flex-row gap-4 pt-4 justify-center">
-                        <a href="#contact" className="cosmic-button">
-                            Contact Me
-                        </a>
-                        <a href="#portfolio" className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/30 transition-colors duration-300">
-                            Download CV
-                        </a>
+                        <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+                            <a href="#contact" className="cosmic-button">
+                                Contact Me
+                            </a>
+                            <a href="/public/files/resume.pdf" download className="cosmic-button">
+                                Download Resume
+                            </a>
+                        </div>
                     </div>
                 </div>
 
