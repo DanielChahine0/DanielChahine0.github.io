@@ -1,3 +1,5 @@
+
+import { useState } from "react";
 import { NavBar } from "../components/NavBar";
 import { Footer } from "../components/Footer";
 import { StarBackground } from "../components/StarBackground";
@@ -103,60 +105,103 @@ const timelineEvents = [
 ];
 
 export const Timeline = () => {
-	return (
-		<PageTransition className="min-h-screen bg-background text-foreground overflow-x-hidden relative">
-			{/* Background Effects - positioned with lower z-index */}
-			<div className="fixed inset-0 z-0">
-				<CloudBackground />
-			</div>
-			<div className="fixed inset-0 z-10">
-				<StarBackground />
-			</div>
+  const categories = [
+	"Extracurricular",
+	"Experience",
+	"Project",
+	"Education"
+  ];
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
-			{/* Content with higher z-index */}
-			<div className="relative z-20">
-				{/* Navbar */}
-				<NavBar />
+  // Only show events matching selected categories, or all if none selected
+  const filteredEvents =
+	selectedCategories.length === 0
+	  ? timelineEvents
+	  : timelineEvents.filter((event) =>
+		  selectedCategories.includes(event.category)
+		);
 
-				{/* Main Content */}
-				<main className="container mx-auto max-w-4xl pt-32 px-4 pb-16">
-					<div className="flex items-center mb-8 gap-4">
-						<h1 className="text-3xl md:text-4xl font-bold">My Timeline</h1>
+  const handleCategoryClick = (category) => {
+	setSelectedCategories((prev) => {
+	  if (prev.includes(category)) {
+		return prev.filter((c) => c !== category);
+	  } else {
+		return [...prev, category];
+	  }
+	});
+  };
+
+  return (
+	<PageTransition className="min-h-screen bg-background text-foreground overflow-x-hidden relative">
+	  {/* Background Effects - positioned with lower z-index */}
+	  <div className="fixed inset-0 z-0">
+		<CloudBackground />
+	  </div>
+	  <div className="fixed inset-0 z-10">
+		<StarBackground />
+	  </div>
+
+	  {/* Content with higher z-index */}
+	  <div className="relative z-20">
+		{/* Navbar */}
+		<NavBar />
+
+		{/* Main Content */}
+		<main className="container mx-auto max-w-4xl pt-32 px-4 pb-16">
+		  <div className="flex items-center mb-8 gap-4">
+			<h1 className="text-3xl md:text-4xl font-bold">My Timeline</h1>
+		  </div>
+
+		  {/* Category Filter Buttons */}
+		  <div className="flex flex-col fixed right-8 top-40 z-30 gap-4">
+			{categories.map((cat) => (
+			  <button
+				key={cat}
+				onClick={() => handleCategoryClick(cat)}
+				className={`px-4 py-2 rounded-full border font-semibold transition-colors duration-200 shadow-md
+				  ${selectedCategories.includes(cat)
+					? "bg-primary text-background border-primary"
+					: "bg-background text-primary border-primary/50 hover:bg-primary/10"}
+				`}
+			  >
+				{cat}
+			  </button>
+			))}
+		  </div>
+
+		  <div className="relative border-l-2 border-primary/50 pl-8 ml-4 space-y-10">
+			{filteredEvents.map((event, index) => (
+			  <div key={index} className="relative">
+				{/* Dot on timeline - outside the hover element */}
+				<div className="absolute w-4 h-4 bg-primary rounded-full -left-[41px] top-6"></div>
+
+				{/* Content with hover effect */}
+				<div className="gradient-border card-hover p-6">
+				  <div className="flex flex-col md:flex-row justify-between gap-4 text-left">
+					<div className="text-left">
+					  <h3 className="text-xl font-bold text-left">{event.title}</h3>
+					  <p className="text-muted-foreground text-left">
+						{event.description}
+					  </p>
 					</div>
-
-					<div className="relative border-l-2 border-primary/50 pl-8 ml-4 space-y-10">
-						{timelineEvents.map((event, index) => (
-							<div key={index} className="relative">
-								{/* Dot on timeline - outside the hover element */}
-								<div className="absolute w-4 h-4 bg-primary rounded-full -left-[41px] top-6"></div>
-
-								{/* Content with hover effect */}
-								<div className="gradient-border card-hover p-6">
-									<div className="flex flex-col md:flex-row justify-between gap-4 text-left">
-										<div className="text-left">
-											<h3 className="text-xl font-bold text-left">{event.title}</h3>
-											<p className="text-muted-foreground text-left">
-												{event.description}
-											</p>
-										</div>
-										<div className="md:text-right text-left">
-											<span className="text-primary font-semibold text-lg">
-												{event.year}
-											</span>
-											<div className="inline-block ml-2 px-2 py-1 rounded-full bg-primary/20 text-xs">
-												{event.category}
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						))}
+					<div className="md:text-right text-left">
+					  <span className="text-primary font-semibold text-lg">
+						{event.year}
+					  </span>
+					  <div className="inline-block ml-2 px-2 py-1 rounded-full bg-primary/20 text-xs">
+						{event.category}
+					  </div>
 					</div>
-				</main>
+				  </div>
+				</div>
+			  </div>
+			))}
+		  </div>
+		</main>
 
-				{/* Footer */}
-				<Footer />
-			</div>
-		</PageTransition>
-	);
+		{/* Footer */}
+		<Footer />
+	  </div>
+	</PageTransition>
+  );
 };
