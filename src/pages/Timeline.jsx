@@ -50,14 +50,14 @@ const timelineEvents = [
 		title: "Learning Linux Shell Scripting",
 		description:
 			"I earned a Certificate of Completion in Learning Linux Shell Scripting, showcasing my ability to write, automate, and manage tasks using shell scripts in a Linux environment.",
-		category: "Certificate",
+		category: "Education",
 	},
 	{
 		year: "November 2023",
 		title: "Learning Linux Command Line",
 		description:
 			"I earned a Certificate of Completion in Learning Linux Command Line, demonstrating proficiency in navigating, managing files, and executing commands within the Linux environment.",
-		category: "Certificate",
+		category: "Education",
 	},
 	{
 		year: "October 2023",
@@ -106,10 +106,10 @@ const timelineEvents = [
 
 export const Timeline = () => {
   const categories = [
-	"Extracurricular",
-	"Experience",
-	"Project",
-	"Education"
+	{ name: "Extracurricular", color: "#6366f1" }, // indigo
+	{ name: "Experience", color: "#10b981" }, // emerald
+	{ name: "Project", color: "#f59e42" }, // orange
+	{ name: "Education", color: "#f43f5e" }, // rose
   ];
   const [selectedCategories, setSelectedCategories] = useState([]);
 
@@ -154,48 +154,76 @@ export const Timeline = () => {
 
 		  {/* Category Filter Buttons */}
 		  <div className="flex flex-col fixed right-8 top-40 z-30 gap-4">
-			{categories.map((cat) => (
-			  <button
-				key={cat}
-				onClick={() => handleCategoryClick(cat)}
-				className={`px-4 py-2 rounded-full border font-semibold transition-colors duration-200 shadow-md
-				  ${selectedCategories.includes(cat)
-					? "bg-primary text-background border-primary"
-					: "bg-background text-primary border-primary/50 hover:bg-primary/10"}
-				`}
-			  >
-				{cat}
-			  </button>
-			))}
+			{categories.map((cat) => {
+			  const isSelected = selectedCategories.includes(cat.name);
+			  return (
+		<button
+		  key={cat.name}
+		  onClick={() => handleCategoryClick(cat.name)}
+		  style={{
+			backgroundColor: isSelected ? cat.color : "#fff",
+			color: isSelected ? "#fff" : cat.color,
+			borderColor: cat.color,
+			transition: 'all 0.2s',
+		  }}
+		  className={`px-4 py-2 rounded-full border-2 font-semibold shadow-md focus:outline-none hover:scale-110`}
+		  onMouseEnter={e => {
+			if (!isSelected) {
+			  e.currentTarget.style.backgroundColor = cat.color;
+			  e.currentTarget.style.color = '#fff';
+			}
+		  }}
+		  onMouseLeave={e => {
+			if (!isSelected) {
+			  e.currentTarget.style.backgroundColor = '#fff';
+			  e.currentTarget.style.color = cat.color;
+			}
+		  }}
+		>
+		  {cat.name}
+		</button>
+			  );
+			})}
 		  </div>
 
 		  <div className="relative border-l-2 border-primary/50 pl-8 ml-4 space-y-10">
-			{filteredEvents.map((event, index) => (
-			  <div key={index} className="relative">
-				{/* Dot on timeline - outside the hover element */}
-				<div className="absolute w-4 h-4 bg-primary rounded-full -left-[41px] top-6"></div>
+			{filteredEvents.map((event, index) => {
+			  // Find the color for the event's category
+			  const cat = categories.find(c => c.name === event.category);
+			  const tagColor = cat ? cat.color : "#6366f1";
+			  return (
+				<div key={index} className="relative">
+				  {/* Dot on timeline - outside the hover element */}
+				  <div className="absolute w-4 h-4 bg-primary rounded-full -left-[41px] top-6"></div>
 
-				{/* Content with hover effect */}
-				<div className="gradient-border card-hover p-6">
-				  <div className="flex flex-col md:flex-row justify-between gap-4 text-left">
-					<div className="text-left">
-					  <h3 className="text-xl font-bold text-left">{event.title}</h3>
-					  <p className="text-muted-foreground text-left">
-						{event.description}
-					  </p>
-					</div>
-					<div className="md:text-right text-left">
-					  <span className="text-primary font-semibold text-lg">
-						{event.year}
-					  </span>
-					  <div className="inline-block ml-2 px-2 py-1 rounded-full bg-primary/20 text-xs">
-						{event.category}
+				  {/* Content with hover effect */}
+				  <div className="gradient-border card-hover p-6">
+					<div className="flex flex-col md:flex-row justify-between gap-4 text-left">
+					  <div className="text-left">
+						<h3 className="text-xl font-bold text-left">{event.title}</h3>
+						<p className="text-muted-foreground text-left">
+						  {event.description}
+						</p>
+					  </div>
+					  <div className="md:text-right text-left">
+						<span className="text-primary font-semibold text-lg">
+						  {event.year}
+						</span>
+						<div
+						  className="inline-block ml-2 px-2 py-1 rounded-full text-xs"
+						  style={{
+							backgroundColor: tagColor,
+							color: "#fff",
+						  }}
+						>
+						  {event.category}
+						</div>
 					  </div>
 					</div>
 				  </div>
 				</div>
-			  </div>
-			))}
+			  );
+			})}
 		  </div>
 		</main>
 
