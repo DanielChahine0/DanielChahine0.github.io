@@ -101,6 +101,13 @@ const timelineEvents = [
 			"Tutored over 100 students from high-school to university level, specializing in math, sciences, computer science, and robotics, with guidance in coursework and test preparation.",
 		category: "Experience",
 	},
+	{
+		year: "September 2022",
+		title: "York University - Computer Science",
+		description:
+			"I am pursuing a Bachelor of Science in Computer Science at the Lassonde School of Engineering, York University (Sep 2022 - Apr 2026), developing strong skills in programming, problem-solving, and analytical thinking, along with experience in public relations, social media, and additional technical competencies.",
+		category: "Education",
+	},
 	
 ];
 
