@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom"
+import { HashRouter, Route, Routes, useLocation } from "react-router-dom"
 import { AnimatePresence } from "framer-motion"
 import { Home } from "./pages/Home"
 import { NotFound } from "./pages/NotFound"
@@ -25,10 +25,10 @@ function App() {
   return (
     <>
       <Toaster />
-      <BrowserRouter>
+      <HashRouter>
         <ScrollToTop />
         <AnimatedRoutes />
-      </BrowserRouter>
+      </HashRouter>
     </>
   )
 }
