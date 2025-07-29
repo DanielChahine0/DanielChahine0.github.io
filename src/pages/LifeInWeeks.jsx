@@ -1,3 +1,4 @@
+
 // For best performance, add this to your CSS (e.g., index.css):
 // .week-square:hover { transform: scale(1.5); z-index: 2; transition: transform 0.15s; }
 import { useState, useMemo, useEffect } from "react";
@@ -6,6 +7,20 @@ import { NavBar } from "../components/NavBar";
 import { PageTransition } from "../components/PageTransition";
 import { motion } from "framer-motion";
 import { Calendar, Heart, Clock, Star, Users, TreePine } from "lucide-react";
+
+// Helper to ensure date is always yyyy-mm-dd or empty
+const getDateInputValue = (dateStr) => {
+    if (!dateStr) return "";
+    // If already in yyyy-mm-dd, return as is
+    if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return dateStr;
+    // Try to parse and format
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return "";
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+};
 
 export default function LifeInWeeks() {
     const [birthDate, setBirthDate] = useState("");
@@ -313,7 +328,7 @@ export default function LifeInWeeks() {
                                     </label>
                                     <input
                                         type="date"
-                                        value={birthDate}
+                                        value={getDateInputValue(birthDate)}
                                         onChange={(e) => setBirthDate(e.target.value)}
                                         className="w-full px-3 py-2 border rounded-md bg-background"
                                     />
