@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom'; // Import Link and useNavi
 const navItems = [
     { name: 'Timeline', href: '/timeline', isRoute: true },
     { name: 'Resume', href: '/files/resume.pdf', isRoute: false, download: true },
-    { name: 'Contact', href: '#contact', isRoute: false },
+    { name: 'Contact', href: '#footer', isRoute: 'footer' },
 ]
 
 export const NavBar = () => {
@@ -48,10 +48,14 @@ export const NavBar = () => {
     };
 
     const handleNavigation = (href, isRoute = false) => {
-        if (isRoute) {
-            // Add a small delay for smooth transition
+        if (isRoute === true) {
             setTimeout(() => {
                 navigate(href);
+            }, 50);
+        } else if (isRoute === 'footer') {
+            setTimeout(() => {
+                const el = document.querySelector('footer');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
             }, 50);
         }
         setIsMenuOpen(false);
@@ -114,10 +118,18 @@ export const NavBar = () => {
                 {/* Desktop Version */}
                 <div className='hidden md:flex items-center space-x-6 relative z-10'>
                     {navItems.map((item, key) => (
-                        item.isRoute ? (
+                        item.isRoute === true ? (
                             <button
                                 onClick={() => handleNavigation(item.href, true)} 
                                 key={key} 
+                                className='text-foreground/80 transition-transform duration-300 hover:scale-120 cursor-pointer bg-transparent border-none'
+                            >
+                                {item.name}
+                            </button>
+                        ) : item.isRoute === 'footer' ? (
+                            <button
+                                onClick={() => handleNavigation(item.href, 'footer')}
+                                key={key}
                                 className='text-foreground/80 transition-transform duration-300 hover:scale-120 cursor-pointer bg-transparent border-none'
                             >
                                 {item.name}
@@ -168,10 +180,18 @@ export const NavBar = () => {
                 </button>
                 <div className='flex flex-col space-y-8 text-xl'>
                     {navItems.map((item, key) => (
-                        item.isRoute ? (
+                        item.isRoute === true ? (
                             <button
                                 onClick={() => handleNavigation(item.href, true)} 
                                 key={key} 
+                                className='text-foreground/80 transition-transform duration-300 hover:scale-120 cursor-pointer bg-transparent border-none text-xl'
+                            >
+                                {item.name}
+                            </button>
+                        ) : item.isRoute === 'footer' ? (
+                            <button
+                                onClick={() => handleNavigation(item.href, 'footer')}
+                                key={key}
                                 className='text-foreground/80 transition-transform duration-300 hover:scale-120 cursor-pointer bg-transparent border-none text-xl'
                             >
                                 {item.name}
