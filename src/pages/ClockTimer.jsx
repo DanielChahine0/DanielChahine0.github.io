@@ -55,7 +55,7 @@ function WorldClock() {
                         onClick={() => toggleCity(city.tz)}
                         className={`px-3 py-1 rounded-md text-sm font-medium border transition-colors ${
                             selectedCities.includes(city.tz)
-                                ? 'bg-blue-500 text-white border-blue-600'
+                                ? 'bg-blue-700 text-white border-blue-800'
                                 : 'bg-white text-blue-700 border-blue-300 hover:bg-blue-100'
                         }`}
                         aria-pressed={selectedCities.includes(city.tz)}
@@ -69,8 +69,8 @@ function WorldClock() {
                     const city = worldCities.find(c => c.tz === tz);
                     return city ? (
                         <div key={tz} className="flex justify-between items-center bg-blue-50 rounded px-3 py-2">
-                            <span className="font-medium">{city.name}</span>
-                            <span className="font-mono text-lg">{getWorldTime(tz)}</span>
+                            <span className="font-medium  text-black">{city.name}</span>
+                            <span className="font-mono text-lg text-black">{getWorldTime(tz)}</span>
                         </div>
                     ) : null;
                 })}
