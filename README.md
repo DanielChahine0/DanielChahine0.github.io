@@ -1,7 +1,9 @@
 # Daniel Chahine — Personal Portfolio
+<p align="center">
 <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/DanielChahine0/DanielChahine0.github.io?style=for-the-badge&logo=GitHub">
 <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/DanielChahine0/DanielChahine0.github.io?style=for-the-badge&logo=Javascript">
 <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/DanielChahine0/DanielChahine0.github.io?style=for-the-badge">
+</p>
 
 Welcome to my personal portfolio website! This site showcases my projects, skills, experience, and provides a way to get in touch. Built with modern web technologies, it features smooth animations, responsive design, and a clean, interactive UI.
 
@@ -27,6 +29,7 @@ Welcome to my personal portfolio website! This site showcases my projects, skill
 ---
 
 ## Tech Stack
+<p align="center">
 <img alt="React" src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB">
 <img alt="Lucide" src="https://img.shields.io/badge/Lucide%20React-000000?style=for-the-badge&logo=lucide&logoColor=white">
 <img alt="React Router" src="https://img.shields.io/badge/React%20Router-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white">
@@ -39,6 +42,7 @@ Welcome to my personal portfolio website! This site showcases my projects, skill
 <img alt="CSS3" src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
 <img alt="clsx" src="https://img.shields.io/badge/clsx-000000?style=for-the-badge">
 <img alt="React Icons" src="https://img.shields.io/badge/React%20Icons-EA7E20?style=for-the-badge&logo=react&logoColor=white">
+</p>
 
 ---
 
