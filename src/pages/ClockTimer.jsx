@@ -84,30 +84,93 @@ function AlarmSection() {
     const [alarms, setAlarms] = useState([]);
     const [newAlarm, setNewAlarm] = useState({ time: "", label: "", sound: "default" });
     const [isRecurring, setIsRecurring] = useState(false);
+    const [audioPermissionGranted, setAudioPermissionGranted] = useState(false);
+
+    // Request audio permission on component mount
+    useEffect(() => {
+        const requestAudioPermission = async () => {
+            try {
+                // Create a silent audio context to test if audio is allowed
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioContext.state === 'suspended') {
+                    await audioContext.resume();
+                }
+                setAudioPermissionGranted(true);
+                audioContext.close();
+            } catch (error) {
+                console.log("Audio permission not granted yet");
+                setAudioPermissionGranted(false);
+            }
+        };
+        
+        requestAudioPermission();
+        
+        // Request notification permission
+        if (Notification.permission === "default") {
+            Notification.requestPermission();
+        }
+    }, []);
 
     useEffect(() => {
         const checkAlarms = setInterval(() => {
             const now = new Date();
-            alarms.forEach(alarm => {
-                const alarmTime = new Date();
-                const [hours, minutes] = alarm.time.split(":" ).map(Number);
-                alarmTime.setHours(hours, minutes, 0, 0);
-
-                if (now >= alarmTime && now - alarmTime < 1000) {
-                    if (Notification.permission === "granted") {
-                        new Notification(alarm.label || "Alarm", {
-                            body: "Your alarm is ringing!",
-                            icon: "src/assets/favicon.svg",
+            const currentTimeString = now.getHours().toString().padStart(2, '0') + ':' + 
+                                    now.getMinutes().toString().padStart(2, '0');
+            
+            alarms.forEach((alarm, index) => {
+                // Check if current time matches alarm time
+                if (currentTimeString === alarm.time) {
+                    // Prevent multiple triggers by checking if alarm was already triggered this minute
+                    const alarmKey = `${alarm.time}-${index}-${now.getDate()}-${now.getMonth()}`;
+                    const triggeredAlarms = JSON.parse(localStorage.getItem('triggeredAlarms') || '[]');
+                    
+                    if (!triggeredAlarms.includes(alarmKey)) {
+                        // Mark alarm as triggered
+                        triggeredAlarms.push(alarmKey);
+                        localStorage.setItem('triggeredAlarms', JSON.stringify(triggeredAlarms));
+                        
+                        // Request notification permission if not already granted
+                        if (Notification.permission === "default") {
+                            Notification.requestPermission();
+                        }
+                        
+                        if (Notification.permission === "granted") {
+                            new Notification(alarm.label || "Alarm", {
+                                body: "Your alarm is ringing!",
+                                icon: "/favicon.ico",
+                            });
+                        }
+                        
+                        // Create and play audio with better error handling
+                        const audio = new Audio(alarm.sound);
+                        audio.volume = 0.7;
+                        audio.play().catch(err => {
+                            console.error("Audio playback failed:", err);
+                            // Fallback: try to use Web Audio API or show alert
+                            alert(alarm.label || "Alarm is ringing!");
                         });
-                    }
-                    const audio = new Audio(alarm.sound);
-                    audio.play().catch(err => console.error("Audio playback failed:", err));
 
-                    if (!alarm.recurring) {
-                        setAlarms(prev => prev.filter(a => a !== alarm));
+                        if (!alarm.recurring) {
+                            setAlarms(prev => prev.filter((_, i) => i !== index));
+                        }
                     }
                 }
             });
+            
+            // Clean up old triggered alarms (older than 1 day)
+            const triggeredAlarms = JSON.parse(localStorage.getItem('triggeredAlarms') || '[]');
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const cleanedAlarms = triggeredAlarms.filter(key => {
+                const parts = key.split('-');
+                if (parts.length >= 4) {
+                    const day = parseInt(parts[2]);
+                    const month = parseInt(parts[3]);
+                    return day >= yesterday.getDate() && month >= yesterday.getMonth();
+                }
+                return false;
+            });
+            localStorage.setItem('triggeredAlarms', JSON.stringify(cleanedAlarms));
         }, 1000);
 
         return () => clearInterval(checkAlarms);
@@ -125,9 +188,28 @@ function AlarmSection() {
         setAlarms(alarms.filter((_, i) => i !== index));
     };
 
+    const testSound = (soundUrl) => {
+        const testAudio = new Audio(soundUrl || "https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae1b6.mp3");
+        testAudio.volume = 0.7;
+        testAudio.play()
+            .then(() => {
+                setAudioPermissionGranted(true);
+                console.log("Audio permission granted");
+            })
+            .catch(err => {
+                console.error("Test sound failed:", err);
+                alert("Please interact with the page first to enable audio playback");
+            });
+    };
+
     return (
         <div className="mt-8 bg-card rounded-lg p-6 shadow-lg">
             <h3 className="text-3xl font-bold mb-6 text-center">Alarm</h3>
+            {!audioPermissionGranted && (
+                <div className="mb-4 p-3 bg-yellow-100 border border-yellow-300 rounded-lg text-yellow-800 text-sm">
+                    <strong>Note:</strong> Audio may not work until you interact with the page. Click the test sound button (🔊) to enable audio playback.
+                </div>
+            )}
             <div className="flex flex-col gap-6">
                 <div className="flex flex-wrap items-center gap-4 justify-center">
                     <input
@@ -151,8 +233,16 @@ function AlarmSection() {
                     >
                         <option value="default">Default</option>
                         <option value="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae1b6.mp3">Beep</option>
-                        <option value="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae1b6.mp3">Chime</option>
+                        <option value="https://cdn.pixabay.com/audio/2021/08/04/audio_12b0c7443c.mp3">Chime</option>
                     </select>
+                    <button
+                        type="button"
+                        onClick={() => testSound(newAlarm.sound === "default" ? "https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae1b6.mp3" : newAlarm.sound)}
+                        className="px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 shadow-sm text-sm"
+                        title="Test sound"
+                    >
+                        🔊
+                    </button>
                     <label className="flex items-center gap-2">
                         <input
                             type="checkbox"
@@ -238,7 +328,12 @@ export default function ClockTimer() {
     // Play sound when timer finishes
     useEffect(() => {
         if (totalSeconds === 0 && audioRef.current) {
-            audioRef.current.play();
+            audioRef.current.volume = 0.7;
+            audioRef.current.play().catch(err => {
+                console.error("Timer audio playback failed:", err);
+                // Fallback notification
+                alert("Timer finished!");
+            });
         }
     }, [totalSeconds]);
 
