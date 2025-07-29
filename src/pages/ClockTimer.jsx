@@ -203,7 +203,7 @@ function AlarmSection() {
     };
 
     return (
-        <div className="mt-8 bg-card rounded-lg p-6 shadow-lg">
+        <div className="mt-8 bg-card rounded-lg p-6 shadow-2xl">
             <h3 className="text-3xl font-bold mb-6 text-center">Alarm</h3>
             {!audioPermissionGranted && (
                 <div className="mb-4 p-3 bg-yellow-100 border border-yellow-300 rounded-lg text-yellow-800 text-sm">
@@ -216,7 +216,7 @@ function AlarmSection() {
                         type="time"
                         value={newAlarm.time}
                         onChange={(e) => setNewAlarm({ ...newAlarm, time: e.target.value })}
-                        className="border px-4 py-2 rounded-lg focus:outline-none text-center shadow-sm"
+                        className="px-4 py-2 rounded-lg text-center shadow-sm focus:outline-none"
                         placeholder="Set Time"
                     />
                     <input
@@ -224,12 +224,12 @@ function AlarmSection() {
                         placeholder="Label"
                         value={newAlarm.label}
                         onChange={(e) => setNewAlarm({ ...newAlarm, label: e.target.value })}
-                        className="border px-4 py-2 rounded-lg focus:outline-none text-center shadow-sm"
+                        className="px-4 py-2 rounded-lg text-center shadow-sm focus:outline-none"
                     />
                     <select
                         value={newAlarm.sound}
                         onChange={(e) => setNewAlarm({ ...newAlarm, sound: e.target.value })}
-                        className="border px-4 py-2 rounded-lg focus:outline-none shadow-sm"
+                        className="px-4 py-2 rounded-lg shadow-sm focus:outline-none"
                     >
                         <option value="default">Default</option>
                         <option value="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae1b6.mp3">Beep</option>
@@ -238,7 +238,7 @@ function AlarmSection() {
                     <button
                         type="button"
                         onClick={() => testSound(newAlarm.sound === "default" ? "https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae1b6.mp3" : newAlarm.sound)}
-                        className="px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 shadow-sm text-sm"
+                        className="px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 shadow-sm text-sm focus:outline-none"
                         title="Test sound"
                     >
                         🔊
@@ -248,13 +248,13 @@ function AlarmSection() {
                             type="checkbox"
                             checked={isRecurring}
                             onChange={(e) => setIsRecurring(e.target.checked)}
-                            className="w-4 h-4"
+                        className="w-4 h-4 focus:outline-none"
                         />
                         <span className="text-sm">Recurring</span>
                     </label>
                     <button
                         onClick={addAlarm}
-                        className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600  shadow-md transition-transform transform hover:scale-105"
+                        className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600  shadow-md transition-transform transform hover:scale-105 focus:outline-none"
                     >
                         Add Alarm
                     </button>
@@ -266,15 +266,15 @@ function AlarmSection() {
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 10 }}
-                            className="flex justify-between items-center bg-white px-6 py-4 rounded-lg shadow-md border-l-4 border-blue-500"
+                            className="flex justify-between items-center bg-white px-6 py-4 rounded-lg shadow-2xl"
                         >
                             <div>
                                 <span className="font-semibold text-lg text-blue-700">{alarm.time}</span>
-                                <span className="text-sm text-gray-600 ml-2">{alarm.label || "No Label"}</span>
+                                <span className="text-sm text-gray-400 ml-2">{alarm.label || "No Label"}</span>
                             </div>
                             <button
                                 onClick={() => removeAlarm(index)}
-                                className="text-red-500 hover:text-red-600 focus:ring-2 focus:ring-red-400"
+                                className="text-red-500 hover:text-red-600 focus:outline-none"
                             >
                                 Remove
                             </button>
@@ -463,7 +463,7 @@ export default function ClockTimer() {
                                     <button
                                         onClick={toggleTimer}
                                         aria-label={isTimerRunning ? "Pause timer" : "Start timer"}
-                                        className={`focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400 flex items-center gap-2 px-6 py-3 rounded-md text-white font-medium transition-colors ${
+                                        className={`flex items-center gap-2 px-6 py-3 rounded-md text-white font-medium transition-colors ${
                                             isTimerRunning 
                                                 ? "bg-red-500 hover:bg-red-600" 
                                                 : "bg-green-500 hover:bg-green-600"
@@ -475,7 +475,7 @@ export default function ClockTimer() {
                                     <button
                                         onClick={resetTimer}
                                         aria-label="Reset timer"
-                                        className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 flex items-center gap-2 px-6 py-3 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors"
+                                        className="flex items-center gap-2 px-6 py-3 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors"
                                     >
                                         <RotateCcw size={20} />
                                         Reset
@@ -488,7 +488,7 @@ export default function ClockTimer() {
                                             onClick={() => adjustTimer(-5)}
                                             disabled={isTimerRunning}
                                             aria-label="Decrease timer by 5 minutes"
-                                            className="focus:outline-none focus:ring-2 focus:ring-blue-400 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                            className="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                                         >
                                             <Minus size={16} />
                                         </button>
@@ -499,7 +499,7 @@ export default function ClockTimer() {
                                             onClick={() => adjustTimer(5)}
                                             disabled={isTimerRunning}
                                             aria-label="Increase timer by 5 minutes"
-                                            className="focus:outline-none focus:ring-2 focus:ring-blue-400 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                            className="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                                         >
                                             <Plus size={16} />
                                         </button>
@@ -512,7 +512,7 @@ export default function ClockTimer() {
                                                 onClick={() => setPresetTimer(minutes)}
                                                 disabled={isTimerRunning}
                                                 aria-label={`Set timer to ${minutes} minutes`}
-                                                className="focus:outline-none focus:ring-2 focus:ring-purple-400 px-3 py-1 text-sm bg-purple-500 text-white rounded-md hover:bg-purple-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                                className="px-3 py-1 text-sm bg-purple-500 text-white rounded-md hover:bg-purple-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                                             >
                                                 {minutes}m
                                             </button>
@@ -521,7 +521,7 @@ export default function ClockTimer() {
                                             onClick={() => setShowCustomInput((v) => !v)}
                                             disabled={isTimerRunning}
                                             aria-label="Set custom timer"
-                                            className="focus:outline-none focus:ring-2 focus:ring-yellow-400 px-3 py-1 text-sm bg-yellow-500 text-white rounded-md hover:bg-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                            className="px-3 py-1 text-sm bg-yellow-500 text-white rounded-md hover:bg-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                                         >
                                             Custom
                                         </button>
@@ -536,14 +536,14 @@ export default function ClockTimer() {
                                                 value={customInput || ''}
                                                 onChange={handleCustomInput}
                                                 onKeyDown={e => { if (e.key === 'Enter') setCustomTimer(); }}
-                                                className="w-20 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-center"
+                                                className="w-20 px-2 py-1 border border-gray-300 rounded-md text-center"
                                                 aria-label="Custom timer minutes"
                                                 placeholder="min"
                                                 autoFocus
                                             />
                                             <button
                                                 onClick={setCustomTimer}
-                                                className="px-2 py-1 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+                                                className="px-2 py-1 bg-green-500 text-white rounded-md hover:bg-green-600"
                                                 aria-label="Set custom timer"
                                             >
                                                 Set
