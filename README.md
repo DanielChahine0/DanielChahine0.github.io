@@ -46,7 +46,7 @@ Welcome to my personal portfolio website! This site showcases my projects, skill
 ---
 
 ## Project Structure
-```
+```txt
 ├── public/ 
 │ ├── files/ 
 │ │ └── resume.pdf 

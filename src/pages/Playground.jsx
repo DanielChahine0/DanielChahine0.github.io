@@ -34,7 +34,7 @@ export default function Playground() {
         <PageTransition>
             <div className="min-h-screen flex flex-col bg-background">
                 <NavBar />
-                <main className="flex-1 container mx-auto px-4 py-8">
+                <main className="mt-10 flex-1 container mx-auto px-4 py-8">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -67,10 +67,7 @@ export default function Playground() {
                                                     {tool.description}
                                                 </p>
                                                 
-                                                <div className="flex items-center justify-center text-blue-500 group-hover:text-blue-600 transition-colors">
-                                                    <span className="text-sm font-medium">Try it out</span>
-                                                    <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
-                                                </div>
+                                                {/* Removed 'Try it out' call-to-action */}
                                             </div>
                                         </Link>
                                     </motion.div>
@@ -78,17 +75,7 @@ export default function Playground() {
                             })}
                         </div>
                         
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 0.4 }}
-                            className="mt-12 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg"
-                        >
-                            <h2 className="text-2xl font-semibold mb-2">More Coming Soon!</h2>
-                            <p className="text-foreground/70">
-                                I'm constantly working on new tools and experiences. Check back regularly for updates!
-                            </p>
-                        </motion.div>
+                        {/* Removed 'More Coming Soon!' section */}
                     </motion.div>
                 </main>
                 <Footer />
