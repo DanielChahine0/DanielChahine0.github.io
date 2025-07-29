@@ -39,6 +39,7 @@ Welcome to my personal portfolio website! This site showcases my projects, skill
 ---
 
 ## 📁 Project Structure
+```
 ├── public/ 
 │ ├── files/ 
 │ │ └── resume.pdf 
@@ -71,3 +72,4 @@ Welcome to my personal portfolio website! This site showcases my projects, skill
 ├── package.json 
 ├── vite.config.js 
 └── README.md
+```
