@@ -2,8 +2,7 @@
 import { useState } from "react";
 import { NavBar } from "../components/NavBar";
 import { Footer } from "../components/Footer";
-import { StarBackground } from "../components/StarBackground";
-import { CloudBackground } from "../components/CloudBackground";
+// Removed StarBackground and CloudBackground imports
 import { PageTransition } from "../components/PageTransition";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -140,13 +139,7 @@ export const Timeline = () => {
 
   return (
 	<PageTransition className="min-h-screen bg-background text-foreground overflow-x-hidden relative">
-	  {/* Background Effects - positioned with lower z-index */}
-	  <div className="fixed inset-0 z-0">
-		<CloudBackground />
-	  </div>
-	  <div className="fixed inset-0 z-10">
-		<StarBackground />
-	  </div>
+  {/* Removed CloudBackground and StarBackground components */}
 
 	  {/* Content with higher z-index */}
 	  <div className="relative z-20">

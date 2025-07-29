@@ -121,8 +121,11 @@ npm run preview
 
 ## Contact
 Email: [Chahinedaniel0@gmail.com](chahinedaniel0@gmail.com)
+
 LinkedIn: [danielchahine](https://www.linkedin.com/in/danielchahine)
+
 GitHub: [DanielChahine0](https://github.com/DanielChahine0)
+
 Instagram: [dxni.ch](https://instagram.com/dxni.ch)
 
 ## License
