@@ -17,7 +17,6 @@ Welcome to my personal portfolio website! This site showcases my projects, skill
 
 - **Modern UI/UX**: Responsive, accessible, and visually appealing design with smooth transitions.
 - **Animated Page Transitions**: Seamless navigation using Framer Motion and React Router.
-- **Dynamic Backgrounds**: Interactive star and cloud backgrounds for a unique look.
 - **Project Showcase**: Highlighted projects with images, tech stack, and links to live demos and source code.
 - **Timeline**: Chronological view of experience, projects, and extracurricular activities.
 - **Skills Section**: Categorized list of programming languages, technologies, and tools.
