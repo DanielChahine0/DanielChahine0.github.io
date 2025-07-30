@@ -34,7 +34,7 @@ export default function Playground() {
             icon: FileText,
             path: "/playground/markdown-editor",
             color: "bg-orange-500"
-        }
+        },
     ];
 
     return (
