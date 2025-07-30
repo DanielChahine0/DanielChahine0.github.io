@@ -3,7 +3,7 @@ import { NavBar } from "../components/NavBar";
 import { PageTransition } from "../components/PageTransition";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calculator, Clock, Calendar, ArrowRight } from "lucide-react";
+import { Calculator, Clock, Calendar, ArrowRight, FileText } from "lucide-react";
 
 export default function Playground() {
     const tools = [
@@ -27,6 +27,13 @@ export default function Playground() {
             icon: Calendar,
             path: "/playground/life-in-weeks",
             color: "bg-purple-500"
+        },
+        {
+            title: "Markdown Editor",
+            description: "A powerful markdown editor with live preview, syntax highlighting, and export capabilities to MD and PDF.",
+            icon: FileText,
+            path: "/playground/markdown-editor",
+            color: "bg-orange-500"
         }
     ];
 
@@ -46,7 +53,7 @@ export default function Playground() {
                             Welcome to the Playground! Explore these interactive tools and experiences.
                         </p>
                         
-                        <div className="grid md:grid-cols-3 gap-6">
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {tools.map((tool, index) => {
                                 const IconComponent = tool.icon;
                                 return (
