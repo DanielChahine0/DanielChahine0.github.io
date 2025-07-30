@@ -3,7 +3,7 @@ import { NavBar } from "../components/NavBar";
 import { PageTransition } from "../components/PageTransition";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calculator, Clock, Calendar, ArrowRight, FileText } from "lucide-react";
+import { Calculator, Clock, Calendar, ArrowRight, FileText, Palette } from "lucide-react";
 
 export default function Playground() {
     const tools = [
@@ -34,6 +34,13 @@ export default function Playground() {
             icon: FileText,
             path: "/playground/markdown-editor",
             color: "bg-orange-500"
+        },
+        {
+            title: "Color Picker",
+            description: "Create color palettes with complementary colorsand HEX/RGB/HSB modes.",
+            icon: Palette,
+            path: "/playground/color-picker",
+            color: "bg-pink-500"
         },
     ];
 

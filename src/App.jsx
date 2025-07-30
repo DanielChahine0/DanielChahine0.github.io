@@ -8,6 +8,7 @@ import CalorieTracker from "./pages/CalorieTracker"
 import ClockTimer from "./pages/ClockTimer"
 import LifeInWeeks from "./pages/LifeInWeeks"
 import MarkdownEditor from "./pages/MarkdownEditor"
+import ColorPicker from "./pages/ColorPicker"
 import { Toaster } from "@/components/ui/toaster"
 import { ScrollToTop } from "./components/ScrollToTop"
 
@@ -24,6 +25,7 @@ function AnimatedRoutes() {
         <Route path="/playground/clock-timer" element={<ClockTimer />} />
         <Route path="/playground/life-in-weeks" element={<LifeInWeeks />} />
         <Route path="/playground/markdown-editor" element={<MarkdownEditor />} />
+        <Route path="/playground/color-picker" element={<ColorPicker />} />
         {/* When the path is *, it will render the NotFound component */}
         <Route path="*" element={<NotFound />} />
       </Routes>
