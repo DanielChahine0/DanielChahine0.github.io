@@ -271,8 +271,8 @@ Start writing your markdown here...
             <div ref={containerRef} className={containerClass}>
                 {!isFullscreen && <NavBar />}
                 
-                <main className={`flex-1 ${isFullscreen ? 'h-screen' : 'mt-10 container mx-auto px-4 py-8'}`}>
-                    <div className="h-full flex flex-col max-w-7xl mx-auto">
+                <main className={`flex-1 ${isFullscreen ? 'h-screen' : 'mt-10 container mx-auto px-2 py-8'} max-w-[95vw]`}>
+                    <div className="h-full flex flex-col max-w-none mx-auto">
                         {/* Title - matching CalorieTracker style */}
                         {!isFullscreen && (
                             <motion.div
@@ -311,14 +311,6 @@ Start writing your markdown here...
                                             title={isPreviewOnly ? "Show editor" : "Preview only"}
                                         >
                                             {isPreviewOnly ? <Eye size={16} /> : <EyeOff size={16} />}
-                                        </button>
-                                        
-                                        <button
-                                            onClick={toggleFullscreen}
-                                            className="p-2 rounded-lg hover:bg-accent transition-colors"
-                                            title={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-                                        >
-                                            {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
                                         </button>
                                         
                                         <div className="w-px h-6 bg-border" />
@@ -360,7 +352,7 @@ Start writing your markdown here...
                         </div>
 
                         {/* Editor and Preview */}
-                        <div className="flex-1 flex bg-card rounded-b-lg overflow-hidden">
+                        <div className="flex-1 flex bg-card overflow-hidden min-h-[600px]">
                             {!isPreviewOnly && (
                                 <motion.div
                                     className="w-1/2 border-r"
@@ -371,9 +363,13 @@ Start writing your markdown here...
                                     <textarea
                                         value={markdown}
                                         onChange={handleMarkdownChange}
-                                        className="w-full h-full p-4 bg-background text-foreground font-mono text-sm resize-none border-none outline-none"
+                                        className="w-full h-full p-4 font-mono text-sm resize-none border-none outline-none bg-slate-900/40 dark:bg-slate-800/60 text-slate-100 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500"
                                         placeholder="Start typing your markdown here..."
                                         spellCheck={false}
+                                        style={{
+                                            backgroundColor: 'rgba(15, 23, 42, 0.4)', // slate-900 with 40% opacity
+                                            backdropFilter: 'blur(8px)',
+                                        }}
                                     />
                                 </motion.div>
                             )}
@@ -384,72 +380,87 @@ Start writing your markdown here...
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.3, delay: 0.1 }}
                             >
-                                <div className="h-full overflow-auto p-4 bg-card/30">
+                                <div className="h-full overflow-auto p-4 bg-white">
                                     <div 
                                         ref={previewRef}
-                                        className="prose prose-gray dark:prose-invert max-w-none prose-headings:font-bold prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-h4:text-xl prose-h5:text-lg prose-h6:text-base prose-p:text-base prose-p:leading-relaxed"
+                                        className="prose prose-gray max-w-none prose-headings:font-bold prose-headings:text-black prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-h4:text-xl prose-h5:text-lg prose-h6:text-base prose-p:text-base prose-p:leading-relaxed prose-p:text-black prose-li:text-black prose-strong:text-black prose-em:text-black prose-blockquote:text-black prose-a:text-blue-600"
+                                        style={{ color: '#000000' }}
                                     >
                                         <ReactMarkdown
                                             remarkPlugins={[remarkGfm]}
                                             rehypePlugins={[rehypeHighlight, rehypeRaw]}
                                             components={{
-                                                // Custom components for better styling
+                                                // Custom components for better styling with black text
                                                 h1: ({ children }) => (
-                                                    <h1 className="text-4xl font-bold mt-6 mb-4">{children}</h1>
+                                                    <h1 className="text-4xl font-bold mt-6 mb-4 text-black">{children}</h1>
                                                 ),
                                                 h2: ({ children }) => (
-                                                    <h2 className="text-3xl font-bold mt-5 mb-3">{children}</h2>
+                                                    <h2 className="text-3xl font-bold mt-5 mb-3 text-black">{children}</h2>
                                                 ),
                                                 h3: ({ children }) => (
-                                                    <h3 className="text-2xl font-bold mt-4 mb-2">{children}</h3>
+                                                    <h3 className="text-2xl font-bold mt-4 mb-2 text-black">{children}</h3>
                                                 ),
                                                 h4: ({ children }) => (
-                                                    <h4 className="text-xl font-bold mt-3 mb-2">{children}</h4>
+                                                    <h4 className="text-xl font-bold mt-3 mb-2 text-black">{children}</h4>
                                                 ),
                                                 h5: ({ children }) => (
-                                                    <h5 className="text-lg font-bold mt-3 mb-1">{children}</h5>
+                                                    <h5 className="text-lg font-bold mt-3 mb-1 text-black">{children}</h5>
                                                 ),
                                                 h6: ({ children }) => (
-                                                    <h6 className="text-base font-bold mt-3 mb-1">{children}</h6>
+                                                    <h6 className="text-base font-bold mt-3 mb-1 text-black">{children}</h6>
                                                 ),
                                                 p: ({ children }) => (
-                                                    <p className="text-base leading-relaxed mb-4">{children}</p>
+                                                    <p className="text-base leading-relaxed mb-4 text-black">{children}</p>
+                                                ),
+                                                li: ({ children }) => (
+                                                    <li className="text-black">{children}</li>
+                                                ),
+                                                strong: ({ children }) => (
+                                                    <strong className="text-black font-bold">{children}</strong>
+                                                ),
+                                                em: ({ children }) => (
+                                                    <em className="text-black italic">{children}</em>
                                                 ),
                                                 code: ({ node, inline, className, children, ...props }) => {
                                                     const match = /language-(\w+)/.exec(className || '');
                                                     return !inline && match ? (
-                                                        <pre className="bg-muted p-4 rounded-lg overflow-x-auto my-4">
-                                                            <code className={className} {...props}>
+                                                        <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto my-4 border">
+                                                            <code className={className} style={{ color: '#000000' }} {...props}>
                                                                 {children}
                                                             </code>
                                                         </pre>
                                                     ) : (
-                                                        <code className="bg-muted px-1 py-0.5 rounded text-sm" {...props}>
+                                                        <code className="bg-gray-100 px-1 py-0.5 rounded text-sm text-black border" {...props}>
                                                             {children}
                                                         </code>
                                                     );
                                                 },
                                                 blockquote: ({ children }) => (
-                                                    <blockquote className="border-l-4 border-primary pl-4 italic bg-muted/50 py-2 my-4">
+                                                    <blockquote className="border-l-4 border-blue-500 pl-4 italic bg-gray-50 py-2 my-4 text-black">
                                                         {children}
                                                     </blockquote>
                                                 ),
                                                 table: ({ children }) => (
                                                     <div className="overflow-x-auto my-4">
-                                                        <table className="min-w-full border border-border rounded-lg">
+                                                        <table className="min-w-full border border-gray-300 rounded-lg">
                                                             {children}
                                                         </table>
                                                     </div>
                                                 ),
                                                 th: ({ children }) => (
-                                                    <th className="border border-border px-4 py-2 bg-muted font-semibold text-left">
+                                                    <th className="border border-gray-300 px-4 py-2 bg-gray-100 font-semibold text-left text-black">
                                                         {children}
                                                     </th>
                                                 ),
                                                 td: ({ children }) => (
-                                                    <td className="border border-border px-4 py-2">
+                                                    <td className="border border-gray-300 px-4 py-2 text-black">
                                                         {children}
                                                     </td>
+                                                ),
+                                                a: ({ children, href }) => (
+                                                    <a href={href} className="text-blue-600 hover:text-blue-800 underline">
+                                                        {children}
+                                                    </a>
                                                 ),
                                             }}
                                         >
@@ -458,6 +469,70 @@ Start writing your markdown here...
                                     </div>
                                 </div>
                             </motion.div>
+                        </div>
+
+                        {/* Bottom Toolbar */}
+                        <div className="border-t bg-card/50 backdrop-blur-sm rounded-b-lg">
+                            <div className="px-4 py-3">
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center space-x-2">
+                                        <FileText size={20} />
+                                        <span className="text-xl font-semibold">Editor</span>
+                                    </div>
+                                    
+                                    <div className="flex items-center space-x-2">
+                                        <button
+                                            onClick={showHelp}
+                                            className="p-2 rounded-lg hover:bg-accent transition-colors"
+                                            title="Show help"
+                                        >
+                                            <HelpCircle size={16} />
+                                        </button>
+                                        
+                                        <button
+                                            onClick={() => setIsPreviewOnly(!isPreviewOnly)}
+                                            className="p-2 rounded-lg hover:bg-accent transition-colors"
+                                            title={isPreviewOnly ? "Show editor" : "Preview only"}
+                                        >
+                                            {isPreviewOnly ? <Eye size={16} /> : <EyeOff size={16} />}
+                                        </button>
+                                        
+                                        <div className="w-px h-6 bg-border" />
+                                        
+                                        <button
+                                            onClick={resetContent}
+                                            className="p-2 rounded-lg hover:bg-accent transition-colors"
+                                            title="Reset content"
+                                        >
+                                            <RotateCcw size={16} />
+                                        </button>
+                                        
+                                        <button
+                                            onClick={copyToClipboard}
+                                            className="p-2 rounded-lg hover:bg-accent transition-colors"
+                                            title="Copy to clipboard"
+                                        >
+                                            <Copy size={16} />
+                                        </button>
+                                        
+                                        <button
+                                            onClick={downloadMarkdown}
+                                            className="p-2 rounded-lg hover:bg-accent transition-colors"
+                                            title="Download as .md"
+                                        >
+                                            <Download size={16} />
+                                        </button>
+                                        
+                                        <button
+                                            onClick={exportToPDF}
+                                            className="px-3 py-1.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium"
+                                            title="Export as PDF"
+                                        >
+                                            PDF
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </main>
