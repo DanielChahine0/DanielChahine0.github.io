@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Footer } from "../components/Footer";
 import { NavBar } from "../components/NavBar";
 import { PageTransition } from "../components/PageTransition";
@@ -80,83 +80,86 @@ function WorldClock() {
 }
 
 // Alarm Section
+const DEFAULT_SOUND = "https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae1b6.mp3";
+const CHIME_SOUND = "https://cdn.pixabay.com/audio/2021/08/04/audio_12b0c7443c.mp3";
+
 function AlarmSection() {
-    const [alarms, setAlarms] = useState([]);
+    const [alarms, setAlarms] = useState(() => {
+        // Persist alarms in localStorage
+        try {
+            const stored = localStorage.getItem('alarms');
+            return stored ? JSON.parse(stored) : [];
+        } catch {
+            return [];
+        }
+    });
     const [newAlarm, setNewAlarm] = useState({ time: "", label: "", sound: "default" });
     const [isRecurring, setIsRecurring] = useState(false);
     const [audioPermissionGranted, setAudioPermissionGranted] = useState(false);
+    const inputRef = useRef(null);
 
-    // Request audio permission on component mount
+    // Request audio and notification permission on mount
     useEffect(() => {
         const requestAudioPermission = async () => {
             try {
-                // Create a silent audio context to test if audio is allowed
                 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 if (audioContext.state === 'suspended') {
                     await audioContext.resume();
                 }
                 setAudioPermissionGranted(true);
                 audioContext.close();
-            } catch (error) {
-                console.log("Audio permission not granted yet");
+            } catch {
                 setAudioPermissionGranted(false);
             }
         };
-        
         requestAudioPermission();
-        
-        // Request notification permission
         if (Notification.permission === "default") {
             Notification.requestPermission();
         }
     }, []);
 
+    // Persist alarms to localStorage
+    useEffect(() => {
+        localStorage.setItem('alarms', JSON.stringify(alarms));
+    }, [alarms]);
+
+    // Alarm checking interval
     useEffect(() => {
         const checkAlarms = setInterval(() => {
             const now = new Date();
-            const currentTimeString = now.getHours().toString().padStart(2, '0') + ':' + 
-                                    now.getMinutes().toString().padStart(2, '0');
-            
+            const currentTimeString = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
             alarms.forEach((alarm, index) => {
-                // Check if current time matches alarm time
                 if (currentTimeString === alarm.time) {
-                    // Prevent multiple triggers by checking if alarm was already triggered this minute
-                    const alarmKey = `${alarm.time}-${index}-${now.getDate()}-${now.getMonth()}`;
+                    const alarmKey = `${alarm.time}-${alarm.id || index}-${now.getDate()}-${now.getMonth()}`;
                     const triggeredAlarms = JSON.parse(localStorage.getItem('triggeredAlarms') || '[]');
-                    
                     if (!triggeredAlarms.includes(alarmKey)) {
-                        // Mark alarm as triggered
                         triggeredAlarms.push(alarmKey);
                         localStorage.setItem('triggeredAlarms', JSON.stringify(triggeredAlarms));
-                        
-                        // Request notification permission if not already granted
                         if (Notification.permission === "default") {
                             Notification.requestPermission();
                         }
-                        
                         if (Notification.permission === "granted") {
                             new Notification(alarm.label || "Alarm", {
                                 body: "Your alarm is ringing!",
                                 icon: "/favicon.ico",
                             });
                         }
-                        
-                        // Create and play audio with better error handling
+                        // Play sound
                         const audio = new Audio(alarm.sound);
                         audio.volume = 0.7;
-                        audio.play().catch(err => {
-                            console.error("Audio playback failed:", err);
-                            // Fallback: try to use Web Audio API or show alert
+                        audio.play().catch(() => {
                             alert(alarm.label || "Alarm is ringing!");
                         });
-
+                        // Vibrate if supported
+                        if (navigator.vibrate) {
+                            navigator.vibrate([200, 100, 200]);
+                        }
                         if (!alarm.recurring) {
                             setAlarms(prev => prev.filter((_, i) => i !== index));
                         }
                     }
                 }
             });
-            
             // Clean up old triggered alarms (older than 1 day)
             const triggeredAlarms = JSON.parse(localStorage.getItem('triggeredAlarms') || '[]');
             const yesterday = new Date();
@@ -172,35 +175,36 @@ function AlarmSection() {
             });
             localStorage.setItem('triggeredAlarms', JSON.stringify(cleanedAlarms));
         }, 1000);
-
         return () => clearInterval(checkAlarms);
     }, [alarms]);
 
-    const addAlarm = () => {
+    const addAlarm = useCallback(() => {
         if (newAlarm.time) {
-            const validSound = newAlarm.sound === "default" ? "https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae1b6.mp3" : newAlarm.sound;
-            setAlarms([...alarms, { ...newAlarm, sound: validSound, recurring: isRecurring }]);
+            const validSound = newAlarm.sound === "default" ? DEFAULT_SOUND : newAlarm.sound;
+            setAlarms(prev => [
+                ...prev,
+                { ...newAlarm, sound: validSound, recurring: isRecurring, id: Date.now() + Math.random() }
+            ]);
             setNewAlarm({ time: "", label: "", sound: "default" });
+            setTimeout(() => inputRef.current?.focus(), 100);
         }
-    };
+    }, [newAlarm, isRecurring]);
 
-    const removeAlarm = (index) => {
-        setAlarms(alarms.filter((_, i) => i !== index));
-    };
+    const removeAlarm = useCallback((index) => {
+        if (window.confirm("Remove this alarm?")) {
+            setAlarms(alarms.filter((_, i) => i !== index));
+        }
+    }, [alarms]);
 
-    const testSound = (soundUrl) => {
-        const testAudio = new Audio(soundUrl || "https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae1b6.mp3");
+    const testSound = useCallback((soundUrl) => {
+        const testAudio = new Audio(soundUrl || DEFAULT_SOUND);
         testAudio.volume = 0.7;
         testAudio.play()
-            .then(() => {
-                setAudioPermissionGranted(true);
-                console.log("Audio permission granted");
-            })
-            .catch(err => {
-                console.error("Test sound failed:", err);
+            .then(() => setAudioPermissionGranted(true))
+            .catch(() => {
                 alert("Please interact with the page first to enable audio playback");
             });
-    };
+    }, []);
 
     return (
         <div className="mt-8 bg-card rounded-lg p-6 shadow-2xl">
@@ -213,11 +217,13 @@ function AlarmSection() {
             <div className="flex flex-col gap-6">
                 <div className="flex flex-wrap items-center gap-4 justify-center">
                     <input
+                        ref={inputRef}
                         type="time"
                         value={newAlarm.time}
                         onChange={(e) => setNewAlarm({ ...newAlarm, time: e.target.value })}
                         className="px-4 py-2 rounded-lg text-center shadow-sm focus:outline-none"
                         placeholder="Set Time"
+                        aria-label="Set alarm time"
                     />
                     <input
                         type="text"
@@ -225,21 +231,24 @@ function AlarmSection() {
                         value={newAlarm.label}
                         onChange={(e) => setNewAlarm({ ...newAlarm, label: e.target.value })}
                         className="px-4 py-2 rounded-lg text-center shadow-sm focus:outline-none"
+                        aria-label="Alarm label"
                     />
                     <select
                         value={newAlarm.sound}
                         onChange={(e) => setNewAlarm({ ...newAlarm, sound: e.target.value })}
                         className="px-4 py-2 rounded-lg shadow-sm focus:outline-none"
+                        aria-label="Alarm sound"
                     >
                         <option value="default">Default</option>
-                        <option value="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae1b6.mp3">Beep</option>
-                        <option value="https://cdn.pixabay.com/audio/2021/08/04/audio_12b0c7443c.mp3">Chime</option>
+                        <option value={DEFAULT_SOUND}>Beep</option>
+                        <option value={CHIME_SOUND}>Chime</option>
                     </select>
                     <button
                         type="button"
-                        onClick={() => testSound(newAlarm.sound === "default" ? "https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae1b6.mp3" : newAlarm.sound)}
+                        onClick={() => testSound(newAlarm.sound === "default" ? DEFAULT_SOUND : newAlarm.sound)}
                         className="px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 shadow-sm text-sm focus:outline-none"
                         title="Test sound"
+                        aria-label="Test alarm sound"
                     >
                         🔊
                     </button>
@@ -248,13 +257,15 @@ function AlarmSection() {
                             type="checkbox"
                             checked={isRecurring}
                             onChange={(e) => setIsRecurring(e.target.checked)}
-                        className="w-4 h-4 focus:outline-none"
+                            className="w-4 h-4 focus:outline-none"
+                            aria-label="Recurring alarm"
                         />
                         <span className="text-sm">Recurring</span>
                     </label>
                     <button
                         onClick={addAlarm}
                         className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600  shadow-md transition-transform transform hover:scale-105 focus:outline-none"
+                        aria-label="Add alarm"
                     >
                         Add Alarm
                     </button>
@@ -262,19 +273,22 @@ function AlarmSection() {
                 <ul className="space-y-4 mt-4">
                     {alarms.map((alarm, index) => (
                         <motion.li
-                            key={index}
+                            key={alarm.id || index}
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 10 }}
                             className="flex justify-between items-center bg-white px-6 py-4 rounded-lg shadow-2xl"
+                            role="listitem"
                         >
                             <div>
                                 <span className="font-semibold text-lg text-blue-700">{alarm.time}</span>
                                 <span className="text-sm text-gray-400 ml-2">{alarm.label || "No Label"}</span>
+                                {alarm.recurring && <span className="ml-2 text-xs text-green-600">(Recurring)</span>}
                             </div>
                             <button
                                 onClick={() => removeAlarm(index)}
                                 className="text-red-500 hover:text-red-600 focus:outline-none"
+                                aria-label="Remove alarm"
                             >
                                 Remove
                             </button>
@@ -298,13 +312,15 @@ export default function ClockTimer() {
     const intervalRef = useRef(null);
     const audioRef = useRef(null);
 
-    // Update current time every second
+    // Update current time every second (requestAnimationFrame for better accuracy)
     useEffect(() => {
-        const timeInterval = setInterval(() => {
+        let frame;
+        const update = () => {
             setCurrentTime(new Date());
-        }, 1000);
-
-        return () => clearInterval(timeInterval);
+            frame = requestAnimationFrame(update);
+        };
+        frame = requestAnimationFrame(update);
+        return () => cancelAnimationFrame(frame);
     }, []);
 
     // Timer logic
@@ -325,15 +341,16 @@ export default function ClockTimer() {
         return () => clearInterval(intervalRef.current);
     }, [isTimerRunning, totalSeconds]);
 
-    // Play sound when timer finishes
+    // Play sound and vibrate when timer finishes
     useEffect(() => {
         if (totalSeconds === 0 && audioRef.current) {
             audioRef.current.volume = 0.7;
-            audioRef.current.play().catch(err => {
-                console.error("Timer audio playback failed:", err);
-                // Fallback notification
+            audioRef.current.play().catch(() => {
                 alert("Timer finished!");
             });
+            if (navigator.vibrate) {
+                navigator.vibrate([200, 100, 200]);
+            }
         }
     }, [totalSeconds]);
 
@@ -352,34 +369,34 @@ export default function ClockTimer() {
         setTotalSeconds(initialTotalSeconds);
     };
 
-    const adjustTimer = (minutes) => {
+    const adjustTimer = useCallback((minutes) => {
         if (!isTimerRunning) {
             const newMinutes = Math.max(1, Math.floor(totalSeconds / 60) + minutes);
-            const newTotal = newMinutes * 60;
+            const newTotal = Math.max(60, newMinutes * 60);
             setTotalSeconds(newTotal);
             setInitialTotalSeconds(newTotal);
         }
-    };
+    }, [isTimerRunning, totalSeconds]);
 
-    const setPresetTimer = (minutes) => {
+    const setPresetTimer = useCallback((minutes) => {
         if (!isTimerRunning) {
-            const newTotal = minutes * 60;
+            const newTotal = Math.max(60, minutes * 60);
             setTotalSeconds(newTotal);
             setInitialTotalSeconds(newTotal);
             setShowCustomInput(false);
         }
-    };
+    }, [isTimerRunning]);
 
-    const handleCustomInput = (e) => {
+    const handleCustomInput = useCallback((e) => {
         setCustomInput(e.target.value.replace(/[^0-9]/g, ''));
-    };
+    }, []);
 
-    const setCustomTimer = () => {
+    const setCustomTimer = useCallback(() => {
         const minutes = Math.max(1, parseInt(customInput, 10) || 0);
         setPresetTimer(minutes);
         setCustomInput(0);
         setShowCustomInput(false);
-    };
+    }, [customInput, setPresetTimer]);
 
     const formatTime = (date) => {
         return date.toLocaleTimeString('en-US', {
@@ -399,9 +416,11 @@ export default function ClockTimer() {
         });
     };
 
-    const progressPercentage = initialTotalSeconds > 0 
-        ? ((initialTotalSeconds - totalSeconds) / initialTotalSeconds) * 100 
-        : 0;
+    const progressPercentage = useMemo(() => (
+        initialTotalSeconds > 0 
+            ? ((initialTotalSeconds - totalSeconds) / initialTotalSeconds) * 100 
+            : 0
+    ), [initialTotalSeconds, totalSeconds]);
 
     return (
         <PageTransition>

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Footer } from "../components/Footer";
 import { NavBar } from "../components/NavBar";
@@ -5,7 +6,13 @@ import { PageTransition } from "../components/PageTransition";
 import { motion } from "framer-motion";
 import { Calculator, Target, Activity } from "lucide-react";
 
+
+/**
+ * CalorieTracker - A calorie calculator using the Mifflin-St Jeor Equation.
+ * Users can input their personal data, select activity level and goal, and get BMR, TDEE, and target calories.
+ */
 export default function CalorieTracker() {
+    // State for form data, results, and errors
     const [formData, setFormData] = useState({
         age: "",
         gender: "male",
@@ -18,6 +25,8 @@ export default function CalorieTracker() {
     const [results, setResults] = useState(null);
     const [errors, setErrors] = useState({});
 
+
+    // Activity levels and their multipliers
     const activityLevels = {
         sedentary: { label: "Sedentary (little/no exercise)", multiplier: 1.2 },
         light: { label: "Light activity (light exercise 1-3 days/week)", multiplier: 1.375 },
@@ -26,6 +35,7 @@ export default function CalorieTracker() {
         extra: { label: "Extra active (very hard exercise, physical job)", multiplier: 1.9 }
     };
 
+    // Goal options and their calorie adjustments
     const goals = {
         lose2: { label: "Lose 2 lbs/week", adjustment: -1000 },
         lose1: { label: "Lose 1 lb/week", adjustment: -500 },
@@ -36,6 +46,8 @@ export default function CalorieTracker() {
     };
 
 
+
+    // Validate form data
     const validate = (data) => {
         const newErrors = {};
         if (!data.age || isNaN(data.age) || data.age < 1 || data.age > 120) newErrors.age = "Enter a valid age (1-120).";
@@ -44,6 +56,8 @@ export default function CalorieTracker() {
         return newErrors;
     };
 
+
+    // Handle input changes and validate
     const handleInputChange = (field, value) => {
         setFormData(prev => {
             const updated = { ...prev, [field]: value };
@@ -52,6 +66,8 @@ export default function CalorieTracker() {
         });
     };
 
+
+    // Calculate calories based on form data
     const calculateCalories = () => {
         const { age, gender, weight, height, activityLevel, goal, unit } = formData;
         const validation = validate(formData);
@@ -90,6 +106,8 @@ export default function CalorieTracker() {
         });
     };
 
+
+    // Reset all fields
     const resetCalculator = () => {
         setFormData({
             age: "",
@@ -115,104 +133,130 @@ export default function CalorieTracker() {
                         transition={{ duration: 0.5 }}
                         className="max-w-4xl mx-auto"
                     >
-                        <h1 className="text-4xl font-bold mb-8 text-center">Calorie Calculator</h1>
-                        
+                        <h1 className="text-4xl font-bold mb-8 text-center" tabIndex={0} aria-label="Calorie Calculator">Calorie Calculator</h1>
+
                         {/* Calculator Form */}
-                        <div className="bg-card rounded-lg p-6 mb-6">
+                        <form
+                            className="bg-card rounded-lg p-6 mb-6"
+                            onSubmit={e => { e.preventDefault(); calculateCalories(); }}
+                            aria-label="Calorie Calculator Form"
+                            autoComplete="off"
+                        >
                             <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
                                 <Calculator size={20} />
                                 Personal Information
                             </h2>
-                            
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {/* Unit System */}
-                            <div>
-                                <label htmlFor="unit" className="block text-sm font-medium mb-2">Unit System</label>
-                                <select
-                                    id="unit"
-                                    aria-label="Unit System"
-                                    value={formData.unit}
-                                    onChange={(e) => handleInputChange("unit", e.target.value)}
-                                    className="w-full px-3 py-2 border rounded-md bg-background"
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {/* Unit System */}
+                                <div>
+                                    <label htmlFor="unit" className="block text-sm font-medium mb-2">Unit System</label>
+                                    <select
+                                        id="unit"
+                                        aria-label="Unit System"
+                                        value={formData.unit}
+                                        onChange={(e) => handleInputChange("unit", e.target.value)}
+                                        className="w-full px-3 py-2 border rounded-md bg-background"
+                                    >
+                                        <option value="metric">Metric (kg, cm)</option>
+                                        <option value="imperial">Imperial (lbs, inches)</option>
+                                    </select>
+                                </div>
+
+                                {/* Gender */}
+                                <div>
+                                    <label htmlFor="gender" className="block text-sm font-medium mb-2">Gender</label>
+                                    <select
+                                        id="gender"
+                                        aria-label="Gender"
+                                        value={formData.gender}
+                                        onChange={(e) => handleInputChange("gender", e.target.value)}
+                                        className="w-full px-3 py-2 border rounded-md bg-background"
+                                    >
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>
+
+                                {/* Age */}
+                                <div>
+                                    <label htmlFor="age" className="block text-sm font-medium mb-2">Age (years)</label>
+                                    <input
+                                        id="age"
+                                        aria-label="Age"
+                                        type="number"
+                                        value={formData.age}
+                                        onChange={(e) => handleInputChange("age", e.target.value)}
+                                        className={`w-full px-3 py-2 border rounded-md bg-background ${errors.age ? 'border-red-500' : ''}`}
+                                        placeholder="Enter your age"
+                                        min="1"
+                                        max="120"
+                                        required
+                                    />
+                                    {errors.age && <span className="text-xs text-red-500">{errors.age}</span>}
+                                </div>
+
+                                {/* Weight */}
+                                <div>
+                                    <label htmlFor="weight" className="block text-sm font-medium mb-2">
+                                        Weight ({formData.unit === "metric" ? "kg" : "lbs"})
+                                    </label>
+                                    <input
+                                        id="weight"
+                                        aria-label="Weight"
+                                        type="number"
+                                        value={formData.weight}
+                                        onChange={(e) => handleInputChange("weight", e.target.value)}
+                                        className={`w-full px-3 py-2 border rounded-md bg-background ${errors.weight ? 'border-red-500' : ''}`}
+                                        placeholder={`Enter weight in ${formData.unit === "metric" ? "kg" : "lbs"}`}
+                                        min="1"
+                                        required
+                                    />
+                                    {errors.weight && <span className="text-xs text-red-500">{errors.weight}</span>}
+                                </div>
+
+                                {/* Height */}
+                                <div className="md:col-span-2">
+                                    <label htmlFor="height" className="block text-sm font-medium mb-2">
+                                        Height ({formData.unit === "metric" ? "cm" : "inches"})
+                                    </label>
+                                    <input
+                                        id="height"
+                                        aria-label="Height"
+                                        type="number"
+                                        value={formData.height}
+                                        onChange={(e) => handleInputChange("height", e.target.value)}
+                                        className={`w-full px-3 py-2 border rounded-md bg-background ${errors.height ? 'border-red-500' : ''}`}
+                                        placeholder={`Enter height in ${formData.unit === "metric" ? "cm" : "inches"}`}
+                                        min="1"
+                                        required
+                                    />
+                                    {errors.height && <span className="text-xs text-red-500">{errors.height}</span>}
+                                </div>
+                            </div>
+                            <div className="flex gap-4 justify-center mt-6">
+                                <button
+                                    type="submit"
+                                    disabled={Object.keys(errors).length > 0 || !formData.age || !formData.weight || !formData.height}
+                                    className={`flex items-center gap-2 px-6 py-3 rounded-md font-medium transition-colors ${Object.keys(errors).length > 0 || !formData.age || !formData.weight || !formData.height ? 'bg-blue-300 text-white cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
+                                    aria-disabled={Object.keys(errors).length > 0 || !formData.age || !formData.weight || !formData.height}
                                 >
-                                    <option value="metric">Metric (kg, cm)</option>
-                                    <option value="imperial">Imperial (lbs, inches)</option>
-                                </select>
-                            </div>
-
-                            {/* Gender */}
-                            <div>
-                                <label htmlFor="gender" className="block text-sm font-medium mb-2">Gender</label>
-                                <select
-                                    id="gender"
-                                    aria-label="Gender"
-                                    value={formData.gender}
-                                    onChange={(e) => handleInputChange("gender", e.target.value)}
-                                    className="w-full px-3 py-2 border rounded-md bg-background"
+                                    <Calculator size={20} />
+                                    Calculate Calories
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={resetCalculator}
+                                    className="flex items-center gap-2 px-6 py-3 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors font-medium"
                                 >
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                </select>
+                                    Reset
+                                </button>
                             </div>
-
-                            {/* Age */}
-                            <div>
-                                <label htmlFor="age" className="block text-sm font-medium mb-2">Age (years)</label>
-                                <input
-                                    id="age"
-                                    aria-label="Age"
-                                    type="number"
-                                    value={formData.age}
-                                    onChange={(e) => handleInputChange("age", e.target.value)}
-                                    className={`w-full px-3 py-2 border rounded-md bg-background ${errors.age ? 'border-red-500' : ''}`}
-                                    placeholder="Enter your age"
-                                    min="1"
-                                    max="120"
-                                />
-                                {errors.age && <span className="text-xs text-red-500">{errors.age}</span>}
-                            </div>
-
-                            {/* Weight */}
-                            <div>
-                                <label htmlFor="weight" className="block text-sm font-medium mb-2">
-                                    Weight ({formData.unit === "metric" ? "kg" : "lbs"})
-                                </label>
-                                <input
-                                    id="weight"
-                                    aria-label="Weight"
-                                    type="number"
-                                    value={formData.weight}
-                                    onChange={(e) => handleInputChange("weight", e.target.value)}
-                                    className={`w-full px-3 py-2 border rounded-md bg-background ${errors.weight ? 'border-red-500' : ''}`}
-                                    placeholder={`Enter weight in ${formData.unit === "metric" ? "kg" : "lbs"}`}
-                                    min="1"
-                                />
-                                {errors.weight && <span className="text-xs text-red-500">{errors.weight}</span>}
-                            </div>
-
-                            {/* Height */}
-                            <div className="md:col-span-2">
-                                <label htmlFor="height" className="block text-sm font-medium mb-2">
-                                    Height ({formData.unit === "metric" ? "cm" : "inches"})
-                                </label>
-                                <input
-                                    id="height"
-                                    aria-label="Height"
-                                    type="number"
-                                    value={formData.height}
-                                    onChange={(e) => handleInputChange("height", e.target.value)}
-                                    className={`w-full px-3 py-2 border rounded-md bg-background ${errors.height ? 'border-red-500' : ''}`}
-                                    placeholder={`Enter height in ${formData.unit === "metric" ? "cm" : "inches"}`}
-                                    min="1"
-                                />
-                                {errors.height && <span className="text-xs text-red-500">{errors.height}</span>}
-                            </div>
-                        </div>
-                        </div>
+                        </form>
 
                         {/* Activity Level */}
-                        <div className="bg-card rounded-lg p-6 mb-6">
-                            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                        <section className="bg-card rounded-lg p-6 mb-6" aria-labelledby="activity-level-heading">
+                            <h2 id="activity-level-heading" className="text-xl font-semibold mb-4 flex items-center gap-2">
                                 <Activity size={20} />
                                 Activity Level
                             </h2>
@@ -226,16 +270,17 @@ export default function CalorieTracker() {
                                             checked={formData.activityLevel === key}
                                             onChange={(e) => handleInputChange("activityLevel", e.target.value)}
                                             className="w-4 h-4"
+                                            aria-checked={formData.activityLevel === key}
                                         />
                                         <span className="text-sm">{level.label}</span>
                                     </label>
                                 ))}
                             </div>
-                        </div>
+                        </section>
 
                         {/* Goal */}
-                        <div className="bg-card rounded-lg p-6 mb-6">
-                            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                        <section className="bg-card rounded-lg p-6 mb-6" aria-labelledby="goal-heading">
+                            <h2 id="goal-heading" className="text-xl font-semibold mb-4 flex items-center gap-2">
                                 <Target size={20} />
                                 Goal
                             </h2>
@@ -249,31 +294,13 @@ export default function CalorieTracker() {
                                             checked={formData.goal === key}
                                             onChange={(e) => handleInputChange("goal", e.target.value)}
                                             className="w-4 h-4"
+                                            aria-checked={formData.goal === key}
                                         />
                                         <span className="text-sm">{goal.label}</span>
                                     </label>
                                 ))}
                             </div>
-                        </div>
-
-                        {/* Calculate Button */}
-                        <div className="flex gap-4 justify-center mb-6">
-                            <button
-                                onClick={calculateCalories}
-                                disabled={Object.keys(errors).length > 0 || !formData.age || !formData.weight || !formData.height}
-                                className={`flex items-center gap-2 px-6 py-3 rounded-md font-medium transition-colors ${Object.keys(errors).length > 0 || !formData.age || !formData.weight || !formData.height ? 'bg-blue-300 text-white cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
-                                aria-disabled={Object.keys(errors).length > 0 || !formData.age || !formData.weight || !formData.height}
-                            >
-                                <Calculator size={20} />
-                                Calculate Calories
-                            </button>
-                            <button
-                                onClick={resetCalculator}
-                                className="flex items-center gap-2 px-6 py-3 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors font-medium"
-                            >
-                                Reset
-                            </button>
-                        </div>
+                        </section>
 
                         {/* Results */}
                         {results && (
@@ -282,6 +309,7 @@ export default function CalorieTracker() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5 }}
                                 className="bg-card rounded-lg p-6"
+                                aria-live="polite"
                             >
                                 <h2 className="text-xl font-semibold mb-4">Your Results</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -303,7 +331,7 @@ export default function CalorieTracker() {
                                 </div>
                                 <div className="mt-4 p-4 bg-blue-50 rounded-lg">
                                     <p className="text-sm text-blue-800">
-                                        <strong>Summary:</strong> Based on your {results.activityLevel.toLowerCase()} and goal to {results.goal.toLowerCase()}, 
+                                        <strong>Summary:</strong> Based on your {results.activityLevel.toLowerCase()} and goal to {results.goal.toLowerCase()},
                                         you should consume approximately <strong>{results.targetCalories} calories per day</strong>.
                                     </p>
                                 </div>

@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Footer } from "../components/Footer";
 import { NavBar } from "../components/NavBar";
@@ -6,6 +7,10 @@ import { motion } from "framer-motion";
 import { Palette, Copy, Download, RotateCcw, Eye, Shuffle } from "lucide-react";
 import { useToast } from "../hooks/use-toast";
 
+
+/**
+ * ColorPicker - A color picker and palette generator with color harmony, export, and accessibility features.
+ */
 export default function ColorPicker() {
     const { toast } = useToast();
     const [currentColor, setCurrentColor] = useState("#3B82F6");
@@ -13,6 +18,7 @@ export default function ColorPicker() {
     const [savedPalette, setSavedPalette] = useState([]);
     const [complementaryColors, setComplementaryColors] = useState([]);
     const [colorHistory, setColorHistory] = useState(["#3B82F6"]);
+
 
     // Convert hex to RGB
     const hexToRgb = (hex) => {
@@ -24,6 +30,7 @@ export default function ColorPicker() {
         } : null;
     };
 
+
     // Convert RGB to HSB
     const rgbToHsb = (r, g, b) => {
         r /= 255;
@@ -32,7 +39,7 @@ export default function ColorPicker() {
         const max = Math.max(r, g, b);
         const min = Math.min(r, g, b);
         const diff = max - min;
-        
+
         let h = 0;
         if (diff !== 0) {
             if (max === r) h = ((g - b) / diff) % 6;
@@ -41,12 +48,13 @@ export default function ColorPicker() {
         }
         h = Math.round(h * 60);
         if (h < 0) h += 360;
-        
+
         const s = Math.round((max === 0 ? 0 : diff / max) * 100);
         const brightness = Math.round(max * 100);
-        
+
         return { h, s, b: brightness };
     };
+
 
     // Convert HSB to RGB
     const hsbToRgb = (h, s, b) => {
@@ -55,7 +63,7 @@ export default function ColorPicker() {
         const c = b * s;
         const x = c * (1 - Math.abs((h / 60) % 2 - 1));
         const m = b - c;
-        
+
         let r = 0, g = 0, blue = 0;
         if (h >= 0 && h < 60) { r = c; g = x; blue = 0; }
         else if (h >= 60 && h < 120) { r = x; g = c; blue = 0; }
@@ -63,13 +71,14 @@ export default function ColorPicker() {
         else if (h >= 180 && h < 240) { r = 0; g = x; blue = c; }
         else if (h >= 240 && h < 300) { r = x; g = 0; blue = c; }
         else if (h >= 300 && h < 360) { r = c; g = 0; blue = x; }
-        
+
         return {
             r: Math.round((r + m) * 255),
             g: Math.round((g + m) * 255),
             b: Math.round((blue + m) * 255)
         };
     };
+
 
     // Convert RGB to hex
     const rgbToHex = (r, g, b) => {
@@ -78,6 +87,7 @@ export default function ColorPicker() {
             return hex.length === 1 ? "0" + hex : hex;
         }).join("");
     };
+
 
     // Generate complementary and related colors
     const generateComplementaryColors = (hex) => {
@@ -128,10 +138,12 @@ export default function ColorPicker() {
         return colors;
     };
 
+
     // Update complementary colors when current color changes
     useEffect(() => {
         setComplementaryColors(generateComplementaryColors(currentColor));
     }, [currentColor]);
+
 
     // Format color based on current mode
     const formatColor = (hex) => {
@@ -141,13 +153,15 @@ export default function ColorPicker() {
         switch (colorMode) {
             case "rgb":
                 return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
-            case "hsb":
+            case "hsb": {
                 const hsb = rgbToHsb(rgb.r, rgb.g, rgb.b);
                 return `hsb(${hsb.h}, ${hsb.s}%, ${hsb.b}%)`;
+            }
             default:
                 return hex.toUpperCase();
         }
     };
+
 
     // Copy color to clipboard
     const copyToClipboard = async (color) => {
@@ -166,6 +180,7 @@ export default function ColorPicker() {
         }
     };
 
+
     // Add color to palette
     const addToPalette = (color) => {
         if (!savedPalette.includes(color)) {
@@ -177,30 +192,33 @@ export default function ColorPicker() {
         }
     };
 
+
     // Remove color from palette
     const removeFromPalette = (color) => {
         setSavedPalette(prev => prev.filter(c => c !== color));
     };
 
+
     // Generate random color
     const generateRandomColor = () => {
         const randomHex = "#" + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
         setCurrentColor(randomHex);
-        setColorHistory(prev => [randomHex, ...prev.slice(0, 9)]);
+        setColorHistory(prev => [randomHex, ...prev.filter(c => c !== randomHex)].slice(0, 10));
     };
 
-    // Export palette
+
+    // Export palette as JSON
     const exportPalette = () => {
         const paletteData = {
-            colors: savedPalette.map(color => ({
-                hex: color,
-                rgb: formatColor(color).includes('rgb') ? formatColor(color) : `rgb(${hexToRgb(color)?.r}, ${hexToRgb(color)?.g}, ${hexToRgb(color)?.b})`,
-                hsb: (() => {
-                    const rgb = hexToRgb(color);
-                    const hsb = rgbToHsb(rgb.r, rgb.g, rgb.b);
-                    return `hsb(${hsb.h}, ${hsb.s}%, ${hsb.b}%)`;
-                })()
-            })),
+            colors: savedPalette.map(color => {
+                const rgb = hexToRgb(color);
+                const hsb = rgb ? rgbToHsb(rgb.r, rgb.g, rgb.b) : null;
+                return {
+                    hex: color,
+                    rgb: rgb ? `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})` : '',
+                    hsb: hsb ? `hsb(${hsb.h}, ${hsb.s}%, ${hsb.b}%)` : ''
+                };
+            }),
             exportDate: new Date().toISOString()
         };
 
@@ -220,6 +238,7 @@ export default function ColorPicker() {
         });
     };
 
+
     return (
         <PageTransition>
             <div className="min-h-screen flex flex-col bg-background">
@@ -232,7 +251,7 @@ export default function ColorPicker() {
                         className="max-w-6xl mx-auto"
                     >
                         <div className="text-center mb-8">
-                            <h1 className="text-4xl font-bold mb-4">Color Picker & Palette Generator</h1>
+                            <h1 className="text-4xl font-bold mb-4" tabIndex={0} aria-label="Color Picker and Palette Generator">Color Picker & Palette Generator</h1>
                             <p className="text-lg text-foreground/80">
                                 Create beautiful color palettes with complementary colors, multiple formats, and export capabilities.
                             </p>
@@ -245,17 +264,22 @@ export default function ColorPicker() {
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.5, delay: 0.1 }}
                                 className="bg-card rounded-lg p-6"
+                                aria-label="Main Color Picker"
                             >
                                 <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
                                     <Palette className="text-pink-500" size={24} />
                                     Main Color
                                 </h2>
-                                
+
                                 {/* Color Display */}
-                                <div 
+                                <div
                                     className="w-full h-32 rounded-lg mb-4 border-4 border-border cursor-pointer transition-transform hover:scale-105"
                                     style={{ backgroundColor: currentColor }}
                                     onClick={() => copyToClipboard(currentColor)}
+                                    title="Click to copy color"
+                                    aria-label="Current color preview"
+                                    tabIndex={0}
+                                    onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') copyToClipboard(currentColor); }}
                                 />
 
                                 {/* Color Input */}
@@ -265,19 +289,22 @@ export default function ColorPicker() {
                                         value={currentColor}
                                         onChange={(e) => {
                                             setCurrentColor(e.target.value);
-                                            setColorHistory(prev => [e.target.value, ...prev.slice(0, 9)]);
+                                            setColorHistory(prev => [e.target.value, ...prev.filter(c => c !== e.target.value)].slice(0, 10));
                                         }}
                                         className="w-full h-12 rounded-lg border-2 border-border cursor-pointer"
+                                        aria-label="Choose color"
                                     />
                                 </div>
 
                                 {/* Color Mode Selector */}
                                 <div className="mb-4">
-                                    <label className="block text-sm font-medium mb-2">Display Format:</label>
-                                    <select 
-                                        value={colorMode} 
+                                    <label className="block text-sm font-medium mb-2" htmlFor="color-mode-select">Display Format:</label>
+                                    <select
+                                        id="color-mode-select"
+                                        value={colorMode}
                                         onChange={(e) => setColorMode(e.target.value)}
                                         className="w-full p-2 rounded-lg border border-border bg-background"
+                                        aria-label="Color display format"
                                     >
                                         <option value="hex">HEX</option>
                                         <option value="rgb">RGB</option>
@@ -292,6 +319,7 @@ export default function ColorPicker() {
                                         <button
                                             onClick={() => copyToClipboard(currentColor)}
                                             className="p-2 hover:bg-background rounded-lg transition-colors"
+                                            aria-label="Copy color value"
                                         >
                                             <Copy size={18} />
                                         </button>
@@ -303,6 +331,7 @@ export default function ColorPicker() {
                                     <button
                                         onClick={generateRandomColor}
                                         className="flex-1 flex items-center justify-center gap-2 p-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+                                        aria-label="Generate random color"
                                     >
                                         <Shuffle size={18} />
                                         Random
@@ -310,6 +339,7 @@ export default function ColorPicker() {
                                     <button
                                         onClick={() => addToPalette(currentColor)}
                                         className="flex-1 flex items-center justify-center gap-2 p-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+                                        aria-label="Save color to palette"
                                     >
                                         <Eye size={18} />
                                         Save
@@ -327,6 +357,9 @@ export default function ColorPicker() {
                                                 style={{ backgroundColor: color }}
                                                 onClick={() => setCurrentColor(color)}
                                                 title={color}
+                                                aria-label={`Recent color ${color}`}
+                                                tabIndex={0}
+                                                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') setCurrentColor(color); }}
                                             />
                                         ))}
                                     </div>
@@ -339,9 +372,10 @@ export default function ColorPicker() {
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.5, delay: 0.2 }}
                                 className="bg-card rounded-lg p-6"
+                                aria-label="Color Harmony"
                             >
                                 <h2 className="text-2xl font-semibold mb-4">Color Harmony</h2>
-                                
+
                                 <div className="space-y-4">
                                     {complementaryColors.map((colorObj, index) => (
                                         <div key={index} className="flex items-center gap-3">
@@ -349,6 +383,10 @@ export default function ColorPicker() {
                                                 className="w-12 h-12 rounded-lg border-2 border-border cursor-pointer hover:scale-110 transition-transform"
                                                 style={{ backgroundColor: colorObj.color }}
                                                 onClick={() => setCurrentColor(colorObj.color)}
+                                                title={colorObj.name}
+                                                aria-label={`Color harmony ${colorObj.name}`}
+                                                tabIndex={0}
+                                                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') setCurrentColor(colorObj.color); }}
                                             />
                                             <div className="flex-1">
                                                 <div className="font-medium">{colorObj.name}</div>
@@ -359,12 +397,14 @@ export default function ColorPicker() {
                                             <button
                                                 onClick={() => copyToClipboard(colorObj.color)}
                                                 className="p-2 hover:bg-muted rounded-lg transition-colors"
+                                                aria-label={`Copy ${colorObj.name} color value`}
                                             >
                                                 <Copy size={16} />
                                             </button>
                                             <button
                                                 onClick={() => addToPalette(colorObj.color)}
                                                 className="p-2 hover:bg-muted rounded-lg transition-colors"
+                                                aria-label={`Save ${colorObj.name} to palette`}
                                             >
                                                 <Eye size={16} />
                                             </button>
@@ -381,6 +421,7 @@ export default function ColorPicker() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5, delay: 0.3 }}
                                 className="mt-8 bg-card rounded-lg p-6"
+                                aria-label="Saved Palette"
                             >
                                 <div className="flex items-center justify-between mb-4">
                                     <h2 className="text-2xl font-semibold">Your Palette</h2>
@@ -388,6 +429,7 @@ export default function ColorPicker() {
                                         <button
                                             onClick={exportPalette}
                                             className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                                            aria-label="Export palette as JSON"
                                         >
                                             <Download size={18} />
                                             Export
@@ -395,13 +437,14 @@ export default function ColorPicker() {
                                         <button
                                             onClick={() => setSavedPalette([])}
                                             className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                                            aria-label="Clear palette"
                                         >
                                             <RotateCcw size={18} />
                                             Clear
                                         </button>
                                     </div>
                                 </div>
-                                
+
                                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                                     {savedPalette.map((color, index) => (
                                         <div key={index} className="text-center">
@@ -409,18 +452,23 @@ export default function ColorPicker() {
                                                 className="aspect-square rounded-lg border-2 border-border cursor-pointer hover:scale-110 transition-transform mb-2"
                                                 style={{ backgroundColor: color }}
                                                 onClick={() => setCurrentColor(color)}
+                                                aria-label={`Palette color ${color}`}
+                                                tabIndex={0}
+                                                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') setCurrentColor(color); }}
                                             />
                                             <div className="text-xs font-mono mb-1">{formatColor(color)}</div>
                                             <div className="flex gap-1">
                                                 <button
                                                     onClick={() => copyToClipboard(color)}
                                                     className="flex-1 p-1 text-xs hover:bg-muted rounded transition-colors"
+                                                    aria-label={`Copy palette color ${color}`}
                                                 >
                                                     Copy
                                                 </button>
                                                 <button
                                                     onClick={() => removeFromPalette(color)}
                                                     className="flex-1 p-1 text-xs hover:bg-muted rounded transition-colors text-red-500"
+                                                    aria-label={`Remove palette color ${color}`}
                                                 >
                                                     Remove
                                                 </button>
