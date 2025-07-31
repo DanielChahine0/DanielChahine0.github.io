@@ -15,8 +15,8 @@ export default function CalorieTracker() {
         goal: "maintain",
         unit: "metric"
     });
-    
     const [results, setResults] = useState(null);
+    const [errors, setErrors] = useState({});
 
     const activityLevels = {
         sedentary: { label: "Sedentary (little/no exercise)", multiplier: 1.2 },
@@ -35,14 +35,28 @@ export default function CalorieTracker() {
         gain1: { label: "Gain 1 lb/week", adjustment: 500 }
     };
 
+
+    const validate = (data) => {
+        const newErrors = {};
+        if (!data.age || isNaN(data.age) || data.age < 1 || data.age > 120) newErrors.age = "Enter a valid age (1-120).";
+        if (!data.weight || isNaN(data.weight) || data.weight < 1) newErrors.weight = "Enter a valid weight.";
+        if (!data.height || isNaN(data.height) || data.height < 1) newErrors.height = "Enter a valid height.";
+        return newErrors;
+    };
+
     const handleInputChange = (field, value) => {
-        setFormData(prev => ({ ...prev, [field]: value }));
+        setFormData(prev => {
+            const updated = { ...prev, [field]: value };
+            setErrors(validate(updated));
+            return updated;
+        });
     };
 
     const calculateCalories = () => {
         const { age, gender, weight, height, activityLevel, goal, unit } = formData;
-        
-        if (!age || !weight || !height) return;
+        const validation = validate(formData);
+        setErrors(validation);
+        if (Object.keys(validation).length > 0) return;
 
         let weightKg = parseFloat(weight);
         let heightCm = parseFloat(height);
@@ -87,6 +101,7 @@ export default function CalorieTracker() {
             unit: "metric"
         });
         setResults(null);
+        setErrors({});
     };
 
     return (
@@ -109,77 +124,90 @@ export default function CalorieTracker() {
                                 Personal Information
                             </h2>
                             
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {/* Unit System */}
-                                <div>
-                                    <label className="block text-sm font-medium mb-2">Unit System</label>
-                                    <select
-                                        value={formData.unit}
-                                        onChange={(e) => handleInputChange("unit", e.target.value)}
-                                        className="w-full px-3 py-2 border rounded-md bg-background"
-                                    >
-                                        <option value="metric">Metric (kg, cm)</option>
-                                        <option value="imperial">Imperial (lbs, inches)</option>
-                                    </select>
-                                </div>
-
-                                {/* Gender */}
-                                <div>
-                                    <label className="block text-sm font-medium mb-2">Gender</label>
-                                    <select
-                                        value={formData.gender}
-                                        onChange={(e) => handleInputChange("gender", e.target.value)}
-                                        className="w-full px-3 py-2 border rounded-md bg-background"
-                                    >
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                    </select>
-                                </div>
-
-                                {/* Age */}
-                                <div>
-                                    <label className="block text-sm font-medium mb-2">Age (years)</label>
-                                    <input
-                                        type="number"
-                                        value={formData.age}
-                                        onChange={(e) => handleInputChange("age", e.target.value)}
-                                        className="w-full px-3 py-2 border rounded-md bg-background"
-                                        placeholder="Enter your age"
-                                        min="1"
-                                        max="120"
-                                    />
-                                </div>
-
-                                {/* Weight */}
-                                <div>
-                                    <label className="block text-sm font-medium mb-2">
-                                        Weight ({formData.unit === "metric" ? "kg" : "lbs"})
-                                    </label>
-                                    <input
-                                        type="number"
-                                        value={formData.weight}
-                                        onChange={(e) => handleInputChange("weight", e.target.value)}
-                                        className="w-full px-3 py-2 border rounded-md bg-background"
-                                        placeholder={`Enter weight in ${formData.unit === "metric" ? "kg" : "lbs"}`}
-                                        min="1"
-                                    />
-                                </div>
-
-                                {/* Height */}
-                                <div className="md:col-span-2">
-                                    <label className="block text-sm font-medium mb-2">
-                                        Height ({formData.unit === "metric" ? "cm" : "inches"})
-                                    </label>
-                                    <input
-                                        type="number"
-                                        value={formData.height}
-                                        onChange={(e) => handleInputChange("height", e.target.value)}
-                                        className="w-full px-3 py-2 border rounded-md bg-background"
-                                        placeholder={`Enter height in ${formData.unit === "metric" ? "cm" : "inches"}`}
-                                        min="1"
-                                    />
-                                </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {/* Unit System */}
+                            <div>
+                                <label htmlFor="unit" className="block text-sm font-medium mb-2">Unit System</label>
+                                <select
+                                    id="unit"
+                                    aria-label="Unit System"
+                                    value={formData.unit}
+                                    onChange={(e) => handleInputChange("unit", e.target.value)}
+                                    className="w-full px-3 py-2 border rounded-md bg-background"
+                                >
+                                    <option value="metric">Metric (kg, cm)</option>
+                                    <option value="imperial">Imperial (lbs, inches)</option>
+                                </select>
                             </div>
+
+                            {/* Gender */}
+                            <div>
+                                <label htmlFor="gender" className="block text-sm font-medium mb-2">Gender</label>
+                                <select
+                                    id="gender"
+                                    aria-label="Gender"
+                                    value={formData.gender}
+                                    onChange={(e) => handleInputChange("gender", e.target.value)}
+                                    className="w-full px-3 py-2 border rounded-md bg-background"
+                                >
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+
+                            {/* Age */}
+                            <div>
+                                <label htmlFor="age" className="block text-sm font-medium mb-2">Age (years)</label>
+                                <input
+                                    id="age"
+                                    aria-label="Age"
+                                    type="number"
+                                    value={formData.age}
+                                    onChange={(e) => handleInputChange("age", e.target.value)}
+                                    className={`w-full px-3 py-2 border rounded-md bg-background ${errors.age ? 'border-red-500' : ''}`}
+                                    placeholder="Enter your age"
+                                    min="1"
+                                    max="120"
+                                />
+                                {errors.age && <span className="text-xs text-red-500">{errors.age}</span>}
+                            </div>
+
+                            {/* Weight */}
+                            <div>
+                                <label htmlFor="weight" className="block text-sm font-medium mb-2">
+                                    Weight ({formData.unit === "metric" ? "kg" : "lbs"})
+                                </label>
+                                <input
+                                    id="weight"
+                                    aria-label="Weight"
+                                    type="number"
+                                    value={formData.weight}
+                                    onChange={(e) => handleInputChange("weight", e.target.value)}
+                                    className={`w-full px-3 py-2 border rounded-md bg-background ${errors.weight ? 'border-red-500' : ''}`}
+                                    placeholder={`Enter weight in ${formData.unit === "metric" ? "kg" : "lbs"}`}
+                                    min="1"
+                                />
+                                {errors.weight && <span className="text-xs text-red-500">{errors.weight}</span>}
+                            </div>
+
+                            {/* Height */}
+                            <div className="md:col-span-2">
+                                <label htmlFor="height" className="block text-sm font-medium mb-2">
+                                    Height ({formData.unit === "metric" ? "cm" : "inches"})
+                                </label>
+                                <input
+                                    id="height"
+                                    aria-label="Height"
+                                    type="number"
+                                    value={formData.height}
+                                    onChange={(e) => handleInputChange("height", e.target.value)}
+                                    className={`w-full px-3 py-2 border rounded-md bg-background ${errors.height ? 'border-red-500' : ''}`}
+                                    placeholder={`Enter height in ${formData.unit === "metric" ? "cm" : "inches"}`}
+                                    min="1"
+                                />
+                                {errors.height && <span className="text-xs text-red-500">{errors.height}</span>}
+                            </div>
+                        </div>
                         </div>
 
                         {/* Activity Level */}
@@ -232,7 +260,9 @@ export default function CalorieTracker() {
                         <div className="flex gap-4 justify-center mb-6">
                             <button
                                 onClick={calculateCalories}
-                                className="flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors font-medium"
+                                disabled={Object.keys(errors).length > 0 || !formData.age || !formData.weight || !formData.height}
+                                className={`flex items-center gap-2 px-6 py-3 rounded-md font-medium transition-colors ${Object.keys(errors).length > 0 || !formData.age || !formData.weight || !formData.height ? 'bg-blue-300 text-white cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
+                                aria-disabled={Object.keys(errors).length > 0 || !formData.age || !formData.weight || !formData.height}
                             >
                                 <Calculator size={20} />
                                 Calculate Calories
