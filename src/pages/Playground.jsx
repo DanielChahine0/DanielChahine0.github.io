@@ -47,18 +47,6 @@ export default function Playground() {
     return (
         <PageTransition>
             <div className="min-h-screen flex flex-col bg-background relative overflow-hidden">
-                {/* Subtle animated gradient background */}
-                <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
-                    <svg width="100%" height="100%" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <radialGradient id="bg-gradient" cx="50%" cy="40%" r="80%">
-                                <stop offset="0%" stopColor="#a5b4fc" stopOpacity="0.25" />
-                                <stop offset="100%" stopColor="#f0abfc" stopOpacity="0.10" />
-                            </radialGradient>
-                        </defs>
-                        <rect width="100%" height="100%" fill="url(#bg-gradient)" />
-                    </svg>
-                </div>
                 <NavBar />
                 <main className="mt-10 flex-1 container mx-auto px-4 py-8 relative z-10">
                     <motion.div
