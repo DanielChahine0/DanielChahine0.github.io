@@ -4,7 +4,7 @@ import { NavBar } from "../components/NavBar";
 import { PageTransition } from "../components/PageTransition";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calculator, Clock, Calendar, ArrowRight, FileText, Palette } from "lucide-react";
+import { Calculator, Clock, Calendar, ArrowRight, FileText, Palette, FileSearch } from "lucide-react";
 
 // ToolCard component for better separation of concerns
 function ToolCard({ tool, index }) {
@@ -80,6 +80,13 @@ export default function Playground() {
             icon: Palette,
             path: "/playground/color-picker",
             color: "bg-pink-500"
+        },
+        {
+            title: "Text Analyzer",
+            description: "Analyze your text for word count, character count, reading time, and sentiment.",
+            icon: FileSearch,
+            path: "/playground/text-analyzer",
+            color: "bg-teal-500"
         },
     ];
 

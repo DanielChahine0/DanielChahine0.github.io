@@ -9,6 +9,7 @@ import ClockTimer from "./pages/ClockTimer"
 import LifeInWeeks from "./pages/LifeInWeeks"
 import MarkdownEditor from "./pages/MarkdownEditor"
 import ColorPicker from "./pages/ColorPicker"
+import TextAnalyzer from "./pages/TextAnalyzer"
 import { Toaster } from "@/components/ui/toaster"
 import { ScrollToTop } from "./components/ScrollToTop"
 
@@ -26,6 +27,7 @@ function AnimatedRoutes() {
         <Route path="/playground/life-in-weeks" element={<LifeInWeeks />} />
         <Route path="/playground/markdown-editor" element={<MarkdownEditor />} />
         <Route path="/playground/color-picker" element={<ColorPicker />} />
+        <Route path="/playground/text-analyzer" element={<TextAnalyzer />} />
         {/* When the path is *, it will render the NotFound component */}
         <Route path="*" element={<NotFound />} />
       </Routes>
