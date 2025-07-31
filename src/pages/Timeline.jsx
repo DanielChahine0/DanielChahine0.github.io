@@ -110,6 +110,7 @@ const timelineEvents = [
 	
 ];
 
+
 export const Timeline = () => {
   const categories = [
 	{ name: "Extracurricular", color: "#6366f1" }, // indigo
@@ -137,99 +138,135 @@ export const Timeline = () => {
 	});
   };
 
+  const handleAllClick = () => setSelectedCategories([]);
+
   return (
 	<PageTransition className="min-h-screen bg-background text-foreground overflow-x-hidden relative">
-  {/* Removed CloudBackground and StarBackground components */}
-
 	  {/* Content with higher z-index */}
 	  <div className="relative z-20">
 		{/* Navbar */}
 		<NavBar />
 
 		{/* Main Content */}
-		<main className="container mx-auto max-w-4xl pt-32 px-4 pb-16">
+		<main className="container mx-auto max-w-4xl pt-32 px-2 md:px-4 pb-16">
 		  <div className="flex items-center mb-8 gap-4">
 			<h1 className="text-3xl md:text-4xl font-bold">My Timeline</h1>
 		  </div>
 
 		  {/* Category Filter Buttons */}
-		  <div className="flex flex-col fixed right-8 top-40 z-30 gap-4">
+		  <nav aria-label="Filter timeline by category" className="flex flex-row md:flex-col fixed right-2 md:right-8 top-24 md:top-40 z-30 gap-2 md:gap-4">
+			<button
+			  onClick={handleAllClick}
+			  className={`px-4 py-2 rounded-full border-2 font-semibold shadow-md focus:outline-none hover:scale-110 transition-all ${selectedCategories.length === 0 ? 'bg-primary text-white border-primary' : 'bg-white text-primary border-primary'}`}
+			  aria-pressed={selectedCategories.length === 0}
+			>
+			  All
+			</button>
 			{categories.map((cat) => {
 			  const isSelected = selectedCategories.includes(cat.name);
 			  return (
-		<button
-		  key={cat.name}
-		  onClick={() => handleCategoryClick(cat.name)}
-		  style={{
-			backgroundColor: isSelected ? cat.color : "#fff",
-			color: isSelected ? "#fff" : cat.color,
-			borderColor: cat.color,
-			transition: 'all 0.2s',
-		  }}
-		  className={`px-4 py-2 rounded-full border-2 font-semibold shadow-md focus:outline-none hover:scale-110`}
-		  onMouseEnter={e => {
-			if (!isSelected) {
-			  e.currentTarget.style.backgroundColor = cat.color;
-			  e.currentTarget.style.color = '#fff';
-			}
-		  }}
-		  onMouseLeave={e => {
-			if (!isSelected) {
-			  e.currentTarget.style.backgroundColor = '#fff';
-			  e.currentTarget.style.color = cat.color;
-			}
-		  }}
-		>
-		  {cat.name}
-		</button>
+				<button
+				  key={cat.name}
+				  onClick={() => handleCategoryClick(cat.name)}
+				  style={{
+					backgroundColor: isSelected ? cat.color : "#fff",
+					color: isSelected ? "#fff" : cat.color,
+					borderColor: cat.color,
+					transition: 'all 0.2s',
+				  }}
+				  className={`px-4 py-2 rounded-full border-2 font-semibold shadow-md focus:outline-none hover:scale-110`}
+				  aria-pressed={isSelected}
+				  onMouseEnter={e => {
+					if (!isSelected) {
+					  e.currentTarget.style.backgroundColor = cat.color;
+					  e.currentTarget.style.color = '#fff';
+					}
+				  }}
+				  onMouseLeave={e => {
+					if (!isSelected) {
+					  e.currentTarget.style.backgroundColor = '#fff';
+					  e.currentTarget.style.color = cat.color;
+					}
+				  }}
+				>
+				  {cat.name}
+				</button>
 			  );
 			})}
-		  </div>
+		  </nav>
 
-		  <div className="relative border-l-2 border-primary/50 pl-8 ml-4 space-y-10">
-			{filteredEvents.map((event, index) => {
-			  // Find the color for the event's category
-			  const cat = categories.find(c => c.name === event.category);
-			  const tagColor = cat ? cat.color : "#6366f1";
-			  return (
-				<div key={index} className="relative">
-				  {/* Dot on timeline - outside the hover element */}
-				  <div className="absolute w-4 h-4 bg-primary rounded-full -left-[41px] top-6"></div>
+		  <section aria-label="Timeline" className="relative border-l-2 border-primary/50 pl-8 ml-4 space-y-10 mt-8">
+			<ul className="space-y-10">
+			  {filteredEvents.map((event, index) => {
+				// Find the color for the event's category
+				const cat = categories.find(c => c.name === event.category);
+				const tagColor = cat ? cat.color : "#6366f1";
+				return (
+				  <li key={index} className="relative animate-fadeIn" style={{animationDelay: `${index * 60}ms`, animationFillMode: 'both'}}>
+					{/* Dot on timeline - outside the hover element */}
+					<span className="absolute w-4 h-4 bg-primary rounded-full -left-[41px] top-6" aria-hidden="true"></span>
 
-				  {/* Content with hover effect */}
-				  <div className="gradient-border card-hover p-6">
-					<div className="flex flex-col md:flex-row justify-between gap-4 text-left">
-					  <div className="text-left">
-						<h3 className="text-xl font-bold text-left">{event.title}</h3>
-						<p className="text-muted-foreground text-left">
-						  {event.description}
-						</p>
-					  </div>
-					  <div className="md:text-right text-left">
-						<span className="text-primary font-semibold text-lg">
-						  {event.year}
-						</span>
-						<div
-						  className="inline-block ml-2 px-2 py-1 rounded-full text-xs"
-						  style={{
-							backgroundColor: tagColor,
-							color: "#fff",
-						  }}
-						>
-						  {event.category}
+					{/* Content with hover effect */}
+					<article className="gradient-border card-hover p-6" tabIndex={0} aria-labelledby={`event-title-${index}`}> 
+					  <div className="flex flex-col md:flex-row justify-between gap-4 text-left">
+						<div className="text-left">
+						  <h2 id={`event-title-${index}`} className="text-xl font-bold text-left">{event.title}</h2>
+						  <p className="text-muted-foreground text-left">
+							{event.description}
+						  </p>
+						</div>
+						<div className="md:text-right text-left flex flex-col md:items-end items-start gap-2">
+						  <span className="text-primary font-semibold text-lg">
+							{event.year}
+						  </span>
+						  <span
+							className="inline-block ml-0 md:ml-2 px-2 py-1 rounded-full text-xs"
+							style={{
+							  backgroundColor: tagColor,
+							  color: "#fff",
+							}}
+						  >
+							{event.category}
+						  </span>
 						</div>
 					  </div>
-					</div>
-				  </div>
-				</div>
-			  );
-			})}
-		  </div>
+					</article>
+				  </li>
+				);
+			  })}
+			</ul>
+			{filteredEvents.length === 0 && (
+			  <div className="text-center text-muted-foreground py-8">No events found for selected categories.</div>
+			)}
+		  </section>
 		</main>
 
 		{/* Footer */}
 		<Footer />
 	  </div>
+
+	  {/* Fade-in animation keyframes */}
+	  <style>{`
+		@keyframes fadeIn {
+		  from { opacity: 0; transform: translateY(20px); }
+		  to { opacity: 1; transform: none; }
+		}
+		.animate-fadeIn {
+		  animation: fadeIn 0.7s cubic-bezier(.4,0,.2,1) both;
+		}
+		@media (max-width: 768px) {
+		  nav[aria-label='Filter timeline by category'] {
+			position: static !important;
+			flex-direction: row !important;
+			margin-bottom: 1.5rem;
+			gap: 0.5rem !important;
+		  }
+		  section[aria-label='Timeline'] {
+			margin-left: 0 !important;
+			padding-left: 1.5rem !important;
+		  }
+		}
+	  `}</style>
 	</PageTransition>
   );
 };

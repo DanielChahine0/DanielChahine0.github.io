@@ -94,12 +94,13 @@ export default function Playground() {
                         transition={{ duration: 0.5 }}
                         className="max-w-4xl mx-auto text-center"
                     >
-                        <h1 className="text-4xl font-bold mb-4 tracking-tight bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
+                        <h1 className="text-4xl font-bold mb-4 tracking-tight text-foreground">
                             Playground
                         </h1>
                         <p className="text-lg text-foreground/80 mb-12">
                             Welcome to the Playground! Explore these interactive tools and experiences.
                         </p>
+
 
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {tools.map((tool, index) => (
@@ -119,6 +120,11 @@ export default function Playground() {
                 </main>
                 <Footer />
             </div>
+            {/* Subtle hover effect for ToolCard */}
+            <style>{`
+                .group:hover .group-hover\\:scale-110 { transform: scale(1.10) rotate(6deg); }
+                .group:focus-within .group-hover\\:scale-110 { transform: scale(1.10) rotate(6deg); }
+            `}</style>
         </PageTransition>
     );
 }
