@@ -162,21 +162,23 @@ export default function CalorieTracker() {
                         transition={{ duration: 0.5 }}
                         className="max-w-4xl mx-auto"
                     >
-                        <h1 className="text-4xl font-bold mb-8 text-center" tabIndex={0} aria-label="Calorie Calculator">Calorie Calculator</h1>
+                        <h1 className="text-4xl font-bold mb-8 text-center" tabIndex={0} aria-label="Calorie Calculator">
+                            Calorie Calculator
+                        </h1>
 
                         {/* Calculator Form */}
                         <form
-                            className="bg-card rounded-lg p-6 mb-6"
+                            className="bg-card rounded-xl p-8 mb-8 shadow-md"
                             onSubmit={e => { e.preventDefault(); calculateCalories(); }}
                             aria-label="Calorie Calculator Form"
                             autoComplete="off"
                         >
-                            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                                <Calculator size={20} />
+                            <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2">
+                                <Calculator size={22} />
                                 Personal Information
                             </h2>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {/* Unit System */}
                                 <div>
                                     <label htmlFor="unit" className="block text-sm font-medium mb-2">Unit System</label>
@@ -184,7 +186,7 @@ export default function CalorieTracker() {
                                         id="unit"
                                         aria-label="Unit System"
                                         value={formData.unit}
-                                        onChange={(e) => handleInputChange("unit", e.target.value)}
+                                        onChange={e => handleInputChange("unit", e.target.value)}
                                         className="w-full px-3 py-2 border rounded-md bg-background focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors"
                                     >
                                         <option value="metric">Metric (kg, cm)</option>
@@ -199,7 +201,7 @@ export default function CalorieTracker() {
                                         id="gender"
                                         aria-label="Gender"
                                         value={formData.gender}
-                                        onChange={(e) => handleInputChange("gender", e.target.value)}
+                                        onChange={e => handleInputChange("gender", e.target.value)}
                                         className="w-full px-3 py-2 border rounded-md bg-background focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors"
                                     >
                                         <option value="male">Male</option>
@@ -215,7 +217,7 @@ export default function CalorieTracker() {
                                         aria-label="Age"
                                         type="number"
                                         value={formData.age}
-                                        onChange={(e) => handleInputChange("age", e.target.value)}
+                                        onChange={e => handleInputChange("age", e.target.value)}
                                         className={`w-full px-3 py-2 border rounded-md bg-background ${errors.age ? 'border-red-500 focus:border-red-500' : 'focus:border-blue-500'} transition-colors`}
                                         placeholder="Enter your age"
                                         min="1"
@@ -237,7 +239,7 @@ export default function CalorieTracker() {
                                         aria-label="Weight"
                                         type="number"
                                         value={formData.weight}
-                                        onChange={(e) => handleInputChange("weight", e.target.value)}
+                                        onChange={e => handleInputChange("weight", e.target.value)}
                                         className={`w-full px-3 py-2 border rounded-md bg-background ${errors.weight ? 'border-red-500 focus:border-red-500' : 'focus:border-blue-500'} transition-colors`}
                                         placeholder={`Enter weight in ${formData.unit === "metric" ? "kg" : "lbs"}`}
                                         min="1"
@@ -259,7 +261,7 @@ export default function CalorieTracker() {
                                         aria-label="Height"
                                         type="number"
                                         value={formData.height}
-                                        onChange={(e) => handleInputChange("height", e.target.value)}
+                                        onChange={e => handleInputChange("height", e.target.value)}
                                         className={`w-full px-3 py-2 border rounded-md bg-background ${errors.height ? 'border-red-500 focus:border-red-500' : 'focus:border-blue-500'} transition-colors`}
                                         placeholder={`Enter height in ${formData.unit === "metric" ? "cm" : "inches"}`}
                                         min="1"
@@ -271,11 +273,11 @@ export default function CalorieTracker() {
                                     {errors.height && <span id="height-error" className="text-xs text-red-500" role="alert">{errors.height}</span>}
                                 </div>
                             </div>
-                            <div className="flex gap-4 justify-center mt-6">
+                            <div className="flex flex-col md:flex-row gap-4 justify-center mt-8">
                                 <button
                                     type="submit"
                                     disabled={!isFormValid}
-                                    className={`flex items-center gap-2 px-6 py-3 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${!isFormValid ? 'bg-blue-300 text-white cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
+                                    className={`flex items-center gap-2 px-6 py-3 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow ${!isFormValid ? 'bg-blue-300 text-white cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
                                     aria-disabled={!isFormValid}
                                 >
                                     <Calculator size={20} />
@@ -284,7 +286,7 @@ export default function CalorieTracker() {
                                 <button
                                     type="button"
                                     onClick={resetCalculator}
-                                    className="flex items-center gap-2 px-6 py-3 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                                    className="flex items-center gap-2 px-6 py-3 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 shadow bg-gray-600 text-white hover:bg-gray-700"
                                     aria-label="Reset all form fields"
                                 >
                                     <RotateCcw size={20} />
@@ -294,9 +296,9 @@ export default function CalorieTracker() {
                         </form>
 
                         {/* Activity Level */}
-                        <section className="bg-card rounded-lg p-6 mb-6" aria-labelledby="activity-level-heading">
-                            <h2 id="activity-level-heading" className="text-xl font-semibold mb-4 flex items-center gap-2">
-                                <Activity size={20} />
+                        <section className="bg-card rounded-xl p-8 mb-8 shadow-md" aria-labelledby="activity-level-heading">
+                            <h2 id="activity-level-heading" className="text-2xl font-semibold mb-6 flex items-center gap-2">
+                                <Activity size={22} />
                                 Activity Level
                             </h2>
                             <div className="space-y-2">
@@ -307,7 +309,7 @@ export default function CalorieTracker() {
                                             name="activityLevel"
                                             value={key}
                                             checked={formData.activityLevel === key}
-                                            onChange={(e) => handleInputChange("activityLevel", e.target.value)}
+                                            onChange={e => handleInputChange("activityLevel", e.target.value)}
                                             className="w-4 h-4 text-blue-600 focus:ring-blue-500 focus:ring-2"
                                             aria-checked={formData.activityLevel === key}
                                         />
@@ -318,9 +320,9 @@ export default function CalorieTracker() {
                         </section>
 
                         {/* Goal */}
-                        <section className="bg-card rounded-lg p-6 mb-6" aria-labelledby="goal-heading">
-                            <h2 id="goal-heading" className="text-xl font-semibold mb-4 flex items-center gap-2">
-                                <Target size={20} />
+                        <section className="bg-card rounded-xl p-8 mb-8 shadow-md" aria-labelledby="goal-heading">
+                            <h2 id="goal-heading" className="text-2xl font-semibold mb-6 flex items-center gap-2">
+                                <Target size={22} />
                                 Goal
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -331,7 +333,7 @@ export default function CalorieTracker() {
                                             name="goal"
                                             value={key}
                                             checked={formData.goal === key}
-                                            onChange={(e) => handleInputChange("goal", e.target.value)}
+                                            onChange={e => handleInputChange("goal", e.target.value)}
                                             className="w-4 h-4 text-blue-600 focus:ring-blue-500 focus:ring-2"
                                             aria-checked={formData.goal === key}
                                         />
@@ -347,11 +349,11 @@ export default function CalorieTracker() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5 }}
-                                className="bg-card rounded-lg p-6"
+                                className="bg-card rounded-xl p-8 shadow-md"
                                 aria-live="polite"
                                 aria-label="Calorie calculation results"
                             >
-                                <h2 className="text-xl font-semibold mb-4" tabIndex={0}>Your Results</h2>
+                                <h2 className="text-2xl font-semibold mb-6" tabIndex={0}>Your Results</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div className="bg-background rounded-lg p-4 text-center" aria-label="BMR result">
                                         <h3 className="text-sm font-medium text-foreground/60 mb-1">BMR</h3>
