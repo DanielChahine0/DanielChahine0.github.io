@@ -8,11 +8,11 @@ import { Play, Pause, RotateCcw, Plus, Minus } from "lucide-react";
 // Current Time Component
 function CurrentTimeDisplay({ currentTime, formatTime, formatDate }) {
     return (
-        <div className="space-y-4">
-            <div className="text-5xl font-mono font-bold text-blue-600 animate-pulse" aria-label="Current time">
+        <div className="space-y-2 flex flex-col items-center">
+            <div className="text-5xl font-mono font-bold text-primary animate-pulse" aria-label="Current time">
                 {formatTime(currentTime)}
             </div>
-            <div className="text-lg text-foreground/80">
+            <div className="text-base text-muted-foreground">
                 {formatDate(currentTime)}
             </div>
         </div>
@@ -46,17 +46,16 @@ function WorldClock() {
     };
 
     return (
-        <div className="mt-8">
-            <h3 className="text-lg font-semibold mb-2">World Clock</h3>
-            <div className="flex flex-wrap gap-2 justify-center mb-4">
+        <section className="mt-8 bg-card rounded-lg p-4 shadow-md">
+            <h3 className="text-xl font-semibold mb-3 text-center">World Clock</h3>
+            <div className="flex flex-wrap gap-2 justify-center mb-3">
                 {worldCities.map(city => (
                     <button
                         key={city.tz}
                         onClick={() => toggleCity(city.tz)}
                         className={`px-3 py-1 rounded-md text-sm font-medium border transition-colors ${
                             selectedCities.includes(city.tz)
-                                ? 'bg-blue-700 text-white border-blue-800'
-                                : 'bg-white text-blue-700 border-blue-300 hover:bg-blue-100'
+                                ? 'bg-primary text-white border-primary' : 'bg-white text-primary border-primary/30 hover:bg-primary/10'
                         }`}
                         aria-pressed={selectedCities.includes(city.tz)}
                     >
@@ -68,14 +67,14 @@ function WorldClock() {
                 {selectedCities.map(tz => {
                     const city = worldCities.find(c => c.tz === tz);
                     return city ? (
-                        <div key={tz} className="flex justify-between items-center bg-blue-50 rounded px-3 py-2">
-                            <span className="font-medium  text-black">{city.name}</span>
-                            <span className="font-mono text-lg text-black">{getWorldTime(tz)}</span>
+                        <div key={tz} className="flex justify-between items-center bg-muted rounded px-3 py-2">
+                            <span className="font-medium text-foreground">{city.name}</span>
+                            <span className="font-mono text-lg text-foreground">{getWorldTime(tz)}</span>
                         </div>
                     ) : null;
                 })}
             </div>
-        </div>
+        </section>
     );
 }
 
@@ -207,10 +206,10 @@ function AlarmSection() {
     }, []);
 
     return (
-        <div className="mt-8 bg-card rounded-lg p-6 shadow-2xl">
-            <h3 className="text-3xl font-bold mb-6 text-center">Alarm</h3>
+        <section className="mt-8 bg-card rounded-lg p-6 shadow-lg">
+            <h3 className="text-2xl font-bold mb-6 text-center">Alarm</h3>
             {!audioPermissionGranted && (
-                <div className="mb-4 p-3 bg-yellow-100 border border-yellow-300 rounded-lg text-yellow-800 text-sm">
+                <div className="mb-4 p-3 bg-yellow-100 border border-yellow-300 rounded-lg text-yellow-800 text-sm text-center">
                     <strong>Note:</strong> Audio may not work until you interact with the page. Click the test sound button (🔊) to enable audio playback.
                 </div>
             )}
@@ -221,7 +220,7 @@ function AlarmSection() {
                         type="time"
                         value={newAlarm.time}
                         onChange={(e) => setNewAlarm({ ...newAlarm, time: e.target.value })}
-                        className="px-4 py-2 rounded-lg text-center shadow-sm focus:outline-none"
+                        className="px-4 py-2 rounded-md text-center shadow-sm border border-input focus:outline-none"
                         placeholder="Set Time"
                         aria-label="Set alarm time"
                     />
@@ -230,13 +229,13 @@ function AlarmSection() {
                         placeholder="Label"
                         value={newAlarm.label}
                         onChange={(e) => setNewAlarm({ ...newAlarm, label: e.target.value })}
-                        className="px-4 py-2 rounded-lg text-center shadow-sm focus:outline-none"
+                        className="px-4 py-2 rounded-md text-center shadow-sm border border-input focus:outline-none"
                         aria-label="Alarm label"
                     />
                     <select
                         value={newAlarm.sound}
                         onChange={(e) => setNewAlarm({ ...newAlarm, sound: e.target.value })}
-                        className="px-4 py-2 rounded-lg shadow-sm focus:outline-none"
+                        className="px-4 py-2 rounded-md shadow-sm border border-input focus:outline-none"
                         aria-label="Alarm sound"
                     >
                         <option value="default">Default</option>
@@ -246,7 +245,7 @@ function AlarmSection() {
                     <button
                         type="button"
                         onClick={() => testSound(newAlarm.sound === "default" ? DEFAULT_SOUND : newAlarm.sound)}
-                        className="px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 shadow-sm text-sm focus:outline-none"
+                        className="px-3 py-2 bg-primary text-white rounded-md hover:bg-primary/90 shadow-sm text-sm focus:outline-none"
                         title="Test sound"
                         aria-label="Test alarm sound"
                     >
@@ -257,14 +256,14 @@ function AlarmSection() {
                             type="checkbox"
                             checked={isRecurring}
                             onChange={(e) => setIsRecurring(e.target.checked)}
-                            className="w-4 h-4 focus:outline-none"
+                            className="w-4 h-4 focus:outline-none accent-primary"
                             aria-label="Recurring alarm"
                         />
                         <span className="text-sm">Recurring</span>
                     </label>
                     <button
                         onClick={addAlarm}
-                        className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600  shadow-md transition-transform transform hover:scale-105 focus:outline-none"
+                        className="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 shadow-md transition-transform transform hover:scale-105 focus:outline-none"
                         aria-label="Add alarm"
                     >
                         Add Alarm
@@ -277,12 +276,12 @@ function AlarmSection() {
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 10 }}
-                            className="flex justify-between items-center bg-white px-6 py-4 rounded-lg shadow-2xl"
+                            className="flex justify-between items-center bg-muted px-6 py-4 rounded-lg shadow-md"
                             role="listitem"
                         >
                             <div>
-                                <span className="font-semibold text-lg text-blue-700">{alarm.time}</span>
-                                <span className="text-sm text-gray-400 ml-2">{alarm.label || "No Label"}</span>
+                                <span className="font-semibold text-lg text-primary">{alarm.time}</span>
+                                <span className="text-sm text-muted-foreground ml-2">{alarm.label || "No Label"}</span>
                                 {alarm.recurring && <span className="ml-2 text-xs text-green-600">(Recurring)</span>}
                             </div>
                             <button
@@ -296,7 +295,7 @@ function AlarmSection() {
                     ))}
                 </ul>
             </div>
-        </div>
+        </section>
     );
 }
 
@@ -434,41 +433,38 @@ export default function ClockTimer() {
                         className="max-w-4xl mx-auto"
                     >
                         <h1 className="text-4xl font-bold mb-8 text-center">Clock & Timer</h1>
-
                         <div className="grid md:grid-cols-2 gap-8">
                             {/* Current Time Display */}
-                            <motion.div
+                            <motion.section
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.5, delay: 0.2 }}
-                                className="bg-card rounded-lg p-8 text-center shadow-lg"
+                                className="bg-card rounded-lg p-8 text-center shadow-md flex flex-col gap-6"
                             >
-                                <h2 className="text-2xl font-semibold mb-6">Current Time</h2>
+                                <h2 className="text-2xl font-semibold mb-4">Current Time</h2>
                                 <CurrentTimeDisplay currentTime={currentTime} formatTime={formatTime} formatDate={formatDate} />
                                 <WorldClock />
-                            </motion.div>
-
+                            </motion.section>
                             {/* Timer */}
-                            <motion.div
+                            <motion.section
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.5, delay: 0.4 }}
-                                className="bg-card rounded-lg p-8 shadow-lg"
+                                className="bg-card rounded-lg p-8 shadow-md flex flex-col gap-6"
                             >
-                                <h2 className="text-2xl font-semibold mb-6 text-center">Pomodoro Timer</h2>
+                                <h2 className="text-2xl font-semibold mb-4 text-center">Pomodoro Timer</h2>
                                 {/* Timer Display */}
-                                <div className="text-center mb-6">
+                                <div className="text-center mb-4">
                                     <motion.div
                                         animate={{ scale: isTimerRunning ? 1.08 : 1 }}
                                         transition={{ type: 'spring', stiffness: 200, damping: 10 }}
-                                        className="text-6xl font-mono font-bold text-green-600 mb-4 select-none"
+                                        className="text-6xl font-mono font-bold text-green-600 mb-2 select-none"
                                         aria-label="Timer countdown"
                                     >
-                                        {String(timerMinutes).padStart(2, '0')}:
-                                        {String(timerSeconds).padStart(2, '0')}
+                                        {String(timerMinutes).padStart(2, '0')}:{String(timerSeconds).padStart(2, '0')}
                                     </motion.div>
                                     {/* Progress Bar */}
-                                    <div className="w-full bg-gray-200 rounded-full h-2 mb-4" aria-label="Timer progress">
+                                    <div className="w-full bg-gray-200 rounded-full h-2 mb-2" aria-label="Timer progress">
                                         <motion.div
                                             className="bg-green-500 h-2 rounded-full"
                                             animate={{ width: `${progressPercentage}%` }}
@@ -478,7 +474,7 @@ export default function ClockTimer() {
                                     </div>
                                 </div>
                                 {/* Timer Controls */}
-                                <div className="flex justify-center gap-4 mb-6">
+                                <div className="flex justify-center gap-4 mb-4">
                                     <button
                                         onClick={toggleTimer}
                                         aria-label={isTimerRunning ? "Pause timer" : "Start timer"}
@@ -501,13 +497,13 @@ export default function ClockTimer() {
                                     </button>
                                 </div>
                                 {/* Timer Adjustment */}
-                                <div className="space-y-4">
+                                <div className="space-y-3">
                                     <div className="flex items-center justify-center gap-4">
                                         <button
                                             onClick={() => adjustTimer(-5)}
                                             disabled={isTimerRunning}
                                             aria-label="Decrease timer by 5 minutes"
-                                            className="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                            className="p-2 bg-primary text-white rounded-md hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                                         >
                                             <Minus size={16} />
                                         </button>
@@ -518,7 +514,7 @@ export default function ClockTimer() {
                                             onClick={() => adjustTimer(5)}
                                             disabled={isTimerRunning}
                                             aria-label="Increase timer by 5 minutes"
-                                            className="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                            className="p-2 bg-primary text-white rounded-md hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                                         >
                                             <Plus size={16} />
                                         </button>
@@ -555,7 +551,7 @@ export default function ClockTimer() {
                                                 value={customInput || ''}
                                                 onChange={handleCustomInput}
                                                 onKeyDown={e => { if (e.key === 'Enter') setCustomTimer(); }}
-                                                className="w-20 px-2 py-1 border border-gray-300 rounded-md text-center"
+                                                className="w-20 px-2 py-1 border border-input rounded-md text-center"
                                                 aria-label="Custom timer minutes"
                                                 placeholder="min"
                                                 autoFocus
@@ -572,9 +568,8 @@ export default function ClockTimer() {
                                 </div>
                                 {/* Hidden audio for timer end notification */}
                                 <audio ref={audioRef} src="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae1b6.mp3" preload="auto" />
-                            </motion.div>
+                            </motion.section>
                         </div>
-
                         {/* Alarm Section */}
                         <AlarmSection />
                     </motion.div>
