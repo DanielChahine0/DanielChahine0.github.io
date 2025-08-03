@@ -72,7 +72,7 @@ export const NavBar = () => {
             )}
         >
             <div className={cn(
-                'container flex items-center justify-between px-5 py-2 transition-all duration-300 relative overflow-hidden',
+                'container flex items-center justify-between px-5 py-2 transition-all duration-300 relative',
                 isScrolled
                     ? "w-6/7 mx-auto rounded-lg bg-primary/30 backdrop-blur-xl shadow-inner"
                     : "w-full"
@@ -146,16 +146,16 @@ export const NavBar = () => {
                             </a>
                         )
                     ))}
-                    <span className="hover:scale-130 transition-transform duration-300">
+                    <div className="hover:scale-130 transition-transform duration-300 relative z-50">
                         <ThemeToggle />
-                    </span>
+                    </div>
                 </div>
         
                 {/* Mobile Version */}
                 <div className="flex items-center md:hidden relative z-10">
-                    <span className="hover:scale-130 transition-transform duration-300">
+                    <div className="hover:scale-130 transition-transform duration-300 relative z-50">
                         <ThemeToggle />
-                    </span>
+                    </div>
                     <button
                         onClick={() => setIsMenuOpen((prev) => !prev)}
                         className="p-2 text-foreground z-50 hover:scale-130 transition-transform duration-300"
