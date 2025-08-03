@@ -119,34 +119,33 @@ export const ThemeToggle = () => {
 
             {/* Theme Picker Dropdown */}
             <div className={cn(
-                "absolute top-full right-0 mt-3 w-80 max-w-[calc(100vw-2rem)]",
+                "absolute top-full right-0 mt-2 w-100 max-w-[calc(100vw-2rem)]",
                 "bg-card/95 backdrop-blur-xl border border-border/30",
-                "rounded-xl shadow-xl transition-all duration-150 ease-out",
+                "rounded-lg shadow-xl transition-all duration-150 ease-out",
                 "transform origin-top-right z-[100]",
                 "md:right-0 right-4", // Responsive positioning
                 isOpen 
                     ? "opacity-100 scale-100 translate-y-0" 
-                    : "opacity-0 scale-95 -translate-y-2 pointer-events-none",
+                    : "opacity-0 scale-30 translate-y-2 pointer-events-none",
                 // Ensure dropdown stays within viewport
                 "max-h-[80vh] overflow-y-auto"
             )}>
-                <div className="p-6">
+                <div className="p-4">
                     {/* Header */}
-                    <div className="flex items-center gap-2 mb-6">
-                        <Palette className="h-5 w-5 text-foreground/80" />
-                        <span className="font-medium text-lg tracking-wide text-foreground">Theme</span>
+                    <div className="flex items-center gap-2 mb-4">
+                        <Palette className="h-4 w-4 text-foreground/80" />
+                        <span className="font-medium text-base tracking-wide text-foreground">Theme</span>
                     </div>
 
                     {/* Background Selection */}
-                    <div className="mb-6">
-                        <label className="block text-sm font-medium mb-3 tracking-wide text-foreground/80">Background</label>
-                        <div className="flex bg-muted/30 rounded-lg p-1 border border-border/20">
+                    <div className="mb-4">
+                        <div className="flex bg-muted/30 rounded-md p-1 border border-border/20">
                             {BACKGROUND_THEMES.map((theme) => (
                                 <button
                                     key={theme.value}
                                     onClick={() => handleBackgroundSelect(theme.value)}
                                     className={cn(
-                                        "flex-1 px-2 py-2.5 text-xs md:text-sm font-medium rounded-md transition-all duration-200",
+                                        "flex-1 px-1.5 py-2 text-xs font-medium rounded-sm transition-all duration-200",
                                         "tracking-wide relative",
                                         selectedBackground === theme.value
                                             ? "text-foreground shadow-sm"
@@ -170,15 +169,14 @@ export const ThemeToggle = () => {
 
                     {/* Accent Color Selection */}
                     <div>
-                        <label className="block text-sm font-medium mb-3 tracking-wide text-foreground/80">Accent Color</label>
-                        <div className="flex gap-3 justify-center">
+                        <div className="flex gap-2 justify-center">
                             {ACCENT_COLORS.map((color) => (
                                 <button
                                     key={color.value}
                                     onClick={() => handleAccentSelect(color.value)}
                                     className={cn(
-                                        "w-10 h-10 rounded-lg transition-all duration-200",
-                                        "hover:scale-110 focus:outline-none focus:scale-110",
+                                        "w-10 h-10 rounded-md transition-all duration-200",
+                                        "hover:scale-101 focus:outline-none focus:scale-105",
                                         "border border-border/20"
                                     )}
                                     style={{
@@ -188,7 +186,10 @@ export const ThemeToggle = () => {
                                             : 'none',
                                         outlineOffset: selectedAccent === color.value ? '2px' : '0',
                                         boxShadow: selectedAccent === color.value 
-                                            ? `0 0 0 4px rgba(${hexToRgb(color.color)}, 0.1)`
+                                            ? `0 0 0 4px rgba(${(() => {
+                                                const rgb = hexToRgb(color.color);
+                                                return rgb ? `${rgb.r}, ${rgb.g}, ${rgb.b}` : '59, 130, 246';
+                                            })()}, 0.1)`
                                             : 'none'
                                     }}
                                     title={color.name}
