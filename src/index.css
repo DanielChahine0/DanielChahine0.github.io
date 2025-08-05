@@ -41,12 +41,14 @@
     );
     border-radius: 50%;
     transform: translate3d(0, 0, 0);
-    filter: blur(4px);
+    filter: blur(3px);
     opacity: 0;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
   }
   
   .glow-container:hover .glow-layer {
-    opacity: 0.7;
+    opacity: 0.6;
   }
   
   .glow-content {
