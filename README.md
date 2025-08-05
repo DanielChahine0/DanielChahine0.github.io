@@ -1,25 +1,12 @@
-<p align="center">
-<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/DanielChahine0/DanielChahine0.github.io?style=for-the-badge&logo=GitHub">
-<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/DanielChahine0/DanielChahine0.github.io?style=for-the-badge&logo=Javascript">
-<img alt="GitHub language count" src="https://img.shields.io/github/languages/count/DanielChahine0/DanielChahine0.github.io?style=for-the-badge">
-</p>
-
-Welcome to my personal portfolio website! This site showcases my projects, skills, experience, and provides a way to get in touch. Built with modern web technologies, it features smooth animations, responsive design, and a clean, interactive UI.
-
-## Live Demo
-
-[danielchahine0.github.io](https://danielchahine0.github.io)
-
-
 # Daniel Chahine — Personal Portfolio
-
-Welcome! This is my personal portfolio website, built to showcase my projects, skills, and experience, and to provide a way to get in touch. The site features a modern UI, smooth animations, responsive design, and interactive elements.
 
 <p align="center">
   <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/DanielChahine0/DanielChahine0.github.io?style=for-the-badge&logo=GitHub">
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/DanielChahine0/DanielChahine0.github.io?style=for-the-badge&logo=Javascript">
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/DanielChahine0/DanielChahine0.github.io?style=for-the-badge">
 </p>
+
+Welcome to my personal portfolio website! This modern, interactive site showcases my projects, skills, experience, and provides multiple ways to get in touch. Built with cutting-edge web technologies, it features smooth animations, responsive design, and a clean, engaging user interface.
 
 ---
 
@@ -33,15 +20,23 @@ Welcome! This is my personal portfolio website, built to showcase my projects, s
 
 ## ✨ Features
 
-- **Modern UI/UX**: Responsive, accessible, and visually appealing design with smooth transitions.
-- **Animated Page Transitions**: Seamless navigation using Framer Motion and React Router.
-- **Project Showcase**: Highlighted projects with images, tech stack, and links to live demos and source code.
-- **Timeline**: Chronological view of experience, projects, and extracurricular activities.
-- **Skills Section**: Categorized list of programming languages, technologies, and tools.
-- **Contact Section**: Easy ways to reach out via email or social media links.
-- **Downloadable Resume**: Quick access to a PDF resume.
-- **Dark/Light Theme Toggle**: Instantly switch between dark and light modes.
-- **Toasts & Notifications**: User feedback for actions like sending a message.
+- **Modern UI/UX**: Responsive, accessible, and visually appealing design with smooth transitions
+- **Animated Page Transitions**: Seamless navigation using Framer Motion and React Router
+- **Interactive Playground**: Collection of mini-projects and tools including:
+  - Calorie Tracker
+  - Clock Timer
+  - Color Picker
+  - Life in Weeks Visualizer
+  - Markdown Editor
+  - Text Analyzer
+- **Project Showcase**: Highlighted projects with images, tech stack, and links to live demos and source code
+- **Experience Timeline**: Chronological view of experience, projects, and extracurricular activities
+- **Skills Section**: Categorized list of programming languages, technologies, and tools
+- **Contact Section**: Easy ways to reach out via email or social media links
+- **Downloadable Resume**: Quick access to a PDF resume
+- **Dark/Light Theme Toggle**: Instantly switch between dark and light modes with persistent preferences
+- **Toast Notifications**: User feedback for actions and interactions
+- **Star & Cloud Backgrounds**: Animated background effects for enhanced visual appeal
 
 ---
 
@@ -49,123 +44,99 @@ Welcome! This is my personal portfolio website, built to showcase my projects, s
 
 <p align="center">
   <img alt="React" src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB">
-  <img alt="Lucide" src="https://img.shields.io/badge/Lucide%20React-000000?style=for-the-badge&logo=lucide&logoColor=white">
-  <img alt="React Router" src="https://img.shields.io/badge/React%20Router-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white">
-  <img alt="Framer Motion" src="https://img.shields.io/badge/Framer%20Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white">
   <img alt="Vite" src="https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E">
   <img alt="TailwindCSS" src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white">
+  <img alt="Framer Motion" src="https://img.shields.io/badge/Framer%20Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white">
+  <img alt="React Router" src="https://img.shields.io/badge/React%20Router-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white">
   <img alt="JavaScript" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
-  <img alt="HTML5" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
-  <img alt="CSS3" src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
-  <img alt="clsx" src="https://img.shields.io/badge/clsx-000000?style=for-the-badge">
-  <img alt="React Icons" src="https://img.shields.io/badge/React%20Icons-EA7E20?style=for-the-badge&logo=react&logoColor=white">
 </p>
+
+**Frontend Technologies:**
+- **React 19** - Modern React with latest features
+- **Vite** - Fast build tool and development server
+- **TailwindCSS** - Utility-first CSS framework
+- **Framer Motion** - Production-ready motion library
+- **React Router** - Declarative routing for React
+
+**UI Components & Utilities:**
+- **Radix UI** - Unstyled, accessible UI primitives
+- **Lucide React** - Beautiful, customizable icons
+- **React Icons** - Popular icon library
+- **clsx & tailwind-merge** - Conditional class name utilities
+- **date-fns** - Modern JavaScript date utility library
+
+**Additional Tools:**
+- **html2canvas** - Screenshot functionality
+- **jsPDF** - PDF generation
+- **DOMPurify** - XSS sanitizer
+- **highlight.js** - Syntax highlighting
 
 ---
 
 
 ## 📁 Project Structure
-```txt
-├── public/
-│   ├── files/
-│   │   └── resume.pdf
-│   ├── photos/
+
+```
+DanielChahine0.github.io/
+├── public/                          # Static assets
+│   ├── files/                       # Downloadable files
+│   │   └── resume.pdf              # Resume PDF
+│   ├── photos/                     # Profile images
 │   │   ├── DarkHeroPhoto.png
 │   │   └── HeroPhoto.png
-│   └── projects/
+│   └── projects/                   # Project screenshots
 │       ├── project1.png
 │       ├── project2.png
 │       └── project3.png
-├── src/
-│   ├── assets/
-│   │   ├── favicon.svg
-│   │   └── react.svg
-│   ├── components/
-│   │   ├── AboutSection.jsx
-│   │   ├── CloudBackground.jsx
-│   │   ├── Footer.jsx
-│   │   ├── HeroSection.jsx
-│   │   ├── NavBar.jsx
-│   │   ├── PageTransition.jsx
-│   │   ├── ProjectsSection.jsx
-│   │   ├── ScrollToTop.jsx
-│   │   ├── SkillsSections.jsx
-│   │   ├── StarBackground.jsx
-│   │   ├── ThemeToggle.jsx
-│   │   └── ui/
-│   │       ├── toast.jsx
-│   │       └── toaster.jsx
-│   ├── hooks/
-│   │   └── use-toast.js
-│   ├── lib/
-│   │   └── utils.js
-│   ├── pages/
-│   │   ├── CalorieTracker.jsx
-│   │   ├── ClockTimer.jsx
-│   │   ├── Home.jsx
-│   │   ├── LifeInWeeks.jsx
-│   │   ├── NotFound.jsx
-│   │   ├── Playground.jsx
-│   │   └── Timeline.jsx
-│   ├── App.jsx
-│   ├── index.css
-│   └── main.jsx
-├── package.json
-├── vite.config.js
-└── README.md
+├── src/                            # Source code
+│   ├── components/                 # Reusable UI components
+│   │   ├── ui/                     # Base UI primitives
+│   │   │   ├── toast.jsx           # Toast component
+│   │   │   └── toaster.jsx         # Toast container
+│   │   ├── AboutSection.jsx        # About section
+│   │   ├── CloudBackground.jsx     # Animated cloud background
+│   │   ├── Footer.jsx              # Site footer
+│   │   ├── HeroSection.jsx         # Hero/landing section
+│   │   ├── NavBar.jsx              # Navigation bar
+│   │   ├── PageTransition.jsx      # Page transition wrapper
+│   │   ├── ProjectsSection.jsx     # Projects showcase
+│   │   ├── ScrollToTop.jsx         # Scroll to top button
+│   │   ├── SkillsSections.jsx      # Skills showcase
+│   │   ├── StarBackground.jsx      # Animated star background
+│   │   └── ThemeToggle.jsx         # Dark/light mode toggle
+│   ├── hooks/                      # Custom React hooks
+│   │   ├── use-glow-effect.js      # Mouse glow effect hook
+│   │   └── use-toast.js            # Toast notification hook
+│   ├── lib/                        # Utility functions
+│   │   └── utils.js                # Common utilities
+│   ├── pages/                      # Page components
+│   │   ├── CalorieTracker.jsx      # Calorie tracking tool
+│   │   ├── ClockTimer.jsx          # Clock and timer tool
+│   │   ├── ColorPicker.jsx         # Color picker tool
+│   │   ├── Home.jsx                # Main portfolio page
+│   │   ├── LifeInWeeks.jsx         # Life visualization tool
+│   │   ├── MarkdownEditor.jsx      # Markdown editor tool
+│   │   ├── NotFound.jsx            # 404 error page
+│   │   ├── Playground.jsx          # Tools showcase page
+│   │   ├── TextAnalyzer.jsx        # Text analysis tool
+│   │   └── Timeline.jsx            # Experience timeline
+│   ├── App.jsx                     # Main app component
+│   ├── index.css                   # Global styles
+│   └── main.jsx                    # App entry point
+├── eslint.config.js                # ESLint configuration
+├── package.json                    # Dependencies and scripts
+├── vite.config.js                  # Vite configuration
+└── README.md                       # Project documentation
 ```
 
----
-
-### Prerequisites
-
-
-### Installation
-
-1. **Clone the repository:**
-```sh
-git clone https://github.com/DanielChahine0/DanielChahine0.github.io.git
-cd DanielChahine0.github.io
-```
-
-2. Install dependencies:
-```sh
-npm install
-```
-
-3. Start the development server:
-```sh
-npm run dev
-```
-
-4. Build for production:
-```sh
-npm run build
-```
-
-5. Preview the production build:
-```sh
-npm run preview
-```
-
-## Contact
-Email: [Chahinedaniel0@gmail.com](chahinedaniel0@gmail.com)
-
-LinkedIn: [danielchahine](https://www.linkedin.com/in/danielchahine)
-
-GitHub: [DanielChahine0](https://github.com/DanielChahine0)
-
-Instagram: [dxni.ch](https://instagram.com/dxni.ch)
-
-## License
-This project is for personal and educational purposes. Feel free to explore and get inspired!
+Each directory contains its own README.md with detailed information about its contents and usage patterns.
 
 ## 🏁 Getting Started
 
 ### Prerequisites
 
-- Node.js (v18+ recommended)
-- npm
+- **Node.js** (v18+ recommended)
+- **npm** or **yarn**
 
 ### Installation
 
@@ -174,22 +145,40 @@ This project is for personal and educational purposes. Feel free to explore and 
    git clone https://github.com/DanielChahine0/DanielChahine0.github.io.git
    cd DanielChahine0.github.io
    ```
+
 2. **Install dependencies:**
    ```sh
    npm install
    ```
+
 3. **Start the development server:**
    ```sh
    npm run dev
    ```
+   Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
+
 4. **Build for production:**
    ```sh
    npm run build
    ```
+
 5. **Preview the production build:**
    ```sh
    npm run preview
    ```
+
+6. **Deploy to GitHub Pages:**
+   ```sh
+   npm run deploy
+   ```
+
+### Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build locally
+- `npm run lint` - Run ESLint
+- `npm run deploy` - Deploy to GitHub Pages
 
 ---
 
