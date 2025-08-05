@@ -1,19 +1,13 @@
 import { Briefcase, Code, User } from "lucide-react";
-
-function handleSpotlight(e, id) {
-    const spotlight = document.getElementById('spotlight-' + id);
-    if (!spotlight) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    spotlight.style.background = `radial-gradient(circle 120px at ${x}px ${y}px, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 60%, transparent 100%)`;
-}
-function removeSpotlight(id) {
-    const spotlight = document.getElementById('spotlight-' + id);
-    if (spotlight) spotlight.style.background = 'none';
-}
+import { useGlowEffect } from "@/hooks/use-glow-effect";
+import { cn } from '@/lib/utils';
 
 export const AboutSection = () => {
+    // Initialize glow effects for each card
+    const aboutCard1Glow = useGlowEffect();
+    const aboutCard2Glow = useGlowEffect();
+    const aboutCard3Glow = useGlowEffect();
+
     return (
     <section id="about" className="py-5 px-2 relative">
         <div className="container mx-auto max-w-6xl">
@@ -77,9 +71,19 @@ export const AboutSection = () => {
                     {/* Right side content */}
                     
 
-                    <div className="gradient-border card-hover spotlight-hover p-6" onMouseMove={e => handleSpotlight(e, 'about-1')} onMouseLeave={() => removeSpotlight('about-1')}>
-                        <div className="spotlight-layer" id="spotlight-about-1"></div>
-                        <div className="flex items-start gap-4">
+                    <div 
+                        className={cn(
+                            "glow-container gradient-border card-hover p-6"
+                        )}
+                        onMouseMove={aboutCard1Glow.handleMouseMove}
+                        onMouseEnter={aboutCard1Glow.handleMouseEnter}
+                        onMouseLeave={aboutCard1Glow.handleMouseLeave}
+                    >
+                        <div
+                            className="glow-layer"
+                            style={aboutCard1Glow.glowStyle}
+                        />
+                        <div className="glow-content flex items-start gap-4">
                             <div className="p-3 rounded-full bg-primary/10 outline-2 outline-primary">
                                 <Briefcase className="h-6 w-6 text-primary" />
                             </div>
@@ -92,9 +96,19 @@ export const AboutSection = () => {
                         </div>
                     </div>
 
-                    <div className="gradient-border card-hover spotlight-hover p-6" onMouseMove={e => handleSpotlight(e, 'about-2')} onMouseLeave={() => removeSpotlight('about-2')}>
-                        <div className="spotlight-layer" id="spotlight-about-2"></div>
-                        <div className="flex items-start gap-4">
+                    <div 
+                        className={cn(
+                            "glow-container gradient-border card-hover p-6"
+                        )}
+                        onMouseMove={aboutCard2Glow.handleMouseMove}
+                        onMouseEnter={aboutCard2Glow.handleMouseEnter}
+                        onMouseLeave={aboutCard2Glow.handleMouseLeave}
+                    >
+                        <div
+                            className="glow-layer"
+                            style={aboutCard2Glow.glowStyle}
+                        />
+                        <div className="glow-content flex items-start gap-4">
                             <div className="p-3 rounded-full bg-primary/10 outline-2 outline-primary">
                                 <User className="h-6 w-6 text-primary" />
                             </div>
@@ -107,9 +121,19 @@ export const AboutSection = () => {
                         </div>
                     </div>
 
-                    <div className="gradient-border card-hover spotlight-hover p-6" onMouseMove={e => handleSpotlight(e, 'about-3')} onMouseLeave={() => removeSpotlight('about-3')}>
-                        <div className="spotlight-layer" id="spotlight-about-3"></div>
-                        <div className="flex items-start gap-4">
+                    <div 
+                        className={cn(
+                            "glow-container gradient-border card-hover p-6"
+                        )}
+                        onMouseMove={aboutCard3Glow.handleMouseMove}
+                        onMouseEnter={aboutCard3Glow.handleMouseEnter}
+                        onMouseLeave={aboutCard3Glow.handleMouseLeave}
+                    >
+                        <div
+                            className="glow-layer"
+                            style={aboutCard3Glow.glowStyle}
+                        />
+                        <div className="glow-content flex items-start gap-4">
                             <div className="p-3 rounded-full bg-primary/10 outline-2 outline-primary">
                                 <Code className="h-6 w-6 text-primary" />
                             </div>
