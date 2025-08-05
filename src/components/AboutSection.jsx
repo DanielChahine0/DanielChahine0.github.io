@@ -103,17 +103,10 @@ export const AboutSection = () => {
 
                     <div 
                         className={cn(
-                            "glow-container gradient-border card-hover p-6"
+                            "gradient-border card-hover p-6"
                         )}
-                        onMouseMove={aboutCard3Glow.handleMouseMove}
-                        onMouseEnter={aboutCard3Glow.handleMouseEnter}
-                        onMouseLeave={aboutCard3Glow.handleMouseLeave}
                     >
-                        <div
-                            className="glow-layer"
-                            style={aboutCard3Glow.glowStyle}
-                        />
-                        <div className="glow-content flex items-start gap-4">
+                        <div className="flex items-start gap-4">
                             <div className="p-3 rounded-full bg-primary/10 outline-2 outline-primary">
                                 <Code className="h-6 w-6 text-primary" />
                             </div>
