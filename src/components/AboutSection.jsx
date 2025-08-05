@@ -1,13 +1,7 @@
 import { Briefcase, Code, User } from "lucide-react";
-import { useGlowEffect } from "@/hooks/use-glow-effect";
 import { cn } from '@/lib/utils';
 
 export const AboutSection = () => {
-    // Initialize glow effects for each card
-    const aboutCard1Glow = useGlowEffect();
-    const aboutCard2Glow = useGlowEffect();
-    const aboutCard3Glow = useGlowEffect();
-
     return (
     <section id="about" className="py-5 px-2 relative">
         <div className="container mx-auto max-w-6xl">
@@ -73,17 +67,10 @@ export const AboutSection = () => {
 
                     <div 
                         className={cn(
-                            "glow-container gradient-border card-hover p-6"
+                            "gradient-border card-hover p-6"
                         )}
-                        onMouseMove={aboutCard1Glow.handleMouseMove}
-                        onMouseEnter={aboutCard1Glow.handleMouseEnter}
-                        onMouseLeave={aboutCard1Glow.handleMouseLeave}
                     >
-                        <div
-                            className="glow-layer"
-                            style={aboutCard1Glow.glowStyle}
-                        />
-                        <div className="glow-content flex items-start gap-4">
+                        <div className="flex items-start gap-4">
                             <div className="p-3 rounded-full bg-primary/10 outline-2 outline-primary">
                                 <Briefcase className="h-6 w-6 text-primary" />
                             </div>
@@ -98,17 +85,10 @@ export const AboutSection = () => {
 
                     <div 
                         className={cn(
-                            "glow-container gradient-border card-hover p-6"
+                            "gradient-border card-hover p-6"
                         )}
-                        onMouseMove={aboutCard2Glow.handleMouseMove}
-                        onMouseEnter={aboutCard2Glow.handleMouseEnter}
-                        onMouseLeave={aboutCard2Glow.handleMouseLeave}
                     >
-                        <div
-                            className="glow-layer"
-                            style={aboutCard2Glow.glowStyle}
-                        />
-                        <div className="glow-content flex items-start gap-4">
+                        <div className="flex items-start gap-4">
                             <div className="p-3 rounded-full bg-primary/10 outline-2 outline-primary">
                                 <User className="h-6 w-6 text-primary" />
                             </div>
