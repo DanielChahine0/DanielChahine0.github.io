@@ -4,7 +4,10 @@ import { NavBar } from "../components/NavBar";
 import { PageTransition } from "../components/PageTransition";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calculator, Clock, Calendar, ArrowRight, FileText, Palette, FileSearch } from "lucide-react";
+import { 
+    Calculator, Clock, Calendar, ArrowRight, FileText, Palette, FileSearch,
+    User, Shield, Image, Globe, Code
+} from "lucide-react";
 
 // ToolCard component for better separation of concerns
 function ToolCard({ tool, index }) {
@@ -88,6 +91,41 @@ export default function Playground() {
             path: "/playground/text-analyzer",
             color: "bg-teal-500"
         },
+        {
+            title: "Resume Builder",
+            description: "Create professional resumes with customizable templates and easy-to-use interface.",
+            icon: User,
+            path: "/playground/resume-builder",
+            color: "bg-indigo-500"
+        },
+        {
+            title: "Password Generator",
+            description: "Generate secure passwords with customizable options and strength analysis.",
+            icon: Shield,
+            path: "/playground/password-generator",
+            color: "bg-red-500"
+        },
+        {
+            title: "Image Editor",
+            description: "Edit images with filters, adjustments, and basic manipulation tools.",
+            icon: Image,
+            path: "/playground/image-editor",
+            color: "bg-yellow-500"
+        },
+        {
+            title: "Portfolio Generator",
+            description: "Create stunning portfolio websites with templates and customizable themes.",
+            icon: Globe,
+            path: "/playground/portfolio-generator",
+            color: "bg-cyan-500"
+        },
+        {
+            title: "Code Playground",
+            description: "Online code editor with live preview for HTML, CSS, and JavaScript.",
+            icon: Code,
+            path: "/playground/code-playground",
+            color: "bg-violet-500"
+        },
     ];
 
     return (
@@ -109,7 +147,7 @@ export default function Playground() {
                                 Welcome to the Playground! Explore these interactive tools and experiences.
                             </p>
                         </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                             {tools.map((tool, index) => (
                                 <ToolCard key={tool.title} tool={tool} index={index} />
                             ))}
