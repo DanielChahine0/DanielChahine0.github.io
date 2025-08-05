@@ -16,8 +16,8 @@ export const useGlowEffect = () => {
     const handleMouseLeave = () => setIsHovered(false);
 
     const glowStyle = {
-        left: mousePosition.x - 60,
-        top: mousePosition.y - 60,
+        left: mousePosition.x - 42,
+        top: mousePosition.y - 42,
     };
 
     return {

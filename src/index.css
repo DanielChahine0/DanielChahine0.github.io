@@ -31,22 +31,22 @@
   .glow-layer {
     @apply absolute pointer-events-none transition-opacity duration-75;
     z-index: 0;
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
     background: radial-gradient(
       circle,
-      rgba(255, 255, 255, 0.10) 55%,
-      rgba(255, 255, 255, 0.05) 60%,
-      transparent 810%
+      rgba(255, 255, 255, 0.3) 30%,
+      rgba(255, 255, 255, 0.15) 50%,
+      transparent 70%
     );
     border-radius: 50%;
     transform: translate3d(0, 0, 0);
-    filter: blur(8px);
+    filter: blur(4px);
     opacity: 0;
   }
   
   .glow-container:hover .glow-layer {
-    opacity: 0.4;
+    opacity: 0.7;
   }
   
   .glow-content {
