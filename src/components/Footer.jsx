@@ -37,7 +37,7 @@ export const Footer = () => {
     return (
         <div id="footer">
             <section 
-                className="py-2 px-4 relative bg-secondary/30"
+                className="py-2 px-4 relative bg-secondary/30 mb-0.5"
             >
                 <div className="container mx-auto max-w-5xl">
                     <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
@@ -50,7 +50,7 @@ export const Footer = () => {
 
                     {/* Contact Information */}
                     <div 
-                        className="glow-container rounded-xl bg-primary/30 px-1 py-4 shadow-inner backdrop-blur-lg mx-auto flex flex-col sm:flex-row items-stretch gap-0" 
+                        className="glow-container rounded-xl bg-card px-1 py-2 shadow-lg backdrop-blur-lg mx-auto flex flex-col sm:flex-row items-stretch gap-0" 
                         style={{ minHeight: '100px', maxWidth: '700px', width: '100%' }}
                         onMouseMove={contactCardGlow.handleMouseMove}
                         onMouseEnter={contactCardGlow.handleMouseEnter}
@@ -93,7 +93,7 @@ export const Footer = () => {
                 <div
                     className={cn(
                         "glow-container w-4/5 flex flex-col sm:flex-row mx-auto items-center sm:justify-between gap-5",
-                        "rounded-lg bg-primary/30 px-5 py-3 shadow-inner backdrop-blur-lg",
+                        "rounded-lg bg-primary/30 px-5 py-3 shadow-lg backdrop-blur-lg",
                     )}
                     onMouseMove={footerGlow.handleMouseMove}
                     onMouseEnter={footerGlow.handleMouseEnter}

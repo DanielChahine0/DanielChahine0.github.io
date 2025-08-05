@@ -211,7 +211,7 @@ export default function CalorieTracker() {
     <PageTransition>
       <div className="min-h-screen flex flex-col bg-background">
         <NavBar />
-        <main className="mt-10 flex-1 container mx-auto px-4 py-8">
+        <main className="mt-15 flex-1 container mx-auto px-4 py-8">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-4xl font-bold mb-4 text-center" aria-label="Calorie Calculator">
               Calorie Calculator & Tracker
@@ -353,7 +353,7 @@ export default function CalorieTracker() {
                 <button
                   type="submit"
                   disabled={!isFormValid}
-                  className={`px-6 py-2 rounded-md text-white font-medium transition-colors ${!isFormValid ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}`}
+                  className={`px-6 py-2 rounded-md text-white font-medium transition-colors ${!isFormValid ? 'bg-primary/25 cursor-not-allowed' : 'bg-primary hover:bg-primary/60'}`}
                 >
                   Calculate
                 </button>
@@ -374,7 +374,7 @@ export default function CalorieTracker() {
                 <p className="mb-1">BMR: {results.bmr} calories/day</p>
                 <p className="mb-1">TDEE: {results.tdee} calories/day</p>
                 <p className="mb-1">Recommended intake: {results.targetCalories} calories/day</p>
-                <p className="text-sm text-gray-500">Goal: {results.goal} &middot; Activity: {results.activityLevel}</p>
+                <p className="text-sm text-primary">Goal: {results.goal} &middot; Activity: {results.activityLevel}</p>
               </div>
             )}
 
@@ -402,7 +402,7 @@ export default function CalorieTracker() {
                 <button
                   type="button"
                   onClick={addFoodItem}
-                  className="px-4 py-2 rounded-md bg-green-600 text-white hover:bg-green-700"
+                  className="px-4 py-2 rounded-md bg-primary text-white hover:bg-primary/60"
                 >
                   Add
                 </button>
