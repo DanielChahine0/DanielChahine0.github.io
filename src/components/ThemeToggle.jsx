@@ -3,23 +3,31 @@ import { useEffect, useState, useRef } from 'react';
 import { cn } from "@/lib/utils";
 
 const BACKGROUND_THEMES = [
-    { name: 'Dark', value: 'dark', color: '#0D1117' },
-    { name: 'Light', value: 'light', color: '#FFFFFF' },
-    { name: 'Dark Gray', value: 'dark-gray', color: '#464646' },
-    { name: 'Matcha', value: 'matcha', color: '#F1EBE1' }
+    { name: 'Matcha', value: 'matcha', color: '#F1EBE1' },
+    { name: 'Slate', value: 'dark-gray', color: '#464646' },
+    { name: 'Pure', value: 'light', color: '#FFFFFF' },
+    { name: 'Midnight', value: 'dark', color: '#0D1117' },
+    { name: 'Ocean', value: 'ocean', color: '#1e3a5f' }
 ];
 
 const ACCENT_COLORS = [
-    { name: 'Green', value: 'green', color: '#22c55e' },
-    { name: 'Blue', value: 'blue', color: '#3b82f6' },
     { name: 'Red', value: 'red', color: '#ef4444' },
+    { name: 'Rose', value: 'rose', color: '#f43f5e' },
+    { name: 'Pink', value: 'pink', color: '#ec4899' },
+    { name: 'Purple', value: 'purple', color: '#a855f7' },
+    { name: 'Indigo', value: 'indigo', color: '#6366f1' },
+    { name: 'Blue', value: 'blue', color: '#3b82f6' },
+    { name: 'Teal', value: 'teal', color: '#14b8a6' },
+    { name: 'Emerald', value: 'emerald', color: '#10b981' },
+    { name: 'Green', value: 'green', color: '#22c55e' },
+    { name: 'Gold', value: 'gold', color: '#ffd700' },
     { name: 'Yellow', value: 'yellow', color: '#eab308' },
     { name: 'Orange', value: 'orange', color: '#f97316' }
 ];
 
 export const ThemeToggle = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedBackground, setSelectedBackground] = useState('light');
+    const [selectedBackground, setSelectedBackground] = useState('matcha');
     const [selectedAccent, setSelectedAccent] = useState('blue');
     const dropdownRef = useRef(null);
     const hoverTimeoutRef = useRef(null);
@@ -58,8 +66,8 @@ export const ThemeToggle = () => {
 
     const applyTheme = (background, accent) => {
         // Remove all theme classes
-        document.documentElement.classList.remove('dark', 'dark-gray', 'matcha', 'light');
-        document.documentElement.classList.remove('accent-green', 'accent-blue', 'accent-red', 'accent-yellow', 'accent-orange');
+        document.documentElement.classList.remove('dark', 'dark-gray', 'matcha', 'light', 'ocean');
+        document.documentElement.classList.remove('accent-green', 'accent-blue', 'accent-red', 'accent-yellow', 'accent-orange', 'accent-purple', 'accent-pink', 'accent-indigo', 'accent-teal', 'accent-emerald', 'accent-rose', 'accent-gold');
         
         // Add selected theme classes
         if (background !== 'light') {
@@ -162,8 +170,39 @@ export const ThemeToggle = () => {
 
                     {/* Accent Color Selection */}
                     <div>
+                        {/* First row - 6 colors */}
+                        <div className="flex gap-2 justify-center mb-2">
+                            {ACCENT_COLORS.slice(0, 6).map((color) => (
+                                <button
+                                    key={color.value}
+                                    onClick={() => handleAccentSelect(color.value)}
+                                    className={cn(
+                                        "w-10 h-10 rounded-md transition-all duration-200",
+                                        "hover:scale-101 focus:outline-none focus:scale-105",
+                                        "border border-border/20"
+                                    )}
+                                    style={{
+                                        backgroundColor: color.color,
+                                        outline: selectedAccent === color.value 
+                                            ? `2px solid ${color.color}` 
+                                            : 'none',
+                                        outlineOffset: selectedAccent === color.value ? '2px' : '0',
+                                        boxShadow: selectedAccent === color.value 
+                                            ? `0 0 0 4px rgba(${(() => {
+                                                const rgb = hexToRgb(color.color);
+                                                return rgb ? `${rgb.r}, ${rgb.g}, ${rgb.b}` : '59, 130, 246';
+                                            })()}, 0.1)`
+                                            : 'none'
+                                    }}
+                                    title={color.name}
+                                    aria-label={`Select ${color.name} accent color`}
+                                />
+                            ))}
+                        </div>
+                        
+                        {/* Second row - 6 colors */}
                         <div className="flex gap-2 justify-center">
-                            {ACCENT_COLORS.map((color) => (
+                            {ACCENT_COLORS.slice(6, 12).map((color) => (
                                 <button
                                     key={color.value}
                                     onClick={() => handleAccentSelect(color.value)}
