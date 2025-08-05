@@ -14,8 +14,6 @@ const navItems = [
 export const NavBar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const [isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -31,22 +29,6 @@ export const NavBar = () => {
         };
 
     }, []);
-
-    const handleMouseMove = (e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        setMousePosition({
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top,
-        });
-    };
-
-    const handleMouseEnter = () => {
-        setIsHovered(true);
-    };
-
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-    };
 
     const handleNavigation = (href, isRoute = false) => {
         if (isRoute === true) {
@@ -74,36 +56,10 @@ export const NavBar = () => {
             <div className={cn(
                 'container flex items-center justify-between px-5 py-2 transition-all duration-300 relative',
                 isScrolled
-                    ? "w-6/7 mx-auto rounded-lg bg-primary/30 backdrop-blur-xl shadow-inner"
+                    ? "w-6/7 mx-auto rounded-lg bg-primary/30 backdrop-blur-3xl shadow-inner"
                     : "w-full"
             )}
-            onMouseMove={handleMouseMove}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
             >
-                {/* Additional glow layer - only when scrolled */}
-                <div
-                    className={cn(
-                        "absolute pointer-events-none transition-opacity duration-75 z-0",
-                        isHovered && isScrolled ? "opacity-75" : "opacity-0"
-                    )}
-                    style={{
-                        left: mousePosition.x - 60,
-                        top: mousePosition.y - 60,
-                        width: 120,
-                        height: 120,
-                        background: `radial-gradient(
-                            circle,
-                            rgba(255, 255, 255, 0.22) 55%,
-                            rgba(255, 255, 255, 0.12) 60%,
-                            transparent 810%
-                        )`,
-                        borderRadius: '50%',
-                        transform: 'translate3d(0, 0, 0)',
-                        filter: 'blur(12px)',
-                    }}
-                />
-
                 <button 
                     className='text-4xl font-bold flex items-center hover:scale-105 transition-transform duration-300 relative z-10 bg-transparent border-none cursor-pointer'
                     onClick={() => handleNavigation('/', true)}
