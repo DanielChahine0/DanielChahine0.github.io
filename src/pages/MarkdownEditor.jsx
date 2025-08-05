@@ -146,14 +146,48 @@ const markdownComponents = {
     ),
     code: ({ node, inline, className, children, ...props }) => {
         const match = /language-(\w+)/.exec(className || '');
-        return !inline && match ? (
-            <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto my-4 border">
-                <code className={className} style={{ color: '#000000' }} {...props}>
-                    {children}
-                </code>
-            </pre>
-        ) : (
-            <code className="bg-gray-100 px-1 py-0.5 rounded text-sm text-black border" {...props}>
+        
+        if (!inline && match) {
+            const codeString = String(children).replace(/\n$/, '');
+            
+            const copyCodeToClipboard = async () => {
+                try {
+                    await navigator.clipboard.writeText(codeString);
+                    // Create a temporary toast notification
+                    const toast = document.createElement('div');
+                    toast.textContent = 'Code copied!';
+                    toast.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg z-50 transition-opacity';
+                    document.body.appendChild(toast);
+                    setTimeout(() => {
+                        toast.style.opacity = '0';
+                        setTimeout(() => document.body.removeChild(toast), 300);
+                    }, 2000);
+                } catch (err) {
+                    console.error('Failed to copy code:', err);
+                }
+            };
+
+            return (
+                <div className="relative group my-4">
+                    <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto border border-gray-200">
+                        <code className={className} style={{ color: '#000000' }} {...props}>
+                            {children}
+                        </code>
+                    </pre>
+                    <button
+                        onClick={copyCodeToClipboard}
+                        className="absolute top-2 right-2 p-2 bg-gray-700 hover:bg-gray-600 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                        title="Copy code"
+                        aria-label="Copy code to clipboard"
+                    >
+                        <Copy size={14} />
+                    </button>
+                </div>
+            );
+        }
+        
+        return (
+            <code className="bg-gray-100 px-1 py-0.5 rounded text-sm text-black border border-gray-200" {...props}>
                 {children}
             </code>
         );
@@ -444,7 +478,7 @@ Start writing your markdown here...
         <PageTransition>
             <div ref={containerRef} className={containerClass}>
                 {!isFullscreen && <NavBar />}
-                <main className={`flex-1 ${isFullscreen ? 'h-screen' : 'mt-10 container mx-auto px-2 py-8'} max-w-[95vw]`}>
+                <main className={`flex-1 ${isFullscreen ? 'h-screen' : 'mt-15 container mx-auto px-2 py-8'} max-w-[95vw]`}>
                     <div className="h-full flex flex-col max-w-none mx-auto">
                         {/* Title - matching CalorieTracker style */}
                         {!isFullscreen && (
