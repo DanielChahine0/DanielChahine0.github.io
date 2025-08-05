@@ -1,4 +1,4 @@
-import { Palette, ChevronDown } from "lucide-react";
+import { Palette } from "lucide-react";
 import { useEffect, useState, useRef } from 'react';
 import { cn } from "@/lib/utils";
 
@@ -22,6 +22,7 @@ export const ThemeToggle = () => {
     const [selectedBackground, setSelectedBackground] = useState('light');
     const [selectedAccent, setSelectedAccent] = useState('blue');
     const dropdownRef = useRef(null);
+    const hoverTimeoutRef = useRef(null);
 
     useEffect(() => {
         // Load saved theme preferences or detect system preference
@@ -41,21 +42,19 @@ export const ThemeToggle = () => {
         applyTheme(background, savedAccent);
     }, []);
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                setIsOpen(false);
-            }
-        };
-
-        if (isOpen) {
-            document.addEventListener('mousedown', handleClickOutside);
+    const handleMouseEnter = () => {
+        if (hoverTimeoutRef.current) {
+            clearTimeout(hoverTimeoutRef.current);
+            hoverTimeoutRef.current = null;
         }
+        setIsOpen(true);
+    };
 
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [isOpen]);
+    const handleMouseLeave = () => {
+        hoverTimeoutRef.current = setTimeout(() => {
+            setIsOpen(false);
+        }, 100); // Small delay to prevent flickering when moving between elements
+    };
 
     const applyTheme = (background, accent) => {
         // Remove all theme classes
@@ -101,9 +100,13 @@ export const ThemeToggle = () => {
     };
 
     return (
-        <div className="relative" ref={dropdownRef}>
+        <div 
+            className="relative" 
+            ref={dropdownRef}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+        >
             <button 
-                onClick={() => setIsOpen(!isOpen)}
                 className={cn(
                     "p-2 rounded-full transition-all duration-300 flex items-center gap-1",
                     "focus:outline-none hover:bg-primary/10"
@@ -111,10 +114,6 @@ export const ThemeToggle = () => {
                 aria-label="Open theme picker"
             > 
                 <Palette className="h-6 w-6" />
-                <ChevronDown className={cn(
-                    "h-4 w-4 transition-transform duration-200",
-                    isOpen && "rotate-180"
-                )} />
             </button>
 
             {/* Theme Picker Dropdown */}
@@ -131,12 +130,6 @@ export const ThemeToggle = () => {
                 "max-h-[80vh] overflow-y-auto"
             )}>
                 <div className="p-4">
-                    {/* Header */}
-                    <div className="flex items-center gap-2 mb-4">
-                        <Palette className="h-4 w-4 text-foreground/80" />
-                        <span className="font-medium text-base tracking-wide text-foreground">Theme</span>
-                    </div>
-
                     {/* Background Selection */}
                     <div className="mb-4">
                         <div className="flex bg-muted/30 rounded-md p-1 border border-border/20">

@@ -146,14 +146,14 @@ export const NavBar = () => {
                             </a>
                         )
                     ))}
-                    <div className="hover:scale-130 transition-transform duration-300 relative z-50">
+                    <div className="relative z-50">
                         <ThemeToggle />
                     </div>
                 </div>
         
                 {/* Mobile Version */}
                 <div className="flex items-center md:hidden relative z-10">
-                    <div className="hover:scale-130 transition-transform duration-300 relative z-50">
+                    <div className="relative z-50">
                         <ThemeToggle />
                     </div>
                     <button
