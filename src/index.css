@@ -285,7 +285,12 @@
     background-clip: padding-box;
   }
   .cosmic-button {
-    @apply px-2.5 py-2 bg-primary text-primary-foreground font-medium transition-all duration-300 hover:shadow-[0_0_10px_#004cff80] hover:scale-105 active:scale-95 leading-normal rounded-xl border-blue-500 border-1;
+    @apply px-2.5 py-2 bg-primary text-primary-foreground font-medium transition-all duration-300 hover:scale-105 active:scale-95 leading-normal rounded-md;
+    border: 1px solid color-mix(in srgb, rgb(var(--accent-rgb)) 70%, black 30%);
+    transition: all 0.3s ease;
+  }
+  .cosmic-button:hover {
+    box-shadow: 0 0 10px color-mix(in srgb, rgb(var(--accent-rgb)) 70%, black 30%);
   }
   /* Removed .star, .cloud, .meteor classes */
   .custom-inline-hover {
