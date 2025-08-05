@@ -1,5 +1,4 @@
 import { ArrowRight, ExternalLink, Github } from "lucide-react";
-import { useGlowEffect } from "@/hooks/use-glow-effect";
 import { cn } from '@/lib/utils';
 
 const projects = [
@@ -34,9 +33,6 @@ const projects = [
 ]
 
 export const ProjectsSection = () => {
-    // Initialize glow effects for each project card
-    const projectGlowEffects = projects.map(() => useGlowEffect());
-
     return (
         <section id="projects" className="py-24 px-4 relative">
             <div className="container mx-auto max-w-5xl">
@@ -51,22 +47,14 @@ export const ProjectsSection = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {projects.map((project, key) => {
-                        const glowEffect = projectGlowEffects[key];
                         return (
                             <div 
                                 key={key} 
                                 className={cn(
-                                    "glow-container group gradient-border overflow-hidden shadow-xs card-hover"
+                                    "group gradient-border overflow-hidden shadow-xs card-hover"
                                 )}
-                                onMouseMove={glowEffect.handleMouseMove}
-                                onMouseEnter={glowEffect.handleMouseEnter}
-                                onMouseLeave={glowEffect.handleMouseLeave}
                             >
-                                <div
-                                    className="glow-layer"
-                                    style={glowEffect.glowStyle}
-                                />
-                                <div className="glow-content">
+                                <div>
                                     <div className="h-48 overflow-hidden">
                                         <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
                                     </div >
