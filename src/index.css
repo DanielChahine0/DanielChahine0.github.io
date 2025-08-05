@@ -21,6 +21,38 @@
   .spotlight-hover:hover .spotlight-layer {
     opacity: 1;
   }
+
+  /* Reusable Glow Effect */
+  .glow-container {
+    @apply relative;
+    overflow: hidden;
+  }
+  
+  .glow-layer {
+    @apply absolute pointer-events-none transition-opacity duration-75;
+    z-index: 0;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.10) 55%,
+      rgba(255, 255, 255, 0.05) 60%,
+      transparent 810%
+    );
+    border-radius: 50%;
+    transform: translate3d(0, 0, 0);
+    filter: blur(8px);
+    opacity: 0;
+  }
+  
+  .glow-container:hover .glow-layer {
+    opacity: 0.4;
+  }
+  
+  .glow-content {
+    @apply relative;
+    z-index: 10;
+  }
 }
 
 @theme {
