@@ -2,52 +2,39 @@
 
 Reusable React components for the portfolio website.
 
-**⬆️ [Back to Source](../README.md) | [Main README](../../README.md)**
+**Built with:** React 19, Framer Motion, Tailwind CSS, Lucide React
 
-## Directory Structure
+## Structure
 
-- [`ui/`](./ui/README.md) - Base UI primitives (toast, etc.)
-- Component files - Feature-specific components
+• `ui/` - Base UI primitives (toast, etc.)
+• Component files - Feature-specific components
 
 ## Key Components
 
-### Layout & Navigation
-- `NavBar.jsx` - Main navigation with responsive menu
-- `Footer.jsx` - Site footer with social links
-- `PageTransition.jsx` - Framer Motion page transitions
+**Layout & Navigation:**
+• `NavBar.jsx` - Main navigation with responsive menu
+• `Footer.jsx` - Site footer with social links
+• `PageTransition.jsx` - Framer Motion page transitions
 
-### Content Sections  
-- `HeroSection.jsx` - Landing section with intro
-- `AboutSection.jsx` - Personal background
-- `SkillsSections.jsx` - Technology skills showcase
-- `ProjectsSection.jsx` - Project portfolio
+**Content Sections:**
+• `HeroSection.jsx` - Landing section with intro
+• `AboutSection.jsx` - Personal background
+• `SkillsSections.jsx` - Technology skills showcase
+• `ProjectsSection.jsx` - Project portfolio
 
-### Interactive Elements
-- `ThemeToggle.jsx` - Dark/light mode switcher
-- `ScrollToTop.jsx` - Smooth scroll utility
+**Interactive Elements:**
+• `ThemeToggle.jsx` - Dark/light mode switcher
+• `ScrollToTop.jsx` - Smooth scroll utility
 
-### Visual Effects
-- `StarBackground.jsx` - Animated canvas stars
-- `CloudBackground.jsx` - CSS cloud animations
+**Visual Effects:**
+• `StarBackground.jsx` - Animated canvas stars
+• `CloudBackground.jsx` - CSS cloud animations
 
-## Design Patterns
-
-Modern React with hooks, Tailwind CSS styling, responsive design, and accessibility features.
-
-### Standard Props
-```jsx
-// Most components accept these common props
-{
-  className?: string,          // Additional CSS classes
-  children?: ReactNode,        // Child components
-  ...props                     // Spread props for flexibility
-}
-```
-
-### Animation Props (Framer Motion components)
-```jsx
-{
-  initial?: MotionProps,       // Initial animation state
+**Features:**
+• Modern React hooks pattern
+• Responsive design with mobile-first approach
+• Accessibility-compliant components
+• Performance-optimized animations
   animate?: MotionProps,       // Animation target
   transition?: MotionProps,    // Animation configuration
   whileHover?: MotionProps,    // Hover animations

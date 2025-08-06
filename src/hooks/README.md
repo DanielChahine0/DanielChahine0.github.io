@@ -2,20 +2,15 @@
 
 Custom React hooks for reusable stateful logic.
 
-**⬆️ [Back to Source](../README.md) | [Main README](../../README.md)**
+**Built with:** React 19, Radix UI
 
 ## Available Hooks
 
 ### `use-glow-effect.js`
 Mouse tracking and glow effect for interactive elements.
 
-**Returns:**
-- `mousePosition` - Current mouse coordinates
-- `isHovered` - Hover state
-- `handleMouseMove/Enter/Leave` - Event handlers
-- `glowStyle` - Calculated glow positioning
+**Returns:** `mousePosition`, `isHovered`, event handlers, `glowStyle`
 
-**Usage:**
 ```jsx
 const { handleMouseMove, handleMouseEnter, handleMouseLeave, glowStyle } = useGlowEffect();
 
@@ -30,12 +25,8 @@ return (
 ### `use-toast.js`
 Toast notification state management.
 
-**Returns:**
-- `toasts` - Array of active toasts
-- `toast` - Function to show toast
-- `dismiss` - Function to dismiss toast
+**Returns:** `toasts`, `toast`, `dismiss`
 
-**Usage:**
 ```jsx
 const { toast } = useToast();
 
@@ -45,6 +36,8 @@ toast({
   duration: 3000
 });
 ```
+
+**Features:** Auto-dismiss, multiple variants, accessible notifications via Radix UI.
   description?: string,
   action?: ReactElement,
   variant?: 'default' | 'destructive',

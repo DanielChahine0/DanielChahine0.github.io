@@ -2,20 +2,19 @@
 
 Fundamental UI primitive components for consistent interface elements.
 
-**⬆️ [Back to Components](../README.md) | [Source](../../README.md) | [Main README](../../../README.md)**
+**Built with:** Radix UI, class-variance-authority, Lucide React
 
 ## Components
 
 ### `toast.jsx`
-Customizable toast notification component with multiple variants.
+Customizable toast notification component.
 
 **Features:**
-- Accessible notifications via Radix UI
-- Default and destructive variants
-- Auto-dismiss functionality
-- Close button with icon
+• Accessible notifications via Radix UI
+• Default and destructive variants
+• Auto-dismiss functionality
+• Close button with icon
 
-**Usage:**
 ```jsx
 <Toast>
   <ToastTitle>Success!</ToastTitle>
@@ -24,14 +23,13 @@ Customizable toast notification component with multiple variants.
 ```
 
 ### `toaster.jsx`
-Toast container and management system for centralized notifications.
+Toast container and management system.
 
 **Features:**
-- Multiple toast handling
-- Automatic positioning
-- Integration with `use-toast` hook
+• Multiple toast handling
+• Automatic positioning
+• Integration with `use-toast` hook
 
-**Usage:**
 ```jsx
 function App() {
   return (
@@ -43,11 +41,7 @@ function App() {
 }
 ```
 
-## Dependencies
-
-- `@radix-ui/react-toast` - Accessible primitives
-- `class-variance-authority` - Variant management
-- `lucide-react` - Icon system
+**Dependencies:** @radix-ui/react-toast, class-variance-authority, lucide-react
 
 - Additional toast variants (info, warning)
 - Custom toast positioning options

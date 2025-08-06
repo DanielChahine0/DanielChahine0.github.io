@@ -2,24 +2,16 @@
 
 Utility functions and shared logic for the portfolio application.
 
-**⬆️ [Back to Source](../README.md) | [Main README](../../README.md)**
+**Built with:** clsx, tailwind-merge
 
-## Utilities
+## Files
 
 ### `utils.js`
-Core utility functions for class name management.
+Core utility function for class name management.
 
-**Main Export:** `cn` function
+**Main export:** `cn` function - merges Tailwind classes with conditional logic and deduplication.
+
 ```javascript
-export const cn = (...inputs) => {
-    return twMerge(clsx(inputs));
-}
-```
-
-**Purpose:** Merges Tailwind classes with conditional logic and deduplication.
-
-**Usage:**
-```jsx
 import { cn } from '@/lib/utils';
 
 const buttonClass = cn(
@@ -34,20 +26,10 @@ const buttonClass = cn(
 ```
 
 **Dependencies:**
-- `clsx` - Conditional class names
-- `tailwind-merge` - Tailwind-specific merging
+• `clsx` - Conditional class names
+• `tailwind-merge` - Tailwind-specific merging
 
-function Card({ variant, hasGlow, isHovered, className }) {
-  return (
-    <div
-      className={cn(
-        // Base card styles
-        'rounded-lg border bg-card text-card-foreground shadow-sm',
-        
-        // Variant-specific styles
-        variant === 'elevated' && 'shadow-lg',
-        variant === 'outlined' && 'border-2',
-        variant === 'filled' && 'bg-muted',
+Handles conflict resolution, conditional logic, and optimizes for minimal runtime overhead.
         
         // Interactive states
         hasGlow && isHovered && [

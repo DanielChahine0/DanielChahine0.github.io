@@ -1,4 +1,4 @@
-# Daniel Chahine — Personal Portfolio
+# Daniel Chahine - Personal Portfolio
 
 <p align="center">
   <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/DanielChahine0/DanielChahine0.github.io?style=for-the-badge&logo=GitHub">
@@ -8,17 +8,13 @@
 
 Welcome to my personal portfolio website! This modern, interactive site showcases my projects, skills, experience, and provides multiple ways to get in touch. Built with cutting-edge web technologies, it features smooth animations, responsive design, and a clean, engaging user interface.
 
----
-
-## 🚀 Live Demo
-
-[danielchahine0.github.io](https://danielchahine0.github.io)
+You can see the live demo on: [danielchahine0.github.io](https://danielchahine0.github.io)
 
 ---
 
 
 
-## ✨ Features
+## Features
 
 - **Modern UI/UX**: Responsive, accessible, and visually appealing design with smooth transitions
 - **Animated Page Transitions**: Seamless navigation using Framer Motion and React Router
@@ -74,7 +70,8 @@ Welcome to my personal portfolio website! This modern, interactive site showcase
 ---
 
 
-## 📁 Project Structure
+## Project Structure
+### Folders 
 - [`src/`](./src/README.md) - Main source code
 - [`src/components/`](./src/components/README.md) - UI components
 - [`src/pages/`](./src/pages/README.md) - Page components  
@@ -82,11 +79,12 @@ Welcome to my personal portfolio website! This modern, interactive site showcase
 - [`src/lib/`](./src/lib/README.md) - Utility functions
 - [`src/components/ui/`](./src/components/ui/README.md) - UI primitives
 
+### Full Structure
 ```
 DanielChahine0.github.io/
 ├── public/                         # Static assets
 │   ├── files/                      # Downloadable files
-│   │   └── resume.pdf              # Resume PDF
+│   │   └── resume.pdf              
 │   ├── photos/                     # Profile images
 │   │   ├── DarkHeroPhoto.png
 │   │   └── HeroPhoto.png
@@ -94,9 +92,9 @@ DanielChahine0.github.io/
 │       ├── project1.png
 │       ├── project2.png
 │       └── project3.png
-├── src/                            # Source code
-│   ├── components/                 # Reusable UI components
-│   │   ├── ui/                     # Base UI primitives
+├── src/                            
+│   ├── components/                 
+│   │   ├── ui/                     
 │   │   │   ├── toast.jsx           # Toast component
 │   │   │   └── toaster.jsx         # Toast container
 │   │   ├── AboutSection.jsx        # About section
@@ -110,12 +108,12 @@ DanielChahine0.github.io/
 │   │   ├── SkillsSections.jsx      # Skills showcase
 │   │   ├── StarBackground.jsx      # Animated star background
 │   │   └── ThemeToggle.jsx         # Dark/light mode toggle
-│   ├── hooks/                      # Custom React hooks
+│   ├── hooks/                      
 │   │   ├── use-glow-effect.js      # Mouse glow effect hook
 │   │   └── use-toast.js            # Toast notification hook
-│   ├── lib/                        # Utility functions
+│   ├── lib/                        
 │   │   └── utils.js                # Common utilities
-│   ├── pages/                      # Page components
+│   ├── pages/                      
 │   │   ├── CalorieTracker.jsx      # Calorie tracking tool
 │   │   ├── ClockTimer.jsx          # Clock and timer tool
 │   │   ├── ColorPicker.jsx         # Color picker tool
@@ -129,54 +127,13 @@ DanielChahine0.github.io/
 │   ├── App.jsx                     # Main app component
 │   ├── index.css                   # Global styles
 │   └── main.jsx                    # App entry point
-├── eslint.config.js                # ESLint configuration
+├── eslint.config.js                
 ├── package.json                    # Dependencies and scripts
-├── vite.config.js                  # Vite configuration
-└── README.md                       # Project documentation
+├── vite.config.js                  
+└── README.md                       
 ```
 
-Each directory contains its own README.md with detailed information about its contents and usage patterns.
-
-## 🏁 Getting Started
-
-### Prerequisites
-
-- **Node.js** (v18+ recommended)
-- **npm** or **yarn**
-
-### Installation
-
-1. **Clone the repository:**
-   ```sh
-   git clone https://github.com/DanielChahine0/DanielChahine0.github.io.git
-   cd DanielChahine0.github.io
-   ```
-
-2. **Install dependencies:**
-   ```sh
-   npm install
-   ```
-
-3. **Start the development server:**
-   ```sh
-   npm run dev
-   ```
-   Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
-
-4. **Build for production:**
-   ```sh
-   npm run build
-   ```
-
-5. **Preview the production build:**
-   ```sh
-   npm run preview
-   ```
-
-6. **Deploy to GitHub Pages:**
-   ```sh
-   npm run deploy
-   ```
+Each directory contains its own `README.md` with detailed information about its contents and usage patterns.
 
 ### Available Scripts
 
@@ -188,7 +145,7 @@ Each directory contains its own README.md with detailed information about its co
 
 ---
 
-## 📬 Contact
+## Contact Me
 
 - Email: [Chahinedaniel0@gmail.com](mailto:Chahinedaniel0@gmail.com)
 - LinkedIn: [danielchahine](https://www.linkedin.com/in/danielchahine)
@@ -197,6 +154,6 @@ Each directory contains its own README.md with detailed information about its co
 
 ---
 
-## 📝 License
+## License
 This project is for personal and educational purposes. Feel free to explore and get inspired!
 

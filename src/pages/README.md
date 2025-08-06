@@ -2,52 +2,40 @@
 
 Page components representing different routes in the portfolio application.
 
-**⬆️ [Back to Source](../README.md) | [Main README](../../README.md)**
+**Built with:** React Router, Framer Motion, various specialized libraries
 
 ## Core Pages
 
-### `Home.jsx`
-Main portfolio landing page (`/`) featuring hero section, about, skills, projects, and contact.
-
-### `Timeline.jsx` 
-Professional timeline (`/timeline`) with chronological experience and education.
-
-### `Playground.jsx`
-Interactive tools showcase (`/playground`) with grid of available mini-applications.
-
-### `NotFound.jsx`
-404 error page (`*`) with friendly messaging and navigation.
+• `Home.jsx` - Main portfolio landing page (`/`)
+• `Timeline.jsx` - Professional timeline (`/timeline`) 
+• `Playground.jsx` - Interactive tools showcase (`/playground`)
+• `NotFound.jsx` - 404 error page (`*`)
 
 ## Interactive Tools
 
-### Development Tools
-- `CodePlayground.jsx` - Online code editor with live preview
-- `MarkdownEditor.jsx` - Real-time markdown editing
-- `TextAnalyzer.jsx` - Text analysis and statistics
+**Development:**
+• `CodePlayground.jsx` - Online code editor with live preview
+• `MarkdownEditor.jsx` - Real-time markdown editing
+• `TextAnalyzer.jsx` - Text analysis and statistics
 
-### Utility Apps  
-- `CalorieTracker.jsx` - Nutrition and calorie tracking
-- `PasswordGenerator.jsx` - Secure password generation
-- `ColorPicker.jsx` - Color selection utility
-- `ClockTimer.jsx` - Clock and timer application
+**Utilities:**
+• `CalorieTracker.jsx` - Nutrition tracking
+• `PasswordGenerator.jsx` - Secure password generation
+• `ColorPicker.jsx` - Color selection utility
+• `ClockTimer.jsx` - Clock, timer, and stopwatch
 
-### Creative Tools
-- `ImageEditor.jsx` - Basic image manipulation
-- `ResumeBuilder.jsx` - Interactive resume creation
-- `PortfolioGenerator.jsx` - Template-based portfolio builder
+**Creative:**
+• `ImageEditor.jsx` - Basic image manipulation
+• `ResumeBuilder.jsx` - Interactive resume creation
+• `PortfolioGenerator.jsx` - Template-based portfolio builder
+• `LifeInWeeks.jsx` - Life timeline visualization
 
-### Visualization
-- `LifeInWeeks.jsx` - Life timeline visualization
-
-Each tool features responsive design, local storage, and export functionality where applicable.
-- Form handling
-
-#### `ClockTimer.jsx`
-**Purpose:** Clock, timer, and stopwatch application  
-**Route:** `/playground/clock-timer`  
-**Features:**
-- Real-time clock display
-- Countdown timer functionality
+**Key Technologies:**
+• Route-based code splitting with React.lazy
+• Local storage for data persistence
+• Canvas API for image processing
+• File API for uploads/exports
+• Crypto API for secure generation
 - Stopwatch with lap times
 - Multiple time zones
 - Alarm functionality
