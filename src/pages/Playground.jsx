@@ -22,11 +22,11 @@ function ToolCard({ tool, index }) {
                 to={tool.path}
                 aria-label={`Open ${tool.title} tool`}
                 tabIndex={0}
-                className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-400 rounded-2xl group"
+                className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary rounded-2xl group"
             >
-                <div className="bg-card/80 backdrop-blur-md rounded-2xl p-5 border border-border/50 shadow-lg shadow-black/5 flex flex-col h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-teal-400/60 group focus-within:border-teal-400/80">
-                    <div className={`${tool.color} w-14 h-14 rounded-xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 group-hover:rotate-6 transition-transform`}>
-                        <IconComponent className="text-white" size={30} aria-hidden="true" />
+                <div className="bg-card/80 backdrop-blur-md rounded-2xl p-5 border border-border/50 shadow-lg shadow-black/5 flex flex-col h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-primary/60 group focus-within:border-primary/80">
+                    <div className="bg-primary w-14 h-14 rounded-xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform">
+                        <IconComponent className="text-primary-foreground" size={30} aria-hidden="true" />
                     </div>
                     <h3 className="text-lg font-bold mb-2 text-foreground text-center">{tool.title}</h3>
                     <p className="text-foreground/70 text-sm mb-4 leading-relaxed text-center">
@@ -34,7 +34,7 @@ function ToolCard({ tool, index }) {
                     </p>
                     <span className="sr-only">Go to {tool.title}</span>
                     <button
-                        className="mt-auto px-4 py-2 bg-teal-600 text-white rounded-lg shadow hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 transition-all text-sm font-medium opacity-0 group-hover:opacity-100 group-focus-within:opacity-100"
+                        className="mt-auto px-4 py-2 bg-primary text-primary-foreground rounded-lg shadow hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all text-sm font-medium opacity-0 group-hover:opacity-100 group-focus-within:opacity-100"
                         tabIndex={-1}
                         aria-label={`Try out ${tool.title}`}
                     >
@@ -154,8 +154,8 @@ export default function Playground() {
                         </div>
                         {/* More Coming Soon section */}
                         <div className="mt-20 flex flex-col items-center">
-                            <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-teal-400 via-fuchsia-400 to-pink-400 flex items-center justify-center animate-pulse mb-4">
-                                <span className="text-white text-3xl font-bold" aria-hidden="true">+</span>
+                            <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-primary/60 via-primary/80 to-primary flex items-center justify-center animate-pulse mb-4">
+                                <span className="text-primary-foreground text-3xl font-bold" aria-hidden="true">+</span>
                                 <span className="sr-only">More tools coming soon</span>
                             </div>
                             <p className="text-foreground/60 text-base">More tools coming soon!</p>
@@ -164,10 +164,6 @@ export default function Playground() {
                 </main>
                 <Footer />
             </div>
-            <style>{`
-                .group:hover .group-hover\\:scale-110 { transform: scale(1.10) rotate(6deg); }
-                .group:focus-within .group-hover\\:scale-110 { transform: scale(1.10) rotate(6deg); }
-            `}</style>
         </PageTransition>
     );
 }
