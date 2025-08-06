@@ -28,7 +28,16 @@ import {
     PanelLeftClose,
     PanelRightClose,
     Sun,
-    Moon
+    Moon,
+    Bold,
+    Italic,
+    Code,
+    Code2,
+    Heading1,
+    Heading2,
+    List,
+    Link,
+    Quote
 } from "lucide-react";
 import { useToast } from "../hooks/use-toast";
 
@@ -49,21 +58,29 @@ const Toolbar = memo(function Toolbar({
     label = "Editor",
     wordCount = 0,
     charCount = 0,
-    lineCount = 0
+    lineCount = 0,
+    onFormatBold,
+    onFormatItalic,
+    onFormatCode,
+    onFormatCodeBlock,
+    onFormatHeader,
+    onFormatList,
+    onFormatLink,
+    onFormatQuote
 }) {
     return (
-        <div className="border-b border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm">
+        <div className="border-b border-border bg-card/80 backdrop-blur-sm">
             <div className="px-4 py-3">
                 <div className="flex items-center justify-between">
                     {/* Left Section - Title and Stats */}
                     <div className="flex items-center space-x-4">
                         <div className="flex items-center space-x-2">
-                            <div className="p-2 bg-blue-500 rounded-lg">
-                                <FileText size={18} className="text-white" />
+                            <div className="p-2 bg-primary rounded-lg">
+                                <FileText size={18} className="text-primary-foreground" />
                             </div>
                             <div>
-                                <span className="text-lg font-semibold text-slate-800 dark:text-slate-200">{label}</span>
-                                <div className="text-xs text-slate-500 dark:text-slate-400 flex space-x-3">
+                                <span className="text-lg font-semibold text-foreground">{label}</span>
+                                <div className="text-xs text-muted-foreground flex space-x-3">
                                     <span>{wordCount} words</span>
                                     <span>{charCount} chars</span>
                                     <span>{lineCount} lines</span>
@@ -75,13 +92,13 @@ const Toolbar = memo(function Toolbar({
                     {/* Right Section - Action Buttons */}
                     <div className="flex items-center space-x-1">
                         {/* View Controls */}
-                        <div className="flex items-center space-x-1 px-1 py-1 bg-slate-100 dark:bg-slate-800 rounded-lg">
+                        <div className="flex items-center space-x-1 px-1 py-1 bg-muted rounded-lg">
                             <button
                                 onClick={onTogglePreview}
                                 className={`p-2 rounded-md transition-all duration-200 ${
                                     isPreviewOnly 
-                                        ? 'bg-blue-500 text-white shadow-sm' 
-                                        : 'hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400'
+                                        ? 'bg-primary text-primary-foreground shadow-sm' 
+                                        : 'hover:bg-accent text-muted-foreground'
                                 }`}
                                 title={isPreviewOnly ? "Show editor" : "Preview only"}
                                 aria-label={isPreviewOnly ? "Show editor" : "Preview only"}
@@ -90,7 +107,7 @@ const Toolbar = memo(function Toolbar({
                             </button>
                             <button
                                 onClick={onToggleFullscreen}
-                                className="p-2 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400 transition-colors"
+                                className="p-2 rounded-md hover:bg-accent text-muted-foreground transition-colors"
                                 title={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
                                 aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
                             >
@@ -98,7 +115,92 @@ const Toolbar = memo(function Toolbar({
                             </button>
                         </div>
 
-                        <div className="w-px h-6 bg-slate-300 dark:bg-slate-600" />
+                        <div className="w-px h-6 bg-border" />
+
+                        {/* Text Formatting Controls */}
+                        {!isPreviewOnly && (
+                            <>
+                                <div className="flex items-center space-x-1 px-1 py-1 bg-muted rounded-lg">
+                                    <button
+                                        onClick={onFormatBold}
+                                        className="p-2 rounded-md hover:bg-accent text-muted-foreground transition-colors"
+                                        title="Bold (Ctrl+B)"
+                                        aria-label="Bold text"
+                                    >
+                                        <Bold size={16} />
+                                    </button>
+                                    <button
+                                        onClick={onFormatItalic}
+                                        className="p-2 rounded-md hover:bg-accent text-muted-foreground transition-colors"
+                                        title="Italic (Ctrl+I)"
+                                        aria-label="Italic text"
+                                    >
+                                        <Italic size={16} />
+                                    </button>
+                                    <button
+                                        onClick={onFormatCode}
+                                        className="p-2 rounded-md hover:bg-accent text-muted-foreground transition-colors"
+                                        title="Inline code"
+                                        aria-label="Inline code"
+                                    >
+                                        <Code size={16} />
+                                    </button>
+                                    <button
+                                        onClick={onFormatCodeBlock}
+                                        className="p-2 rounded-md hover:bg-accent text-muted-foreground transition-colors"
+                                        title="Code block"
+                                        aria-label="Code block"
+                                    >
+                                        <Code2 size={16} />
+                                    </button>
+                                </div>
+                                
+                                <div className="flex items-center space-x-1 px-1 py-1 bg-muted rounded-lg">
+                                    <button
+                                        onClick={() => onFormatHeader(1)}
+                                        className="p-2 rounded-md hover:bg-accent text-muted-foreground transition-colors"
+                                        title="Header 1"
+                                        aria-label="Header 1"
+                                    >
+                                        <Heading1 size={16} />
+                                    </button>
+                                    <button
+                                        onClick={() => onFormatHeader(2)}
+                                        className="p-2 rounded-md hover:bg-accent text-muted-foreground transition-colors"
+                                        title="Header 2"
+                                        aria-label="Header 2"
+                                    >
+                                        <Heading2 size={16} />
+                                    </button>
+                                    <button
+                                        onClick={onFormatList}
+                                        className="p-2 rounded-md hover:bg-accent text-muted-foreground transition-colors"
+                                        title="List"
+                                        aria-label="Bullet list"
+                                    >
+                                        <List size={16} />
+                                    </button>
+                                    <button
+                                        onClick={onFormatLink}
+                                        className="p-2 rounded-md hover:bg-accent text-muted-foreground transition-colors"
+                                        title="Link"
+                                        aria-label="Insert link"
+                                    >
+                                        <Link size={16} />
+                                    </button>
+                                    <button
+                                        onClick={onFormatQuote}
+                                        className="p-2 rounded-md hover:bg-accent text-muted-foreground transition-colors"
+                                        title="Quote"
+                                        aria-label="Block quote"
+                                    >
+                                        <Quote size={16} />
+                                    </button>
+                                </div>
+
+                                <div className="w-px h-6 bg-border" />
+                            </>
+                        )}
 
                         {/* File Operations */}
                         <div className="flex items-center space-x-1">
@@ -111,7 +213,7 @@ const Toolbar = memo(function Toolbar({
                             />
                             <label
                                 htmlFor="file-upload"
-                                className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors cursor-pointer"
+                                className="p-2 rounded-lg hover:bg-accent text-muted-foreground transition-colors cursor-pointer"
                                 title="Upload markdown file"
                             >
                                 <Upload size={16} />
@@ -119,7 +221,7 @@ const Toolbar = memo(function Toolbar({
                             {showReset && (
                                 <button
                                     onClick={onReset}
-                                    className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"
+                                    className="p-2 rounded-lg hover:bg-accent text-muted-foreground transition-colors"
                                     title="Reset content"
                                     aria-label="Reset content"
                                 >
@@ -128,13 +230,13 @@ const Toolbar = memo(function Toolbar({
                             )}
                         </div>
 
-                        <div className="w-px h-6 bg-slate-300 dark:bg-slate-600" />
+                        <div className="w-px h-6 bg-border" />
 
                         {/* Export Operations */}
                         <div className="flex items-center space-x-1">
                             <button
                                 onClick={onCopy}
-                                className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"
+                                className="p-2 rounded-lg hover:bg-accent text-muted-foreground transition-colors"
                                 title="Copy to clipboard"
                                 aria-label="Copy to clipboard"
                             >
@@ -142,7 +244,7 @@ const Toolbar = memo(function Toolbar({
                             </button>
                             <button
                                 onClick={onDownload}
-                                className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"
+                                className="p-2 rounded-lg hover:bg-accent text-muted-foreground transition-colors"
                                 title="Download as .md"
                                 aria-label="Download as markdown"
                             >
@@ -151,7 +253,7 @@ const Toolbar = memo(function Toolbar({
                             {showExportPDF && (
                                 <button
                                     onClick={onExportPDF}
-                                    className="px-3 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-200 text-sm font-medium shadow-sm hover:shadow-md"
+                                    className="px-3 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-200 text-sm font-medium shadow-sm hover:shadow-md"
                                     title="Export as PDF"
                                     aria-label="Export as PDF"
                                 >
@@ -160,12 +262,12 @@ const Toolbar = memo(function Toolbar({
                             )}
                         </div>
 
-                        <div className="w-px h-6 bg-slate-300 dark:bg-slate-600" />
+                        <div className="w-px h-6 bg-border" />
 
                         {/* Help */}
                         <button
                             onClick={onShowHelp}
-                            className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"
+                            className="p-2 rounded-lg hover:bg-accent text-muted-foreground transition-colors"
                             title="Show help"
                             aria-label="Show help"
                         >
@@ -180,58 +282,58 @@ const Toolbar = memo(function Toolbar({
 // Enhanced markdown components with better styling and UX
 const markdownComponents = {
     h1: ({ children }) => (
-        <h1 className="text-4xl font-bold mt-8 mb-6 text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-700 pb-3">
+        <h1 className="text-4xl font-bold mt-8 mb-6 text-foreground border-b border-border pb-3">
             {children}
         </h1>
     ),
     h2: ({ children }) => (
-        <h2 className="text-3xl font-bold mt-7 mb-4 text-slate-900 dark:text-slate-100 border-b border-slate-100 dark:border-slate-800 pb-2">
+        <h2 className="text-3xl font-bold mt-7 mb-4 text-foreground border-b border-muted pb-2">
             {children}
         </h2>
     ),
     h3: ({ children }) => (
-        <h3 className="text-2xl font-bold mt-6 mb-3 text-slate-900 dark:text-slate-100">
+        <h3 className="text-2xl font-bold mt-6 mb-3 text-foreground">
             {children}
         </h3>
     ),
     h4: ({ children }) => (
-        <h4 className="text-xl font-semibold mt-5 mb-2 text-slate-800 dark:text-slate-200">
+        <h4 className="text-xl font-semibold mt-5 mb-2 text-foreground">
             {children}
         </h4>
     ),
     h5: ({ children }) => (
-        <h5 className="text-lg font-semibold mt-4 mb-2 text-slate-800 dark:text-slate-200">
+        <h5 className="text-lg font-semibold mt-4 mb-2 text-foreground">
             {children}
         </h5>
     ),
     h6: ({ children }) => (
-        <h6 className="text-base font-semibold mt-3 mb-1 text-slate-700 dark:text-slate-300">
+        <h6 className="text-base font-semibold mt-3 mb-1 text-card-foreground">
             {children}
         </h6>
     ),
     p: ({ children }) => (
-        <p className="text-base leading-relaxed mb-4 text-slate-700 dark:text-slate-300">
+        <p className="text-base leading-relaxed mb-4 text-card-foreground">
             {children}
         </p>
     ),
     ul: ({ children }) => (
-        <ul className="list-disc pl-6 mb-4 space-y-1 text-slate-700 dark:text-slate-300">
+        <ul className="list-disc pl-6 mb-4 space-y-1 text-card-foreground">
             {children}
         </ul>
     ),
     ol: ({ children }) => (
-        <ol className="list-decimal pl-6 mb-4 space-y-1 text-slate-700 dark:text-slate-300">
+        <ol className="list-decimal pl-6 mb-4 space-y-1 text-card-foreground">
             {children}
         </ol>
     ),
     li: ({ children }) => (
-        <li className="text-slate-700 dark:text-slate-300">{children}</li>
+        <li className="text-card-foreground">{children}</li>
     ),
     strong: ({ children }) => (
-        <strong className="text-slate-900 dark:text-slate-100 font-bold">{children}</strong>
+        <strong className="text-foreground font-bold">{children}</strong>
     ),
     em: ({ children }) => (
-        <em className="text-slate-800 dark:text-slate-200 italic">{children}</em>
+        <em className="text-foreground italic">{children}</em>
     ),
     code: ({ node, inline, className, children, ...props }) => {
         const match = /language-(\w+)/.exec(className || '');
@@ -252,7 +354,7 @@ const markdownComponents = {
                             <span>Code copied!</span>
                         </div>
                     `;
-                    toast.className = 'fixed top-4 right-4 bg-slate-800 text-white px-4 py-3 rounded-lg shadow-lg z-50 transition-all transform translate-x-0';
+                    toast.className = 'fixed top-4 right-4 bg-card text-foreground px-4 py-3 rounded-lg shadow-lg z-50 transition-all transform translate-x-0 border border-border';
                     document.body.appendChild(toast);
                     
                     setTimeout(() => {
@@ -266,14 +368,14 @@ const markdownComponents = {
             };
 
             return (
-                <div className="relative group my-6 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700">
-                    <div className="flex items-center justify-between px-4 py-2 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
-                        <span className="text-sm font-medium text-slate-600 dark:text-slate-400 capitalize">
+                <div className="relative group my-6 rounded-xl overflow-hidden border border-border">
+                    <div className="flex items-center justify-between px-4 py-2 bg-muted border-b border-border">
+                        <span className="text-sm font-medium text-muted-foreground capitalize">
                             {match[1]}
                         </span>
                         <button
                             onClick={copyCodeToClipboard}
-                            className="flex items-center space-x-1 px-2 py-1 text-xs bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 rounded transition-colors"
+                            className="flex items-center space-x-1 px-2 py-1 text-xs bg-accent hover:bg-accent/80 text-foreground rounded transition-colors"
                             title="Copy code"
                             aria-label="Copy code to clipboard"
                         >
@@ -281,7 +383,7 @@ const markdownComponents = {
                             <span>Copy</span>
                         </button>
                     </div>
-                    <pre className="p-4 overflow-x-auto bg-white dark:bg-slate-900 text-sm">
+                    <pre className="p-4 overflow-x-auto bg-card text-sm">
                         <code className={className} {...props}>
                             {children}
                         </code>
@@ -291,44 +393,44 @@ const markdownComponents = {
         }
         
         return (
-            <code className="bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-sm text-slate-800 dark:text-slate-200 font-mono border border-slate-200 dark:border-slate-700" {...props}>
+            <code className="bg-muted px-1.5 py-0.5 rounded text-sm text-foreground font-mono border border-border" {...props}>
                 {children}
             </code>
         );
     },
     blockquote: ({ children }) => (
-        <blockquote className="border-l-4 border-blue-500 pl-6 py-2 my-6 bg-blue-50 dark:bg-blue-900/20 rounded-r-lg">
-            <div className="text-slate-700 dark:text-slate-300 italic">
+        <blockquote className="border-l-4 border-primary pl-6 py-2 my-6 bg-primary/5 rounded-r-lg">
+            <div className="text-card-foreground italic">
                 {children}
             </div>
         </blockquote>
     ),
     table: ({ children }) => (
-        <div className="overflow-x-auto my-6 rounded-lg border border-slate-200 dark:border-slate-700">
+        <div className="overflow-x-auto my-6 rounded-lg border border-border">
             <table className="min-w-full">
                 {children}
             </table>
         </div>
     ),
     thead: ({ children }) => (
-        <thead className="bg-slate-50 dark:bg-slate-800">
+        <thead className="bg-muted">
             {children}
         </thead>
     ),
     th: ({ children }) => (
-        <th className="border-b border-slate-200 dark:border-slate-700 px-4 py-3 text-left font-semibold text-slate-900 dark:text-slate-100">
+        <th className="border-b border-border px-4 py-3 text-left font-semibold text-foreground">
             {children}
         </th>
     ),
     td: ({ children }) => (
-        <td className="border-b border-slate-100 dark:border-slate-800 px-4 py-3 text-slate-700 dark:text-slate-300">
+        <td className="border-b border-border/50 px-4 py-3 text-card-foreground">
             {children}
         </td>
     ),
     a: ({ children, href }) => (
         <a
             href={href}
-            className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline decoration-blue-300 dark:decoration-blue-600 underline-offset-2 hover:decoration-blue-500 dark:hover:decoration-blue-400 transition-colors"
+            className="text-primary hover:text-primary/80 underline decoration-primary/30 underline-offset-2 hover:decoration-primary/60 transition-colors"
             target="_blank"
             rel="noopener noreferrer"
         >
@@ -336,7 +438,7 @@ const markdownComponents = {
         </a>
     ),
     hr: () => (
-        <hr className="my-8 border-0 h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-600 to-transparent" />
+        <hr className="my-8 border-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
     ),
 };
 
@@ -405,7 +507,7 @@ console.log(greet("World"));
     const [isDarkMode, setIsDarkMode] = useState(false);
     const previewRef = useRef(null);
     const containerRef = useRef(null);
-    const fileInputRef = useRef(null);
+    const textareaRef = useRef(null);
 
     // Calculate text statistics
     const textStats = useMemo(() => {
@@ -418,6 +520,59 @@ console.log(greet("World"));
     const handleMarkdownChange = useCallback((e) => {
         setMarkdown(e.target.value);
     }, []);
+
+    // Text formatting functions
+    const insertTextAtCursor = useCallback((beforeText, afterText = '') => {
+        const textarea = textareaRef.current;
+        if (!textarea) return;
+
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const selectedText = markdown.substring(start, end);
+        
+        const newText = markdown.substring(0, start) + beforeText + selectedText + afterText + markdown.substring(end);
+        setMarkdown(newText);
+        
+        // Restore cursor position
+        setTimeout(() => {
+            const newCursorPos = start + beforeText.length + selectedText.length;
+            textarea.setSelectionRange(newCursorPos, newCursorPos);
+            textarea.focus();
+        }, 0);
+    }, [markdown]);
+
+    const formatBold = useCallback(() => {
+        insertTextAtCursor('**', '**');
+    }, [insertTextAtCursor]);
+
+    const formatItalic = useCallback(() => {
+        insertTextAtCursor('*', '*');
+    }, [insertTextAtCursor]);
+
+    const formatCode = useCallback(() => {
+        insertTextAtCursor('`', '`');
+    }, [insertTextAtCursor]);
+
+    const formatCodeBlock = useCallback(() => {
+        insertTextAtCursor('\n```\n', '\n```\n');
+    }, [insertTextAtCursor]);
+
+    const formatHeader = useCallback((level = 1) => {
+        const hashtags = '#'.repeat(level);
+        insertTextAtCursor(`${hashtags} `);
+    }, [insertTextAtCursor]);
+
+    const formatList = useCallback(() => {
+        insertTextAtCursor('- ');
+    }, [insertTextAtCursor]);
+
+    const formatLink = useCallback(() => {
+        insertTextAtCursor('[', '](url)');
+    }, [insertTextAtCursor]);
+
+    const formatQuote = useCallback(() => {
+        insertTextAtCursor('> ');
+    }, [insertTextAtCursor]);
 
     const handleFileUpload = useCallback((e) => {
         const file = e.target.files?.[0];
@@ -506,7 +661,7 @@ console.log(greet("World"));
             // Apply explicit styles for PDF optimization
             const elements = clonedContent.querySelectorAll('*');
             elements.forEach((element) => {
-                // Reset any dark mode styles
+                // Reset any theme styles to standard colors for PDF
                 element.style.color = '#1e293b';
                 element.style.backgroundColor = 'transparent';
                 
@@ -640,11 +795,55 @@ Start writing your markdown here...
         };
     }, []);
 
+    // Keyboard shortcuts
+    React.useEffect(() => {
+        const handleKeydown = (e) => {
+            if (!textareaRef.current) return;
+            
+            // Only handle shortcuts when textarea is focused or when target is body
+            if (document.activeElement !== textareaRef.current && document.activeElement !== document.body) {
+                return;
+            }
+
+            if ((e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey) {
+                switch (e.key.toLowerCase()) {
+                    case 'b':
+                        e.preventDefault();
+                        formatBold();
+                        break;
+                    case 'i':
+                        e.preventDefault();
+                        formatItalic();
+                        break;
+                    case 'k':
+                        e.preventDefault();
+                        formatLink();
+                        break;
+                    case '`':
+                        e.preventDefault();
+                        formatCode();
+                        break;
+                }
+            }
+            
+            // Header shortcuts with Ctrl+1, Ctrl+2, etc.
+            if ((e.ctrlKey || e.metaKey) && /^[1-6]$/.test(e.key)) {
+                e.preventDefault();
+                formatHeader(parseInt(e.key));
+            }
+        };
+
+        document.addEventListener('keydown', handleKeydown);
+        return () => {
+            document.removeEventListener('keydown', handleKeydown);
+        };
+    }, [formatBold, formatItalic, formatCode, formatLink, formatHeader]);
+
     const showHelp = useCallback(() => {
         toast({
             title: "📝 Markdown Help",
-            description: "Use # for headers, **bold**, *italic*, `code`, [links](url), and - for lists",
-            duration: 5000,
+            description: "Keyboard shortcuts: Ctrl+B (bold), Ctrl+I (italic), Ctrl+K (link), Ctrl+` (code). Use # for headers, **bold**, *italic*, `code`, [links](url), and - for lists",
+            duration: 8000,
         });
     }, [toast]);
 
@@ -693,37 +892,46 @@ Start writing your markdown here...
                             wordCount={textStats.words}
                             charCount={textStats.chars}
                             lineCount={textStats.lines}
+                            onFormatBold={formatBold}
+                            onFormatItalic={formatItalic}
+                            onFormatCode={formatCode}
+                            onFormatCodeBlock={formatCodeBlock}
+                            onFormatHeader={formatHeader}
+                            onFormatList={formatList}
+                            onFormatLink={formatLink}
+                            onFormatQuote={formatQuote}
                         />
                         
                         {/* Enhanced Editor and Preview Layout */}
-                        <div className="flex-1 flex overflow-hidden min-h-[600px] rounded-lg border border-slate-200 dark:border-slate-700 shadow-lg bg-white dark:bg-slate-900">
+                        <div className="flex-1 flex overflow-hidden min-h-[600px] rounded-lg border border-border shadow-lg bg-card">
                             {/* Editor Panel */}
                             <AnimatePresence mode="wait">
                                 {!isPreviewOnly && (
                                     <motion.div
                                         key="editor"
-                                        className="w-1/2 border-r border-slate-200 dark:border-slate-700 flex flex-col"
+                                        className="w-1/2 border-r border-border flex flex-col"
                                         initial={{ opacity: 0, x: -20 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         exit={{ opacity: 0, x: -20 }}
                                         transition={{ duration: 0.3 }}
                                     >
                                         {/* Editor Header */}
-                                        <div className="px-4 py-2 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
+                                        <div className="px-4 py-2 bg-muted border-b border-border flex items-center justify-between">
                                             <div className="flex items-center space-x-2">
-                                                <Type size={16} className="text-slate-600 dark:text-slate-400" />
-                                                <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Editor</span>
+                                                <Type size={16} className="text-muted-foreground" />
+                                                <span className="text-sm font-medium text-foreground">Editor</span>
                                             </div>
-                                            <div className="text-xs text-slate-500 dark:text-slate-400">
+                                            <div className="text-xs text-muted-foreground">
                                                 Ctrl+S to save • Tab for indentation
                                             </div>
                                         </div>
                                         
                                         {/* Enhanced Textarea */}
                                         <textarea
+                                            ref={textareaRef}
                                             value={markdown}
                                             onChange={handleMarkdownChange}
-                                            className="flex-1 p-4 font-mono text-sm resize-none border-none outline-none bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 placeholder-slate-500 dark:placeholder-slate-400 focus:bg-white dark:focus:bg-slate-800 transition-colors leading-relaxed"
+                                            className="flex-1 p-4 font-mono text-sm resize-none border-none outline-none bg-muted/30 text-foreground placeholder-muted-foreground focus:bg-card transition-colors leading-relaxed"
                                             placeholder="# Start writing your markdown here...
 
 Use **bold**, *italic*, `code`, and more!"
@@ -746,19 +954,19 @@ Use **bold**, *italic*, `code`, and more!"
                                 transition={{ duration: 0.3, delay: 0.1 }}
                             >
                                 {/* Preview Header */}
-                                <div className="px-4 py-2 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
+                                <div className="px-4 py-2 bg-muted border-b border-border flex items-center justify-between">
                                     <div className="flex items-center space-x-2">
-                                        <Eye size={16} className="text-slate-600 dark:text-slate-400" />
-                                        <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Preview</span>
+                                        <Eye size={16} className="text-muted-foreground" />
+                                        <span className="text-sm font-medium text-foreground">Preview</span>
                                     </div>
-                                    <div className="text-xs text-slate-500 dark:text-slate-400">
+                                    <div className="text-xs text-muted-foreground">
                                         Live rendering • GitHub Flavored Markdown
                                     </div>
                                 </div>
                                 
                                 {/* Enhanced Preview Content */}
                                 <div className="h-full overflow-auto">
-                                    <div className="p-6 bg-white dark:bg-slate-900 min-h-full">
+                                    <div className="p-6 bg-card min-h-full">
                                         <div
                                             ref={previewRef}
                                             className="prose prose-slate dark:prose-invert max-w-none prose-headings:scroll-mt-20"
