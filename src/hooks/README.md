@@ -4,6 +4,10 @@ Custom React hooks for reusable stateful logic.
 
 **Built with:** React 19, Radix UI
 
+## Documentation Navigation
+[⬆️ Main README](../../README.md) - Project overview and features
+[⬆️ Source Overview](../README.md) - Source code structure
+
 ## Available Hooks
 
 ### `use-glow-effect.js`
@@ -38,12 +42,7 @@ toast({
 ```
 
 **Features:** Auto-dismiss, multiple variants, accessible notifications via Radix UI.
-  description?: string,
-  action?: ReactElement,
-  variant?: 'default' | 'destructive',
-  duration?: number,
-}
-```
+
 
 **Usage Examples:**
 ```jsx

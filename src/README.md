@@ -4,13 +4,13 @@ Main source directory for Daniel Chahine's portfolio React application.
 
 **Built with:** React 19, Vite, Tailwind CSS, Framer Motion
 
-## Structure
-
-• `components/` - Reusable UI components
-• `pages/` - Page components and routes  
-• `hooks/` - Custom React hooks
-• `lib/` - Utility functions
-• `assets/` - Static assets (SVGs, images)
+##  Documentation Navigation
+[⬆️ Main README](../README.md) - Project overview and features
+- [⬇️ /components/](./components/README.md) - UI components documentation
+- [⬇️ /components/ui/](./components/ui/README.md) - UI primitives
+- [⬇️ /hooks/](./hooks/README.md) - Custom React hooks
+- [⬇️ /lib/](./lib/README.md) - Utility functions
+- [⬇️ /pages/](./pages/README.md) - Page components and tools
 
 ## Core Files
 
@@ -19,12 +19,6 @@ Main source directory for Daniel Chahine's portfolio React application.
 • `index.css` - Global styles and Tailwind imports
 
 ## Development
-
-**Setup:**
-```bash
-npm install
-npm run dev
-```
 
 **Architecture:**
 • Modern React hooks and component-driven development

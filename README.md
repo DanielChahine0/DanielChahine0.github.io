@@ -36,7 +36,7 @@ You can see the live demo on: [danielchahine0.github.io](https://danielchahine0.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 <p align="center">
   <img alt="React" src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB">
@@ -70,14 +70,16 @@ You can see the live demo on: [danielchahine0.github.io](https://danielchahine0.
 ---
 
 
-## Project Structure
-### Folders 
-- [`src/`](./src/README.md) - Main source code
-- [`src/components/`](./src/components/README.md) - UI components
-- [`src/pages/`](./src/pages/README.md) - Page components  
-- [`src/hooks/`](./src/hooks/README.md) - Custom hooks
-- [`src/lib/`](./src/lib/README.md) - Utility functions
-- [`src/components/ui/`](./src/components/ui/README.md) - UI primitives
+## Documentation Navigation
+
+### Quick Links
+- [📁 src/](./src/README.md) - Main source code structure and setup
+- [🧩 src/components/](./src/components/README.md) - Reusable UI components and their usage
+- [🎨 src/components/ui](./src/components/ui/README.md) - Fundamental UI primitives
+- [🎣 src/hooks/](./src/hooks/README.md) - Custom React hooks for reusable logic
+- [🛠️ src/lib/](./src/lib/README.md) - Utility functions and shared logic
+- [📄 src/pages/](./src/pages/README.md) - Page components and interactive tools
+
 
 ### Full Structure
 ```
@@ -151,6 +153,19 @@ Each directory contains its own `README.md` with detailed information about its 
 - LinkedIn: [danielchahine](https://www.linkedin.com/in/danielchahine)
 - GitHub: [DanielChahine0](https://github.com/DanielChahine0)
 - Instagram: [dxni.ch](https://instagram.com/dxni.ch)
+
+---
+
+## See Also
+
+For detailed documentation about specific parts of the codebase:
+
+- **[Source Code Structure](./src/README.md)** - Development setup and architecture overview
+- **[Component System](./src/components/README.md)** - Reusable UI components and patterns
+- **[Interactive Pages](./src/pages/README.md)** - Tools and applications within the portfolio
+- **[Custom Hooks](./src/hooks/README.md)** - Reusable React logic and state management
+- **[Utilities](./src/lib/README.md)** - Helper functions and shared utilities
+- **[UI Primitives](./src/components/ui/README.md)** - Base components for consistent design
 
 ---
 

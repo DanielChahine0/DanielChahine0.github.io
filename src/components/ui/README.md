@@ -4,6 +4,11 @@ Fundamental UI primitive components for consistent interface elements.
 
 **Built with:** Radix UI, class-variance-authority, Lucide React
 
+## Documentation Navigation
+[⬆️ Main README](../../../README.md) - Project overview and features
+[⬆️ Source Overview](../../README.md) - Source code structure
+[⬆️ Components](../README.md) - Parent components directory
+
 ## Components
 
 ### `toast.jsx`

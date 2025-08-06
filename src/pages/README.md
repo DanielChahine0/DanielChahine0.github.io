@@ -4,6 +4,9 @@ Page components representing different routes in the portfolio application.
 
 **Built with:** React Router, Framer Motion, various specialized libraries
 
+## Documentation Navigation
+[⬆️ Main README](../../README.md) - Project overview and features
+[⬆️ Source Overview](../README.md) - Source code structure
 ## Core Pages
 
 • `Home.jsx` - Main portfolio landing page (`/`)

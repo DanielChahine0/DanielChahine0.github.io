@@ -4,9 +4,15 @@ Reusable React components for the portfolio website.
 
 **Built with:** React 19, Framer Motion, Tailwind CSS, Lucide React
 
+## Documentation Navigation
+[⬆️ Main README](../../README.md) - Project overview and features
+[⬆️ Source Overview](../README.md) - Source code structure
+
+- [⬇️ /ui/](./ui/README.md) - UI primitives
+
 ## Structure
 
-• `ui/` - Base UI primitives (toast, etc.)
+• `ui/` - [Base UI primitives](./ui/README.md) (toast, etc.)
 • Component files - Feature-specific components
 
 ## Key Components
@@ -35,12 +41,6 @@ Reusable React components for the portfolio website.
 • Responsive design with mobile-first approach
 • Accessibility-compliant components
 • Performance-optimized animations
-  animate?: MotionProps,       // Animation target
-  transition?: MotionProps,    // Animation configuration
-  whileHover?: MotionProps,    // Hover animations
-  whileInView?: MotionProps    // Scroll-triggered animations
-}
-```
 
 ---
 

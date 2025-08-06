@@ -4,6 +4,10 @@ Utility functions and shared logic for the portfolio application.
 
 **Built with:** clsx, tailwind-merge
 
+## Documentation Navigation
+[⬆️ Main README](../../README.md) - Project overview and features
+[⬆️ Source Overview](../README.md) - Source code structure
+
 ## Files
 
 ### `utils.js`
@@ -30,25 +34,6 @@ const buttonClass = cn(
 • `tailwind-merge` - Tailwind-specific merging
 
 Handles conflict resolution, conditional logic, and optimizes for minimal runtime overhead.
-        
-        // Interactive states
-        hasGlow && isHovered && [
-          'relative overflow-hidden',
-          'before:absolute before:inset-0',
-          'before:bg-gradient-to-r before:from-blue-500/20 before:to-purple-500/20',
-          'before:opacity-0 before:transition-opacity',
-          'hover:before:opacity-100'
-        ],
-        
-        // Custom overrides
-        className
-      )}
-    >
-      {/* Card content */}
-    </div>
-  );
-}
-```
 
 ---
 
