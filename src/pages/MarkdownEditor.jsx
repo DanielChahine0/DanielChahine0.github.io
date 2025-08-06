@@ -445,61 +445,7 @@ const markdownComponents = {
 export default function MarkdownEditor() {
     const { toast } = useToast();
     const [markdown, setMarkdown] = useState(`# 🚀 Welcome to Enhanced Markdown Editor
-
-This is a **live preview** markdown editor with real-time rendering and modern design!
-
-## ✨ Features
-
-- ✅ **Live preview** with syntax highlighting
-- ✅ **Dark/Light mode** support  
-- ✅ **Export** to MD/PDF with beautiful formatting
-- ✅ **Copy to clipboard** functionality
-- ✅ **File upload** support (.md, .txt)
-- ✅ **Word/Character count** statistics
-- ✅ **GitHub Flavored Markdown** support
-- ✅ **Responsive design** with fullscreen mode
-
-## 💻 Code Example
-
-\`\`\`javascript
-function greet(name) {
-    return \`Hello, \${name}! 👋\`;
-}
-
-console.log(greet("World"));
-// Output: Hello, World! 👋
-\`\`\`
-
-## 📊 Table Example
-
-| Feature | Status | Priority |
-|---------|--------|----------|
-| Live Preview | ✅ Done | High |
-| Export PDF | ✅ Done | High |
-| File Upload | ✅ Done | Medium |
-| Syntax Highlighting | ✅ Done | High |
-
-## 📝 Lists & Quotes
-
-### Unordered List
-- First item with **bold text**
-- Second item with *italic text*
-- Third item with \`inline code\`
-
-### Ordered List
-1. Step one: Write your content
-2. Step two: See live preview
-3. Step three: Export or share
-
-> **💡 Pro Tip:** Use the toolbar buttons to quickly access all features. Try uploading your own markdown files or exporting to PDF for sharing!
-
-## 🔗 Links and More
-
-[Visit GitHub](https://github.com) | [Markdown Guide](https://www.markdownguide.org)
-
----
-
-*Happy writing!* ✍️ Made with ❤️
+Start writing your markdown here...
 `);
     
     const [isPreviewOnly, setIsPreviewOnly] = useState(false);
