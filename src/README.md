@@ -1,103 +1,26 @@
 # Source (src)
 
-This is the main source directory containing all the React application code for Daniel Chahine's personal portfolio website. The directory follows a feature-based organization pattern with clear separation of concerns and modern React development practices.
+Main source directory for Daniel Chahine's portfolio React application.
 
----
+**⬆️ [Back to Main README](../README.md)**
 
-## Structure
+## Directory Structure
 
-```
-src/
-├── components/                 # Reusable UI components
-│   ├── ui/                    # Primitive UI components
-│   └── [component files]     # Feature-specific components
-├── hooks/                     # Custom React hooks
-├── lib/                       # Utility functions and helpers
-├── pages/                     # Page components (routes)
-├── assets/                    # Static assets (SVGs, images)
-├── App.jsx                    # Main application component
-├── index.css                  # Global styles and Tailwind imports
-├── main.jsx                   # Application entry point
-└── README.md                  # This documentation
-```
-
----
-
-## Architecture Overview
-
-### Application Flow
-```
-main.jsx (Entry Point)
-    ↓
-App.jsx (Root Component)
-    ↓
-React Router (Navigation)
-    ↓
-Pages (Route Components)
-    ↓
-Components (UI Building Blocks)
-    ↓
-Hooks & Utils (Shared Logic)
-```
-
-### Design Philosophy
-- **Component-Driven Development** - Modular, reusable components
-- **Separation of Concerns** - Clear boundaries between logic and presentation
-- **Performance First** - Optimized for speed and user experience
-- **Accessibility** - WCAG-compliant design and implementation
-- **Modern React** - Hooks, functional components, and latest patterns
-
----
+- [`components/`](./components/README.md) - Reusable UI components
+- [`pages/`](./pages/README.md) - Page components and routes
+- [`hooks/`](./hooks/README.md) - Custom React hooks
+- [`lib/`](./lib/README.md) - Utility functions
+- `assets/` - Static assets (SVGs, images)
 
 ## Core Files
 
-### `main.jsx` - Application Entry Point
-**Purpose:** Bootstrap the React application and mount it to the DOM  
-**Responsibilities:**
-- React 18 root creation
-- StrictMode wrapper for development checks
-- Initial DOM mounting
-- Development hot reloading integration
+- `App.jsx` - Root component with routing
+- `main.jsx` - Application entry point
+- `index.css` - Global styles and Tailwind imports
 
-```jsx
-// Key features
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
-import './index.css';
+## Architecture
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
-```
-
-### `App.jsx` - Root Application Component
-**Purpose:** Main application wrapper with routing and global providers  
-**Responsibilities:**
-- React Router configuration
-- Global state providers
-- Theme management
-- Toast notification system
-- Route definitions and lazy loading
-
-```jsx
-// Key features
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Toaster } from '@/components/ui/toaster';
-import { lazy, Suspense } from 'react';
-
-// Lazy-loaded pages for code splitting
-const Home = lazy(() => import('./pages/Home'));
-const Playground = lazy(() => import('./pages/Playground'));
-// ... other routes
-```
-
-### `index.css` - Global Styles
-**Purpose:** Global styles, CSS variables, and Tailwind CSS imports  
-**Features:**
-- Tailwind CSS base, components, and utilities
+React 19 application using modern hooks, component-driven development, and performance-first design patterns.
 - CSS custom properties for theming
 - Global font declarations
 - Base element styling

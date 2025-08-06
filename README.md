@@ -75,11 +75,17 @@ Welcome to my personal portfolio website! This modern, interactive site showcase
 
 
 ## 📁 Project Structure
+- [`src/`](./src/README.md) - Main source code
+- [`src/components/`](./src/components/README.md) - UI components
+- [`src/pages/`](./src/pages/README.md) - Page components  
+- [`src/hooks/`](./src/hooks/README.md) - Custom hooks
+- [`src/lib/`](./src/lib/README.md) - Utility functions
+- [`src/components/ui/`](./src/components/ui/README.md) - UI primitives
 
 ```
 DanielChahine0.github.io/
-├── public/                          # Static assets
-│   ├── files/                       # Downloadable files
+├── public/                         # Static assets
+│   ├── files/                      # Downloadable files
 │   │   └── resume.pdf              # Resume PDF
 │   ├── photos/                     # Profile images
 │   │   ├── DarkHeroPhoto.png

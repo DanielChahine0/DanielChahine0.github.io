@@ -1,103 +1,45 @@
 # Pages
 
-This directory contains all the main page components that represent different routes and views in the portfolio application. Each page is a complete, self-contained component that can be rendered as a full-screen experience.
+Page components representing different routes in the portfolio application.
 
----
+**⬆️ [Back to Source](../README.md) | [Main README](../../README.md)**
 
-## Structure
+## Core Pages
 
-```
-pages/
-├── CalorieTracker.jsx         # Calorie tracking tool
-├── ClockTimer.jsx             # Clock and timer application
-├── CodePlayground.jsx         # Online code editor with preview ✨ NEW
-├── ColorPicker.jsx            # Color selection utility
-├── Home.jsx                   # Main portfolio homepage
-├── ImageEditor.jsx            # Basic image manipulation tool ✨ NEW
-├── LifeInWeeks.jsx            # Life visualization tool
-├── MarkdownEditor.jsx         # Markdown editing tool
-├── NotFound.jsx               # 404 error page
-├── PasswordGenerator.jsx      # Secure password creation utility ✨ NEW
-├── Playground.jsx             # Interactive tools showcase
-├── PortfolioGenerator.jsx     # Template-based portfolio builder ✨ NEW
-├── ResumeBuilder.jsx          # Interactive resume creation tool ✨ NEW
-├── TextAnalyzer.jsx           # Text analysis utility
-├── TextAnalyzer_new.jsx       # Updated text analyzer
-├── TextAnalyzer_old.jsx       # Legacy text analyzer
-├── Timeline.jsx               # Experience timeline
-└── README.md                  # This documentation
-```
+### `Home.jsx`
+Main portfolio landing page (`/`) featuring hero section, about, skills, projects, and contact.
 
----
+### `Timeline.jsx` 
+Professional timeline (`/timeline`) with chronological experience and education.
 
-## Pages Overview
+### `Playground.jsx`
+Interactive tools showcase (`/playground`) with grid of available mini-applications.
 
-### Core Portfolio Pages
+### `NotFound.jsx`
+404 error page (`*`) with friendly messaging and navigation.
 
-#### `Home.jsx`
-**Purpose:** Main portfolio landing page  
-**Route:** `/`  
-**Features:**
-- Hero section with personal introduction
-- About section with background information
-- Skills showcase with technology stack
-- Featured projects portfolio
-- Contact information and social links
-- Animated background effects (stars and clouds)
+## Interactive Tools
 
-**Components Used:**
-- `NavBar`, `HeroSection`, `AboutSection`
-- `SkillsSections`, `ProjectsSection`, `Footer`
-- `StarBackground`, `CloudBackground`
-- `PageTransition`
+### Development Tools
+- `CodePlayground.jsx` - Online code editor with live preview
+- `MarkdownEditor.jsx` - Real-time markdown editing
+- `TextAnalyzer.jsx` - Text analysis and statistics
 
-#### `Timeline.jsx`
-**Purpose:** Professional and personal timeline  
-**Route:** `/timeline`  
-**Features:**
-- Chronological experience display
-- Education milestones
-- Project timeline
-- Interactive timeline navigation
-- Responsive design
+### Utility Apps  
+- `CalorieTracker.jsx` - Nutrition and calorie tracking
+- `PasswordGenerator.jsx` - Secure password generation
+- `ColorPicker.jsx` - Color selection utility
+- `ClockTimer.jsx` - Clock and timer application
 
-#### `Playground.jsx`
-**Purpose:** Showcase of interactive tools and mini-projects  
-**Route:** `/playground`  
-**Features:**
-- Grid layout of available tools
-- Tool previews and descriptions
-- Navigation to individual tools
-- Search and filtering capabilities
+### Creative Tools
+- `ImageEditor.jsx` - Basic image manipulation
+- `ResumeBuilder.jsx` - Interactive resume creation
+- `PortfolioGenerator.jsx` - Template-based portfolio builder
 
-#### `NotFound.jsx`
-**Purpose:** 404 error page  
-**Route:** `*` (catch-all)  
-**Features:**
-- Friendly error message
-- Navigation back to home
-- Consistent branding
-- Animated error illustration
+### Visualization
+- `LifeInWeeks.jsx` - Life timeline visualization
 
----
-
-### Interactive Tools & Applications
-
-#### `CalorieTracker.jsx`
-**Purpose:** Calorie tracking and nutrition tool  
-**Route:** `/playground/calorie-tracker`  
-**Features:**
-- Food database search
-- Calorie calculation
-- Daily intake tracking
-- Nutritional information display
-- Data persistence
-- Export functionality
-
-**Key Technologies:**
-- Local storage for data persistence
-- Search functionality
-- Data visualization
+Each tool features responsive design, local storage, and export functionality where applicable.
 - Form handling
 
 #### `ClockTimer.jsx`

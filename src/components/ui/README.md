@@ -1,102 +1,53 @@
 # UI Components
 
-This directory contains fundamental UI primitive components that serve as the building blocks for the portfolio interface. These components follow design system principles and provide consistent, reusable interface elements.
+Fundamental UI primitive components for consistent interface elements.
 
----
+**⬆️ [Back to Components](../README.md) | [Source](../../README.md) | [Main README](../../../README.md)**
 
-## Structure
-
-```
-ui/
-├── toast.jsx          # Toast notification component
-├── toaster.jsx        # Toast container and management
-└── README.md          # This documentation
-```
-
----
-
-## Components Overview
+## Components
 
 ### `toast.jsx`
-**Purpose:** Customizable toast notification component  
-**Dependencies:** `@radix-ui/react-toast`, `lucide-react`, `class-variance-authority`  
+Customizable toast notification component with multiple variants.
+
 **Features:**
-- Multiple toast variants (default, destructive)
-- Accessible toast notifications
-- Customizable styling with Tailwind classes
-- Close button with X icon
+- Accessible notifications via Radix UI
+- Default and destructive variants
 - Auto-dismiss functionality
+- Close button with icon
 
 **Usage:**
 ```jsx
-import { Toast, ToastAction } from './ui/toast';
-
 <Toast>
   <ToastTitle>Success!</ToastTitle>
-  <ToastDescription>Your action was completed.</ToastDescription>
-  <ToastAction altText="Close">Close</ToastAction>
+  <ToastDescription>Action completed.</ToastDescription>
 </Toast>
 ```
 
 ### `toaster.jsx`
-**Purpose:** Toast container and notification management system  
-**Dependencies:** `use-toast` hook  
+Toast container and management system for centralized notifications.
+
 **Features:**
-- Centralized toast rendering
 - Multiple toast handling
 - Automatic positioning
-- Integration with toast state management
+- Integration with `use-toast` hook
 
 **Usage:**
 ```jsx
-import { Toaster } from './ui/toaster';
-
 function App() {
   return (
     <div>
-      {/* Your app content */}
+      {/* App content */}
       <Toaster />
     </div>
   );
 }
 ```
 
----
-
-## Design System
-
-### Toast Variants
-- **Default**: Standard notification styling
-- **Destructive**: Error/warning notifications with red accent
-
-### Styling Approach
-- Built with **Tailwind CSS** utility classes
-- Uses **class-variance-authority** for variant management
-- Follows **Radix UI** accessibility patterns
-- Consistent with overall portfolio design language
-
----
-
-## Integration
-
-These UI components are designed to work seamlessly with:
-- **Custom hooks** (`use-toast`)
-- **Global styling** (Tailwind configuration)
-- **Accessibility standards** (WCAG guidelines)
-- **Animation system** (Framer Motion compatible)
-
----
-
 ## Dependencies
 
-- `@radix-ui/react-toast` - Accessible toast primitive
-- `class-variance-authority` - Component variant management
+- `@radix-ui/react-toast` - Accessible primitives
+- `class-variance-authority` - Variant management
 - `lucide-react` - Icon system
-- `clsx` & `tailwind-merge` - Class name utilities
-
----
-
-## Future Enhancements
 
 - Additional toast variants (info, warning)
 - Custom toast positioning options

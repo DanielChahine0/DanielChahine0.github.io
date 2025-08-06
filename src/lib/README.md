@@ -1,102 +1,41 @@
 # Lib
 
-This directory contains utility functions, helpers, and shared logic that supports the entire portfolio application. These utilities are framework-agnostic, pure functions that can be easily tested and reused across different components.
+Utility functions and shared logic for the portfolio application.
 
----
+**⬆️ [Back to Source](../README.md) | [Main README](../../README.md)**
 
-## Structure
-
-```
-lib/
-├── utils.js                   # Common utility functions
-└── README.md                  # This documentation
-```
-
----
-
-## Utilities Overview
+## Utilities
 
 ### `utils.js`
-**Purpose:** Core utility functions for class name management and common operations  
-**Main Export:** `cn` function for conditional class name merging  
+Core utility functions for class name management.
 
-**Features:**
-- Tailwind CSS class name optimization
-- Conditional class application
-- Duplicate class removal
-- Type-safe class name handling
-- Performance-optimized merging
-
-**Primary Function:**
+**Main Export:** `cn` function
 ```javascript
 export const cn = (...inputs) => {
     return twMerge(clsx(inputs));
 }
 ```
 
-**Dependencies:**
-- `clsx` - Conditional class name utility
-- `tailwind-merge` - Tailwind-specific class merging
+**Purpose:** Merges Tailwind classes with conditional logic and deduplication.
 
----
-
-## Usage Examples
-
-### Basic Class Name Merging
-```javascript
+**Usage:**
+```jsx
 import { cn } from '@/lib/utils';
 
-// Simple class combination
-const buttonClasses = cn(
-  'px-4 py-2 rounded-md font-medium',
-  'bg-blue-500 text-white',
-  'hover:bg-blue-600 transition-colors'
+const buttonClass = cn(
+  'px-4 py-2 rounded-md',
+  {
+    'bg-blue-500': variant === 'primary',
+    'bg-gray-500': variant === 'secondary',
+  },
+  disabled && 'opacity-50',
+  className
 );
 ```
 
-### Conditional Classes
-```javascript
-import { cn } from '@/lib/utils';
-
-function Button({ variant, size, disabled, className, ...props }) {
-  return (
-    <button
-      className={cn(
-        // Base styles
-        'inline-flex items-center justify-center rounded-md font-medium transition-colors',
-        
-        // Variant styles
-        {
-          'bg-primary text-primary-foreground hover:bg-primary/90': variant === 'default',
-          'bg-destructive text-destructive-foreground hover:bg-destructive/90': variant === 'destructive',
-          'border border-input bg-transparent hover:bg-accent': variant === 'outline',
-        },
-        
-        // Size styles
-        {
-          'h-10 px-4 py-2': size === 'default',
-          'h-9 rounded-md px-3': size === 'sm',
-          'h-11 rounded-md px-8': size === 'lg',
-        },
-        
-        // State styles
-        {
-          'opacity-50 cursor-not-allowed': disabled,
-        },
-        
-        // Custom classes
-        className
-      )}
-      disabled={disabled}
-      {...props}
-    />
-  );
-}
-```
-
-### Complex Conditional Logic
-```javascript
-import { cn } from '@/lib/utils';
+**Dependencies:**
+- `clsx` - Conditional class names
+- `tailwind-merge` - Tailwind-specific merging
 
 function Card({ variant, hasGlow, isHovered, className }) {
   return (

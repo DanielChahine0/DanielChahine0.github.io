@@ -1,103 +1,50 @@
 # Hooks
 
-This directory contains custom React hooks that encapsulate reusable stateful logic and side effects. These hooks follow React's hooks conventions and provide clean abstractions for common functionality used throughout the portfolio.
+Custom React hooks for reusable stateful logic.
 
----
+**⬆️ [Back to Source](../README.md) | [Main README](../../README.md)**
 
-## Structure
-
-```
-hooks/
-├── use-glow-effect.js         # Mouse glow effect hook
-├── use-toast.js               # Toast notification management
-└── README.md                  # This documentation
-```
-
----
-
-## Hooks Overview
+## Available Hooks
 
 ### `use-glow-effect.js`
-**Purpose:** Provides mouse tracking and glow effect functionality for interactive elements  
-**Returns:** Object with mouse position, hover state, event handlers, and glow styles  
+Mouse tracking and glow effect for interactive elements.
 
-**Features:**
-- Real-time mouse position tracking
-- Hover state management
-- Optimized event handlers
-- Pre-calculated glow positioning
-- Performance-conscious implementation
+**Returns:**
+- `mousePosition` - Current mouse coordinates
+- `isHovered` - Hover state
+- `handleMouseMove/Enter/Leave` - Event handlers
+- `glowStyle` - Calculated glow positioning
 
-**API:**
-```javascript
-const {
-  mousePosition,     // { x: number, y: number }
-  isHovered,         // boolean
-  handleMouseMove,   // (event) => void
-  handleMouseEnter,  // () => void
-  handleMouseLeave,  // () => void
-  glowStyle,         // { left: number, top: number }
-} = useGlowEffect();
-```
-
-**Usage Example:**
+**Usage:**
 ```jsx
-import { useGlowEffect } from '@/hooks/use-glow-effect';
+const { handleMouseMove, handleMouseEnter, handleMouseLeave, glowStyle } = useGlowEffect();
 
-function GlowCard() {
-  const {
-    isHovered,
-    handleMouseMove,
-    handleMouseEnter,
-    handleMouseLeave,
-    glowStyle,
-  } = useGlowEffect();
-
-  return (
-    <div
-      className="relative overflow-hidden"
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      {isHovered && (
-        <div
-          className="absolute w-20 h-20 bg-blue-500/20 rounded-full blur-xl pointer-events-none"
-          style={glowStyle}
-        />
-      )}
-      <div className="relative z-10">Card content</div>
-    </div>
-  );
-}
+return (
+  <div onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <div className="glow-effect" style={glowStyle} />
+    Content
+  </div>
+);
 ```
 
 ### `use-toast.js`
-**Purpose:** Manages toast notification state and provides toast manipulation functions  
-**Returns:** Object with toast state and control functions  
+Toast notification state management.
 
-**Features:**
-- Toast queue management
-- Auto-dismiss functionality
-- Multiple toast support
-- Action button handling
-- Accessibility compliance
-- Memory leak prevention
+**Returns:**
+- `toasts` - Array of active toasts
+- `toast` - Function to show toast
+- `dismiss` - Function to dismiss toast
 
-**API:**
-```javascript
-const {
-  toasts,           // Array of toast objects
-  toast,            // (props) => string (returns toast ID)
-  dismiss,          // (toastId?: string) => void
-} = useToast();
+**Usage:**
+```jsx
+const { toast } = useToast();
+
+toast({
+  title: "Success!",
+  description: "Action completed",
+  duration: 3000
+});
 ```
-
-**Toast Object Structure:**
-```javascript
-{
-  id: string,
-  title?: string,
   description?: string,
   action?: ReactElement,
   variant?: 'default' | 'destructive',

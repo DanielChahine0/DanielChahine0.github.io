@@ -1,103 +1,38 @@
 # Components
 
-This directory contains all the reusable React components that make up the portfolio website. These components are organized by functionality and follow modern React patterns with hooks, proper prop handling, and responsive design principles.
+Reusable React components for the portfolio website.
 
----
+**⬆️ [Back to Source](../README.md) | [Main README](../../README.md)**
 
-## Structure
+## Directory Structure
 
-```
-components/
-├── ui/                         # Primitive UI components
-│   ├── toast.jsx              # Toast notifications
-│   ├── toaster.jsx            # Toast container
-│   └── README.md              # UI components documentation
-├── AboutSection.jsx           # About/bio section
-├── CloudBackground.jsx        # Animated cloud background
-├── Footer.jsx                 # Site footer with links
-├── HeroSection.jsx            # Landing/hero section
-├── NavBar.jsx                 # Navigation bar
-├── PageTransition.jsx         # Page transition wrapper
-├── ProjectsSection.jsx        # Projects showcase
-├── ScrollToTop.jsx            # Scroll to top button
-├── SkillsSections.jsx         # Skills display
-├── StarBackground.jsx         # Animated star background
-├── ThemeToggle.jsx            # Dark/light mode toggle
-└── README.md                  # This documentation
-```
+- [`ui/`](./ui/README.md) - Base UI primitives (toast, etc.)
+- Component files - Feature-specific components
 
----
-
-## Components Overview
+## Key Components
 
 ### Layout & Navigation
-| Component | Purpose | Key Features |
-|-----------|---------|--------------|
-| `NavBar.jsx` | Main navigation | Responsive menu, active states, smooth scrolling |
-| `Footer.jsx` | Site footer | Social links, copyright, contact info |
-| `PageTransition.jsx` | Page transitions | Framer Motion animations, route transitions |
+- `NavBar.jsx` - Main navigation with responsive menu
+- `Footer.jsx` - Site footer with social links
+- `PageTransition.jsx` - Framer Motion page transitions
 
-### Content Sections
-| Component | Purpose | Key Features |
-|-----------|---------|--------------|
-| `HeroSection.jsx` | Landing section | Profile photo, intro text, social links, CTA buttons |
-| `AboutSection.jsx` | About/bio section | Personal information, background, story |
-| `SkillsSections.jsx` | Skills showcase | Categorized skills, technology icons, proficiency levels |
-| `ProjectsSection.jsx` | Project portfolio | Project cards, tech stack, live/repo links |
+### Content Sections  
+- `HeroSection.jsx` - Landing section with intro
+- `AboutSection.jsx` - Personal background
+- `SkillsSections.jsx` - Technology skills showcase
+- `ProjectsSection.jsx` - Project portfolio
 
 ### Interactive Elements
-| Component | Purpose | Key Features |
-|-----------|---------|--------------|
-| `ThemeToggle.jsx` | Theme switcher | Dark/light mode, persistent preferences, smooth transitions |
-| `ScrollToTop.jsx` | Scroll utility | Auto-show/hide, smooth scrolling, accessibility |
+- `ThemeToggle.jsx` - Dark/light mode switcher
+- `ScrollToTop.jsx` - Smooth scroll utility
 
 ### Visual Effects
-| Component | Purpose | Key Features |
-|-----------|---------|--------------|
-| `StarBackground.jsx` | Animated stars | Canvas-based animation, responsive, performance optimized |
-| `CloudBackground.jsx` | Cloud effects | CSS animations, layered effects, theme-aware |
-
----
+- `StarBackground.jsx` - Animated canvas stars
+- `CloudBackground.jsx` - CSS cloud animations
 
 ## Design Patterns
 
-### Component Structure
-```jsx
-// Standard component pattern used throughout
-export const ComponentName = ({ prop1, prop2, ...props }) => {
-  // Hooks
-  const [state, setState] = useState(defaultValue);
-  
-  // Event handlers
-  const handleEvent = useCallback(() => {
-    // Handler logic
-  }, [dependencies]);
-  
-  // JSX with proper accessibility
-  return (
-    <section className="responsive-classes" {...props}>
-      {/* Component content */}
-    </section>
-  );
-};
-```
-
-### Styling Approach
-- **Tailwind CSS** utility-first styling
-- **Responsive design** with mobile-first approach
-- **Dark/light theme** support via CSS variables
-- **Framer Motion** for animations and transitions
-
-### Accessibility Features
-- Semantic HTML elements
-- ARIA labels and roles
-- Keyboard navigation support
-- Screen reader compatibility
-- Focus management
-
----
-
-## Common Props & Patterns
+Modern React with hooks, Tailwind CSS styling, responsive design, and accessibility features.
 
 ### Standard Props
 ```jsx
