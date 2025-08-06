@@ -45,27 +45,16 @@ You can see the live demo on: [danielchahine0.github.io](https://danielchahine0.
   <img alt="Framer Motion" src="https://img.shields.io/badge/Framer%20Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white">
   <img alt="React Router" src="https://img.shields.io/badge/React%20Router-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white">
   <img alt="JavaScript" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+  <img alt="Radix UI" src="https://img.shields.io/badge/Radix%20UI-161618?style=for-the-badge&logo=radixui&logoColor=white">
+  <img alt="Lucide React" src="https://img.shields.io/badge/Lucide-F56565?style=for-the-badge&logo=lucide&logoColor=white">
+  <img alt="React Icons" src="https://img.shields.io/badge/React%20Icons-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+  <img alt="clsx" src="https://img.shields.io/badge/clsx-4F46E5?style=for-the-badge&logo=javascript&logoColor=white">
+  <img alt="date-fns" src="https://img.shields.io/badge/date--fns-770C56?style=for-the-badge&logo=javascript&logoColor=white">
+  <img alt="html2canvas" src="https://img.shields.io/badge/html2canvas-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+  <img alt="jsPDF" src="https://img.shields.io/badge/jsPDF-FF6B6B?style=for-the-badge&logo=adobe-acrobat-reader&logoColor=white">
+  <img alt="DOMPurify" src="https://img.shields.io/badge/DOMPurify-4B5563?style=for-the-badge&logo=security&logoColor=white">
+  <img alt="highlight.js" src="https://img.shields.io/badge/highlight.js-9CA3AF?style=for-the-badge&logo=javascript&logoColor=white">
 </p>
-
-**Frontend Technologies:**
-- **React 19** - Modern React with latest features
-- **Vite** - Fast build tool and development server
-- **TailwindCSS** - Utility-first CSS framework
-- **Framer Motion** - Production-ready motion library
-- **React Router** - Declarative routing for React
-
-**UI Components & Utilities:**
-- **Radix UI** - Unstyled, accessible UI primitives
-- **Lucide React** - Beautiful, customizable icons
-- **React Icons** - Popular icon library
-- **clsx & tailwind-merge** - Conditional class name utilities
-- **date-fns** - Modern JavaScript date utility library
-
-**Additional Tools:**
-- **html2canvas** - Screenshot functionality
-- **jsPDF** - PDF generation
-- **DOMPurify** - XSS sanitizer
-- **highlight.js** - Syntax highlighting
 
 ---
 
