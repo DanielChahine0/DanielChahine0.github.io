@@ -5,7 +5,7 @@ Main source directory for Daniel Chahine's portfolio React application.
 **Built with:** React 19, Vite, Tailwind CSS, Framer Motion
 
 ##  Documentation Navigation
-[⬆️ Main README](../README.md) - Project overview and features
+- [⬆️ Main README](../README.md) - Project overview and features
 - [⬇️ /components/](./components/README.md) - UI components documentation
 - [⬇️ /components/ui/](./components/ui/README.md) - UI primitives
 - [⬇️ /hooks/](./hooks/README.md) - Custom React hooks

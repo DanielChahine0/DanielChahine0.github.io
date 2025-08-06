@@ -5,8 +5,8 @@ Utility functions and shared logic for the portfolio application.
 **Built with:** clsx, tailwind-merge
 
 ## Documentation Navigation
-[⬆️ Main README](../../README.md) - Project overview and features
-[⬆️ Source Overview](../README.md) - Source code structure
+- [⬆️ Main README](../../README.md) - Project overview and features
+- [⬆️ Source Overview](../README.md) - Source code structure
 
 ## Files
 

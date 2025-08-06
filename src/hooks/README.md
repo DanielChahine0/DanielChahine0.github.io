@@ -5,8 +5,8 @@ Custom React hooks for reusable stateful logic.
 **Built with:** React 19, Radix UI
 
 ## Documentation Navigation
-[⬆️ Main README](../../README.md) - Project overview and features
-[⬆️ Source Overview](../README.md) - Source code structure
+- [⬆️ Main README](../../README.md) - Project overview and features
+- [⬆️ Source Overview](../README.md) - Source code structure
 
 ## Available Hooks
 

@@ -5,9 +5,8 @@ Reusable React components for the portfolio website.
 **Built with:** React 19, Framer Motion, Tailwind CSS, Lucide React
 
 ## Documentation Navigation
-[⬆️ Main README](../../README.md) - Project overview and features
-[⬆️ Source Overview](../README.md) - Source code structure
-
+- [⬆️ Main README](../../README.md) - Project overview and features
+- [⬆️ Source Overview](../README.md) - Source code structure
 - [⬇️ /ui/](./ui/README.md) - UI primitives
 
 ## Structure
