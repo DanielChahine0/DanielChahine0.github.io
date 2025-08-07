@@ -12,6 +12,7 @@ import { LifeGrid } from "../components/LifeInWeeks/LifeGrid";
 import { LifeHighlights } from "../components/LifeInWeeks/LifeHighlights";
 import { SocietalContext } from "../components/LifeInWeeks/SocietalContext";
 import { NaturalWorld } from "../components/LifeInWeeks/NaturalWorld";
+import { formatNumber } from "../lib/utils";
 import { motion } from "framer-motion";
 
 export default function LifeInWeeks() {
@@ -139,13 +140,6 @@ export default function LifeInWeeks() {
         }
         return arr;
     }, [birthDate, lifeExpectancy, stats.livedWeeks, stats.totalWeeks]);
-
-
-    // Format numbers with commas
-    const formatNumber = (num) => {
-        if (typeof num !== 'number' || isNaN(num)) return '-';
-        return num.toLocaleString();
-    };
 
     return (
         <PageTransition>

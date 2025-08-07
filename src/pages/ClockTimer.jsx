@@ -6,6 +6,7 @@ import { CurrentTimeDisplay } from "../components/ClockTimer/CurrentTimeDisplay"
 import { WorldClock } from "../components/ClockTimer/WorldClock";
 import { AlarmSection } from "../components/ClockTimer/AlarmSection";
 import { PomodoroTimer } from "../components/ClockTimer/PomodoroTimer";
+import { formatTime, formatDateLong } from "../lib/utils";
 import { motion } from "framer-motion";
 
 export default function ClockTimer() {
@@ -21,24 +22,6 @@ export default function ClockTimer() {
         frame = requestAnimationFrame(update);
         return () => cancelAnimationFrame(frame);
     }, []);
-
-    const formatTime = (date) => {
-        return date.toLocaleTimeString('en-US', {
-            hour12: true,
-            hour: 'numeric',
-            minute: '2-digit',
-            second: '2-digit'
-        });
-    };
-
-    const formatDate = (date) => {
-        return date.toLocaleDateString('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-    };
 
     return (
         <PageTransition>
@@ -61,7 +44,7 @@ export default function ClockTimer() {
                                 className="bg-card rounded-lg p-8 text-center shadow-md flex flex-col gap-6"
                             >
                                 <h2 className="text-2xl font-semibold mb-4">Current Time</h2>
-                                <CurrentTimeDisplay currentTime={currentTime} formatTime={formatTime} formatDate={formatDate} />
+                                <CurrentTimeDisplay currentTime={currentTime} formatTime={formatTime} formatDate={formatDateLong} />
                                 <WorldClock />
                             </motion.section>
                             {/* Timer */}
