@@ -161,7 +161,7 @@ Start writing your markdown here...
                                 className="mb-8 text-center"
                             >
                                 <h1 className="text-4xl font-bold">
-                                            Enhanced Markdown Editor
+                                            Markdown Editor
                                         </h1>
                             </motion.div>
                         )}

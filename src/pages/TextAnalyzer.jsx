@@ -63,7 +63,7 @@ export default function TextAnalyzer() {
         <PageTransition>
             <div className="min-h-screen flex flex-col">
                 <NavBar />
-                <main className="mt-15 flex-1 container mx-auto px-2 py-2">
+                <main className="mt-15 flex-1 container mx-auto px-2 py-8">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -71,7 +71,7 @@ export default function TextAnalyzer() {
                         className="max-w-7xl mx-auto"
                     >
                         {/* Header Section */}
-                        <div className="text-center mb-4">
+                        <div className="text-center mb-8">
                             <motion.h1 
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
