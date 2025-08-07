@@ -199,7 +199,7 @@ function BlogPost({ blog }) {
             
             <main className="pt-16 pb-16 lg:pl-72">
                 {/* Hero Section with Back Button */}
-                <div className="bg-gradient-to-br from-primary/5 to-secondary/5 border-b border-border/50">
+                <div className="border-b border-border/50">
                     <div className="container mx-auto max-w-4xl px-6 py-8">
                         <motion.button
                             initial={{ opacity: 0, x: -20 }}
