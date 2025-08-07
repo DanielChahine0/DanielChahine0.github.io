@@ -15,9 +15,9 @@ import '../assets/blog-styles.css';
 const blogPosts = [
     {
         id: 1,
-        title: "EECS3482",
+        title: "Introduction to Computer Security",
         date: "2025-08-07",
-        summary: "A concise and comprehensive overview of the foundational concepts in cybersecurity",
+        summary: "This blog covers the fundamentals of cybersecurity. An overview of digital threats and the importance of security, then explains key cryptographic tools used to protect data. It explores common types of malicious software, methods of user authentication, major web security risks, and access control mechanisms.",
         readTime: "3 hours",
         tags: ["Computer Security"],
         filename: "eecs3482.md"
@@ -34,32 +34,19 @@ function BlogCard({ blog, index, onReadMore }) {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="bg-card/80 backdrop-blur-md rounded-2xl p-6 border border-border/50 shadow-lg shadow-black/5 hover:shadow-xl hover:border-primary/60 transition-all duration-300 hover:-translate-y-1"
+            className="bg-card/80 backdrop-blur-md rounded-2xl p-6 border border-border/50 shadow-lg shadow-black/5 hover:shadow-xl hover:border-primary/60 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+            onClick={() => onReadMore(blog)}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onReadMore(blog);
+                }
+            }}
+            tabIndex={0}
+            role="button"
+            aria-label={`Read more about ${blog.title}`}
         >
-            <div className="flex flex-wrap gap-2 mb-4">
-                {blog.tags?.map((tag) => (
-                    <span
-                        key={tag}
-                        className="px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full border border-primary/20"
-                    >
-                        {tag}
-                    </span>
-                )) || null}
-            </div>
-
-            <h2 
-                className="text-xl font-bold mb-3 text-foreground hover:text-primary transition-colors cursor-pointer"
-                onClick={() => onReadMore(blog)}
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        onReadMore(blog);
-                    }
-                }}
-                tabIndex={0}
-                role="button"
-                aria-label={`Read more about ${blog.title}`}
-            >
+            <h2 className="text-xl font-bold mb-3 text-foreground hover:text-primary transition-colors">
                 {blog.title}
             </h2>
 
@@ -74,17 +61,9 @@ function BlogCard({ blog, index, onReadMore }) {
                 </div>
             </div>
 
-            <p className="text-muted-foreground mb-6 leading-relaxed">
+            <p className="text-muted-foreground leading-relaxed">
                 {blog.summary}
             </p>
-
-            <button
-                onClick={() => onReadMore(blog)}
-                className="inline-flex items-center gap-2 text-primary font-semibold hover:text-primary/80 transition-colors group"
-            >
-                Read More
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </button>
         </motion.article>
     );
 }
@@ -203,7 +182,7 @@ function BlogPost({ blog, onBack }) {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         onClick={onBack}
-                        className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-8 group"
+                        className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-8 mt-6 group"
                     >
                         <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
                         Back to Blogs
@@ -216,17 +195,6 @@ function BlogPost({ blog, onBack }) {
                         transition={{ delay: 0.1 }}
                         className="mb-8"
                     >
-                        <div className="flex flex-wrap gap-2 mb-4">
-                            {blog.tags?.map((tag) => (
-                                <span
-                                    key={tag}
-                                    className="px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full border border-primary/20"
-                                >
-                                    {tag}
-                                </span>
-                            )) || null}
-                        </div>
-                        
                         <h1 className="text-3xl md:text-4xl font-bold mb-4">
                             {blog.title}
                         </h1>
@@ -308,24 +276,17 @@ export const Blogs = () => {
             <NavBar />
             
             <main className="pt-20 pb-12">
-                <div className="container mx-auto max-w-6xl px-4">
+                <div className="mt-4 container mx-auto max-w-6xl px-4">
                     {/* Header Section */}
                     <motion.div
-                        initial={{ opacity: 0, y: 24 }}
+                        initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
-                        className="text-center mb-16"
+                        className="mb-8 text-center"
                     >
-                        <div className="flex items-center justify-center gap-3 mb-4">
-                            <BookOpen className="text-primary" size={40} />
-                            <h1 className="text-4xl md:text-5xl font-bold">
-                                My Blogs
-                            </h1>
-                        </div>
-                        <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                            Welcome to my blog! Here you'll find articles about web development, programming tutorials, 
-                            technology insights, and my journey as a software developer.
-                        </p>
+                        <h1 className="text-4xl font-bold">
+                            My Blogs
+                        </h1>
                     </motion.div>
 
                     {/* Blog Stats */}
@@ -333,7 +294,7 @@ export const Blogs = () => {
                         initial={{ opacity: 0, y: 24 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
-                        className="flex justify-center mb-12"
+                        className="flex justify-center mb-8"
                     >
                         <div className="bg-card/60 backdrop-blur-md rounded-xl px-6 py-3 border border-border/50">
                             <span className="text-sm text-muted-foreground">
