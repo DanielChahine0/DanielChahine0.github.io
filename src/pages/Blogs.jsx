@@ -257,21 +257,22 @@ function BlogPost({ blog }) {
                         transition={{ delay: 0.2 }}
                         className="py-12"
                     >
-                        <div className="prose prose-xl dark:prose-invert max-w-none
-                            prose-headings:font-bold prose-headings:text-foreground prose-headings:leading-tight
-                            prose-h1:text-4xl prose-h1:mb-8 prose-h1:mt-12 prose-h1:pb-4 prose-h1:border-b prose-h1:border-border/30
-                            prose-h2:text-3xl prose-h2:mb-6 prose-h2:mt-10 prose-h2:text-primary
-                            prose-h3:text-2xl prose-h3:mb-4 prose-h3:mt-8
-                            prose-h4:text-xl prose-h4:mb-3 prose-h4:mt-6
-                            prose-p:text-foreground prose-p:leading-relaxed prose-p:mb-6 prose-p:text-base
+                        <div className="prose prose-2xl dark:prose-invert max-w-none text-left
+                            prose-headings:font-bold prose-headings:text-foreground prose-headings:leading-tight prose-headings:text-left
+                            prose-h1:text-5xl prose-h1:mb-8 prose-h1:mt-12 prose-h1:pb-4 prose-h1:border-b prose-h1:border-border/30 prose-h1:text-left
+                            prose-h2:text-4xl prose-h2:mb-6 prose-h2:mt-10 prose-h2:text-primary prose-h2:text-left
+                            prose-h3:text-3xl prose-h3:mb-4 prose-h3:mt-8 prose-h3:text-left
+                            prose-h4:text-2xl prose-h4:mb-3 prose-h4:mt-6 prose-h4:text-left
+                            prose-p:text-foreground prose-p:leading-relaxed prose-p:mb-6 prose-p:text-lg prose-p:text-left
                             prose-a:text-primary prose-a:no-underline hover:prose-a:underline
                             prose-strong:text-foreground prose-strong:font-semibold
                             prose-em:text-muted-foreground
-                            prose-code:text-primary prose-code:bg-muted/70 prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:text-sm prose-code:font-mono
+                            prose-code:text-primary prose-code:bg-muted/70 prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:text-base prose-code:font-mono
                             prose-pre:bg-muted/70 prose-pre:border prose-pre:border-border/50 prose-pre:rounded-lg prose-pre:p-4 prose-pre:overflow-x-auto
-                            prose-blockquote:border-l-4 prose-blockquote:border-l-primary prose-blockquote:pl-4 prose-blockquote:py-2 prose-blockquote:bg-muted/30 prose-blockquote:rounded-r-lg prose-blockquote:text-muted-foreground prose-blockquote:italic
-                            prose-ul:mb-6 prose-ol:mb-6
-                            prose-li:text-foreground prose-li:mb-2 prose-li:leading-relaxed
+                            prose-blockquote:border-l-4 prose-blockquote:border-l-primary prose-blockquote:pl-4 prose-blockquote:py-2 prose-blockquote:bg-muted/30 prose-blockquote:rounded-r-lg prose-blockquote:text-muted-foreground prose-blockquote:italic prose-blockquote:text-left
+                            prose-ul:mb-6 prose-ul:list-disc prose-ul:pl-6
+                            prose-ol:mb-6 prose-ol:list-decimal prose-ol:pl-6
+                            prose-li:text-foreground prose-li:mb-2 prose-li:leading-relaxed prose-li:marker:text-primary prose-li:text-lg
                             prose-table:border prose-table:border-border/50 prose-table:rounded-lg prose-table:overflow-hidden
                             prose-th:bg-muted/50 prose-th:text-foreground prose-th:font-semibold prose-th:p-3 prose-th:border-b prose-th:border-border/50
                             prose-td:p-3 prose-td:border-b prose-td:border-border/30

@@ -36,10 +36,24 @@
 .prose ul, .prose ol {
   margin-bottom: 0.5em;
   padding-left: 1.5em;
+  list-style: revert;
+}
+
+.prose ul {
+  list-style-type: disc;
+}
+
+.prose ol {
+  list-style-type: decimal;
 }
 
 .prose li {
   margin-bottom: 0.1em;
+  display: list-item;
+}
+
+.prose li::marker {
+  color: var(--primary);
 }
 
 .prose blockquote {
