@@ -3,6 +3,7 @@ import { AnimatePresence } from "framer-motion"
 import { Home } from "./pages/Home"
 import { NotFound } from "./pages/NotFound"
 import { Timeline } from "./pages/Timeline"
+import { Blogs } from "./pages/Blogs"
 import Playground from "./pages/Playground"
 import CalorieTracker from "./pages/CalorieTracker"
 import ClockTimer from "./pages/ClockTimer"
@@ -25,6 +26,7 @@ function AnimatedRoutes() {
       <Routes location={location} key={location.pathname}>
         <Route index element={<Home />} />
         <Route path="/timeline" element={<Timeline />} />
+        <Route path="/blogs" element={<Blogs />} />
         <Route path="/playground" element={<Playground />} />
         <Route path="/playground/calorie-tracker" element={<CalorieTracker />} />
         <Route path="/playground/clock-timer" element={<ClockTimer />} />
