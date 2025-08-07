@@ -24,7 +24,6 @@ Page components representing different routes in the portfolio application.
 
 **Utilities:**
 • `CalorieTracker.jsx` - Nutrition tracking
-• `PasswordGenerator.jsx` - Secure password generation
 • `ColorPicker.jsx` - Color selection utility
 • `ClockTimer.jsx` - Clock, timer, and stopwatch
 
@@ -51,11 +50,6 @@ Color selection and palette tool (`/playground/color-picker`)
 Basic image manipulation tool (`/playground/image-editor`)
 - Image upload, filters, and transform operations
 - Real-time canvas rendering with undo/redo functionality
-
-#### `PasswordGenerator.jsx`
-Secure password creation tool (`/playground/password-generator`)
-- Customizable generation with strength analysis
-- Cryptographically secure random generation
 
 #### `PortfolioGenerator.jsx`
 Template-based portfolio builder (`/playground/portfolio-generator`)

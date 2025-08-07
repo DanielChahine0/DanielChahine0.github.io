@@ -11,7 +11,6 @@ import MarkdownEditor from "./pages/MarkdownEditor"
 import ColorPicker from "./pages/ColorPicker"
 import TextAnalyzer from "./pages/TextAnalyzer"
 import ResumeBuilder from "./pages/ResumeBuilder"
-import PasswordGenerator from "./pages/PasswordGenerator"
 import ImageEditor from "./pages/ImageEditor"
 import PortfolioGenerator from "./pages/PortfolioGenerator"
 import CodePlayground from "./pages/CodePlayground"
@@ -34,7 +33,6 @@ function AnimatedRoutes() {
         <Route path="/playground/color-picker" element={<ColorPicker />} />
         <Route path="/playground/text-analyzer" element={<TextAnalyzer />} />
         <Route path="/playground/resume-builder" element={<ResumeBuilder />} />
-        <Route path="/playground/password-generator" element={<PasswordGenerator />} />
         <Route path="/playground/image-editor" element={<ImageEditor />} />
         <Route path="/playground/portfolio-generator" element={<PortfolioGenerator />} />
         <Route path="/playground/code-playground" element={<CodePlayground />} />

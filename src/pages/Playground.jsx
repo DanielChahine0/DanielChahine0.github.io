@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
     Calculator, Clock, Calendar, ArrowRight, FileText, Palette, FileSearch,
-    User, Shield, Image, Globe, Code
+    User, Image, Globe, Code
 } from "lucide-react";
 
 // ToolCard component for better separation of concerns
@@ -97,13 +97,6 @@ export default function Playground() {
             icon: User,
             path: "/playground/resume-builder",
             color: "bg-indigo-500"
-        },
-        {
-            title: "Password Generator",
-            description: "Generate secure passwords with customizable options and strength analysis.",
-            icon: Shield,
-            path: "/playground/password-generator",
-            color: "bg-red-500"
         },
         {
             title: "Image Editor",
