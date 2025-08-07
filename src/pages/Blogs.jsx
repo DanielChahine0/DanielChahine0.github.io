@@ -10,6 +10,8 @@ import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import { formatDate } from "../lib/utils";
+import TableOfContents from "../components/TableOfContents";
+import { MarkdownComponents } from "../components/MarkdownComponents";
 import '../assets/blog-styles.css';
 
 // Blog posts metadata
@@ -191,7 +193,11 @@ function BlogPost({ blog }) {
     return (
         <div className="min-h-screen bg-background text-foreground">
             <NavBar />
-            <main className="pt-16 pb-16">
+            
+            {/* Table of Contents */}
+            <TableOfContents content={content} />
+            
+            <main className="pt-16 pb-16 lg:pl-72">
                 {/* Hero Section with Back Button */}
                 <div className="bg-gradient-to-br from-primary/5 to-secondary/5 border-b border-border/50">
                     <div className="container mx-auto max-w-4xl px-6 py-8">
@@ -275,6 +281,7 @@ function BlogPost({ blog }) {
                             <ReactMarkdown
                                 remarkPlugins={[remarkGfm]}
                                 rehypePlugins={[rehypeHighlight, rehypeRaw]}
+                                components={MarkdownComponents}
                             >
                                 {content}
                             </ReactMarkdown>
