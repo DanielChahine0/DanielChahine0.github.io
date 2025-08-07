@@ -27,6 +27,7 @@ function AnimatedRoutes() {
         <Route index element={<Home />} />
         <Route path="/timeline" element={<Timeline />} />
         <Route path="/blogs" element={<Blogs />} />
+        <Route path="/blogs/blog/:id" element={<Blogs />} />
         <Route path="/playground" element={<Playground />} />
         <Route path="/playground/calorie-tracker" element={<CalorieTracker />} />
         <Route path="/playground/clock-timer" element={<ClockTimer />} />

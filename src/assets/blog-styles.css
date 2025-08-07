@@ -4,8 +4,8 @@
 }
 
 .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
-  margin-top: 2em;
-  margin-bottom: 1em;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
   font-weight: 600;
 }
 
@@ -30,22 +30,22 @@
 }
 
 .prose p {
-  margin-bottom: 1.5em;
+  margin-bottom: 0.5em;
 }
 
 .prose ul, .prose ol {
-  margin-bottom: 1.5em;
+  margin-bottom: 0.5em;
   padding-left: 1.5em;
 }
 
 .prose li {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.1em;
 }
 
 .prose blockquote {
   border-left: 4px solid var(--primary);
   padding-left: 1.5em;
-  margin: 1.5em 0;
+  margin: 0.5em 0;
   font-style: italic;
   opacity: 0.8;
 }
@@ -62,8 +62,8 @@
   background-color: #0d1117 !important;
   border: 1px solid rgba(var(--border-rgb), 0.3);
   border-radius: 0.75rem;
-  padding: 1.5em;
-  margin: 1.5em 0;
+  padding: 1em;
+  margin: 0.5em 0;
   overflow-x: auto;
   line-height: 1.5;
 }
@@ -87,7 +87,7 @@
 
 .prose img {
   border-radius: 0.75rem;
-  margin: 1.5em 0;
+  margin: 0.5em 0;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
@@ -95,12 +95,12 @@
   border: none;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--border), transparent);
-  margin: 3em 0;
+  margin: 1em 0;
 }
 
 .prose table {
   width: 100%;
-  margin: 1.5em 0;
+  margin: 1em 0;
   border-collapse: collapse;
   border: 1px solid var(--border);
   border-radius: 0.5rem;
@@ -203,4 +203,33 @@
 
 .hljs-strong {
   font-weight: bold;
+}
+
+/* Compact spacing for better screen utilization */
+.prose-compact {
+  max-width: none !important;
+}
+
+.prose-compact h1:first-child,
+.prose-compact h2:first-child,
+.prose-compact h3:first-child {
+  margin-top: 0;
+}
+
+.prose-compact h1 + p,
+.prose-compact h2 + p,
+.prose-compact h3 + p,
+.prose-compact h4 + p {
+  margin-top: 0.5em;
+}
+
+/* Reduce spacing around emphasis elements */
+.prose-compact em + p,
+.prose-compact i + p {
+  margin-top: 0.75em;
+}
+
+/* Tighter spacing for coming soon content */
+.prose-compact p:has(em:only-child) {
+  margin-bottom: 0.75em;
 }
