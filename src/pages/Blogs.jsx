@@ -15,39 +15,12 @@ import '../assets/blog-styles.css';
 const blogPosts = [
     {
         id: 1,
-        title: "My Journey into Full-Stack Development: From Curiosity to Career",
-        date: "2024-11-28",
-        summary: "Every developer has a unique origin story. Mine began with curiosity, evolved through countless hours of debugging, and culminated in the realization that programming isn't just about writing code—it's about solving problems and creating meaningful experiences.",
-        readTime: "12 min read",
-        tags: ["Career", "Full-Stack", "Journey", "Learning"],
-        filename: "fullstack-journey.md"
-    },
-    {
-        id: 2,
-        title: "Building Scalable React Applications with Modern Patterns",
-        date: "2024-12-01",
-        summary: "Explore advanced React patterns including custom hooks, context optimization, and component composition techniques that help build maintainable and scalable applications.",
-        readTime: "8 min read",
-        tags: ["React", "JavaScript", "Architecture", "Patterns"],
-        filename: "react-modern-patterns.md"
-    },
-    {
-        id: 3,
-        title: "Web Performance Optimization: Making Your Sites Lightning Fast",
-        date: "2024-12-10",
-        summary: "Learn essential techniques to optimize your web applications for better performance, including lazy loading, code splitting, image optimization, and caching strategies.",
-        readTime: "10 min read",
-        tags: ["Performance", "Optimization", "Web Development", "Speed"],
-        filename: "web-performance-optimization.md"
-    },
-    {
-        id: 4,
-        title: "Programming as Creative Expression: Beyond Logic and Syntax",
-        date: "2024-12-15",
-        summary: "Discover how programming transcends mere problem-solving to become a form of creative expression, exploring the artistic side of code and software craftsmanship.",
-        readTime: "6 min read",
-        tags: ["Creativity", "Programming", "Philosophy", "Craftsmanship"],
-        filename: "programming-creativity.md"
+        title: "EECS3482",
+        date: "2025-08-07",
+        summary: "A concise and comprehensive overview of the foundational concepts in cybersecurity",
+        readTime: "3 hours",
+        tags: ["Computer Security"],
+        filename: "eecs3482.md"
     }
 ];
 
