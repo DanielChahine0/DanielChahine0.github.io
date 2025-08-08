@@ -17,13 +17,31 @@ import '../assets/blog-styles.css';
 // Blog posts metadata
 const blogPosts = [
     {
+        id: 3,
+        title: "Web Performance Optimization: A Complete Guide",
+        date: "2025-08-08",
+        summary: "Learn essential strategies and techniques to optimize your web applications for maximum speed and efficiency. Covers Core Web Vitals, frontend optimization, backend performance strategies, and monitoring tools.",
+        readTime: "15 min",
+        tags: ["Web Performance", "Optimization"],
+        filename: "blog3.md"
+    },
+    {
+        id: 2,
+        title: "Modern React Development: Best Practices and Patterns",
+        date: "2025-08-07",
+        summary: "Explore the latest best practices, patterns, and techniques for building scalable, maintainable, and performant React applications. Learn about modern hooks, state management, and development workflow.",
+        readTime: "12 min",
+        tags: ["React", "JavaScript", "Frontend"],
+        filename: "blog2.md"
+    },
+    {
         id: 1,
         title: "Introduction to Computer Security",
         date: "2025-08-07",
         summary: "This blog covers the fundamentals of cybersecurity. An overview of digital threats and the importance of security, then explains key cryptographic tools used to protect data. It explores common types of malicious software, methods of user authentication, major web security risks, and access control mechanisms.",
         readTime: "3 hours",
         tags: ["Computer Security"],
-        filename: "eecs3482.md"
+        filename: "blog1.md"
     }
 ];
 
