@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
     Calculator, Clock, Calendar, ArrowRight, FileText, Palette, FileSearch,
-    User, Image, Globe, Code
+    User, Image, Code
 } from "lucide-react";
 
 // ToolCard component for better separation of concerns
@@ -104,13 +104,6 @@ export default function Tools() {
             icon: Image,
             path: "/tools/image-editor",
             color: "bg-yellow-500"
-        },
-        {
-            title: "Portfolio Generator",
-            description: "Create stunning portfolio websites with templates and customizable themes.",
-            icon: Globe,
-            path: "/tools/portfolio-generator",
-            color: "bg-cyan-500"
         },
         {
             title: "Code Editor",
