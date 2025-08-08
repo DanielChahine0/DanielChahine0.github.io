@@ -12,7 +12,7 @@ Page components representing different routes in the portfolio application.
 
 • `Home.jsx` - Main portfolio landing page (`/`)
 • `Timeline.jsx` - Professional timeline (`/timeline`) 
-• `Playground.jsx` - Interactive tools showcase (`/playground`)
+• `Tools.jsx` - Interactive tools showcase (`/tools`)
 • `NotFound.jsx` - 404 error page (`*`)
 
 ## Interactive Tools
@@ -36,28 +36,28 @@ Page components representing different routes in the portfolio application.
 ## Tool Details
 
 #### `CodePlayground.jsx`
-Online code editor with live preview (`/playground/code-playground`)
+Online code editor with live preview (`/tools/code-playground`)
 - HTML, CSS, JavaScript editing with real-time preview
 - Multiple viewport modes and template library
 - Project save/load and export functionality
 
 #### `ColorPicker.jsx`
-Color selection and palette tool (`/playground/color-picker`)
+Color selection and palette tool (`/tools/color-picker`)
 - HSL/RGB/HEX color selection with palette generation
 - Accessibility contrast checking and export formats
 
 #### `ImageEditor.jsx`
-Basic image manipulation tool (`/playground/image-editor`)
+Basic image manipulation tool (`/tools/image-editor`)
 - Image upload, filters, and transform operations
 - Real-time canvas rendering with undo/redo functionality
 
 #### `PortfolioGenerator.jsx`
-Template-based portfolio builder (`/playground/portfolio-generator`)
+Template-based portfolio builder (`/tools/portfolio-generator`)
 - Multiple design templates with customizable themes
 - Export to complete HTML website
 
 #### `ResumeBuilder.jsx`
-Interactive resume creation tool (`/playground/resume-builder`)
+Interactive resume creation tool (`/tools/resume-builder`)
 - Professional sections with real-time preview
 - Export functionality with print-ready design
 

@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom'; // Import Link and useNavi
 const navItems = [
     { name: 'Timeline', href: '/timeline', isRoute: true },
     { name: 'Resume', href: '/files/resume.pdf', isRoute: false, download: true },
-    { name: 'Playground', href: '/playground', isRoute: true },
+    { name: 'Tools', href: '/tools', isRoute: true },
     { name: 'Contact', href: '#footer', isRoute: 'footer' },
 ]
 

@@ -488,7 +488,7 @@ document.querySelector('.ripple-btn').addEventListener('click', function(e) {
           <div className="flex items-center space-x-4">
             <h1 className="text-xl font-bold text-foreground flex items-center">
               <Code className="w-6 h-6 mr-2 text-primary" />
-              Code Playground
+              Code Editor
             </h1>
             
             {/* Templates Dropdown */}

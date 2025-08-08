@@ -47,76 +47,76 @@ function ToolCard({ tool, index }) {
 }
 
 
-export default function Playground() {
+export default function Tools() {
     const tools = [
         {
             title: "Calorie Tracker",
             description: "Track your daily calorie intake and monitor your nutrition goals with an easy-to-use interface.",
             icon: Calculator,
-            path: "/playground/calorie-tracker",
+            path: "/tools/calorie-tracker",
             color: "bg-green-500"
         },
         {
             title: "Clock & Timer",
             description: "A digital clock with a built-in Pomodoro timer to help you stay productive and manage your time.",
             icon: Clock,
-            path: "/playground/clock-timer",
+            path: "/tools/clock-timer",
             color: "bg-blue-500"
         },
         {
             title: "Life in Weeks",
             description: "Visualize your entire life as a grid of weeks to gain perspective on time and make every week count.",
             icon: Calendar,
-            path: "/playground/life-in-weeks",
+            path: "/tools/life-in-weeks",
             color: "bg-purple-500"
         },
         {
             title: "Markdown Editor",
             description: "A powerful markdown editor with live preview, syntax highlighting, and export capabilities to MD and PDF.",
             icon: FileText,
-            path: "/playground/markdown-editor",
+            path: "/tools/markdown-editor",
             color: "bg-orange-500"
         },
         {
             title: "Color Picker",
             description: "Create color palettes with complementary colors and HEX/RGB/HSB modes.",
             icon: Palette,
-            path: "/playground/color-picker",
+            path: "/tools/color-picker",
             color: "bg-pink-500"
         },
         {
             title: "Text Analyzer",
             description: "Analyze your text for word count, character count, reading time, and sentiment.",
             icon: FileSearch,
-            path: "/playground/text-analyzer",
+            path: "/tools/text-analyzer",
             color: "bg-teal-500"
         },
         {
             title: "Resume Builder",
             description: "Create professional resumes with customizable templates and easy-to-use interface.",
             icon: User,
-            path: "/playground/resume-builder",
+            path: "/tools/resume-builder",
             color: "bg-indigo-500"
         },
         {
             title: "Image Editor",
             description: "Edit images with filters, adjustments, and basic manipulation tools.",
             icon: Image,
-            path: "/playground/image-editor",
+            path: "/tools/image-editor",
             color: "bg-yellow-500"
         },
         {
             title: "Portfolio Generator",
             description: "Create stunning portfolio websites with templates and customizable themes.",
             icon: Globe,
-            path: "/playground/portfolio-generator",
+            path: "/tools/portfolio-generator",
             color: "bg-cyan-500"
         },
         {
-            title: "Code Playground",
+            title: "Code Editor",
             description: "Online code editor with live preview for HTML, CSS, and JavaScript.",
             icon: Code,
-            path: "/playground/code-playground",
+            path: "/tools/code-playground",
             color: "bg-violet-500"
         },
     ];
@@ -134,10 +134,10 @@ export default function Playground() {
                     >
                         <div className="text-center mb-8">
                             <h1 className="text-4xl font-bold mb-2 tracking-tight text-foreground">
-                                Playground
+                                Tools
                             </h1>
                             <p className="text-lg text-foreground/80 max-w-2xl mx-auto leading-relaxed">
-                                Welcome to the Playground! Explore these interactive tools and experiences.
+                                Welcome to the Tools section! Explore these interactive tools and utilities.
                             </p>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

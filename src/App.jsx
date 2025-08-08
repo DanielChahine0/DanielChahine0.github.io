@@ -4,7 +4,7 @@ import { Home } from "./pages/Home"
 import { NotFound } from "./pages/NotFound"
 import { Timeline } from "./pages/Timeline"
 import { Blogs } from "./pages/Blogs"
-import Playground from "./pages/Playground"
+import Tools from "./pages/Tools"
 import CalorieTracker from "./pages/CalorieTracker"
 import ClockTimer from "./pages/ClockTimer"
 import LifeInWeeks from "./pages/LifeInWeeks"
@@ -28,7 +28,20 @@ function AnimatedRoutes() {
         <Route path="/timeline" element={<Timeline />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blogs/blog/:id" element={<Blogs />} />
-        <Route path="/playground" element={<Playground />} />
+        <Route path="/tools" element={<Tools />} />
+        <Route path="/tools/calorie-tracker" element={<CalorieTracker />} />
+        <Route path="/tools/clock-timer" element={<ClockTimer />} />
+        <Route path="/tools/life-in-weeks" element={<LifeInWeeks />} />
+        <Route path="/tools/markdown-editor" element={<MarkdownEditor />} />
+        <Route path="/tools/color-picker" element={<ColorPicker />} />
+        <Route path="/tools/text-analyzer" element={<TextAnalyzer />} />
+        <Route path="/tools/resume-builder" element={<ResumeBuilder />} />
+        <Route path="/tools/image-editor" element={<ImageEditor />} />
+        <Route path="/tools/portfolio-generator" element={<PortfolioGenerator />} />
+        <Route path="/tools/code-playground" element={<CodePlayground />} />
+        
+        {/* Backward compatibility routes - redirect old /playground/* URLs to /tools/* */}
+        <Route path="/playground" element={<Tools />} />
         <Route path="/playground/calorie-tracker" element={<CalorieTracker />} />
         <Route path="/playground/clock-timer" element={<ClockTimer />} />
         <Route path="/playground/life-in-weeks" element={<LifeInWeeks />} />
@@ -39,6 +52,7 @@ function AnimatedRoutes() {
         <Route path="/playground/image-editor" element={<ImageEditor />} />
         <Route path="/playground/portfolio-generator" element={<PortfolioGenerator />} />
         <Route path="/playground/code-playground" element={<CodePlayground />} />
+        
         {/* When the path is *, it will render the NotFound component */}
         <Route path="*" element={<NotFound />} />
       </Routes>
