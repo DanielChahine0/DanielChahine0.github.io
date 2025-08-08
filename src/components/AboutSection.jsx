@@ -2,6 +2,12 @@ import { Briefcase, Code, User } from "lucide-react";
 import { cn } from '@/lib/utils';
 
 export const AboutSection = () => {
+    const handleContactClick = () => {
+        setTimeout(() => {
+            const el = document.querySelector('footer');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 50);
+    };
     return (
     <section id="about" className="py-5 px-2 relative">
         <div className="container mx-auto max-w-6xl">
@@ -51,10 +57,10 @@ export const AboutSection = () => {
                     </p>
                     <div className="flex flex-col md:flex-row gap-4 pt-4 justify-center">
                         <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-                            <a href="#contact" className="cosmic-button">
+                            <a href="#footer" className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200">
                                 Contact Me
                             </a>
-                            <a href="/public/files/resume.pdf" download className="cosmic-button">
+                            <a href="/public/files/resume.pdf" download className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200">
                                 Download Resume
                             </a>
                         </div>
