@@ -1,5 +1,5 @@
-import React, { memo } from "react";
-import { Palette, Sliders } from "lucide-react";
+import React, { memo, useMemo } from "react";
+import { Palette, Sliders, Smartphone } from "lucide-react";
 
 const ControlPanel = memo(function ControlPanel({
     filters,
@@ -9,13 +9,33 @@ const ControlPanel = memo(function ControlPanel({
 }) {
     if (!isVisible) return null;
 
+    // Check if browser supports canvas filters
+    const supportsCanvasFilters = useMemo(() => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        ctx.filter = 'brightness(1)';
+        return ctx.filter !== 'none';
+    }, []);
+
     const presets = [
         { name: 'vintage', label: 'Vintage' },
         { name: 'bw', label: 'Black & White' },
         { name: 'vivid', label: 'Vivid' },
-        { name: 'soft', label: 'Soft' },
+        { name: 'soft', label: 'Soft', limitedMobile: true },
         { name: 'dramatic', label: 'Dramatic' }
     ];
+
+    const filterLabels = {
+        brightness: 'Brightness',
+        contrast: 'Contrast',
+        saturation: 'Saturation',
+        hue: 'Hue',
+        blur: 'Blur',
+        sepia: 'Sepia',
+        grayscale: 'Grayscale'
+    };
+
+    const limitedMobileFilters = ['hue', 'blur'];
 
     return (
         <div className="lg:col-span-1 space-y-6">
@@ -30,9 +50,13 @@ const ControlPanel = memo(function ControlPanel({
                         <button
                             key={preset.name}
                             onClick={() => onApplyPreset(preset.name)}
-                            className="px-3 py-2 text-sm bg-secondary text-secondary-foreground rounded hover:bg-secondary/80 transition-colors text-left"
+                            className={`px-3 py-2 text-sm bg-secondary text-secondary-foreground rounded hover:bg-secondary/80 transition-colors text-left flex items-center justify-between
+                                ${preset.limitedMobile && !supportsCanvasFilters ? 'opacity-60' : ''}`}
                         >
-                            {preset.label}
+                            <span>{preset.label}</span>
+                            {preset.limitedMobile && !supportsCanvasFilters && (
+                                <Smartphone className="w-3 h-3 text-muted-foreground" />
+                            )}
                         </button>
                     ))}
                 </div>
@@ -46,10 +70,13 @@ const ControlPanel = memo(function ControlPanel({
                 </h3>
                 <div className="space-y-4">
                     {Object.entries(filters).map(([key, value]) => (
-                        <div key={key}>
+                        <div key={key} className={limitedMobileFilters.includes(key) && !supportsCanvasFilters ? 'opacity-60' : ''}>
                             <div className="flex justify-between items-center mb-1">
-                                <label className="text-sm font-medium capitalize">
-                                    {key}
+                                <label className="text-sm font-medium flex items-center">
+                                    {filterLabels[key] || key}
+                                    {limitedMobileFilters.includes(key) && !supportsCanvasFilters && (
+                                        <Smartphone className="w-3 h-3 ml-1 text-muted-foreground" />
+                                    )}
                                 </label>
                                 <span className="text-sm text-muted-foreground">
                                     {key === 'hue' ? `${value}°` : 
@@ -68,6 +95,17 @@ const ControlPanel = memo(function ControlPanel({
                         </div>
                     ))}
                 </div>
+                {!supportsCanvasFilters && (
+                    <div className="mt-4 p-3 bg-muted/50 rounded-lg">
+                        <div className="flex items-start">
+                            <Smartphone className="w-4 h-4 text-muted-foreground mt-0.5 mr-2 flex-shrink-0" />
+                            <p className="text-xs text-muted-foreground">
+                                Some filters (hue, blur) have limited support on mobile browsers. 
+                                Basic filters work normally.
+                            </p>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

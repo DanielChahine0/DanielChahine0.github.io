@@ -43,6 +43,72 @@ export default function ImageEditor() {
     setHistoryIndex(newHistory.length - 1);
   }, [history, historyIndex]);
 
+  // Utility function to detect if browser supports canvas filters
+  const supportsCanvasFilters = useCallback(() => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.filter = 'brightness(1)';
+    return ctx.filter !== 'none';
+  }, []);
+
+  // Manual filter application for mobile compatibility
+  const applyFiltersManually = useCallback((ctx, imageData, activeFilters) => {
+    const data = imageData.data;
+    const brightness = activeFilters.brightness / 100;
+    const contrast = activeFilters.contrast / 100;
+    const saturation = activeFilters.saturation / 100;
+    const sepia = activeFilters.sepia / 100;
+    const grayscale = activeFilters.grayscale / 100;
+
+    for (let i = 0; i < data.length; i += 4) {
+      let r = data[i];
+      let g = data[i + 1];
+      let b = data[i + 2];
+
+      // Apply brightness
+      r *= brightness;
+      g *= brightness;
+      b *= brightness;
+
+      // Apply contrast
+      r = ((r / 255 - 0.5) * contrast + 0.5) * 255;
+      g = ((g / 255 - 0.5) * contrast + 0.5) * 255;
+      b = ((b / 255 - 0.5) * contrast + 0.5) * 255;
+
+      // Apply saturation
+      const gray = 0.299 * r + 0.587 * g + 0.114 * b;
+      r = gray + saturation * (r - gray);
+      g = gray + saturation * (g - gray);
+      b = gray + saturation * (b - gray);
+
+      // Apply sepia
+      if (sepia > 0) {
+        const sepiaR = (r * 0.393) + (g * 0.769) + (b * 0.189);
+        const sepiaG = (r * 0.349) + (g * 0.686) + (b * 0.168);
+        const sepiaB = (r * 0.272) + (g * 0.534) + (b * 0.131);
+        
+        r = r * (1 - sepia) + sepiaR * sepia;
+        g = g * (1 - sepia) + sepiaG * sepia;
+        b = b * (1 - sepia) + sepiaB * sepia;
+      }
+
+      // Apply grayscale
+      if (grayscale > 0) {
+        const grayValue = 0.299 * r + 0.587 * g + 0.114 * b;
+        r = r * (1 - grayscale) + grayValue * grayscale;
+        g = g * (1 - grayscale) + grayValue * grayscale;
+        b = b * (1 - grayscale) + grayValue * grayscale;
+      }
+
+      // Clamp values
+      data[i] = Math.max(0, Math.min(255, r));
+      data[i + 1] = Math.max(0, Math.min(255, g));
+      data[i + 2] = Math.max(0, Math.min(255, b));
+    }
+
+    ctx.putImageData(imageData, 0, 0);
+  }, []);
+
   const drawImageToCanvas = useCallback((img, customFilters = null) => {
     const canvas = canvasRef.current;
     if (!canvas || !img) return;
@@ -69,21 +135,49 @@ export default function ImageEditor() {
     // Clear canvas
     ctx.clearRect(0, 0, width, height);
 
-    // Apply filters
     const activeFilters = customFilters || filters;
-    ctx.filter = `
-      brightness(${activeFilters.brightness}%)
-      contrast(${activeFilters.contrast}%)
-      saturate(${activeFilters.saturation}%)
-      hue-rotate(${activeFilters.hue}deg)
-      blur(${activeFilters.blur}px)
-      sepia(${activeFilters.sepia}%)
-      grayscale(${activeFilters.grayscale}%)
-    `;
+    
+    // Check if we need any filters
+    const hasFilters = activeFilters.brightness !== 100 || 
+                      activeFilters.contrast !== 100 || 
+                      activeFilters.saturation !== 100 || 
+                      activeFilters.hue !== 0 || 
+                      activeFilters.blur !== 0 || 
+                      activeFilters.sepia !== 0 || 
+                      activeFilters.grayscale !== 0;
 
-    // Draw image
+    // Draw image first
     ctx.drawImage(img, 0, 0, width, height);
-  }, [filters]);
+
+    if (hasFilters) {
+      // Try CSS filters first (works on desktop)
+      if (supportsCanvasFilters() && activeFilters.hue === 0 && activeFilters.blur === 0) {
+        // For simple filters that work well with manual application
+        const imageData = ctx.getImageData(0, 0, width, height);
+        ctx.clearRect(0, 0, width, height);
+        ctx.drawImage(img, 0, 0, width, height);
+        applyFiltersManually(ctx, ctx.getImageData(0, 0, width, height), activeFilters);
+      } else if (supportsCanvasFilters()) {
+        // Use CSS filters for complex effects like hue and blur
+        ctx.clearRect(0, 0, width, height);
+        ctx.filter = `
+          brightness(${activeFilters.brightness}%)
+          contrast(${activeFilters.contrast}%)
+          saturate(${activeFilters.saturation}%)
+          hue-rotate(${activeFilters.hue}deg)
+          blur(${activeFilters.blur}px)
+          sepia(${activeFilters.sepia}%)
+          grayscale(${activeFilters.grayscale}%)
+        `;
+        ctx.drawImage(img, 0, 0, width, height);
+        ctx.filter = 'none';
+      } else {
+        // Fallback for mobile: manual filter application
+        const imageData = ctx.getImageData(0, 0, width, height);
+        applyFiltersManually(ctx, imageData, activeFilters);
+      }
+    }
+  }, [filters, supportsCanvasFilters, applyFiltersManually]);
 
   // Use custom hooks
   const {
@@ -112,8 +206,18 @@ export default function ImageEditor() {
   useEffect(() => {
     if (image) {
       drawImageToCanvas(image);
+      
+      // Show mobile compatibility notice once
+      if (!supportsCanvasFilters() && !sessionStorage.getItem('mobile-filter-notice')) {
+        sessionStorage.setItem('mobile-filter-notice', 'shown');
+        toast({
+          title: "Mobile Device Detected",
+          description: "Some advanced filters (hue, blur) may have limited support on mobile devices.",
+          variant: "default"
+        });
+      }
     }
-  }, [filters, image, drawImageToCanvas]);
+  }, [filters, image, drawImageToCanvas, supportsCanvasFilters, toast]);
 
   const handleFilterChange = (filterName, value) => {
     setFilters(prev => ({
@@ -131,6 +235,8 @@ export default function ImageEditor() {
       img.onload = () => {
         setImage(img);
         setHistoryIndex(previousIndex);
+        // Redraw with current filters after undo
+        setTimeout(() => drawImageToCanvas(img), 0);
       };
       img.src = previousImageData;
     }
@@ -145,6 +251,8 @@ export default function ImageEditor() {
       img.onload = () => {
         setImage(img);
         setHistoryIndex(nextIndex);
+        // Redraw with current filters after redo
+        setTimeout(() => drawImageToCanvas(img), 0);
       };
       img.src = nextImageData;
     }
