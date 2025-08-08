@@ -13,7 +13,6 @@ import ColorPicker from "./pages/ColorPicker"
 import TextAnalyzer from "./pages/TextAnalyzer"
 import ResumeBuilder from "./pages/ResumeBuilder"
 import ImageEditor from "./pages/ImageEditor"
-import PortfolioGenerator from "./pages/PortfolioGenerator"
 import CodePlayground from "./pages/CodePlayground"
 import { Toaster } from "@/components/ui/toaster"
 import { ScrollToTop } from "./components/ScrollToTop"
@@ -37,7 +36,6 @@ function AnimatedRoutes() {
         <Route path="/tools/text-analyzer" element={<TextAnalyzer />} />
         <Route path="/tools/resume-builder" element={<ResumeBuilder />} />
         <Route path="/tools/image-editor" element={<ImageEditor />} />
-        <Route path="/tools/portfolio-generator" element={<PortfolioGenerator />} />
         <Route path="/tools/code-playground" element={<CodePlayground />} />
         
         {/* Backward compatibility routes - redirect old /playground/* URLs to /tools/* */}
@@ -50,7 +48,6 @@ function AnimatedRoutes() {
         <Route path="/playground/text-analyzer" element={<TextAnalyzer />} />
         <Route path="/playground/resume-builder" element={<ResumeBuilder />} />
         <Route path="/playground/image-editor" element={<ImageEditor />} />
-        <Route path="/playground/portfolio-generator" element={<PortfolioGenerator />} />
         <Route path="/playground/code-playground" element={<CodePlayground />} />
         
         {/* When the path is *, it will render the NotFound component */}

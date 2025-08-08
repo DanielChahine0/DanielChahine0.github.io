@@ -30,7 +30,6 @@ Page components representing different routes in the portfolio application.
 **Creative:**
 • `ImageEditor.jsx` - Basic image manipulation
 • `ResumeBuilder.jsx` - Interactive resume creation
-• `PortfolioGenerator.jsx` - Template-based portfolio builder
 • `LifeInWeeks.jsx` - Life timeline visualization
 
 ## Tool Details
@@ -50,11 +49,6 @@ Color selection and palette tool (`/tools/color-picker`)
 Basic image manipulation tool (`/tools/image-editor`)
 - Image upload, filters, and transform operations
 - Real-time canvas rendering with undo/redo functionality
-
-#### `PortfolioGenerator.jsx`
-Template-based portfolio builder (`/tools/portfolio-generator`)
-- Multiple design templates with customizable themes
-- Export to complete HTML website
 
 #### `ResumeBuilder.jsx`
 Interactive resume creation tool (`/tools/resume-builder`)
