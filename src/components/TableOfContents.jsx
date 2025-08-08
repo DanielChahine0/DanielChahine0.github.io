@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, FileText } from 'lucide-react';
+import { FileText } from 'lucide-react';
 
 const TableOfContents = ({ content, className = '' }) => {
     const [headings, setHeadings] = useState([]);
@@ -98,7 +98,7 @@ const TableOfContents = ({ content, className = '' }) => {
                             <span className="font-semibold text-sm text-foreground">Table of Contents</span>
                         </div>
 
-                        <nav className="space-y-1">
+                        <nav className="space-y-1 scrollbar-hide">
                             {headings.map((heading, index) => {
                                 const isActive = activeId === heading.id;
                                 const indentLevel = Math.max(0, heading.level - 1);
@@ -154,12 +154,6 @@ const TableOfContents = ({ content, className = '' }) => {
                             <FileText size={16} className="text-primary" />
                             <span className="font-semibold text-sm text-foreground">Table of Contents</span>
                         </div>
-                        <ChevronRight 
-                            size={16} 
-                            className={`text-muted-foreground transition-transform ${
-                                isCollapsed ? 'rotate-90' : 'rotate-0'
-                            }`} 
-                        />
                     </button>
 
                     <AnimatePresence>
@@ -171,7 +165,7 @@ const TableOfContents = ({ content, className = '' }) => {
                                 transition={{ duration: 0.2 }}
                                 className="overflow-hidden"
                             >
-                                <nav className="px-4 pb-4 space-y-1 max-h-64 overflow-y-auto">
+                                <nav className="px-4 pb-4 space-y-1 max-h-64 overflow-y-auto scrollbar-hide">
                                     {headings.map((heading, index) => {
                                         const isActive = activeId === heading.id;
                                         const indentLevel = Math.max(0, heading.level - 1);

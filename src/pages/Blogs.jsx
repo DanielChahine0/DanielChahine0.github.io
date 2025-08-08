@@ -194,10 +194,7 @@ function BlogPost({ blog }) {
         <div className="min-h-screen bg-background text-foreground">
             <NavBar />
             
-            {/* Table of Contents */}
-            <TableOfContents content={content} />
-            
-            <main className="pt-16 pb-16 lg:pl-72">
+            <main className="pt-16 pb-16">
                 {/* Hero Section with Back Button */}
                 <div className="border-b border-border/50">
                     <div className="container mx-auto max-w-4xl px-6 py-8">
@@ -249,6 +246,11 @@ function BlogPost({ blog }) {
                     </div>
                 </div>
 
+                {/* Table of Contents */}
+                <div className="container mx-auto max-w-4xl px-6 py-8">
+                    <TableOfContents content={content} />
+                </div>
+
                 {/* Blog Content */}
                 <div className="container mx-auto max-w-4xl px-6">
                     <motion.article
@@ -259,23 +261,23 @@ function BlogPost({ blog }) {
                     >
                         <div className="prose prose-2xl dark:prose-invert max-w-none text-left
                             prose-headings:font-bold prose-headings:text-foreground prose-headings:leading-tight prose-headings:text-left
-                            prose-h1:text-5xl prose-h1:mb-8 prose-h1:mt-12 prose-h1:pb-4 prose-h1:border-b prose-h1:border-border/30 prose-h1:text-left
+                            prose-h1:text-6xl prose-h1:mb-8 prose-h1:mt-12 prose-h1:pb-4 prose-h1:border-b prose-h1:border-border/30 prose-h1:text-left
                             prose-h2:text-4xl prose-h2:mb-6 prose-h2:mt-10 prose-h2:text-primary prose-h2:text-left
                             prose-h3:text-3xl prose-h3:mb-4 prose-h3:mt-8 prose-h3:text-left
                             prose-h4:text-2xl prose-h4:mb-3 prose-h4:mt-6 prose-h4:text-left
-                            prose-p:text-foreground prose-p:leading-relaxed prose-p:mb-6 prose-p:text-lg prose-p:text-left
+                            prose-p:text-foreground prose-p:leading-relaxed prose-p:mb-6 prose-p:text-xl prose-p:text-left
                             prose-a:text-primary prose-a:no-underline hover:prose-a:underline
                             prose-strong:text-foreground prose-strong:font-semibold
                             prose-em:text-muted-foreground
-                            prose-code:text-primary prose-code:bg-muted/70 prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:text-base prose-code:font-mono
+                            prose-code:text-primary prose-code:bg-muted/70 prose-code:px-3 prose-code:py-1 prose-code:rounded-md prose-code:text-lg prose-code:font-mono
                             prose-pre:bg-muted/70 prose-pre:border prose-pre:border-border/50 prose-pre:rounded-lg prose-pre:p-4 prose-pre:overflow-x-auto
                             prose-blockquote:border-l-4 prose-blockquote:border-l-primary prose-blockquote:pl-4 prose-blockquote:py-2 prose-blockquote:bg-muted/30 prose-blockquote:rounded-r-lg prose-blockquote:text-muted-foreground prose-blockquote:italic prose-blockquote:text-left
                             prose-ul:mb-6 prose-ul:list-disc prose-ul:pl-6
                             prose-ol:mb-6 prose-ol:list-decimal prose-ol:pl-6
-                            prose-li:text-foreground prose-li:mb-2 prose-li:leading-relaxed prose-li:marker:text-primary prose-li:text-lg
+                            prose-li:text-foreground prose-li:mb-2 prose-li:leading-relaxed prose-li:marker:text-primary prose-li:text-xl
                             prose-table:border prose-table:border-border/50 prose-table:rounded-lg prose-table:overflow-hidden
-                            prose-th:bg-muted/50 prose-th:text-foreground prose-th:font-semibold prose-th:p-3 prose-th:border-b prose-th:border-border/50
-                            prose-td:p-3 prose-td:border-b prose-td:border-border/30
+                            prose-th:bg-muted/50 prose-th:text-foreground prose-th:font-semibold prose-th:p-3 prose-th:border-b prose-th:border-border/50 prose-th:text-lg
+                            prose-td:p-3 prose-td:border-b prose-td:border-border/30 prose-td:text-lg
                             prose-img:rounded-lg prose-img:shadow-lg prose-img:border prose-img:border-border/30
                             prose-hr:border-border/50 prose-hr:my-12"
                         >
