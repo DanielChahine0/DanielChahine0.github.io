@@ -138,6 +138,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const [viewMode, setViewMode] = useState('desktop');
   const [autoRun, setAutoRun] = useState(true);
   const [savedProjects, setSavedProjects] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
   const iframeRef = useRef(null);
 
   // Custom hook for actions
@@ -166,6 +168,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     // Load shared code if present in URL
     loadSharedCode();
+    
+    // Check if mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
   }, [loadSharedCode]);
 
   // Auto-run preview when code changes
@@ -211,22 +225,22 @@ document.addEventListener('DOMContentLoaded', function() {
   return (
     <PageTransition className="min-h-screen bg-background">
       <NavBar />
-      <main className="flex-1 container mx-auto px-2 py-8 max-w-[95vw]">
+      <main className="flex-1 container mx-auto px-2 py-4 md:py-8 max-w-[95vw]">
         <div className="mt-16 h-full flex flex-col max-w-none mx-auto">
           {/* Title Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-8 text-center"
+            className="mb-4 md:mb-8 text-center"
           >
-            <h1 className="text-4xl font-bold">Code Playground</h1>
-            <p className="text-muted-foreground mt-2">
+            <h1 className="text-2xl md:text-4xl font-bold">Code Playground</h1>
+            <p className="text-muted-foreground mt-2 text-sm md:text-base">
               Write HTML, CSS, and JavaScript with live preview
             </p>
           </motion.div>
 
-          <div className="flex flex-col h-[calc(100vh-12rem)]">
+          <div className="flex flex-col h-[calc(100vh-8rem)] md:h-[calc(100vh-12rem)]">
             {/* Toolbar */}
             <Toolbar
               onRun={handleRunCode}
@@ -241,27 +255,64 @@ document.addEventListener('DOMContentLoaded', function() {
               onViewModeChange={setViewMode}
               templates={codeTemplates}
               label="Code Playground"
+              isMobile={isMobile}
+              showPreview={showPreview}
+              onTogglePreview={() => setShowPreview(!showPreview)}
             />
 
             {/* Main Content */}
-            <div className="flex-1 flex overflow-hidden min-h-[600px] rounded-lg border border-border shadow-lg bg-card">
-              {/* Editor Panel */}
-              <EditorPanel
-                activeTab={activeTab}
-                onTabChange={setActiveTab}
-                html={html}
-                css={css}
-                js={js}
-                onHtmlChange={setHtml}
-                onCssChange={setCss}
-                onJsChange={setJs}
-              />
+            <div className={`flex-1 flex overflow-hidden min-h-[400px] md:min-h-[600px] rounded-lg border border-border shadow-lg bg-card ${
+              isMobile ? 'flex-col' : ''
+            }`}>
+              {/* Mobile: Show either editor or preview */}
+              {isMobile ? (
+                <>
+                  {/* Editor Panel - Always visible on mobile, preview toggles */}
+                  {!showPreview && (
+                    <EditorPanel
+                      activeTab={activeTab}
+                      onTabChange={setActiveTab}
+                      html={html}
+                      css={css}
+                      js={js}
+                      onHtmlChange={setHtml}
+                      onCssChange={setCss}
+                      onJsChange={setJs}
+                      isMobile={isMobile}
+                    />
+                  )}
 
-              {/* Preview Panel */}
-              <PreviewPanel
-                viewMode={viewMode}
-                iframeRef={iframeRef}
-              />
+                  {/* Preview Panel */}
+                  {showPreview && (
+                    <PreviewPanel
+                      viewMode={viewMode}
+                      iframeRef={iframeRef}
+                      isMobile={isMobile}
+                    />
+                  )}
+                </>
+              ) : (
+                <>
+                  {/* Desktop: Side by side layout */}
+                  <EditorPanel
+                    activeTab={activeTab}
+                    onTabChange={setActiveTab}
+                    html={html}
+                    css={css}
+                    js={js}
+                    onHtmlChange={setHtml}
+                    onCssChange={setCss}
+                    onJsChange={setJs}
+                    isMobile={isMobile}
+                  />
+
+                  <PreviewPanel
+                    viewMode={viewMode}
+                    iframeRef={iframeRef}
+                    isMobile={isMobile}
+                  />
+                </>
+              )}
             </div>
 
             {/* Saved Projects Panel */}
@@ -269,6 +320,7 @@ document.addEventListener('DOMContentLoaded', function() {
               savedProjects={savedProjects}
               onLoadProject={loadProject}
               onDeleteProject={deleteProject}
+              isMobile={isMobile}
             />
           </div>
         </div>
