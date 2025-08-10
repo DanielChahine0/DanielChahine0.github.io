@@ -9,7 +9,8 @@ export const useCodePlaygroundActions = (
     setJs, 
     savedProjects,
     setSavedProjects,
-    toast
+    toast,
+    setError = null
 ) => {
     const runCode = useCallback((iframeRef) => {
         if (!iframeRef.current) return;
