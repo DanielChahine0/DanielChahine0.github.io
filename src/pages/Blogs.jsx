@@ -12,92 +12,9 @@ import rehypeRaw from 'rehype-raw';
 import { formatDate } from "../lib/utils";
 import TableOfContents from "../components/TableOfContents";
 import { MarkdownComponents } from "../components/MarkdownComponents";
+import { blogPosts, getBlogById } from "../data/blogs";
+import { BlogCard } from "../components/BlogCard";
 import '../assets/blog-styles.css';
-
-// Blog posts metadata
-const blogPosts = [
-    {
-        id: 3,
-        title: "Web Performance Optimization: A Complete Guide",
-        date: "2025-08-08",
-        summary: "Learn essential strategies and techniques to optimize your web applications for maximum speed and efficiency. Covers Core Web Vitals, frontend optimization, backend performance strategies, and monitoring tools.",
-        readTime: "15 min",
-        tags: ["Web Performance", "Optimization"],
-        filename: "blog3.md"
-    },
-    {
-        id: 2,
-        title: "Modern React Development: Best Practices and Patterns",
-        date: "2025-08-07",
-        summary: "Explore the latest best practices, patterns, and techniques for building scalable, maintainable, and performant React applications. Learn about modern hooks, state management, and development workflow.",
-        readTime: "12 min",
-        tags: ["React", "JavaScript", "Frontend"],
-        filename: "blog2.md"
-    },
-    {
-        id: 1,
-        title: "Introduction to Computer Security",
-        date: "2025-08-07",
-        summary: "This blog covers the fundamentals of cybersecurity. An overview of digital threats and the importance of security, then explains key cryptographic tools used to protect data. It explores common types of malicious software, methods of user authentication, major web security risks, and access control mechanisms.",
-        readTime: "3 hours",
-        tags: ["Computer Security"],
-        filename: "blog1.md"
-    }
-];
-
-function BlogCard({ blog, index }) {
-    const navigate = useNavigate();
-    
-    if (!blog) {
-        return null;
-    }
-
-    const handleReadMore = () => {
-        if (blog?.id) {
-            navigate(`/blogs/blog/${blog.id}`);
-        } else {
-            console.error('Blog missing id:', blog);
-        }
-    };
-
-    return (
-        <motion.article
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="bg-card/80 backdrop-blur-md rounded-2xl p-6 border border-border/50 shadow-lg shadow-black/5 hover:shadow-xl hover:border-primary/60 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
-            onClick={handleReadMore}
-            onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handleReadMore();
-                }
-            }}
-            tabIndex={0}
-            role="button"
-            aria-label={`Read more about ${blog.title}`}
-        >
-            <h2 className="text-xl font-bold mb-3 text-foreground hover:text-primary transition-colors">
-                {blog.title}
-            </h2>
-
-            <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-                <div className="flex items-center gap-1">
-                    <Calendar size={14} />
-                    <span>{formatDate(blog.date)}</span>
-                </div>
-                <div className="flex items-center gap-1">
-                    <Clock size={14} />
-                    <span>{blog.readTime}</span>
-                </div>
-            </div>
-
-            <p className="text-muted-foreground leading-relaxed">
-                {blog.summary}
-            </p>
-        </motion.article>
-    );
-}
 
 function BlogPost({ blog }) {
     const [content, setContent] = useState('');
@@ -338,8 +255,7 @@ export const Blogs = () => {
 
     // If there's an ID in the URL, show the blog post
     if (id) {
-        const blogId = parseInt(id);
-        const selectedBlog = sortedBlogs.find(blog => blog.id === blogId);
+        const selectedBlog = getBlogById(id);
         return <BlogPost blog={selectedBlog} />;
     }
 
