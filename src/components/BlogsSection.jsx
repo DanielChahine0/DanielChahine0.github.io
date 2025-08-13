@@ -7,24 +7,22 @@ export const BlogsSection = () => {
     const latestBlogs = getLatestBlogs(3);
     
     return (
-        <section id="blogs" className="py-24 px-4 relative">
+        <section id="blogs" className="py-10 px-4 relative">
             <div className="container mx-auto max-w-6xl">
-                <div className="text-center mb-12">
+                <div className="text-center mb-10">
                     <div className="flex items-center justify-center gap-3 mb-4">
-                        <BookOpen className="text-primary" size={32} />
-                        <h2 className="text-3xl md:text-4xl font-bold">
+                        <div className="p-2 rounded-xl bg-primary/10 border border-primary/20">
+                            <BookOpen className="text-primary" size={32} />
+                        </div>
+                        <h2 className="text-4xl md:text-5xl font-bold">
                             My Blogs
                         </h2>
                     </div>
 
-                    <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-                        Insights, tutorials, and thoughts on web development, technology, and programming. 
-                        Stay updated with my latest articles and technical discoveries.
-                    </p>
                 </div>
 
                 {/* Latest 3 Blog Posts */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
                     {latestBlogs.map((blog, index) => (
                         <BlogCard key={blog.id} blog={blog} index={index} />
                     ))}

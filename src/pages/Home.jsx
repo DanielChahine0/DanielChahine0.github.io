@@ -19,7 +19,7 @@ export const Home = () => {
           <HeroSection />
           
           {/* Other sections with consistent spacing */}
-          <div className="space-y-24">
+          <div className="space-y-16">
             <AboutSection />
             <SkillsSections />
             <ProjectsSection />

@@ -48,7 +48,7 @@ export const SkillsSections = () => {
                         <div className="p-2 rounded-xl bg-primary/10 border border-primary/20">
                             <Code2 size={32} className="text-primary"/>
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
+                        <h2 className="text-4xl md:text-5xl font-bold">
                             Skills & Technologies
                         </h2>
                     </div>
@@ -101,19 +101,6 @@ export const SkillsSections = () => {
                             </div>
                         </div>
                     ))}
-                </div>
-
-                {/* Additional Info Section */}
-                <div className="mt-16 text-center section-fade-in stagger-delay-4">
-                    <div className="inline-flex flex-col items-center gap-4 p-8 rounded-2xl bg-gradient-to-br from-primary/5 to-accent/5 border border-primary/10">
-                        <h3 className="text-xl font-semibold text-foreground">
-                            Always Learning & Growing
-                        </h3>
-                        <p className="text-muted-foreground max-w-2xl">
-                            I'm constantly exploring new technologies and expanding my skill set. 
-                            Currently diving deeper into AI/ML technologies, cloud platforms, and modern web frameworks.
-                        </p>
-                    </div>
                 </div>
             </div>
         </section>

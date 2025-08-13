@@ -1,4 +1,4 @@
-import { ArrowRight, ExternalLink, Github, Sparkles } from "lucide-react";
+import { ArrowRight, ExternalLink, Github, FolderOpen } from "lucide-react";
 import { cn } from '@/lib/utils';
 
 const projects = [
@@ -33,7 +33,7 @@ const projects = [
 
 export const ProjectsSection = () => {
     return (
-        <section id="projects" className="py-20 px-4 relative overflow-hidden">
+        <section id="projects" className="py-10 px-4 relative overflow-hidden">
             {/* Background Elements */}
             <div className="absolute inset-0 -z-10">
                 <div className="absolute top-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
@@ -45,9 +45,9 @@ export const ProjectsSection = () => {
                 <div className="text-center mb-16 section-fade-in">
                     <div className="inline-flex items-center gap-3 mb-4">
                         <div className="p-2 rounded-xl bg-primary/10 border border-primary/20">
-                            <Sparkles size={32} className="text-primary"/>
+                            <FolderOpen size={32} className="text-primary"/>
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
+                        <h2 className="text-4xl md:text-5xl font-bold">
                             Featured Projects
                         </h2>
                     </div>
@@ -158,14 +158,12 @@ export const ProjectsSection = () => {
                 </div>
 
                 {/* Call to Action */}
-                <div className="text-center mt-16 section-fade-in stagger-delay-3">
+                <div className="text-center mt-10 section-fade-in stagger-delay-3">
                     <div className="inline-flex flex-col items-center gap-4 p-8 rounded-2xl bg-gradient-to-br from-primary/5 to-accent/5 border border-primary/10">
                         <h3 className="text-xl font-semibold text-foreground">
                             Want to see more of my work?
                         </h3>
-                        <p className="text-muted-foreground max-w-md">
-                            Check out my GitHub profile for more projects and contributions
-                        </p>
+                        
                         <a 
                             href="https://github.com/DanielChahine0"
                             target="_blank"
