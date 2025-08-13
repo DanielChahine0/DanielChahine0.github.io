@@ -53,64 +53,55 @@ export default function Tools() {
             title: "Calorie Tracker",
             description: "Track your daily calorie intake and monitor your nutrition goals with an easy-to-use interface.",
             icon: Calculator,
-            path: "/tools/calorie-tracker",
-            color: "bg-green-500"
+            path: "/tools/calorie-tracker"
         },
         {
             title: "Clock & Timer",
             description: "A digital clock with a built-in Pomodoro timer to help you stay productive and manage your time.",
             icon: Clock,
-            path: "/tools/clock-timer",
-            color: "bg-blue-500"
+            path: "/tools/clock-timer"
         },
         {
             title: "Life in Weeks",
             description: "Visualize your entire life as a grid of weeks to gain perspective on time and make every week count.",
             icon: Calendar,
-            path: "/tools/life-in-weeks",
-            color: "bg-purple-500"
+            path: "/tools/life-in-weeks"
         },
         {
             title: "Markdown Editor",
             description: "A powerful markdown editor with live preview, syntax highlighting, and export capabilities to MD and PDF.",
             icon: FileText,
-            path: "/tools/markdown-editor",
-            color: "bg-orange-500"
+            path: "/tools/markdown-editor"
         },
         {
             title: "Color Picker",
             description: "Create color palettes with complementary colors and HEX/RGB/HSB modes.",
             icon: Palette,
-            path: "/tools/color-picker",
-            color: "bg-pink-500"
+            path: "/tools/color-picker"
         },
         {
             title: "Text Analyzer",
             description: "Analyze your text for word count, character count, reading time, and sentiment.",
             icon: FileSearch,
-            path: "/tools/text-analyzer",
-            color: "bg-teal-500"
+            path: "/tools/text-analyzer"
         },
         {
             title: "Resume Builder",
             description: "Create professional resumes with customizable templates and easy-to-use interface.",
             icon: User,
-            path: "/tools/resume-builder",
-            color: "bg-indigo-500"
+            path: "/tools/resume-builder"
         },
         {
             title: "Image Editor",
             description: "Edit images with filters, adjustments, and basic manipulation tools.",
             icon: Image,
-            path: "/tools/image-editor",
-            color: "bg-yellow-500"
+            path: "/tools/image-editor"
         },
         {
             title: "Code Editor",
             description: "Online code editor with live preview for HTML, CSS, and JavaScript.",
             icon: Code,
-            path: "/tools/code-playground",
-            color: "bg-violet-500"
+            path: "/tools/code-playground"
         },
     ];
 

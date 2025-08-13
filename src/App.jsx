@@ -19,7 +19,7 @@ import { ScrollToTop } from "./components/ScrollToTop"
 
 function AnimatedRoutes() {
   const location = useLocation();
-  
+
   return (
     <AnimatePresence mode="wait" initial={false}>
       <Routes location={location} key={location.pathname}>
@@ -37,20 +37,6 @@ function AnimatedRoutes() {
         <Route path="/tools/resume-builder" element={<ResumeBuilder />} />
         <Route path="/tools/image-editor" element={<ImageEditor />} />
         <Route path="/tools/code-playground" element={<CodePlayground />} />
-        
-        {/* Backward compatibility routes - redirect old /playground/* URLs to /tools/* */}
-        <Route path="/playground" element={<Tools />} />
-        <Route path="/playground/calorie-tracker" element={<CalorieTracker />} />
-        <Route path="/playground/clock-timer" element={<ClockTimer />} />
-        <Route path="/playground/life-in-weeks" element={<LifeInWeeks />} />
-        <Route path="/playground/markdown-editor" element={<MarkdownEditor />} />
-        <Route path="/playground/color-picker" element={<ColorPicker />} />
-        <Route path="/playground/text-analyzer" element={<TextAnalyzer />} />
-        <Route path="/playground/resume-builder" element={<ResumeBuilder />} />
-        <Route path="/playground/image-editor" element={<ImageEditor />} />
-        <Route path="/playground/code-playground" element={<CodePlayground />} />
-        
-        {/* When the path is *, it will render the NotFound component */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>

@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { NavBar } from "../components/NavBar";
 import { Footer } from "../components/Footer";
-// Removed StarBackground and CloudBackground imports
 import { PageTransition } from "../components/PageTransition";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";

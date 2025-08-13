@@ -130,8 +130,6 @@ function changeColor() {
 
 // Add some interactivity with error handling
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Code Playground loaded successfully!');
-    
     try {
         // Add click effects to all buttons
         const buttons = document.querySelectorAll('button');

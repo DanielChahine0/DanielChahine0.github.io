@@ -148,7 +148,7 @@ h1 {
 }`);
         
         setJs(`// JavaScript Code
-console.log('Hello, Code Playground!');`);
+// Add your JavaScript here`);
 
         toast({
             title: "Code Reset",
