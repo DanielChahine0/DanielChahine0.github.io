@@ -26,18 +26,18 @@ export function BlogCard({ blog, index }) {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="bg-card/80 backdrop-blur-md rounded-xl p-6 border border-border/50 shadow-lg hover:shadow-xl hover:border-primary/60 transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
+            className="bg-card/80 backdrop-blur-md rounded-xl p-4 border border-border/50 shadow-lg hover:shadow-xl hover:border-primary/60 transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
             onClick={handleReadMore}
             onKeyDown={handleKeyDown}
             tabIndex={0}
             role="button"
             aria-label={`Read more about ${blog.title}`}
         >
-            <h3 className="text-lg font-bold mb-3 text-foreground group-hover:text-primary transition-colors line-clamp-2">
+            <h3 className="text-lg font-bold mb-2 text-foreground group-hover:text-primary transition-colors line-clamp-2">
                 {blog.title}
             </h3>
 
-            <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
+            <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
                 <div className="flex items-center gap-1">
                     <Calendar size={14} />
                     <span>{formatDate(blog.date)}</span>
@@ -48,11 +48,11 @@ export function BlogCard({ blog, index }) {
                 </div>
             </div>
 
-            <p className="text-muted-foreground leading-relaxed text-sm line-clamp-3 mb-4">
+            <p className="text-muted-foreground leading-relaxed text-sm line-clamp-3 mb-3">
                 {blog.summary}
             </p>
 
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="flex flex-wrap gap-2 mb-3">
                 {blog.tags.map((tag, index) => (
                     <span
                         key={index}
