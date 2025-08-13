@@ -31,7 +31,7 @@ function BlogPost({ blog }) {
             <div className="min-h-screen bg-background text-foreground">
                 <NavBar />
                 <main className="pt-20 pb-12">
-                    <div className="container mx-auto max-w-4xl px-4">
+                    <div className="container mx-auto max-w-7xl px-4">
                         <div className="text-center py-20">
                             <p className="text-destructive mb-4">Blog not found</p>
                             <button
@@ -88,7 +88,7 @@ function BlogPost({ blog }) {
             <div className="min-h-screen bg-background text-foreground">
                 <NavBar />
                 <main className="pt-20 pb-12">
-                    <div className="container mx-auto max-w-4xl px-4">
+                    <div className="container mx-auto max-w-7xl px-4">
                         <div className="flex items-center justify-center py-20">
                             <div className="text-center">
                                 <Loader2 className="animate-spin text-primary mx-auto mb-4" size={48} />
@@ -107,7 +107,7 @@ function BlogPost({ blog }) {
             <div className="min-h-screen bg-background text-foreground">
                 <NavBar />
                 <main className="pt-20 pb-12">
-                    <div className="container mx-auto max-w-4xl px-4">
+                    <div className="container mx-auto max-w-7xl px-4">
                         <div className="text-center py-20">
                             <p className="text-destructive mb-4">{error}</p>
                             <button
@@ -132,7 +132,7 @@ function BlogPost({ blog }) {
             <main className="pt-16 pb-16">
                 {/* Hero Section with Back Button */}
                 <div className="border-b border-border/50">
-                    <div className="container mx-auto max-w-4xl px-6 py-8">
+                    <div className="container mx-auto max-w-7xl px-6 py-8">
                         <motion.button
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
@@ -182,12 +182,10 @@ function BlogPost({ blog }) {
                 </div>
 
                 {/* Table of Contents */}
-                <div className="container mx-auto max-w-4xl px-6 py-8">
-                    <TableOfContents content={content} />
-                </div>
+                <TableOfContents content={content} />
 
                 {/* Blog Content */}
-                <div className="container mx-auto max-w-4xl px-6">
+                <div className="container mx-auto max-w-7xl px-6 lg:pl-80 xl:pl-96">
                     <motion.article
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
