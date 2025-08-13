@@ -34,7 +34,7 @@ const skillsData = {
 
 export const SkillsSections = () => {
     return (
-        <section id="skills" className="py-20 px-4 relative overflow-hidden">
+        <section id="skills" className="py-15 px-4 relative overflow-hidden">
             {/* Background Elements */}
             <div className="absolute inset-0 -z-10">
                 <div className="absolute top-20 right-20 w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
@@ -43,8 +43,8 @@ export const SkillsSections = () => {
 
             <div className="container mx-auto max-w-7xl">
                 {/* Enhanced Header */}
-                <div className="text-center mb-16 section-fade-in">
-                    <div className="inline-flex items-center gap-3 mb-4">
+                <div className="text-center mb-10 section-fade-in">
+                    <div className="inline-flex items-center gap-3">
                         <div className="p-2 rounded-xl bg-primary/10 border border-primary/20">
                             <Code2 size={32} className="text-primary"/>
                         </div>
@@ -52,18 +52,14 @@ export const SkillsSections = () => {
                             Skills & Technologies
                         </h2>
                     </div>
-                    <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                        A comprehensive overview of my technical expertise and the tools I use to build amazing software
-                    </p>
                 </div>
 
-                {/* Enhanced Skills Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                     {Object.entries(skillsData).map(([category, data], index) => (
                         <div 
                             key={category} 
                             className={cn(
-                                "enhanced-gradient-border p-6 group card-hover section-fade-in",
+                                "enhanced-gradient-border p-4 group card-hover section-fade-in",
                                 index === 1 && "stagger-delay-1",
                                 index === 2 && "stagger-delay-2",
                                 index === 3 && "stagger-delay-3"

@@ -33,7 +33,7 @@ const projects = [
 
 export const ProjectsSection = () => {
     return (
-        <section id="projects" className="py-10 px-4 relative overflow-hidden">
+        <section id="projects" className="py-0 px-4 relative overflow-hidden">
             {/* Background Elements */}
             <div className="absolute inset-0 -z-10">
                 <div className="absolute top-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
@@ -42,8 +42,8 @@ export const ProjectsSection = () => {
 
             <div className="container mx-auto max-w-7xl">
                 {/* Enhanced Header */}
-                <div className="text-center mb-16 section-fade-in">
-                    <div className="inline-flex items-center gap-3 mb-4">
+                <div className="text-center mb-10 section-fade-in">
+                    <div className="inline-flex items-center gap-3">
                         <div className="p-2 rounded-xl bg-primary/10 border border-primary/20">
                             <FolderOpen size={32} className="text-primary"/>
                         </div>
@@ -51,11 +51,6 @@ export const ProjectsSection = () => {
                             Featured Projects
                         </h2>
                     </div>
-                    
-                    <p className="text-center text-muted-foreground text-lg mb-8 max-w-3xl mx-auto">
-                        A curated selection of my recent work showcasing expertise in modern web development, 
-                        full-stack architecture, and innovative problem-solving across diverse technologies.
-                    </p>
                 </div>
 
                 {/* Enhanced Project Grid */}

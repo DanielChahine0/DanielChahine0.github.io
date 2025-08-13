@@ -37,17 +37,13 @@ export const AboutSection = () => {
     ];
 
     return (
-        <section id="about" className="py-16 px-4 relative overflow-hidden">
-            {/* Background Elements */}
-            <div className="absolute inset-0 -z-10">
-                <div className="absolute top-40 right-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-20 left-20 w-80 h-80 bg-accent/5 rounded-full blur-3xl"></div>
-            </div>
+        <section id="about" className="py-3 px-4 relative overflow-hidden">
+            
 
             <div className="container mx-auto max-w-7xl">
                 {/* Enhanced Header */}
                 <div className="text-center mb-16 section-fade-in">
-                    <div className="inline-flex items-center gap-3 mb-4">
+                    <div className="inline-flex items-center gap-3">
                         <div className="p-2 rounded-xl bg-primary/10 border border-primary/20">
                             <User size={32} className="text-primary"/>
                         </div>
@@ -55,9 +51,7 @@ export const AboutSection = () => {
                             About Me
                         </h2>
                     </div>
-                    <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                        Passionate about creating innovative solutions and building impactful software
-                    </p>
+                    
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
