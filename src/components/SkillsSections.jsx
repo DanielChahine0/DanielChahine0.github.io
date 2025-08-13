@@ -1,5 +1,6 @@
 
 import { cn } from '@/lib/utils';
+import { Code2, Wrench, Layers, Zap } from 'lucide-react';
 
 const skillColors = [
     'hover:bg-blue-400',

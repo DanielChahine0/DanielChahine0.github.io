@@ -1,4 +1,4 @@
-import { ArrowRight, ExternalLink, Github } from "lucide-react";
+import { ArrowRight, ExternalLink, Github, Sparkles } from "lucide-react";
 import { cn } from '@/lib/utils';
 
 const projects = [
@@ -16,96 +16,169 @@ const projects = [
         title: 'My Calendar',
         description: 'A modern calendar application inspired by Google Calendar, designed for scheduling and event management.',
         image: '/projects/project2.png',
-        tags: ['JavaScript', 'PHP', 'CSS', 'PostgreSQL', 'XAMPP'],
+        tags: ['JavaScript', 'PHP', 'PostgreSQL', 'XAMPP'],
         link: 'https://example.com/',
         githubUrl: 'https://github.com/DanielChahine0/Webapp-MyCalendar',
     },
     {
         id: 3,
         title: 'Fit Coach',
-        description: 'A fitness tracker that monitors calories, workouts, and progress, including features for coaches.',
+        description: 'A fitness tracker that logs calories, workouts, and progress, with tools for coaches to create plans, track client performance, and provide feedback.',
         image: '/projects/project3.png',
-        tags: ['HTML', 'JavaScript', 'CSS', 'Python', 'Flask'],
+        tags: ['HTML', 'JavaScript', 'Python', 'Flask'],
         link: 'https://example.com/project-one',
         githubUrl: 'https://github.com/EECS3311F24/project-fit-coach',
     }
-
 ]
 
 export const ProjectsSection = () => {
     return (
-        <section id="projects" className="py-24 px-4 relative">
-            <div className="container mx-auto max-w-5xl">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-                    Featured Projects
-                </h2>
+        <section id="projects" className="py-20 px-4 relative overflow-hidden">
+            {/* Background Elements */}
+            <div className="absolute inset-0 -z-10">
+                <div className="absolute top-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-20 right-10 w-80 h-80 bg-accent/5 rounded-full blur-3xl"></div>
+            </div>
 
-                <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-                    A selection of my recent work that showcases my skills in web development using 
-                    React, Javascript, NodeJS, Express, PHP, HTML, and CSS.
-                </p>
+            <div className="container mx-auto max-w-7xl">
+                {/* Enhanced Header */}
+                <div className="text-center mb-16 section-fade-in">
+                    <div className="inline-flex items-center gap-3 mb-4">
+                        <div className="p-2 rounded-xl bg-primary/10 border border-primary/20">
+                            <Sparkles size={32} className="text-primary"/>
+                        </div>
+                        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
+                            Featured Projects
+                        </h2>
+                    </div>
+                    
+                    <p className="text-center text-muted-foreground text-lg mb-8 max-w-3xl mx-auto">
+                        A curated selection of my recent work showcasing expertise in modern web development, 
+                        full-stack architecture, and innovative problem-solving across diverse technologies.
+                    </p>
+                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projects.map((project, key) => {
+                {/* Enhanced Project Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {projects.map((project, index) => {
                         return (
                             <div 
-                                key={key} 
+                                key={project.id} 
                                 className={cn(
-                                    "group gradient-border overflow-hidden shadow-xs card-hover"
+                                    "group enhanced-gradient-border overflow-hidden card-hover section-fade-in",
+                                    index === 1 && "stagger-delay-1",
+                                    index === 2 && "stagger-delay-2"
                                 )}
                             >
-                                <div>
-                                    <div className="h-48 overflow-hidden">
-                                        <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
-                                    </div >
-                                        
-                                    <div className="p-3">
-                                        <div className="flex flex-wrap gap-2 mb-2">
-                                            {project.tags.map((tag) => (
-                                                <span className="px-2 py-1 text-xs font-medium bg-primary/20 border rounded-full background-secondary text-foreground">
-                                                    {tag}
-                                                </span>
-                                            ))}
-                                        </div>
+                                {/* Project Image */}
+                                <div className="relative h-48 overflow-hidden">
+                                    <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
+                                    <img 
+                                        src={project.image} 
+                                        alt={project.title} 
+                                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
+                                    />
                                     
+                                    {/* Overlay Actions */}
+                                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 z-20">
+                                        <a 
+                                            href={project.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="p-3 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 hover:scale-110"
+                                            title="View Live Demo"
+                                        >
+                                            <ExternalLink className="w-5 h-5" />
+                                        </a>
+                                        <a 
+                                            href={project.githubUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="p-3 rounded-full bg-card text-foreground hover:bg-card/90 transition-all duration-300 hover:scale-110"
+                                            title="View Source Code"
+                                        >
+                                            <Github className="w-5 h-5" />
+                                        </a>
+                                    </div>
+                                </div>
+                                        
+                                {/* Project Content */}
+                                <div className="p-6 space-y-4">
+                                    {/* Tech Stack Tags */}
+                                    <div className="flex flex-wrap gap-2">
+                                        {project.tags.map((tag) => (
+                                            <span 
+                                                key={tag}
+                                                className="px-3 py-1 text-xs font-semibold bg-primary/20 text-primary rounded-full border border-primary/30 transition-all duration-300 hover:bg-primary/30 hover:scale-105"
+                                            >
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                
 
-                                        <h3 className="text-xl font-semibold mb-2">
+                                    <div className="space-y-3">
+                                        <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
                                             {project.title}
                                         </h3>
-                                        <p className="text-muted-foreground text-sm mb-4">
+                                        <p className="text-muted-foreground text-sm leading-relaxed">
                                             {project.description}
                                         </p>
-                                        <div className="flex justify-between items-center">
-                                            <div className="flex space-x-3">
-                                                <a 
-                                                    href={project.link} 
-                                                    className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                                                    target="_blank">
-                                                <ExternalLink size={20}/> 
-                                                </a>
+                                    </div>
 
-                                                <a 
-                                                    href={project.githubUrl} 
-                                                    target="_blank"
-                                                    className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                                                >
-                                                    <Github size={20}/>
-                                                </a>
-                                            </div>
+                                    {/* Action Links */}
+                                    <div className="flex items-center justify-between pt-2">
+                                        <div className="flex space-x-3">
+                                            <a 
+                                                href={project.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-lg font-medium transition-all duration-300 hover:bg-primary/20 hover:scale-105"
+                                            >
+                                                <ExternalLink className="w-4 h-4" />
+                                                <span className="text-sm">Demo</span>
+                                            </a>
+                                            <a 
+                                                href={project.githubUrl}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center gap-2 px-4 py-2 bg-card border border-border/50 rounded-lg font-medium transition-all duration-300 hover:border-primary/50 hover:bg-primary/5 hover:scale-105"
+                                            >
+                                                <Github className="w-4 h-4" />
+                                                <span className="text-sm">Code</span>
+                                            </a>
                                         </div>
+                                        
+                                        <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
                                     </div>
                                 </div>
                             </div>
-                        );
+                        )
                     })}
                 </div>
 
-                <div className="text-center mt-12">
-                    <a className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 w-fit mx-auto" href="#/timeline">
-                        View my Timeline <ArrowRight size={16}/>
-                    </a>
+                {/* Call to Action */}
+                <div className="text-center mt-16 section-fade-in stagger-delay-3">
+                    <div className="inline-flex flex-col items-center gap-4 p-8 rounded-2xl bg-gradient-to-br from-primary/5 to-accent/5 border border-primary/10">
+                        <h3 className="text-xl font-semibold text-foreground">
+                            Want to see more of my work?
+                        </h3>
+                        <p className="text-muted-foreground max-w-md">
+                            Check out my GitHub profile for more projects and contributions
+                        </p>
+                        <a 
+                            href="https://github.com/DanielChahine0"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="modern-button inline-flex items-center gap-2 group"
+                        >
+                            <Github className="w-4 h-4" />
+                            <span>View All Projects</span>
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
-    );
+    )
 }

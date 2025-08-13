@@ -1,7 +1,7 @@
 import { NavBar } from "../components/NavBar";
 import { HeroSection } from "../components/HeroSection";
 import { AboutSection } from "../components/AboutSection";
-import { SkillsSections } from "../components/SkillsSections";
+import { SkillsSections } from "../components/SkillsSection_Enhanced";
 import { ProjectsSection } from "../components/ProjectsSection";
 import { BlogsSection } from "../components/BlogsSection";
 import { Footer } from "../components/Footer";
@@ -13,13 +13,18 @@ export const Home = () => {
         {/* Navbar */}
         <NavBar />
 
-        {/* Main Content */}
-        <main>
+        {/* Main Content with Enhanced Spacing */}
+        <main className="space-y-0">
+          {/* Hero takes full screen */}
           <HeroSection />
-          <AboutSection />
-          <SkillsSections />
-          <ProjectsSection />
-          <BlogsSection />
+          
+          {/* Other sections with consistent spacing */}
+          <div className="space-y-24">
+            <AboutSection />
+            <SkillsSections />
+            <ProjectsSection />
+            <BlogsSection />
+          </div>
         </main>
 
         {/* Footer */}

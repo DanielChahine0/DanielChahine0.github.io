@@ -148,6 +148,45 @@
     }
   }
 
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes sectionFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInFromLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
   /* Removed meteor keyframes */
 
   @keyframes flash {
@@ -443,24 +482,68 @@
 
 @layer utilities {
   .card-hover {
-    @apply transition-transform duration-300 hover:scale-[1.05] hover:shadow-lg;
+    @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:-translate-y-1;
   }
   .gradient-border {
-    @apply relative rounded-md bg-primary/30 border border-primary/30;
+    @apply relative rounded-xl bg-gradient-to-br from-card via-card/95 to-card/90 border border-border/50 backdrop-blur-sm;
     background-clip: padding-box;
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  }
+  .enhanced-gradient-border {
+    @apply relative rounded-xl bg-gradient-to-br from-card/80 via-card/90 to-card backdrop-blur-md;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.12),
+      0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+      0 1px 0 rgba(255, 255, 255, 0.1) inset;
   }
   .cosmic-button {
-    @apply px-2.5 py-2 bg-primary text-primary-foreground font-medium transition-all duration-300 hover:scale-105 active:scale-95 leading-normal rounded-md;
+    @apply px-6 py-3 bg-gradient-to-r from-primary via-primary to-primary/90 text-primary-foreground font-semibold transition-all duration-300 hover:scale-105 active:scale-95 rounded-xl;
     border: 1px solid color-mix(in srgb, rgb(var(--accent-rgb)) 70%, black 30%);
-    transition: all 0.3s ease;
+    box-shadow: 
+      0 4px 14px 0 rgba(var(--accent-rgb), 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .cosmic-button:hover {
-    box-shadow: 0 0 10px color-mix(in srgb, rgb(var(--accent-rgb)) 70%, black 30%);
+    box-shadow: 
+      0 8px 25px 0 rgba(var(--accent-rgb), 0.6),
+      0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+    transform: translateY(-2px) scale(1.05);
   }
-  /* Removed .star, .cloud, .meteor classes */
+  .modern-button {
+    @apply px-6 py-3 bg-primary/90 text-primary-foreground font-semibold rounded-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:scale-105 active:scale-95;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 4px 14px 0 rgba(var(--accent-rgb), 0.3),
+      0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  }
+  .glass-card {
+    @apply rounded-2xl backdrop-blur-lg border border-white/10;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.12),
+      0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  }
+  .animated-gradient {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+  }
   .custom-inline-hover {
-    @apply inline-block transition-transform duration-200 hover:scale-105;
+    @apply inline-block transition-all duration-200 hover:scale-105 hover:text-primary;
   }
+  .section-fade-in {
+    animation: sectionFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  .stagger-delay-1 { animation-delay: 0.1s; }
+  .stagger-delay-2 { animation-delay: 0.2s; }
+  .stagger-delay-3 { animation-delay: 0.3s; }
+  .stagger-delay-4 { animation-delay: 0.4s; }
 }
 
 #root {
