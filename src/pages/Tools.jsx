@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
     Calculator, Clock, Calendar, ArrowRight, FileText, Palette, FileSearch,
-    User, Image, Code
+    User, Image, Code, Zap
 } from "lucide-react";
 
 // ToolCard component for better separation of concerns
@@ -102,6 +102,12 @@ export default function Tools() {
             description: "Online code editor with live preview for HTML, CSS, and JavaScript.",
             icon: Code,
             path: "/tools/code-playground"
+        },
+        {
+            title: "Color Inverter",
+            description: "Instantly invert image colors. Perfect for converting icons and creating negative effects.",
+            icon: Zap,
+            path: "/tools/color-inverter"
         },
     ];
 

@@ -27,7 +27,7 @@ const skillsData = {
         icon: <Zap className="h-6 w-6 text-primary" />,
         skills: [
             'Full-Stack Development', 'Machine Learning', 'Data Analytics', 
-            'Web Development', 'Software Engineering'
+            'Web Development', 'Software Engineering', 'Image Processing'
         ]
     }
 };
