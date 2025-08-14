@@ -14,7 +14,6 @@ import TextAnalyzer from "./pages/TextAnalyzer"
 import ResumeBuilder from "./pages/ResumeBuilder"
 import ImageEditor from "./pages/ImageEditor"
 import CodePlayground from "./pages/CodePlayground"
-import ColorInverter from "./pages/ColorInverter"
 import { Toaster } from "@/components/ui/toaster"
 import { ScrollToTop } from "./components/ScrollToTop"
 
@@ -38,7 +37,6 @@ function AnimatedRoutes() {
         <Route path="/tools/resume-builder" element={<ResumeBuilder />} />
         <Route path="/tools/image-editor" element={<ImageEditor />} />
         <Route path="/tools/code-playground" element={<CodePlayground />} />
-        <Route path="/tools/color-inverter" element={<ColorInverter />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
