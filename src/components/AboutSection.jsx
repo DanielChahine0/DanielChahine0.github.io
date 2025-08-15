@@ -144,7 +144,7 @@ export const AboutSection = () => {
                                                 {achievement.highlight}
                                             </span>
                                         </div>
-                                        <p className="text-muted-foreground leading-relaxed">
+                                        <p className="leading-relaxed">
                                             {achievement.description}
                                         </p>
                                     </div>
