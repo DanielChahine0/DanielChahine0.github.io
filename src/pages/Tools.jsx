@@ -120,23 +120,13 @@ export default function Tools() {
                             <h1 className="text-4xl font-bold mb-2 tracking-tight text-foreground">
                                 Tools
                             </h1>
-                            <p className="text-lg text-foreground/80 max-w-2xl mx-auto leading-relaxed">
-                                Welcome to the Tools section! Explore these interactive tools and utilities.
-                            </p>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                             {tools.map((tool, index) => (
                                 <ToolCard key={tool.title} tool={tool} index={index} />
                             ))}
                         </div>
-                        {/* More Coming Soon section */}
-                        <div className="mt-20 flex flex-col items-center">
-                            <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-primary/60 via-primary/80 to-primary flex items-center justify-center animate-pulse mb-4">
-                                <span className="text-primary-foreground text-3xl font-bold" aria-hidden="true">+</span>
-                                <span className="sr-only">More tools coming soon</span>
-                            </div>
-                            <p className="text-foreground/60 text-base">More tools coming soon!</p>
-                        </div>
+                        
                     </motion.div>
                 </main>
                 <Footer />
