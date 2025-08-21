@@ -10,28 +10,28 @@ Page components representing different routes in the portfolio application.
 
 ## Core Pages
 
-• `Home.jsx` - Main portfolio landing page (`/`)
-• `Blogs.jsx` - Blog posts and articles (`/blogs`)
-• `Timeline.jsx` - Professional timeline (`/timeline`) 
-• `Tools.jsx` - Interactive tools showcase (`/tools`)
-• `NotFound.jsx` - 404 error page (`*`)
+- `Home.jsx` - Main portfolio landing page (`/`)
+- `Blogs.jsx` - Blog posts and articles (`/blogs`)
+- `Timeline.jsx` - Professional timeline (`/timeline`) 
+- `Tools.jsx` - Interactive tools showcase (`/tools`)
+- `NotFound.jsx` - 404 error page (`*`)
 
 ## Interactive Tools
 
 **Development:**
-• `CodePlayground.jsx` - Online code editor with live preview (`/tools/code-playground`)
-• `MarkdownEditor.jsx` - Real-time markdown editing (`/tools/markdown-editor`)
-• `TextAnalyzer.jsx` - Text analysis and statistics (`/tools/text-analyzer`)
+- `CodePlayground.jsx` - Online code editor with live preview (`/tools/code-playground`)
+- `MarkdownEditor.jsx` - Real-time markdown editing (`/tools/markdown-editor`)
+- `TextAnalyzer.jsx` - Text analysis and statistics (`/tools/text-analyzer`)
 
 **Health & Lifestyle:**
-• `CalorieTracker.jsx` - Nutrition and calorie tracking (`/tools/calorie-tracker`)
-• `ClockTimer.jsx` - Clock, timer, and Pomodoro (`/tools/clock-timer`)
+- `CalorieTracker.jsx` - Nutrition and calorie tracking (`/tools/calorie-tracker`)
+- `ClockTimer.jsx` - Clock, timer, and Pomodoro (`/tools/clock-timer`)
 
 **Creative:**
-• `ColorPicker.jsx` - Color selection and palettes (`/tools/color-picker`)
-• `ImageEditor.jsx` - Basic image manipulation (`/tools/image-editor`)
-• `ResumeBuilder.jsx` - Interactive resume creation (`/tools/resume-builder`)
-• `LifeInWeeks.jsx` - Life timeline visualization (`/tools/life-in-weeks`)
+- `ColorPicker.jsx` - Color selection and palettes (`/tools/color-picker`)
+- `ImageEditor.jsx` - Basic image manipulation (`/tools/image-editor`)
+- `ResumeBuilder.jsx` - Interactive resume creation (`/tools/resume-builder`)
+- `LifeInWeeks.jsx` - Life timeline visualization (`/tools/life-in-weeks`)
 
 ## Tool Details
 
