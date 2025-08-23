@@ -1,52 +1,80 @@
 # UI Components
 
-Fundamental UI primitive components for consistent interface elements.
+Last Updated: August 23, 2025
 
-**Built with:** Radix UI, class-variance-authority, Lucide React
+## Overview
+Core UI primitives built on Radix UI for consistent, accessible interface elements.
 
-## Documentation Navigation
-- [⬆️ Main README](../../../README.md) - Project overview and features
-- [⬆️ Source Overview](../../README.md) - Source code structure
-- [⬆️ Components](../README.md) - Parent components directory
+**Tech Stack:**
+- Radix UI
+- class-variance-authority
+- Lucide React
+- TailwindCSS
 
 ## Components
 
-### `toast.jsx`
-Customizable toast notification component.
-
-**Features:**
-• Accessible notifications via Radix UI
-• Default and destructive variants
-• Auto-dismiss functionality
-• Close button with icon
-
+### Toast System
 ```jsx
-<Toast>
+// toast.jsx - Notification component
+<Toast variant="default" duration={3000}>
   <ToastTitle>Success!</ToastTitle>
   <ToastDescription>Action completed.</ToastDescription>
+  <ToastClose />
 </Toast>
-```
 
-### `toaster.jsx`
-Toast container and management system.
-
-**Features:**
-• Multiple toast handling
-• Automatic positioning
-• Integration with `use-toast` hook
-
-```jsx
+// toaster.jsx - Toast container
 function App() {
   return (
-    <div>
-      {/* App content */}
-      <Toaster />
-    </div>
+    <>
+      {children}
+      <Toaster position="bottom-right" />
+    </>
   );
 }
 ```
 
-**Dependencies:** @radix-ui/react-toast, class-variance-authority, lucide-react
+**Features:**
+- ARIA compliance
+- Multiple variants
+- Auto-dismiss
+- Position control
+- Animation
+- Sound effects
+
+## Usage Guide
+
+### Installation
+```bash
+npm install @radix-ui/react-toast class-variance-authority
+```
+
+### Implementation
+```jsx
+import { useToast } from '@/hooks/use-toast';
+import { Toast } from '@/components/ui/toast';
+
+function MyComponent() {
+  const { toast } = useToast();
+  
+  const notify = () => {
+    toast({
+      title: "Success!",
+      description: "Operation completed",
+      variant: "default" | "success" | "error",
+      duration: 3000
+    });
+  };
+  
+  return <button onClick={notify}>Trigger Toast</button>;
+}
+```
+
+## Best Practices
+- Use semantic HTML
+- Include ARIA labels
+- Support keyboard nav
+- Test with screen readers
+- Follow design tokens
 
 - Additional toast variants (info, warning)
 - Custom toast positioning options
