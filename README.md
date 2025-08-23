@@ -1,14 +1,18 @@
 # Daniel Chahine - Personal Portfolio
 
+Last Updated: August 23, 2025
+
 <p align="center">
   <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/DanielChahine0/DanielChahine0.github.io?style=for-the-badge&logo=GitHub">
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/DanielChahine0/DanielChahine0.github.io?style=for-the-badge&logo=Javascript">
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/DanielChahine0/DanielChahine0.github.io?style=for-the-badge">
 </p>
 
-Welcome to my personal portfolio website! This modern, interactive site showcases my projects, skills, experience, and provides multiple ways to get in touch. Built with cutting-edge web technologies, it features smooth animations, responsive design, and a clean, engaging user interface.
+Welcome to my modern, interactive portfolio showcasing my projects, skills, and experience. Built with React 19 and Vite, featuring smooth animations, responsive design, and a collection of interactive tools.
 
-You can see the live demo on: [danielchahine0.github.io](https://danielchahine0.github.io)
+🚀 **Live Demo:** [danielchahine0.github.io](https://danielchahine0.github.io)
+
+[![Portfolio Preview](public/photos/HeroPhoto.png)](https://danielchahine0.github.io)
 
 ---
 
