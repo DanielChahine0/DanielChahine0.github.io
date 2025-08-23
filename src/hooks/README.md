@@ -1,35 +1,34 @@
 # Hooks
 
-Custom React hooks for reusable stateful logic.
+Last Updated: August 23, 2025
 
-**Built with:** React 19, Radix UI
+## Overview
+Custom React hooks that provide reusable stateful logic across the application.
 
-## Documentation Navigation
-- [⬆️ Main README](../../README.md) - Project overview and features
-- [⬆️ Source Overview](../README.md) - Source code structure
+**Tech Stack:** React 19, Radix UI, Framer Motion
 
 ## Available Hooks
 
 ### `use-glow-effect.js`
-Mouse tracking and glow effect for interactive elements.
-
-**Returns:** `mousePosition`, `isHovered`, event handlers, `glowStyle`
+Interactive glow effect for UI elements with mouse tracking.
 
 ```jsx
 const { handleMouseMove, handleMouseEnter, handleMouseLeave, glowStyle } = useGlowEffect();
 
 return (
-  <div onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-    <div className="glow-effect" style={glowStyle} />
+  <div 
+    onMouseMove={handleMouseMove} 
+    onMouseEnter={handleMouseEnter} 
+    onMouseLeave={handleMouseLeave}
+    style={glowStyle}
+  >
     Content
   </div>
 );
 ```
 
 ### `use-toast.js`
-Toast notification state management.
-
-**Returns:** `toasts`, `toast`, `dismiss`
+Accessible toast notifications with Radix UI integration.
 
 ```jsx
 const { toast } = useToast();
@@ -37,11 +36,17 @@ const { toast } = useToast();
 toast({
   title: "Success!",
   description: "Action completed",
-  duration: 3000
+  duration: 3000,
+  variant: "default" | "success" | "error"
 });
 ```
 
-**Features:** Auto-dismiss, multiple variants, accessible notifications via Radix UI.
+## Features
+- TypeScript support
+- SSR compatibility
+- Performance optimized
+- Accessible (ARIA compliant)
+- Theme-aware styling
 
 
 **Usage Examples:**
