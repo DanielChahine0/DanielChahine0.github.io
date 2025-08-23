@@ -1,37 +1,79 @@
 # Pages
 
-Page components representing different routes in the portfolio application.
+Last Updated: August 23, 2025
 
-**Built with:** React Router, Framer Motion, various specialized libraries
+## Overview
+React components representing routes in the portfolio application, including the main portfolio pages and interactive tools.
 
-## Documentation Navigation
-- [⬆️ Main README](../../README.md) - Project overview and features
-- [⬆️ Source Overview](../README.md) - Source code structure
+**Tech Stack:**
+- React Router v6
+- Framer Motion
+- Specialized Libraries
 
-## Core Pages
+## Page Structure
 
-- `Home.jsx` - Main portfolio landing page (`/`)
-- `Blogs.jsx` - Blog posts and articles (`/blogs`)
-- `Timeline.jsx` - Professional timeline (`/timeline`) 
-- `Tools.jsx` - Interactive tools showcase (`/tools`)
-- `NotFound.jsx` - 404 error page (`*`)
+### Main Portfolio `/`
+- **`Home.jsx`** - Portfolio landing page
+- **`Blogs.jsx`** - Blog posts and articles
+- **`Timeline.jsx`** - Professional journey
+- **`Tools.jsx`** - Tools showcase
+- **`NotFound.jsx`** - 404 error page
 
-## Interactive Tools
+### Development Tools `/tools`
+- **`CodePlayground.jsx`** - Web code editor
+  - Live preview
+  - Multi-language support
+  - Project management
 
-**Development:**
-- `CodePlayground.jsx` - Online code editor with live preview (`/tools/code-playground`)
-- `MarkdownEditor.jsx` - Real-time markdown editing (`/tools/markdown-editor`)
-- `TextAnalyzer.jsx` - Text analysis and statistics (`/tools/text-analyzer`)
+- **`MarkdownEditor.jsx`** - Markdown authoring
+  - Real-time preview
+  - Custom components
+  - Export options
 
-**Health & Lifestyle:**
-- `CalorieTracker.jsx` - Nutrition and calorie tracking (`/tools/calorie-tracker`)
-- `ClockTimer.jsx` - Clock, timer, and Pomodoro (`/tools/clock-timer`)
+- **`TextAnalyzer.jsx`** - Text analysis
+  - Statistics
+  - Readability scores
+  - Word frequency
 
-**Creative:**
-- `ColorPicker.jsx` - Color selection and palettes (`/tools/color-picker`)
-- `ImageEditor.jsx` - Basic image manipulation (`/tools/image-editor`)
-- `ResumeBuilder.jsx` - Interactive resume creation (`/tools/resume-builder`)
-- `LifeInWeeks.jsx` - Life timeline visualization (`/tools/life-in-weeks`)
+### Productivity Tools `/tools`
+- **`CalorieTracker.jsx`** - Nutrition tracking
+  - Daily goals
+  - Meal logging
+  - Progress charts
+
+- **`ClockTimer.jsx`** - Time management
+  - World clock
+  - Pomodoro timer
+  - Alarms
+
+- **`ResumeBuilder.jsx`** - CV creation
+  - Templates
+  - PDF export
+  - Real-time preview
+
+### Creative Tools `/tools`
+- **`ColorPicker.jsx`** - Color tools
+  - Palette generation
+  - Harmony rules
+  - Color schemes
+
+- **`ImageEditor.jsx`** - Image editing
+  - Filters
+  - Transformations
+  - Export options
+
+- **`LifeInWeeks.jsx`** - Life visualization
+  - Interactive grid
+  - Milestones
+  - Statistics
+
+## Features
+- Smooth transitions
+- Responsive layouts
+- Error boundaries
+- Loading states
+- Data persistence
+- Keyboard shortcuts
 
 ## Tool Details
 
