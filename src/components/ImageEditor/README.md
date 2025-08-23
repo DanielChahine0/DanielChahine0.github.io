@@ -1,21 +1,29 @@
-# ImageEditor Components
+# Image Editor Components
 
-This directory contains all the components and hooks for the Image Editor feature.
+Last Updated: August 23, 2025
+
+## Overview
+This directory contains a full-featured image editing interface with real-time previews, filters, and transformations.
 
 ## Components
+- **`Toolbar.jsx`** - Upload, transform, history, and export controls
+- **`ControlPanel.jsx`** - Filter presets and adjustment sliders
+- **`EditorCanvas.jsx`** - Interactive canvas for image manipulation
+- **`HelpSection.jsx`** - Contextual help and keyboard shortcuts
 
-- **Toolbar**: Main toolbar with upload, transformation, history, and export controls
-- **ControlPanel**: Side panel with filter presets and adjustment sliders
-- **EditorCanvas**: Canvas component for displaying and editing images
-- **HelpSection**: Help documentation component
+## Custom Hooks
+- **`useImageTransforms.js`** - Image rotation, flipping, and scaling
+- **`useImageActions.js`** - File operations and filter management
 
-## Hooks
-
-- **useImageTransforms**: Custom hook for image rotation and flipping operations
-- **useImageActions**: Custom hook for file upload, download, and filter management
+## Features
+- Image upload/download
+- Filters and adjustments
+- Transformation controls
+- History/undo support
+- Keyboard shortcuts
+- Touch gestures support
 
 ## Usage
-
 ```jsx
 import { 
   Toolbar, 
@@ -27,4 +35,5 @@ import {
 } from '@/components/ImageEditor';
 ```
 
-The components are designed to work together as a cohesive image editing interface, following the same patterns as other editor components in the project.
+## Architecture
+The components follow a modular design pattern for easy maintenance and testing, integrating with the project's shared UI components and hooks.
