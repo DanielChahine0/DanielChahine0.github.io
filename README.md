@@ -10,13 +10,11 @@ Last Updated: August 23, 2025
 
 Welcome to my modern, interactive portfolio showcasing my projects, skills, and experience. Built with React 19 and Vite, featuring smooth animations, responsive design, and a collection of interactive tools.
 
-🚀 **Live Demo:** [danielchahine0.github.io](https://danielchahine0.github.io)
+**Live Demo:** [danielchahine0.github.io](https://danielchahine0.github.io)
 
 [![Portfolio Preview](public/photos/HeroPhoto.png)](https://danielchahine0.github.io)
 
 ---
-
-
 
 ## Features
 
