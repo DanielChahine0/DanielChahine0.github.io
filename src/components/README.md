@@ -1,45 +1,54 @@
 # Components
 
-Reusable React components for the portfolio website.
+Last Updated: August 23, 2025
 
-**Built with:** React 19, Framer Motion, Tailwind CSS, Lucide React
+## Overview
+Core React components powering the portfolio website and its interactive tools.
 
-## Documentation Navigation
-- [⬆️ Main README](../../README.md) - Project overview and features
-- [⬆️ Source Overview](../README.md) - Source code structure
-- [⬇️ /ui/](./ui/README.md) - UI primitives
+**Tech Stack:**
+- React 19
+- Framer Motion
+- Tailwind CSS
+- Radix UI
+- Lucide React
 
-## Structure
+## Component Categories
 
-• `ui/` - [Base UI primitives](./ui/README.md) (toast, etc.)
-• Component files - Feature-specific components
+### Core UI
+- **`NavBar.jsx`** - Responsive navigation with theme toggle
+- **`Footer.jsx`** - Site footer with dynamic content
+- **`PageTransition.jsx`** - Smooth page transitions
+- **`ui/`** - Foundational UI components
 
-## Key Components
+### Portfolio Sections
+- **`HeroSection.jsx`** - Animated landing section
+- **`AboutSection.jsx`** - Personal introduction
+- **`ProjectsSection.jsx`** - Project showcase grid
+- **`SkillsSection.jsx`** - Interactive skills display
 
-**Layout & Navigation:**
-• `NavBar.jsx` - Main navigation with responsive menu
-• `Footer.jsx` - Site footer with social links
-• `PageTransition.jsx` - Framer Motion page transitions
+### Interactive Tools
+- **`CalorieCalculator/`** - Nutrition tracking tool
+- **`ClockTimer/`** - Time management suite
+- **`CodePlayground/`** - Web code editor
+- **`ColorPicker/`** - Color manipulation tools
+- **`ImageEditor/`** - Image processing suite
+- **`LifeInWeeks/`** - Life visualization tool
+- **`MarkdownEditor/`** - Markdown authoring environment
+- **`ResumeBuilder/`** - CV generation tool
+- **`TextAnalyzer/`** - Text analysis utilities
 
-**Content Sections:**
-• `HeroSection.jsx` - Landing section with intro
-• `AboutSection.jsx` - Personal background
-• `SkillsSections.jsx` - Technology skills showcase
-• `ProjectsSection.jsx` - Project portfolio
+### Visual Effects
+- **`StarBackground.jsx`** - Canvas star animation
+- **`CloudBackground.jsx`** - Parallax cloud effects
 
-**Interactive Elements:**
-• `ThemeToggle.jsx` - Dark/light mode switcher
-• `ScrollToTop.jsx` - Smooth scroll utility
-
-**Visual Effects:**
-• `StarBackground.jsx` - Animated canvas stars
-• `CloudBackground.jsx` - CSS cloud animations
-
-**Features:**
-• Modern React hooks pattern
-• Responsive design with mobile-first approach
-• Accessibility-compliant components
-• Performance-optimized animations
+## Features
+- SSR-compatible components
+- Mobile-first responsive design
+- ARIA-compliant accessibility
+- Motion optimization
+- Theme support
+- Error boundaries
+- Performance monitoring
 
 ---
 
