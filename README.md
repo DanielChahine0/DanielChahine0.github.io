@@ -12,7 +12,11 @@ Welcome to my modern, interactive portfolio showcasing my projects, skills, and 
 
 **Live Demo:** [danielchahine0.github.io](https://danielchahine0.github.io)
 
-[![Portfolio Preview](public/photos/HeroPhoto.png)](https://danielchahine0.github.io)
+<p align="center">
+  <a href="https://danielchahine0.github.io">
+    <img src="public/photos/HeroPhoto.png" alt="Portfolio Preview" style="max-height: 500px;">
+  </a>
+</p>
 
 ---
 
