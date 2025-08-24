@@ -14,7 +14,7 @@ Welcome to my modern, interactive portfolio showcasing my projects, skills, and 
 
 <p align="center">
   <a href="https://danielchahine0.github.io">
-    <img src="public/photos/HeroPhoto.png" alt="Portfolio Preview" style="max-height: 500px;">
+    <img src="public/photos/HeroPhoto.png" alt="Portfolio Preview" style="max-height: 300px;">
   </a>
 </p>
 
