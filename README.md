@@ -1,6 +1,6 @@
 # Daniel Chahine - Personal Portfolio
 
-Last Updated: August 23, 2025
+Last Updated: August 26, 2025
 
 <p align="center">
   <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/DanielChahine0/DanielChahine0.github.io?style=for-the-badge&logo=GitHub">
@@ -8,9 +8,16 @@ Last Updated: August 23, 2025
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/DanielChahine0/DanielChahine0.github.io?style=for-the-badge">
 </p>
 
-Welcome to my modern, interactive portfolio showcasing my projects, skills, and experience. Built with React 19 and Vite, featuring smooth animations, responsive design, and a collection of interactive tools.
+Welcome to my modern, interactive portfolio showcasing my projects, skills, and professional journey. Built with React 19 and Vite, this portfolio features smooth animations, responsive design, and a comprehensive collection of interactive development tools.
 
 **Live Demo:** [danielchahine0.github.io](https://danielchahine0.github.io)
+
+**Key Features:**
+- Modern React with Hooks and Suspense
+- Fast builds with Vite
+- Responsive design with Tailwind CSS
+- Smooth animations with Framer Motion
+- Interactive development tools
 
 <p align="center">
   <a href="https://danielchahine0.github.io">
