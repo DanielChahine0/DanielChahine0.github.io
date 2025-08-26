@@ -1,8 +1,17 @@
 # Code Playground Components
 
-Last Updated: August 23, 2025
+Last Updated: August 26, 2025
 
 ## Overview
+
+An interactive code editor environment with real-time preview capabilities and multi-language support.
+
+### Core Features
+- Syntax highlighting
+- Live preview
+- Multiple language support
+- Code saving
+- Custom templates
 A feature-rich code editor and live preview environment for HTML, CSS, and JavaScript development.
 
 ## Structure
