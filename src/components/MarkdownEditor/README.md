@@ -1,8 +1,16 @@
 # MarkdownEditor Components
 
-This directory contains the modular components for the Enhanced Markdown Editor application.
+Last Updated: August 26, 2025
+
+This directory contains the modular components for the Enhanced Markdown Editor application, providing a feature-rich markdown authoring experience.
 
 ## Component Structure
+
+### Core Components
+- **`EditorPanel.jsx`** - Main editing interface
+- **`PreviewPanel.jsx`** - Real-time markdown preview
+- **`Toolbar.jsx`** - Formatting controls
+- **`MarkdownComponents.jsx`** - Custom markdown elements
 
 ### Main Components
 
