@@ -1,8 +1,17 @@
 # Text Analyzer Components
 
-Last Updated: August 24, 2025
+Last Updated: August 26, 2025
 
 ## Overview
+
+A comprehensive set of components for analyzing text content, providing insights through various metrics and visualization tools.
+
+### Features
+- Word and character counting
+- Readability scoring
+- Sentiment analysis
+- Keyword extraction
+- Text statistics
 A comprehensive text analysis tool providing linguistic insights, readability metrics, and content optimization suggestions.
 
 ## Structure
