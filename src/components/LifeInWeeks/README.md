@@ -1,8 +1,16 @@
 # Life in Weeks Components
 
-Last Updated: August 24, 2025
+Last Updated: August 26, 2025
 
 ## Overview
+
+A collection of components that create an interactive life visualization tool, helping users understand and plan their life journey through a visual grid representation.
+
+### Purpose
+- Visualize life in weekly blocks
+- Track milestones and achievements
+- Analyze life patterns
+- Plan future goals
 A visual life planning and reflection tool that represents life in weeks, incorporating personal milestones and societal context.
 
 ## Structure
