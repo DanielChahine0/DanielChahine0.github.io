@@ -1,30 +1,30 @@
 # Components
 
-Last Updated: August 23, 2025
+Last Updated: August 26, 2025
 
 ## Overview
-Core React components powering the portfolio website and its interactive tools.
+Core React components powering the portfolio website and its interactive tools. Follows a modular architecture with reusable components and specialized tool modules.
 
 **Tech Stack:**
-- React 19
-- Framer Motion
-- Tailwind CSS
-- Radix UI
-- Lucide React
+- React 19 with Hooks
+- Framer Motion for animations
+- Tailwind CSS for styling
+- Radix UI for accessibility
+- Lucide React for icons
 
 ## Component Categories
 
 ### Core UI
-- **`NavBar.jsx`** - Responsive navigation with theme toggle
-- **`Footer.jsx`** - Site footer with dynamic content
-- **`PageTransition.jsx`** - Smooth page transitions
-- **`ui/`** - Foundational UI components
+- **`NavBar.jsx`** - Responsive navigation with theme toggle and mobile menu
+- **`Footer.jsx`** - Site footer with dynamic content and social links
+- **`PageTransition.jsx`** - Smooth page transitions with Framer Motion
+- **`ui/`** - Foundational UI components and primitives
 
 ### Portfolio Sections
-- **`HeroSection.jsx`** - Animated landing section
-- **`AboutSection.jsx`** - Personal introduction
-- **`ProjectsSection.jsx`** - Project showcase grid
-- **`SkillsSection.jsx`** - Interactive skills display
+- **`HeroSection.jsx`** - Animated landing section with parallax effects
+- **`AboutSection.jsx`** - Personal introduction with interactive elements
+- **`ProjectsSection.jsx`** - Project showcase grid with filtering
+- **`SkillsSection_Enhanced.jsx`** - Interactive skills display with categories
 
 ### Interactive Tools
 - **`CalorieCalculator/`** - Nutrition tracking tool
