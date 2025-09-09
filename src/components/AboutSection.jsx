@@ -88,13 +88,13 @@ export const AboutSection = () => {
                                     <span className="text-primary font-semibold custom-inline-hover">Data Analytics</span>.
                                 </p>
                                 
-                                <p>
+                                {/* <p>
                                     Currently working as a Data Analyst at the Institute for Social Research (ISR),
                                     I specialize in 
                                     <span className="text-primary font-semibold custom-inline-hover">data collection</span>,&nbsp;
                                     <span className="text-primary font-semibold custom-inline-hover">data transformation</span>, and&nbsp;
                                     <span className="text-primary font-semibold custom-inline-hover">data visualization</span>.
-                                </p>
+                                </p> */}
                             </div>
                         </div>
 
