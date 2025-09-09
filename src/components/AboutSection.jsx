@@ -10,12 +10,12 @@ export const AboutSection = () => {
     };
 
     const achievements = [
-        {
-            icon: <Briefcase className="h-6 w-6 text-primary" />,
-            title: "Current Role",
-            description: "Data Analyst at the Institute for Social Research (ISR)",
-            highlight: "Active"
-        },
+        // {
+        //     icon: <Briefcase className="h-6 w-6 text-primary" />,
+        //     title: "Current Role",
+        //     description: "Data Analyst at the Institute for Social Research (ISR)",
+        //     highlight: "Active"
+        // },
         {
             icon: <GraduationCap className="h-6 w-6 text-primary" />,
             title: "Education",
@@ -60,7 +60,7 @@ export const AboutSection = () => {
                         <div className="space-y-6">
                             <div className="space-y-2">
                                 <h3 className="text-3xl font-bold leading-tight"> 
-                                    Data Analyst, Computer Science Student & Full-Stack Developer
+                                    Computer Science Student & Full-Stack Developer
                                 </h3>
                             </div>
                             
@@ -71,7 +71,7 @@ export const AboutSection = () => {
                                     <span className="text-primary font-semibold custom-inline-hover">Node.js</span>,&nbsp;
                                     <span className="text-primary font-semibold custom-inline-hover">Express.js</span>, and&nbsp;
                                     <span className="text-primary font-semibold custom-inline-hover">MongoDB</span>.
-                                    My projects also leverage 
+                                    My projects also leverage&nbsp;
                                     <span className="text-primary font-semibold custom-inline-hover">Next.js</span>,&nbsp;
                                     <span className="text-primary font-semibold custom-inline-hover">Vite</span>,&nbsp;
                                     <span className="text-primary font-semibold custom-inline-hover">Tailwind CSS</span>, and deployment platforms like&nbsp;
@@ -102,7 +102,7 @@ export const AboutSection = () => {
                         <div className="flex flex-col sm:flex-row gap-4 pt-6">
                             <button 
                                 onClick={handleContactClick}
-                                className="modern-button inline-flex items-center gap-2 group"
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-xl border border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:border-primary group"
                             >
                                 <Target className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
                                 <span>Get In Touch</span>

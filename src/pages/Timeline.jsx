@@ -15,13 +15,13 @@ const timelineEvents = [
 			"I supported hackathon operations by managing check-ins, guiding participants, ensuring safety, and assisting with event logistics for a seamless experience.",
 		category: "Extracurricular",
 	},
-	{
-		year: "April 2025",
-		title: "Data Analyst - ISR",
-		description:
-			"I worked as a Data Analyst, performing data collection, cleaning, and statistical analysis to identify trends, generate actionable insights, and support data-driven decision-making through visualizations and reports.",
-		category: "Experience",
-	},
+	// {
+	// 	year: "April 2025",
+	// 	title: "Data Analyst - ISR",
+	// 	description:
+	// 		"I worked as a Data Analyst, performing data collection, cleaning, and statistical analysis to identify trends, generate actionable insights, and support data-driven decision-making through visualizations and reports.",
+	// 	category: "Experience",
+	// },
 	{
 		year: "January 2025",
 		title: "Smart Recipe - Frontend",
