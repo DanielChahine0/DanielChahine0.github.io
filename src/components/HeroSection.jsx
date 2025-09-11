@@ -1,3 +1,12 @@
+/**
+ * HeroSection Component
+ * The main landing section of the portfolio website that displays:
+ * - Personal introduction
+ * - Social media links
+ * - Call-to-action buttons
+ * - Smooth scroll navigation
+ */
+
 import { ArrowDown, Mail, Download, ExternalLink } from "lucide-react";
 import { FiGithub, FiLinkedin, FiInstagram } from "react-icons/fi";
 
