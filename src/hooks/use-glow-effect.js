@@ -1,3 +1,13 @@
+/**
+ * useGlowEffect Hook
+ * A custom React hook that creates an interactive glow effect following the mouse cursor
+ * Features:
+ * - Tracks mouse position relative to the element
+ * - Manages hover state
+ * - Provides necessary event handlers and styles
+ * - Creates a smooth, performant glow effect for UI elements
+ */
+
 import { useState } from 'react';
 
 export const useGlowEffect = () => {
