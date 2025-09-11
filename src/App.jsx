@@ -1,3 +1,9 @@
+/**
+ * App.jsx - Main application component that handles routing and layout
+ * This file sets up the application's routing structure and provides smooth page transitions
+ * using React Router and Framer Motion for animations.
+ */
+
 import { HashRouter, Route, Routes, useLocation } from "react-router-dom"
 import { AnimatePresence } from "framer-motion"
 import { Home } from "./pages/Home"
