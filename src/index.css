@@ -1,8 +1,18 @@
 
+/**
+ * Global CSS Styles
+ * This file contains global styles, utilities, and theme configurations
+ * for the entire application. It includes:
+ * - Font imports
+ * - Tailwind CSS utilities
+ * - Custom utility classes
+ * - Theme variables and configurations
+ */
+
 @import url('https://fonts.googleapis.com/css2?family=Coda:wght@400;700&display=swap');
 @import "tailwindcss";
 
-/* Syntax highlighting for code blocks */
+/* Syntax highlighting styles for code blocks using highlight.js */
 @import "highlight.js/styles/github-dark.css";
 
 @layer utilities {
