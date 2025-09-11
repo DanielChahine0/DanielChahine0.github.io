@@ -1,3 +1,9 @@
+/**
+ * main.jsx - Application Entry Point
+ * This file initializes the React application and renders it to the DOM
+ * It sets up StrictMode for development and imports necessary global styles
+ */
+
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
