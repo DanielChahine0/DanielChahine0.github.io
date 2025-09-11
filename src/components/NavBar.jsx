@@ -1,8 +1,18 @@
+/**
+ * NavBar Component
+ * A responsive navigation bar that includes:
+ * - Navigation links to different sections/pages
+ * - Theme toggle functionality
+ * - Mobile menu support
+ * - Scroll-based styling
+ * - Resume download link
+ */
+
 import { cn } from '@/lib/utils'
 import { X, Menu, CodeXml } from 'lucide-react';
 import { useEffect, useState } from 'react'
-import { ThemeToggle } from './ThemeToggle'; // Import the ThemeToggle component
-import { Link, useNavigate } from 'react-router-dom'; // Import Link and useNavigate from react-router-dom
+import { ThemeToggle } from './ThemeToggle';
+import { Link, useNavigate } from 'react-router-dom';
 
 const navItems = [
     { name: 'Timeline', href: '/timeline', isRoute: true },
