@@ -1,6 +1,18 @@
+/**
+ * Utility Functions
+ * This file contains various helper functions used throughout the application:
+ * - Tailwind CSS class name merging utilities
+ * - Date and time formatting functions
+ * - Common helper functions
+ */
+
 import {clsx} from 'clsx'
 import { twMerge } from 'tailwind-merge';
 
+/**
+ * Combines and merges Tailwind CSS classes using clsx and tailwind-merge
+ * This helps avoid conflicts when combining conditional classes
+ */
 export const cn = (...inputs) => {
     return twMerge(clsx(inputs));
 }
