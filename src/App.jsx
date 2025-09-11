@@ -23,6 +23,11 @@ import CodePlayground from "./pages/CodePlayground"
 import { Toaster } from "@/components/ui/toaster"
 import { ScrollToTop } from "./components/ScrollToTop"
 
+/**
+ * AnimatedRoutes Component
+ * Handles the route transitions with animations using Framer Motion's AnimatePresence
+ * Each route change triggers a smooth page transition animation
+ */
 function AnimatedRoutes() {
   const location = useLocation();
 
