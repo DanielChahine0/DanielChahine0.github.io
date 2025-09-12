@@ -105,6 +105,11 @@ ${js}
         });
     }, [html, css, js, toast]);
 
+    /**
+     * Saves the current project to local storage
+     * Prompts for a project name and stores the current state
+     * Updates the savedProjects list and shows a success notification
+     */
     const saveProject = useCallback(() => {
         const projectName = prompt('Enter project name:');
         if (!projectName) return;
