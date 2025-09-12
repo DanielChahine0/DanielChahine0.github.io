@@ -34,6 +34,14 @@ export const validateFormData = (data) => {
 /**
  * Calculate BMR, TDEE, and target calories based on form data
  */
+/**
+ * Calculates BMR, TDEE, and target calories based on user's data
+ * Uses the Mifflin-St Jeor Equation for BMR calculation
+ * @param {Object} formData - User's personal data (age, weight, height, gender, etc.)
+ * @param {Object} activityLevels - Activity level multipliers
+ * @param {Object} goals - Weight goals and their caloric adjustments
+ * @returns {Object} Contains calculated BMR, TDEE, and target calories
+ */
 export const calculateCalories = (formData, activityLevels, goals) => {
   let weightKg = parseFloat(formData.weight);
   let heightCm = parseFloat(formData.height);
