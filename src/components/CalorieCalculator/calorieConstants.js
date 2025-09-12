@@ -5,7 +5,15 @@
  * Contains activity level multipliers and goal adjustments for calorie calculations.
  */
 
-// Activity level multipliers for TDEE calculation
+/**
+ * Activity level multipliers used for TDEE calculation
+ * Each level represents a different amount of physical activity:
+ * - Sedentary: Little to no exercise, desk job
+ * - Light: Light exercise 1-3 days per week
+ * - Moderate: Moderate exercise 3-5 days per week
+ * - Very: Hard exercise 6-7 days per week
+ * - Extra: Very hard exercise and physical job
+ */
 export const activityLevels = {
   sedentary: { label: 'Sedentary (little/no exercise)', multiplier: 1.2 },
   light: { label: 'Light activity (1–3 days/week)', multiplier: 1.375 },
