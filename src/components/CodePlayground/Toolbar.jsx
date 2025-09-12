@@ -14,6 +14,37 @@ import {
     EyeOff
 } from "lucide-react";
 
+/**
+ * Toolbar Component
+ * 
+ * A memoized component that provides the main controls for the Code Playground.
+ * Features include:
+ * - Template selection
+ * - Code execution controls
+ * - Project saving/loading
+ * - Viewport size switching
+ * - Auto-run toggle
+ * - Preview toggle for mobile
+ * 
+ * @param {Object} props
+ * @param {function} props.onRun - Callback to run the code
+ * @param {function} props.onSave - Callback to save the project
+ * @param {function} props.onShare - Callback to share the project
+ * @param {function} props.onDownload - Callback to download the project
+ * @param {function} props.onReset - Callback to reset the editor
+ * @param {function} props.onLoadTemplate - Callback when loading a template
+ * @param {boolean} props.autoRun - Flag for auto-run feature
+ * @param {function} props.onAutoRunToggle - Callback for auto-run toggle
+ * @param {string} props.viewMode - Current viewport mode
+ * @param {function} props.onViewModeChange - Callback for viewport mode change
+ * @param {Array} props.templates - Available code templates
+ * @param {boolean} props.isFullscreen - Flag for fullscreen mode
+ * @param {string} props.label - Toolbar label
+ * @param {boolean} props.isMobile - Flag for mobile view
+ * @param {boolean} props.showPreview - Flag for preview visibility
+ * @param {function} props.onTogglePreview - Callback for preview toggle
+ */
+
 const Toolbar = memo(function Toolbar({
     onRun,
     onSave,
