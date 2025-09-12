@@ -2,6 +2,23 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Code2, FileCode, Braces } from "lucide-react";
 
+/**
+ * EditorPanel Component
+ * 
+ * A code editor panel that supports HTML, CSS, and JavaScript editing with syntax highlighting
+ * and tab-based navigation. Includes animations for tab switching and responsive design for mobile.
+ * 
+ * @param {Object} props
+ * @param {string} props.activeTab - Currently active tab (html/css/js)
+ * @param {function} props.onTabChange - Callback for tab change
+ * @param {string} props.html - HTML code content
+ * @param {string} props.css - CSS code content
+ * @param {string} props.js - JavaScript code content
+ * @param {function} props.onHtmlChange - Callback for HTML code changes
+ * @param {function} props.onCssChange - Callback for CSS code changes
+ * @param {function} props.onJsChange - Callback for JavaScript code changes
+ * @param {boolean} props.isMobile - Flag for mobile view adaptation
+ */
 export default function EditorPanel({ 
     activeTab, 
     onTabChange,
