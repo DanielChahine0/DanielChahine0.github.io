@@ -1,12 +1,26 @@
 /**
  * WorldClock.jsx
  * 
- * A component that displays time in different time zones.
+ * A component that displays current time across different time zones simultaneously.
  * Features:
- * - Toggle between multiple cities/time zones
- * - Real-time updates
+ * - Interactive city selection with toggle buttons
+ * - Real-time updates using local time conversion
  * - Supports major cities across different continents
- * - User-selectable cities
+ * - User-selectable cities with persistent selection state
+ * - Responsive layout with flex-wrap design
+ * - Accessibility support with ARIA attributes
+ * - 12-hour time format with seconds display
+ * - Styled with Tailwind CSS for consistent theming
+ * 
+ * @component
+ * @example
+ * <WorldClock />
+ * 
+ * Default Cities:
+ * - New York (America/New_York)
+ * - London (Europe/London)
+ * - Tokyo (Asia/Tokyo)
+ * - Sydney (Australia/Sydney)
  */
 
 import { useState } from "react";
