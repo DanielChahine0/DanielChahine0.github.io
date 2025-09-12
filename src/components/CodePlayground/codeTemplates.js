@@ -1,6 +1,10 @@
+/**
+ * Collection of predefined code templates for the Code Playground
+ * Each template contains HTML, CSS, and JavaScript code for different interactive components
+ */
 export const codeTemplates = [
     {
-        name: 'Animated Card',
+        name: 'Animated Card', // Template for a hover-animated card with button interaction
         html: `<div class="container">
     <div class="card">
         <h2>Animated Card</h2>
