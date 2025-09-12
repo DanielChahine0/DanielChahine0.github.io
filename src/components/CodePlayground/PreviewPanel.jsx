@@ -1,6 +1,19 @@
 import React from "react";
 import { Eye } from "lucide-react";
 
+/**
+ * PreviewPanel Component
+ * 
+ * Renders a live preview of the code being edited in the CodePlayground.
+ * Supports different viewport sizes (mobile, tablet, desktop) and includes
+ * a sandboxed iframe for secure code execution.
+ * 
+ * @param {Object} props
+ * @param {string} props.viewMode - Current viewport mode (mobile/tablet/desktop)
+ * @param {React.RefObject} props.iframeRef - Reference to the preview iframe
+ * @param {string} props.className - Additional CSS classes
+ * @param {boolean} props.isMobile - Flag for mobile view adaptation
+ */
 export default function PreviewPanel({ 
     viewMode, 
     iframeRef,
