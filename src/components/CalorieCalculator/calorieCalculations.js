@@ -5,9 +5,7 @@
  * BMR calculation, TDEE calculation, and target calorie determination.
  */
 
-/**
- * Validate form inputs for age, weight, and height
- */
+
 /**
  * Validates user input data for the calorie calculator
  * @param {Object} data - Form data containing age, weight, height, and unit system
