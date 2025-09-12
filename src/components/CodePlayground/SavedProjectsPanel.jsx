@@ -1,5 +1,18 @@
 import React from "react";
 
+/**
+ * SavedProjectsPanel Component
+ * 
+ * Displays a list of saved code playground projects with options to load or delete them.
+ * Projects are shown in a horizontal scrollable list with project name, creation date,
+ * and action buttons.
+ * 
+ * @param {Object} props
+ * @param {Array} props.savedProjects - List of saved code projects
+ * @param {function} props.onLoadProject - Callback when loading a project
+ * @param {function} props.onDeleteProject - Callback when deleting a project
+ * @param {boolean} props.isMobile - Flag for mobile view adaptation
+ */
 export default function SavedProjectsPanel({ 
     savedProjects = [], 
     onLoadProject, 
