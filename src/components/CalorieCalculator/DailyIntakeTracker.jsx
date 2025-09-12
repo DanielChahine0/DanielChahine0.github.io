@@ -2,10 +2,24 @@ import React from 'react';
 import { Plus, Trash2 } from 'lucide-react';
 
 /**
- * DailyIntakeTracker
+ * DailyIntakeTracker Component
  * 
- * Component for tracking daily food intake. Allows users to add food items
- * with calorie values, view the total consumed calories, and clear the log.
+ * A tracking tool for monitoring daily food intake and calorie consumption.
+ * Features:
+ * - Add food items with their calorie values
+ * - Display a running list of consumed foods
+ * - Show total calories consumed
+ * - Clear the daily log
+ * 
+ * Props:
+ * @param {Array} dailyIntake - List of consumed food items
+ * @param {string} newFood - Current value of food input field
+ * @param {string} newCalories - Current value of calories input field
+ * @param {number} totalConsumed - Sum of all consumed calories
+ * @param {Function} onNewFoodChange - Handler for food name input
+ * @param {Function} onNewCaloriesChange - Handler for calorie value input
+ * @param {Function} onAddFoodItem - Handler for adding new food items
+ * @param {Function} onClearIntake - Handler for clearing the intake log
  */
 export function DailyIntakeTracker({
   dailyIntake,
