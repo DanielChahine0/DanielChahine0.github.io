@@ -1,7 +1,15 @@
+/**
+ * AlarmSection.jsx
+ * 
+ * A component that provides alarm functionality with features including:
+ * - Setting and managing multiple alarms
+ * - Persistent storage of alarms in localStorage
+ * - Audio and notification support
+ * - Recurring alarm options
+ */
+
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
-
-// Alarm Section
 const DEFAULT_SOUND = "https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae1b6.mp3";
 const CHIME_SOUND = "https://cdn.pixabay.com/audio/2021/08/04/audio_12b0c7443c.mp3";
 
