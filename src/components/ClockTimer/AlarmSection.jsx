@@ -4,8 +4,15 @@
  * A component that provides alarm functionality with features including:
  * - Setting and managing multiple alarms
  * - Persistent storage of alarms in localStorage
- * - Audio and notification support
- * - Recurring alarm options
+ * - Audio and notification support with volume control
+ * - Recurring alarm options for daily reminders
+ * - Vibration support for mobile devices
+ * - Browser notifications if permitted
+ * - Auto-cleanup of triggered alarms after 24 hours
+ * 
+ * @component
+ * @example
+ * <AlarmSection />
  */
 
 import { useState, useEffect, useRef, useCallback } from "react";
