@@ -1,4 +1,11 @@
-// Current Time Component
+/**
+ * CurrentTimeDisplay.jsx
+ * 
+ * A component that displays the current time and date.
+ * @param {Date} currentTime - The current time to display
+ * @param {Function} formatTime - Function to format the time string
+ * @param {Function} formatDate - Function to format the date string
+ */
 export function CurrentTimeDisplay({ currentTime, formatTime, formatDate }) {
     return (
         <div className="space-y-2 flex flex-col items-center">
