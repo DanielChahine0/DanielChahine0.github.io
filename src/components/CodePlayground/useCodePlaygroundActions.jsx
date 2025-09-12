@@ -1,5 +1,27 @@
 import { useCallback } from 'react';
 
+/**
+ * Custom hook that provides actions and utilities for the Code Playground
+ * 
+ * This hook manages core functionality including:
+ * - Code execution in an iframe sandbox
+ * - Project saving and loading
+ * - File downloading
+ * - Error handling
+ * - Local storage integration
+ * 
+ * @param {string} html - HTML code content
+ * @param {string} css - CSS code content
+ * @param {string} js - JavaScript code content
+ * @param {function} setHtml - HTML setter function
+ * @param {function} setCss - CSS setter function
+ * @param {function} setJs - JavaScript setter function
+ * @param {Array} savedProjects - List of saved projects
+ * @param {function} setSavedProjects - Saved projects setter function
+ * @param {function} toast - Toast notification function
+ * @param {function} setError - Error state setter function
+ * @returns {Object} Object containing playground action functions
+ */
 export const useCodePlaygroundActions = (
     html, 
     css, 
