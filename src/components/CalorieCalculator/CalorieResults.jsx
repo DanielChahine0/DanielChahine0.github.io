@@ -1,10 +1,20 @@
 import React from 'react';
 
 /**
- * CalorieResults
+ * CalorieResults Component
  * 
- * Component for displaying calculated calorie results including BMR, TDEE,
- * and recommended daily calorie intake based on user's goals.
+ * Displays the calculated results from the calorie calculator:
+ * - BMR (Basal Metabolic Rate): Calories burned at complete rest
+ * - TDEE (Total Daily Energy Expenditure): Calories burned including activity
+ * - Recommended daily calorie intake based on user's goals
+ * 
+ * Props:
+ * @param {Object} results - Contains calculated values:
+ *   - bmr: Base metabolic rate
+ *   - tdee: Total daily energy expenditure
+ *   - targetCalories: Recommended daily calorie intake
+ *   - goal: Selected weight management goal
+ *   - activityLevel: Selected activity level
  */
 export function CalorieResults({ results }) {
   if (!results) return null;
