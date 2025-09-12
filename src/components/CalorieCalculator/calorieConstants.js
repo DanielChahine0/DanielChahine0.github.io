@@ -22,7 +22,13 @@ export const activityLevels = {
   extra: { label: 'Extra active (physical job)', multiplier: 1.9 },
 };
 
-// Goal adjustments for calorie recommendations
+/**
+ * Weight management goals and their corresponding caloric adjustments
+ * Based on the principle that:
+ * - 3500 calories = 1 pound of body weight
+ * - To lose/gain 1 pound per week, adjust by 500 calories per day
+ * - To lose/gain 2 pounds per week, adjust by 1000 calories per day
+ */
 export const goals = {
   lose2: { label: 'Lose 2 lbs/week', adjustment: -1000 },
   lose1: { label: 'Lose 1 lb/week', adjustment: -500 },
