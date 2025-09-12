@@ -1,6 +1,15 @@
-import { useState } from "react";
+/**
+ * WorldClock.jsx
+ * 
+ * A component that displays time in different time zones.
+ * Features:
+ * - Toggle between multiple cities/time zones
+ * - Real-time updates
+ * - Supports major cities across different continents
+ * - User-selectable cities
+ */
 
-// World Clock Component
+import { useState } from "react";
 export function WorldClock() {
     const worldCities = [
         { name: "New York", tz: "America/New_York" },
