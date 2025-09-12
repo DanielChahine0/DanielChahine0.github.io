@@ -2,10 +2,24 @@ import React from 'react';
 import { Calculator } from 'lucide-react';
 
 /**
- * CalorieForm
+ * CalorieForm Component
  * 
- * Form component for collecting personal information needed for calorie calculations.
- * Handles user input for age, gender, weight, height, activity level, and goals.
+ * A form component for collecting personal information needed for calorie calculations.
+ * Features:
+ * - Unit system selection (metric/imperial)
+ * - Personal details input (age, gender, weight, height)
+ * - Activity level selection
+ * - Weight management goal selection
+ * 
+ * Props:
+ * @param {Object} formData - Current form values
+ * @param {Object} errors - Validation errors
+ * @param {Object} activityLevels - Available activity level options
+ * @param {Object} goals - Available weight management goals
+ * @param {boolean} isFormValid - Form validation status
+ * @param {Function} onInputChange - Handler for input changes
+ * @param {Function} onCalculate - Handler for form submission
+ * @param {Function} onReset - Handler for form reset
  */
 export function CalorieForm({
   formData,
