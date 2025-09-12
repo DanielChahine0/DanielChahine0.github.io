@@ -34,6 +34,13 @@ export const useCodePlaygroundActions = (
     toast,
     setError = null
 ) => {
+    /**
+     * Executes the current code in a sandboxed iframe
+     * Combines HTML, CSS, and JavaScript into a single document
+     * Includes error handling for JavaScript execution
+     * 
+     * @param {React.RefObject} iframeRef - Reference to the preview iframe
+     */
     const runCode = useCallback((iframeRef) => {
         if (!iframeRef.current) return;
 
@@ -60,6 +67,11 @@ export const useCodePlaygroundActions = (
         iframe.srcdoc = combinedCode;
     }, [html, css, js]);
 
+    /**
+     * Downloads the current project as a single HTML file
+     * Combines HTML, CSS, and JavaScript into a standalone document
+     * Creates and triggers a download through a temporary anchor element
+     */
     const downloadProject = useCallback(() => {
         const combinedHTML = `<!DOCTYPE html>
 <html lang="en">
