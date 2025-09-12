@@ -8,6 +8,11 @@
 /**
  * Validate form inputs for age, weight, and height
  */
+/**
+ * Validates user input data for the calorie calculator
+ * @param {Object} data - Form data containing age, weight, height, and unit system
+ * @returns {Object} Object containing validation errors for each field if any
+ */
 export const validateFormData = (data) => {
   const errs = {};
   const ageNum = parseFloat(data.age);
