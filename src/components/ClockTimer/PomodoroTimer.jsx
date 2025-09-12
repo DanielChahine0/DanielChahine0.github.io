@@ -1,12 +1,25 @@
 /**
  * PomodoroTimer.jsx
  * 
- * A Pomodoro timer component that helps with time management using the Pomodoro Technique.
+ * A Pomodoro timer component that implements the Pomodoro Technique for time management.
  * Features include:
- * - Customizable timer duration
- * - Play/Pause functionality
- * - Audio notification on completion
- * - Visual progress tracking
+ * - Customizable timer duration with preset options
+ * - Play/Pause functionality with visual state indication
+ * - Audio notification and vibration on completion
+ * - Visual progress tracking with circular progress bar
+ * - Quick adjustment controls (+/- minutes)
+ * - Custom duration input
+ * - Memory of last used duration
+ * - Mobile-friendly interface
+ * 
+ * @component
+ * @example
+ * <PomodoroTimer />
+ * 
+ * State Management:
+ * - Uses multiple useState hooks for timer state
+ * - Manages intervals with useRef to prevent memory leaks
+ * - Implements useCallback for optimized event handlers
  */
 
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
