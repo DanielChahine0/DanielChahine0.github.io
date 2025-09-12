@@ -133,6 +133,15 @@ ${js}
         });
     }, [html, css, js, savedProjects, setSavedProjects, toast]);
 
+    /**
+     * Loads a saved project into the editor
+     * Updates the HTML, CSS, and JavaScript content with the saved state
+     * 
+     * @param {Object} project - The saved project to load
+     * @param {string} project.html - Saved HTML content
+     * @param {string} project.css - Saved CSS content
+     * @param {string} project.js - Saved JavaScript content
+     */
     const loadProject = useCallback((project) => {
         setHtml(project.html);
         setCss(project.css);
