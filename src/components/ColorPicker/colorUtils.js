@@ -1,4 +1,14 @@
-// Color utility functions
+/**
+ * Color Utility Functions
+ * A collection of helper functions for color conversion and manipulation.
+ * Supports conversions between different color formats: HEX, RGB, HSB, HSL.
+ */
+
+/**
+ * Converts a hexadecimal color string to RGB values
+ * @param {string} hex - The hexadecimal color code (e.g., "#FF0000")
+ * @returns {Object|null} An object containing r, g, b values or null if invalid
+ */
 export const hexToRgb = (hex) => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
