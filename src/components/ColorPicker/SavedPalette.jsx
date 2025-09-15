@@ -1,3 +1,15 @@
+/**
+ * SavedPalette Component
+ * Manages and displays the user's custom color palette.
+ * Features:
+ * - Display saved colors
+ * - Custom palette naming
+ * - Export functionality
+ * - Color removal
+ * - Color selection
+ * - Empty state handling
+ */
+
 import { motion } from "framer-motion";
 import { Download, RotateCcw } from "lucide-react";
 import ColorSwatch from "./ColorSwatch";
