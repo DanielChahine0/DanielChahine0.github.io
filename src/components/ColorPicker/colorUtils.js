@@ -18,6 +18,13 @@ export const hexToRgb = (hex) => {
     } : null;
 };
 
+/**
+ * Converts RGB values to HSB (Hue, Saturation, Brightness) color space
+ * @param {number} r - Red value (0-255)
+ * @param {number} g - Green value (0-255)
+ * @param {number} b - Blue value (0-255)
+ * @returns {Object} An object containing h (0-360), s (0-100), b (0-100) values
+ */
 export const rgbToHsb = (r, g, b) => {
     r /= 255;
     g /= 255;
