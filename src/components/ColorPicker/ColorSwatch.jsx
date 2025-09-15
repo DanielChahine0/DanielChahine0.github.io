@@ -1,6 +1,22 @@
+/**
+ * ColorSwatch Component
+ * A reusable component that displays a color sample with interactive features.
+ * Features include:
+ * - Click to select/copy color
+ * - Optional delete button
+ * - Automatic text contrast calculation
+ * - Keyboard accessibility
+ * - Hover effects
+ */
+
 import { X } from "lucide-react";
 
-// Helper function to determine text color based on background
+/**
+ * Helper function to determine text color based on background color brightness
+ * Returns black for light backgrounds and white for dark backgrounds
+ * @param {string} hexColor - The background color in hex format
+ * @returns {string} The contrasting text color ('#000000' or '#FFFFFF')
+ */
 const getContrastColor = (hexColor) => {
     const hexToRgb = (hex) => {
         const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
