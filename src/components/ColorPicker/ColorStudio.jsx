@@ -1,3 +1,14 @@
+/**
+ * ColorStudio Component
+ * The main color picker interface that allows users to:
+ * - Select colors using a color picker
+ * - View color in different formats (HEX, RGB, HSL, HSB)
+ * - Copy color values
+ * - Generate random colors
+ * - View color analysis
+ * - Add colors to palette
+ */
+
 import { motion } from "framer-motion";
 import { Palette, Copy, Shuffle, Heart } from "lucide-react";
 import { Lightbulb } from "lucide-react";
