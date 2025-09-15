@@ -1,3 +1,9 @@
+/**
+ * Popular Color Palettes
+ * A collection of predefined color schemes that users can quickly apply.
+ * Each palette consists of 5 complementary colors carefully chosen for different themes.
+ */
+
 // Predefined popular color palettes
 export const POPULAR_PALETTES = {
     'Sunset': ['#FF6B6B', '#FF8E53', '#FF6B35', '#F7931E', '#FFD23F'],

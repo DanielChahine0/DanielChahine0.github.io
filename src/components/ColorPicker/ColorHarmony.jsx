@@ -1,3 +1,9 @@
+/**
+ * ColorHarmony Component
+ * Displays a set of harmonious colors based on the current selected color.
+ * Includes color swatches with their descriptions and actions like copy and add to palette.
+ */
+
 import { motion } from "framer-motion";
 import { Palette, Copy, Plus } from "lucide-react";
 import ColorSwatch from "./ColorSwatch";
