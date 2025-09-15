@@ -77,6 +77,13 @@ export const hsbToRgb = (h, s, b) => {
     };
 };
 
+/**
+ * Converts RGB values to hexadecimal color string
+ * @param {number} r - Red value (0-255)
+ * @param {number} g - Green value (0-255)
+ * @param {number} b - Blue value (0-255)
+ * @returns {string} Hexadecimal color code (e.g., "#FF0000")
+ */
 export const rgbToHex = (r, g, b) => {
     return "#" + [r, g, b].map(x => {
         const hex = x.toString(16);
