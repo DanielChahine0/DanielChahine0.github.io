@@ -92,6 +92,13 @@ export const rgbToHex = (r, g, b) => {
 };
 
 // Convert HSB to HSL
+/**
+ * Converts HSB values to HSL (Hue, Saturation, Lightness) color space
+ * @param {number} h - Hue (0-360)
+ * @param {number} s - Saturation (0-100)
+ * @param {number} b - Brightness (0-100)
+ * @returns {Object} An object containing h (0-360), s (0-100), l (0-100) values
+ */
 export const hsbToHsl = (h, s, b) => {
     s /= 100;
     b /= 100;
