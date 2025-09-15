@@ -1,3 +1,14 @@
+/**
+ * PopularPalettes Component
+ * Displays a collection of predefined color palettes that users can quickly access.
+ * Each palette shows a preview of its colors and can be loaded into the main workspace.
+ * Features:
+ * - Visual preview of each palette
+ * - Quick load functionality
+ * - Individual color selection
+ * - Animated transitions
+ */
+
 import { motion } from "framer-motion";
 import { POPULAR_PALETTES } from "./colorPalettes";
 import ColorSwatch from "./ColorSwatch";
