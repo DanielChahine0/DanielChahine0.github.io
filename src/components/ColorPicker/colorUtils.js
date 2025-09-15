@@ -48,6 +48,13 @@ export const rgbToHsb = (r, g, b) => {
     return { h, s, b: brightness };
 };
 
+/**
+ * Converts HSB values to RGB color space
+ * @param {number} h - Hue (0-360)
+ * @param {number} s - Saturation (0-100)
+ * @param {number} b - Brightness (0-100)
+ * @returns {Object} An object containing r, g, b values (0-255)
+ */
 export const hsbToRgb = (h, s, b) => {
     s /= 100;
     b /= 100;
