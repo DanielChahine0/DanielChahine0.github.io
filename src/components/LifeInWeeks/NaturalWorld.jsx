@@ -1,6 +1,16 @@
 import { motion } from "framer-motion";
 import { TreePine } from "lucide-react";
 
+/**
+ * NaturalWorld Component
+ * Provides context about a person's life in relation to natural phenomena.
+ * Calculates and displays:
+ * - Number of lunar cycles experienced
+ * - Orbits around the sun completed
+ * - Age comparison to a giant sequoia's lifespan
+ * - Includes fact about cellular regeneration
+ * Features animated entrance and natural world metaphors.
+ */
 export function NaturalWorld({ 
     birthDate, 
     currentAge,
