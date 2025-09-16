@@ -1,5 +1,12 @@
 import { Calendar, Heart } from "lucide-react";
 
+/**
+ * InputSection Component
+ * Provides input controls for birth date and life expectancy.
+ * Features date validation and formatting for consistent input handling.
+ * Includes a reset option and displays warnings for unusual life expectancy values.
+ */
+
 // Helper to ensure date is always yyyy-mm-dd or empty
 function getDateInputValue(dateStr) {
     if (!dateStr) return "";
