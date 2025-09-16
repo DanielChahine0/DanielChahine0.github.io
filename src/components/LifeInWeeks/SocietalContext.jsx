@@ -1,6 +1,16 @@
 import { motion } from "framer-motion";
 import { Users } from "lucide-react";
 
+/**
+ * SocietalContext Component
+ * Provides historical and demographic context for a person's life.
+ * Features:
+ * - World population estimates at birth and current time
+ * - Historical context of global events
+ * - Population growth during lifetime
+ * Uses interpolation for accurate population estimates between data points.
+ */
+
 // Helper for world population estimate
 function estimateWorldPopulation(date) {
     const data = [
