@@ -1,6 +1,22 @@
+/**
+ * @file EditorCanvas.jsx
+ * Provides the main canvas area for image display and editing.
+ * Handles image upload interface and canvas rendering.
+ */
+
 import React, { memo, forwardRef } from "react";
 import { Image as ImageIcon, RefreshCw } from "lucide-react";
 
+/**
+ * EditorCanvas Component
+ * @param {Object} props - Component props
+ * @param {Image} props.image - The current image being edited
+ * @param {boolean} props.isProcessing - Processing state flag
+ * @param {Function} props.onUpload - Image upload handler
+ * @param {React.RefObject} props.fileInputRef - Reference to file input
+ * @param {Function} props.onFileChange - File change handler
+ * @param {React.RefObject} ref - Canvas reference for drawing
+ */
 const EditorCanvas = memo(forwardRef(function EditorCanvas({
     image,
     isProcessing,

@@ -1,6 +1,20 @@
+/**
+ * @file ControlPanel.jsx
+ * Provides the control interface for image adjustments and presets.
+ * Features filter adjustments and preset filters for quick image enhancements.
+ */
+
 import React, { memo, useMemo } from "react";
 import { Palette, Sliders, Smartphone } from "lucide-react";
 
+/**
+ * ControlPanel Component
+ * @param {Object} props - Component props
+ * @param {Object} props.filters - Current filter values
+ * @param {Function} props.onFilterChange - Callback for filter value changes
+ * @param {Function} props.onApplyPreset - Callback for applying preset filters
+ * @param {boolean} props.isVisible - Controls component visibility
+ */
 const ControlPanel = memo(function ControlPanel({
     filters,
     onFilterChange,
