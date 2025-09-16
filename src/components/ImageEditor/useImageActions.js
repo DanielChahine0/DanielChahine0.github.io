@@ -1,6 +1,24 @@
+/**
+ * @file useImageActions.js
+ * Custom hook for handling image-related actions like upload and download.
+ * Provides functionality for image processing, including HEIC conversion.
+ */
+
 import { useCallback } from 'react';
 import heic2any from 'heic2any';
 
+/**
+ * Custom hook for image actions
+ * @param {Image} image - Current image being edited
+ * @param {Function} setImage - Function to update current image
+ * @param {Function} setOriginalImage - Function to store original image
+ * @param {Function} setFilters - Function to reset filters
+ * @param {Function} addToHistory - Function to add state to history
+ * @param {React.RefObject} canvasRef - Reference to canvas element
+ * @param {Function} drawImageToCanvas - Function to render image to canvas
+ * @param {Function} toast - Toast notification function
+ * @returns {Object} Object containing image action handlers
+ */
 export const useImageActions = (
     image, 
     setImage, 
