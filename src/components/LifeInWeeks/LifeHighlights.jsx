@@ -1,6 +1,17 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 
+/**
+ * LifeHighlights Component
+ * Presents interesting statistics and milestones about a person's life journey.
+ * Calculates and displays:
+ * - Weeks lived and life percentage
+ * - Total days of experience
+ * - Number of seasons experienced
+ * - Estimated heartbeats and breaths taken
+ * - Hours of sleep
+ * Includes animated entrance and tooltip explanations.
+ */
 export function LifeHighlights({ 
     birthDate, 
     lifeExpectancy, 
