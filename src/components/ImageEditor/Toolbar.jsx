@@ -1,3 +1,9 @@
+/**
+ * @file Toolbar.jsx
+ * Provides the main toolbar interface for image manipulation actions.
+ * Includes controls for file operations, transformations, and history.
+ */
+
 import React, { memo } from "react";
 import { 
     Upload, 
@@ -15,6 +21,26 @@ import {
     Sliders
 } from "lucide-react";
 
+/**
+ * Toolbar Component
+ * @param {Object} props - Component props
+ * @param {Image} props.image - Current image being edited
+ * @param {Function} props.onUpload - Image upload handler
+ * @param {Function} props.onDownload - Image download handler
+ * @param {Function} props.onRotateLeft - Rotate left handler
+ * @param {Function} props.onRotateRight - Rotate right handler
+ * @param {Function} props.onFlipHorizontal - Horizontal flip handler
+ * @param {Function} props.onFlipVertical - Vertical flip handler
+ * @param {Function} props.onUndo - Undo action handler
+ * @param {Function} props.onRedo - Redo action handler
+ * @param {Function} props.onReset - Reset all changes handler
+ * @param {Function} props.onToggleFullscreen - Fullscreen toggle handler
+ * @param {boolean} props.isFullscreen - Fullscreen state
+ * @param {boolean} props.isProcessing - Processing state
+ * @param {boolean} props.canUndo - Whether undo is available
+ * @param {boolean} props.canRedo - Whether redo is available
+ * @param {boolean} props.showStats - Whether to show statistics
+ */
 const Toolbar = memo(function Toolbar({
     image,
     onUpload,
