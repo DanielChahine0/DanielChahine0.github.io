@@ -1,3 +1,11 @@
+/**
+ * Legend Component
+ * Displays a color-coded legend explaining the visualization of different week states:
+ * - Blue: Weeks already lived
+ * - Yellow: Current week
+ * - Gray: Future weeks
+ * Provides visual context for interpreting the Life Grid visualization.
+ */
 export function Legend() {
     return (
         <div className="flex justify-center gap-6 mb-6">

@@ -1,5 +1,15 @@
 import { motion } from "framer-motion";
 
+/**
+ * StatisticsSection Component
+ * Displays key life statistics in an animated grid layout.
+ * Shows:
+ * - Current age in years
+ * - Number of weeks lived
+ * - Number of weeks remaining
+ * - Overall life progress as a percentage
+ * Features smooth animations and responsive design.
+ */
 export function StatisticsSection({ stats, formatNumber }) {
     return (
         <motion.div

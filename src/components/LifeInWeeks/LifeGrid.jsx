@@ -1,5 +1,17 @@
 import { Clock } from "lucide-react";
 
+/**
+ * LifeGrid Component
+ * Visualizes a person's life in weeks using a grid of colored squares.
+ * Each square represents one week, with rows typically representing years (52 weeks).
+ * The grid is responsive and adjusts its layout based on screen size.
+ * Features:
+ * - Color-coded squares for lived, current, and future weeks
+ * - Hover tooltips with detailed week information
+ * - Accessible design with ARIA labels
+ * - Responsive grid layout
+ */
+
 // Color palette for better contrast
 const getWeekColor = (status) => {
     switch (status) {
