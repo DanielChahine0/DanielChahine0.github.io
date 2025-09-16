@@ -1,5 +1,19 @@
+/**
+ * @file useImageTransforms.js
+ * Custom hook for handling image transformation operations.
+ * Provides functionality for rotation and flipping of images.
+ */
+
 import { useCallback } from 'react';
 
+/**
+ * Custom hook for image transformations
+ * @param {Image} image - Current image being edited
+ * @param {Function} setImage - Function to update current image
+ * @param {Function} addToHistory - Function to add state to history
+ * @param {Function} setIsProcessing - Function to update processing state
+ * @returns {Object} Object containing transformation functions
+ */
 export const useImageTransforms = (image, setImage, addToHistory, setIsProcessing) => {
     const rotateImage = useCallback((degrees) => {
         if (!image) return;
