@@ -1,5 +1,16 @@
+/**
+ * @file HelpSection.jsx
+ * Provides user documentation and instructions for the image editor.
+ * Displays a guide for basic usage, editing tools, and saving work.
+ */
+
 import React, { memo } from "react";
 
+/**
+ * HelpSection Component
+ * @param {Object} props - Component props
+ * @param {boolean} props.isVisible - Controls component visibility
+ */
 const HelpSection = memo(function HelpSection({ isVisible = true }) {
     if (!isVisible) return null;
 
