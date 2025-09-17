@@ -2,6 +2,22 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Download } from 'lucide-react';
 
+/**
+ * ResumePreviewHeader Component
+ * 
+ * Header component for the resume preview mode. This component appears when
+ * the user is viewing the preview of their resume and provides options to
+ * return to editing mode or export the resume data.
+ * 
+ * Features:
+ * - Animated title using Framer Motion
+ * - Edit mode toggle button to return to builder interface
+ * - Export functionality to save resume data
+ * 
+ * @param {Function} setIsPreview - Function to toggle preview mode
+ * @param {Function} exportToJSON - Function to export resume data
+ * @returns {JSX.Element} Header with title and action buttons
+ */
 export const ResumePreviewHeader = ({ setIsPreview, exportToJSON }) => {
   return (
     <div className="text-center mb-8">
