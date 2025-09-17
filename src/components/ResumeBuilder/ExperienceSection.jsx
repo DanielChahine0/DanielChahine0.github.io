@@ -2,6 +2,25 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, Plus, Trash2 } from 'lucide-react';
 
+/**
+ * ExperienceSection Component
+ * 
+ * A dynamic form section that manages work experience entries in the resume.
+ * Allows users to add, edit, and remove multiple work experiences with details
+ * like job title, company, dates, and responsibilities.
+ * 
+ * Features:
+ * - Dynamic addition/removal of experience entries
+ * - Rich text input for job responsibilities
+ * - Date validation and formatting
+ * - Animated transitions for smooth UX
+ * 
+ * @param {Object} resumeData - The complete resume data object
+ * @param {Function} addExperience - Callback to add a new experience entry
+ * @param {Function} updateExperience - Callback to update a specific experience entry
+ * @param {Function} removeExperience - Callback to remove an experience entry
+ * @returns {JSX.Element} A form section for work experience entries
+ */
 export const ExperienceSection = ({ 
   resumeData, 
   addExperience, 

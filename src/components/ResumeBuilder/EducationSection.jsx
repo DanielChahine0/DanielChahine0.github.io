@@ -2,6 +2,25 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { GraduationCap, Plus, Trash2 } from 'lucide-react';
 
+/**
+ * EducationSection Component
+ * 
+ * A dynamic form section that manages educational background entries in the resume.
+ * Allows users to add, edit, and remove multiple education entries with details
+ * like degree, institution, dates, and achievements.
+ * 
+ * Features:
+ * - Dynamic addition/removal of education entries
+ * - Support for multiple education levels
+ * - Date validation and formatting
+ * - Animated transitions for smooth UX
+ * 
+ * @param {Object} resumeData - The complete resume data object
+ * @param {Function} addEducation - Callback to add a new education entry
+ * @param {Function} updateEducation - Callback to update a specific education entry
+ * @param {Function} removeEducation - Callback to remove an education entry
+ * @returns {JSX.Element} A form section for education entries
+ */
 export const EducationSection = ({ 
   resumeData, 
   addEducation, 
