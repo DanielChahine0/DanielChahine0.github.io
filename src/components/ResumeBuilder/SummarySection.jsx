@@ -2,6 +2,22 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FileText } from 'lucide-react';
 
+/**
+ * SummarySection Component
+ * 
+ * A form section component that allows users to write and edit their professional
+ * summary or objective statement for the resume.
+ * 
+ * Features:
+ * - Animated entry using Framer Motion
+ * - Large text area for detailed content
+ * - Character guidance for optimal summary length
+ * - Real-time updates to resume data
+ * 
+ * @param {Object} resumeData - The complete resume data object
+ * @param {Function} setResumeData - Callback to update the entire resume data object
+ * @returns {JSX.Element} A form section for professional summary
+ */
 export const SummarySection = ({ resumeData, setResumeData }) => {
   return (
     <motion.div 
