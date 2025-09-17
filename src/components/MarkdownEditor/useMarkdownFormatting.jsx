@@ -1,5 +1,26 @@
 import { useCallback } from "react";
 
+/**
+ * useMarkdownFormatting Hook
+ * 
+ * A custom hook that provides text formatting utilities for the markdown editor.
+ * Handles text selection, cursor position, and markdown syntax insertion.
+ * 
+ * Features:
+ * - Smart text wrapping with markdown syntax
+ * - Cursor position preservation
+ * - Support for various markdown formatting options:
+ *   - Bold, italic, code blocks
+ *   - Headers (H1, H2)
+ *   - Lists
+ *   - Links
+ *   - Blockquotes
+ * 
+ * @param {string} markdown - Current markdown content
+ * @param {function} setMarkdown - State setter for markdown content
+ * @param {React.RefObject} textareaRef - Reference to the textarea element
+ * @returns {Object} Object containing formatting utility functions
+ */
 export function useMarkdownFormatting(markdown, setMarkdown, textareaRef) {
     // Text formatting functions
     const insertTextAtCursor = useCallback((beforeText, afterText = '') => {
