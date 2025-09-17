@@ -2,6 +2,23 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { User, FileText, Briefcase, GraduationCap, Award } from 'lucide-react';
 
+/**
+ * ResumeSidebar Component
+ * 
+ * A navigation sidebar component that allows users to switch between different
+ * sections of the resume builder. Provides visual feedback for the active
+ * section and smooth transitions.
+ * 
+ * Features:
+ * - Animated section transitions
+ * - Visual indicators for active section
+ * - Icon-based navigation
+ * - Responsive layout support
+ * 
+ * @param {string} activeSection - The currently selected section ID
+ * @param {Function} setActiveSection - Callback to change the active section
+ * @returns {JSX.Element} A sidebar navigation component
+ */
 export const ResumeSidebar = ({ activeSection, setActiveSection }) => {
   const sections = [
     { id: 'personal', label: 'Personal Info', icon: User },

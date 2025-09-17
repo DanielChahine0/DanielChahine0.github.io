@@ -2,6 +2,39 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FileText } from 'lucide-react';
 
+/**
+ * ResumeContentArea Component
+ * 
+ * The main content area of the resume builder that displays the currently active
+ * section's form. This component manages the rendering of different sections
+ * and handles all the data updates for each section.
+ * 
+ * Features:
+ * - Dynamic section rendering based on active section
+ * - Smooth transitions between sections
+ * - Centralized data management for all sections
+ * - Responsive layout with grid system
+ * 
+ * @param {string} activeSection - The currently selected section to display
+ * @param {Object} resumeData - The complete resume data object
+ * @param {Function} updatePersonalInfo - Callback for personal info updates
+ * @param {Function} setResumeData - Callback to update the entire resume data
+ * @param {Function} addExperience - Callback to add experience entries
+ * @param {Function} updateExperience - Callback to update experience entries
+ * @param {Function} removeExperience - Callback to remove experience entries
+ * @param {Function} addEducation - Callback to add education entries
+ * @param {Function} updateEducation - Callback to update education entries
+ * @param {Function} removeEducation - Callback to remove education entries
+ * @param {Function} addSkill - Callback to add skill entries
+ * @param {Function} updateSkill - Callback to update skill entries
+ * @param {Function} removeSkill - Callback to remove skill entries
+ * @param {Component} PersonalInfoSection - Personal info form component
+ * @param {Component} SummarySection - Summary form component
+ * @param {Component} ExperienceSection - Experience form component
+ * @param {Component} EducationSection - Education form component
+ * @param {Component} SkillsSection - Skills form component
+ * @returns {JSX.Element} The main content area with the active section form
+ */
 export const ResumeContentArea = ({ 
   activeSection, 
   resumeData, 
