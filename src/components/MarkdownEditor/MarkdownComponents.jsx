@@ -1,7 +1,24 @@
 import React from "react";
 import { Copy } from "lucide-react";
 
-// Enhanced markdown components with better styling and UX
+/**
+ * MarkdownComponents
+ * 
+ * A collection of custom React components for rendering markdown content with enhanced styling.
+ * These components are used by the markdown parser to render different markdown elements
+ * with consistent styling and interactive features.
+ * 
+ * Components include:
+ * - Headings (h1-h6) with consistent typography and spacing
+ * - Code blocks with syntax highlighting and copy button
+ * - Lists with proper indentation and bullets
+ * - Blockquotes with visual styling
+ * - Links with hover effects
+ * - Tables with responsive layout
+ * 
+ * All components are styled using Tailwind CSS classes for consistency
+ * with the application's design system.
+ */
 export const markdownComponents = {
     h1: ({ children }) => (
         <h1 className="text-4xl font-bold mt-8 mb-6 text-foreground border-b border-border pb-3">
