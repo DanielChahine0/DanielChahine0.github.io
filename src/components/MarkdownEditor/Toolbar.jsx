@@ -21,7 +21,22 @@ import {
     Quote
 } from "lucide-react";
 
-// Enhanced Toolbar Component with better grouping and design
+/**
+ * Toolbar Component
+ * 
+ * A comprehensive toolbar for the markdown editor that provides various text formatting
+ * and file operation controls. Features include text formatting, file operations,
+ * view toggles, and export options.
+ * 
+ * Features:
+ * - Text formatting (bold, italic, code, headings, lists, links, quotes)
+ * - File operations (upload, download, copy, reset)
+ * - View controls (preview toggle, fullscreen)
+ * - Export options (PDF, raw markdown)
+ * - Word and character count display
+ * 
+ * The component is memoized for performance optimization.
+ */
 const Toolbar = memo(function Toolbar({
     isPreviewOnly,
     onShowHelp,
