@@ -6,6 +6,18 @@ import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
 
+/**
+ * PreviewPanel Component
+ * 
+ * Renders a live preview of the markdown content with GitHub Flavored Markdown support.
+ * Features syntax highlighting, animated transitions, and responsive layout.
+ * 
+ * Props:
+ * @param {boolean} isPreviewOnly - Controls if preview takes full width
+ * @param {string} markdown - The markdown content to render
+ * @param {React.RefObject} previewRef - Reference to the preview container for PDF export
+ * @param {Object} markdownComponents - Custom components for markdown rendering
+ */
 export default function PreviewPanel({ 
     isPreviewOnly, 
     markdown, 

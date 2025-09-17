@@ -2,6 +2,18 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Type } from "lucide-react";
 
+/**
+ * EditorPanel Component
+ * 
+ * A responsive and animated markdown editor panel with a monospace font editor.
+ * Features smooth transitions and keyboard shortcuts for an enhanced editing experience.
+ * 
+ * Props:
+ * @param {boolean} isPreviewOnly - Controls visibility of the editor panel
+ * @param {string} markdown - The markdown content to be edited
+ * @param {function} onMarkdownChange - Callback function for handling content changes
+ * @param {React.RefObject} textareaRef - Reference to the textarea element for direct DOM manipulation
+ */
 export default function EditorPanel({ 
     isPreviewOnly, 
     markdown, 
