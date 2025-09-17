@@ -2,6 +2,25 @@ import { useCallback } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
+/**
+ * useMarkdownActions Hook
+ * 
+ * A custom hook that provides various utility functions for handling markdown content,
+ * including file operations, clipboard actions, and PDF export functionality.
+ * 
+ * Features:
+ * - File upload with markdown content parsing
+ * - Copy to clipboard functionality
+ * - Download markdown as .md file
+ * - Export preview as PDF
+ * - Content reset confirmation
+ * 
+ * @param {string} markdown - Current markdown content
+ * @param {function} setMarkdown - State setter for markdown content
+ * @param {React.RefObject} previewRef - Reference to preview container for PDF export
+ * @param {function} toast - Toast notification function for user feedback
+ * @returns {Object} Object containing various markdown action handlers
+ */
 export function useMarkdownActions(markdown, setMarkdown, previewRef, toast) {
     const handleFileUpload = useCallback((e) => {
         const file = e.target.files?.[0];
