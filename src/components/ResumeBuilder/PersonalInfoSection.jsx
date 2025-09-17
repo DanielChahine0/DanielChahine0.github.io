@@ -2,6 +2,22 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { User } from 'lucide-react';
 
+/**
+ * PersonalInfoSection Component
+ * 
+ * A form section component that collects and manages personal contact information
+ * for the resume. This includes fields for name, email, phone, and location.
+ * 
+ * Features:
+ * - Animated entry using Framer Motion
+ * - Responsive grid layout for form fields
+ * - Real-time validation and updates
+ * - Clear visual hierarchy with icon and section description
+ * 
+ * @param {Object} resumeData - The complete resume data object
+ * @param {Function} updatePersonalInfo - Callback to update specific personal info fields
+ * @returns {JSX.Element} A form section for personal information
+ */
 export const PersonalInfoSection = ({ resumeData, updatePersonalInfo }) => {
   return (
     <motion.div 
