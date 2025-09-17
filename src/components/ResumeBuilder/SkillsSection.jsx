@@ -2,6 +2,25 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Award, Plus, Trash2 } from 'lucide-react';
 
+/**
+ * SkillsSection Component
+ * 
+ * A form section that manages technical and professional skills in the resume.
+ * Allows users to add, edit, and categorize different skills with proficiency
+ * levels and categories.
+ * 
+ * Features:
+ * - Dynamic addition/removal of skills
+ * - Skill categorization (e.g., Technical, Soft Skills)
+ * - Proficiency level indicators
+ * - Animated transitions for smooth UX
+ * 
+ * @param {Object} resumeData - The complete resume data object
+ * @param {Function} addSkill - Callback to add a new skill entry
+ * @param {Function} updateSkill - Callback to update a specific skill entry
+ * @param {Function} removeSkill - Callback to remove a skill entry
+ * @returns {JSX.Element} A form section for skills management
+ */
 export const SkillsSection = ({ 
   resumeData, 
   addSkill, 
