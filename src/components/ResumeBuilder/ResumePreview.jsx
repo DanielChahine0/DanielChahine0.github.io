@@ -2,6 +2,25 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin } from 'lucide-react';
 
+/**
+ * ResumePreview Component
+ * 
+ * A live preview component that renders the resume in a professional format
+ * based on the current resume data. Shows how the resume will look when
+ * exported or printed.
+ * 
+ * Features:
+ * - Real-time preview updates
+ * - Professional formatting and layout
+ * - Responsive design
+ * - Section-based organization
+ * - Icon integration for contact details
+ * 
+ * @param {Object} resumeData - The complete resume data object containing
+ *                             all sections (personal info, summary, experience,
+ *                             education, skills)
+ * @returns {JSX.Element} A formatted preview of the resume
+ */
 export const ResumePreview = ({ resumeData }) => {
   return (
     <motion.div 
