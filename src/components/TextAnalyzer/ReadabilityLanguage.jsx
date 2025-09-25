@@ -1,3 +1,14 @@
+/*
+ * ReadabilityLanguage.jsx
+ * -----------------------
+ * Small UI block showing the readability score and detected language.
+ *
+ * Props:
+ * - analysis: object (expects analysis.readabilityScore and analysis.language)
+ * - getReadabilityLevel(score) -> { level, color }
+ * - getLanguageFlag(lang) -> emoji/icon
+ */
+
 import { motion } from "framer-motion";
 import { BarChart3, Globe } from "lucide-react";
 
