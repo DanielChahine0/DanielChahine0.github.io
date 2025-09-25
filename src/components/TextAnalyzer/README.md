@@ -17,12 +17,14 @@ A comprehensive text analysis tool providing linguistic insights, readability me
 ## Structure
 
 ### Components
-- **`TextInput.jsx`** - Text entry and formatting
-- **`StatisticsPanel.jsx`** - Text metrics display
-- **`ReadabilityScore.jsx`** - Reading level assessment
-- **`KeywordAnalysis.jsx`** - Word frequency and importance
-- **`SentimentAnalyzer.jsx`** - Emotional tone analysis
-- **`GrammarChecker.jsx`** - Language correctness check
+- **`TextInput.jsx`** - Text entry and template loader
+- **`QuickStats.jsx`** - Compact numeric metrics (characters, words, read time)
+- **`ReadabilityLanguage.jsx`** - Readability score + detected language
+- **`KeywordDensity.jsx`** - Top keyword list and densities
+- **`SentimentAnalysis.jsx`** - Emotional tone classification
+- **`DetailedAnalysis.jsx`** - Sentences/paragraphs and averages
+- **`ActionButtons.jsx`** - Copy / export / keyword toggle actions
+- **`EmptyState.jsx`** - Friendly empty state explaining features
 
 ## Key Features
 - Word count statistics
@@ -68,3 +70,20 @@ function TextAnalysis() {
 - Performance optimization
 - Multi-language support
 - Export formats (PDF, TXT)
+
+### Quick usage & props
+
+Most components expect an `analysis` object produced by `analyzeText(inputText)`
+from `textAnalysisUtils.js`. The shape is:
+
+```
+{
+  characters, charactersNoSpaces, words, sentences, paragraphs,
+  readingTime, sentiment, keywordDensity, readabilityScore, language,
+  averageWordsPerSentence, averageSentencesPerParagraph
+}
+```
+
+Pass the `analysis` object to display components (QuickStats, SentimentAnalysis,
+ReadabilityLanguage, KeywordDensity, DetailedAnalysis). The TextInput component
+handles user input and template loading.
