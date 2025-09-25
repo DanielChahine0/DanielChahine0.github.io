@@ -1,3 +1,15 @@
+/*
+ * uiUtils.js
+ * ---------
+ * Small collection of UI helper utilities used by the Text Analyzer
+ * components. These helpers map analysis values to display strings, emojis,
+ * CSS classes and also implement clipboard/download helper wrappers that
+ * trigger user-facing toasts.
+ *
+ * Important: the clipboard and download helpers call browser APIs and a
+ * `toast` callback. They assume a modern browser environment.
+ */
+
 export const getSentimentColor = (sentiment) => {
     switch (sentiment) {
         case 'positive': return 'text-green-600 bg-green-50 border-green-200 dark:text-green-400 dark:bg-green-950/50 dark:border-green-800';
