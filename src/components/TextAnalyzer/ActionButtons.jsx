@@ -1,3 +1,25 @@
+/*
+ * ActionButtons.jsx
+ * -----------------
+ * Small presentational component that renders the action buttons used by
+ * the Text Analyzer. Buttons include copy-to-clipboard, toggle keywords,
+ * and export options (TXT/JSON/CSV).
+ *
+ * Exports:
+ * - ActionButtons({ text, analysis, copyToClipboard, downloadAnalysis, showKeywords, setShowKeywords })
+ *
+ * Props:
+ * - text: string - current user input (used to enable/disable actions)
+ * - analysis: object - result of analyzeText() used to compose results
+ * - copyToClipboard: function(content) - callback to copy text to clipboard
+ * - downloadAnalysis: function(format) - callback to download analysis in given format
+ * - showKeywords: boolean - whether keyword list is visible
+ * - setShowKeywords: function(boolean) - toggles keyword visibility
+ *
+ * This file only affects UI and delegates side effects (clipboard / downloads)
+ * to the passed-in helper functions so it stays easily testable.
+ */
+
 import { motion } from "framer-motion";
 import { Copy, TrendingUp, FileText, Zap, BarChart3 } from "lucide-react";
 

@@ -1,3 +1,15 @@
+/*
+ * DetailedAnalysis.jsx
+ * --------------------
+ * Displays secondary metrics derived from the main analysis object such as
+ * sentences, paragraphs, and averages. This is a pure presentational
+ * component and expects a fully-formed `analysis` object (see
+ * textAnalysisUtils.analyzeText for structure).
+ *
+ * Props:
+ * - analysis: object with keys { sentences, paragraphs, averageWordsPerSentence, averageSentencesPerParagraph }
+ */
+
 import { motion } from "framer-motion";
 import { MessageSquare, FileSearch } from "lucide-react";
 
