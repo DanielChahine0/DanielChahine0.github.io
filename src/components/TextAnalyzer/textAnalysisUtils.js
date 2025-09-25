@@ -1,3 +1,20 @@
+/*
+ * textAnalysisUtils.js
+ * --------------------
+ * Lightweight utilities for analyzing plain text. The implementations are
+ * intentionally simple and fast (suitable for client-side usage) — they
+ * provide approximate results rather than advanced NLP accuracy. Use these
+ * helpers for quick feedback in the UI; replace with an NLP service for
+ * production-grade analysis if higher accuracy is required.
+ *
+ * Functions/exports:
+ * - analyzeSentiment(text) -> 'positive'|'negative'|'neutral'
+ * - analyzeKeywords(text) -> [{ word, count, density }, ...]
+ * - calculateReadability(text, words, sentences) -> 0-100 (Flesch-like)
+ * - detectLanguage(text) -> ISO short code (en, es, fr, de, it)
+ * - analyzeText(inputText) -> aggregated analysis object
+ */
+
 // Simple sentiment analysis based on positive/negative word lists
 const positiveWords = [
     'good', 'great', 'excellent', 'amazing', 'wonderful', 'fantastic', 'awesome', 'brilliant',
@@ -14,6 +31,15 @@ const negativeWords = [
     'fail', 'failure', 'lose', 'lost', 'defeat', 'worst', 'useless', 'worthless'
 ];
 
+/*
+ * analyzeSentiment
+ * - Input: raw text string
+ * - Output: 'positive' | 'negative' | 'neutral'
+ *
+ * Implementation notes: tokenizes on non-word characters and counts
+ * occurrences of words from small positive/negative lexicons. This is a
+ * heuristic and does not handle negation, sarcasm, or context.
+ */
 export const analyzeSentiment = (text) => {
     const words = text.toLowerCase().split(/\W+/);
     let positiveCount = 0;
@@ -30,6 +56,15 @@ export const analyzeSentiment = (text) => {
 };
 
 // Keyword density analysis
+/*
+ * analyzeKeywords
+ * - Input: raw text string
+ * - Output: array of top keyword objects { word, count, density }
+ *
+ * Implementation notes: removes punctuation, lowercases, filters out
+ * short words (<= 3 chars), counts frequencies and returns top 10 by
+ * frequency. Density is percentage relative to total counted words.
+ */
 export const analyzeKeywords = (text) => {
     if (!text.trim()) return [];
     
@@ -55,6 +90,15 @@ export const analyzeKeywords = (text) => {
         .slice(0, 10); // Top 10 keywords
 };
 
+/*
+ * countSyllables
+ * - Input: text string
+ * - Output: integer estimate of total syllables
+ *
+ * Implementation notes: very small heuristic that counts vowel groups and
+ * subtracts an ending 'e'. This will under/over count for many words but
+ * is sufficient for a rough readability score on the client.
+ */
 const countSyllables = (text) => {
     const words = text.toLowerCase().match(/[a-z]+/g) || [];
     return words.reduce((total, word) => {
@@ -66,7 +110,14 @@ const countSyllables = (text) => {
     }, 0);
 };
 
-// Simple readability score (Flesch Reading Ease approximation)
+/*
+ * calculateReadability
+ * - Inputs: text string, total words count, sentence count
+ * - Output: integer score between 0 and 100 where higher is easier to read
+ *
+ * Implementation notes: uses a simplified Flesch Reading Ease formula. The
+ * result is clamped between 0 and 100.
+ */
 export const calculateReadability = (text, words, sentences) => {
     if (sentences === 0 || words === 0) return 0;
     
@@ -79,7 +130,15 @@ export const calculateReadability = (text, words, sentences) => {
     return Math.max(0, Math.min(100, Math.round(score)));
 };
 
-// Language detection (basic implementation)
+/*
+ * detectLanguage
+ * - Input: text string
+ * - Output: short language code (e.g. 'en')
+ *
+ * Implementation notes: compares frequency of a few very common words for
+ * supported languages and returns the language with the highest match.
+ * This is a naive approach and intended for quick, best-effort detection.
+ */
 export const detectLanguage = (text) => {
     const commonWords = {
         en: ['the', 'and', 'that', 'have', 'for', 'not', 'with', 'you', 'this', 'but'],
@@ -102,6 +161,15 @@ export const detectLanguage = (text) => {
     return Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b) || 'en';
 };
 
+/*
+ * analyzeText
+ * - Input: raw text string
+ * - Output: aggregated analysis object with metrics used by the UI
+ *
+ * The returned object contains fields used across the Text Analyzer
+ * components (characters, words, readingTime, sentiment, keywordDensity,
+ * readabilityScore, language, averages, etc.).
+ */
 export const analyzeText = (inputText) => {
     const characters = inputText.length;
     const charactersNoSpaces = inputText.replace(/\s/g, '').length;
