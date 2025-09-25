@@ -1,3 +1,23 @@
+/*
+ * TextInput.jsx
+ * -------------
+ * Text entry area used by the Text Analyzer. Responsible for:
+ * - rendering the textarea where users paste/type text
+ * - exposing a template selector to quickly load sample texts
+ * - small helper actions (clear, load sample)
+ *
+ * Props:
+ * - text: string - current text value
+ * - setText: function - setter to update text
+ * - templates: object - map of templateKey => { name, text }
+ * - selectedTemplate: string - key for currently selected template
+ * - setSelectedTemplate: function - setter for selected template key
+ * - toast: function - UI toast callback for user feedback
+ *
+ * Note: This component intentionally delegates analysis and persistence
+ * to its parent. It only manages UI state and template loading.
+ */
+
 import { motion } from "framer-motion";
 
 export function TextInput({ text, setText, templates, selectedTemplate, setSelectedTemplate, toast }) {
