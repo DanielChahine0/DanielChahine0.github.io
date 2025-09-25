@@ -1,3 +1,14 @@
+/*
+ * SentimentAnalysis.jsx
+ * ---------------------
+ * Shows the overall sentiment classification and a small explanation.
+ *
+ * Props:
+ * - analysis: object (expects analysis.sentiment)
+ * - getSentimentColor: function(sentiment) -> className string
+ * - getSentimentEmoji: function(sentiment) -> emoji string
+ */
+
 import { motion } from "framer-motion";
 
 export function SentimentAnalysis({ analysis, getSentimentColor, getSentimentEmoji }) {
