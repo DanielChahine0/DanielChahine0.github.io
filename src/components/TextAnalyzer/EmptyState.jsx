@@ -1,3 +1,11 @@
+/*
+ * EmptyState.jsx
+ * --------------
+ * Shown when no text is present. Provides guidance to the user about
+ * features available in the Text Analyzer and encourages loading a
+ * template or pasting text.
+ */
+
 import { motion } from "framer-motion";
 
 export function EmptyState() {
