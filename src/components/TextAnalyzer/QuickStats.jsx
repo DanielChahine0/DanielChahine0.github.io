@@ -1,3 +1,13 @@
+/*
+ * QuickStats.jsx
+ * --------------
+ * Compact summary panel that surfaces the most commonly requested stats
+ * (characters, spaces, words, estimated reading minutes).
+ *
+ * Props:
+ * - analysis: object containing numeric metrics used for display
+ */
+
 import { motion } from "framer-motion";
 import { Type, Hash, BookOpen, Clock } from "lucide-react";
 
