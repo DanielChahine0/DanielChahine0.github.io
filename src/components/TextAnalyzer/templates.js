@@ -1,3 +1,14 @@
+/*
+ * templates.js
+ * -----------
+ * Simple collection of example text templates that can be loaded into the
+ * TextInput component. Each template contains a `name` (display label) and
+ * `text` (the content to insert).
+ *
+ * These are intentionally static for UI convenience; you may replace this
+ * with a remote template registry or localStorage persistence if needed.
+ */
+
 export const templates = {
     "business-email": {
         name: "Business Email",
