@@ -1,3 +1,16 @@
+/*
+ * KeywordDensity.jsx
+ * ------------------
+ * Renders the detected keywords and their densities. The component is
+ * controlled via `showKeywords` to allow collapsing the list while keeping
+ * the analysis available.
+ *
+ * Props:
+ * - analysis: object (expects analysis.keywordDensity array)
+ * - showKeywords: boolean - controls visibility
+ * - setShowKeywords: function - toggles visibility
+ */
+
 import { motion } from "framer-motion";
 import { TrendingUp } from "lucide-react";
 
