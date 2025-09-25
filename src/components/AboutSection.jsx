@@ -10,12 +10,6 @@ export const AboutSection = () => {
     };
 
     const achievements = [
-        // {
-        //     icon: <Briefcase className="h-6 w-6 text-primary" />,
-        //     title: "Current Role",
-        //     description: "Data Analyst at the Institute for Social Research (ISR)",
-        //     highlight: "Active"
-        // },
         {
             icon: <GraduationCap className="h-6 w-6 text-primary" />,
             title: "Education",
