@@ -1,3 +1,9 @@
+/**
+ * SkillsSection_Enhanced.jsx
+ * Shows categorized skills and tools as styled tags. Used on the home
+ * page to highlight languages, technologies, tools and specializations.
+ * Exports: SkillsSections (React component)
+ */
 import { cn } from '@/lib/utils';
 import { Code2, Wrench, Layers, Zap } from 'lucide-react';
 
