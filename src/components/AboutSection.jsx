@@ -1,3 +1,9 @@
+/**
+ * AboutSection.jsx
+ * Displays the 'About Me' section on the homepage including a brief
+ * introduction, action buttons (contact / resume) and achievement cards.
+ * Exports: AboutSection (React component)
+ */
 import { Briefcase, Code, User, GraduationCap, Award, Target } from "lucide-react";
 import { cn } from '@/lib/utils';
 
