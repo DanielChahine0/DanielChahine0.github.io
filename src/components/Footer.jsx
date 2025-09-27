@@ -1,4 +1,9 @@
-
+/**
+ * Footer.jsx
+ * Renders the website footer including contact info, quick links and
+ * social icons. Also contains a contact form that triggers toasts.
+ * Exports: Footer (React component)
+ */
 import { ArrowUp, Mail, MapPin, Phone, Send } from "lucide-react";
 import { FiGithub, FiLinkedin, FiInstagram } from "react-icons/fi";
 import { SiLeetcode } from "react-icons/si";
