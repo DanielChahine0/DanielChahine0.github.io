@@ -1,3 +1,8 @@
+/**
+ * PageTransition.jsx
+ * Simple wrapper using Framer Motion to animate page transitions
+ * (fade/slide) when routes change. Exports: PageTransition component.
+ */
 import { motion } from 'framer-motion';
 
 const pageVariants = {
