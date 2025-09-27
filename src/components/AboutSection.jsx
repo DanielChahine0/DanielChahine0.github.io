@@ -33,7 +33,6 @@ export const AboutSection = () => {
     return (
         <section id="about" className="py-3 px-4 relative overflow-hidden">
             
-
             <div className="container mx-auto max-w-7xl">
                 {/* Enhanced Header */}
                 <div className="text-center mb-16 section-fade-in">
