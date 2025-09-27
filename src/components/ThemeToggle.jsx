@@ -1,3 +1,10 @@
+/**
+ * ThemeToggle.jsx
+ * Small UI control that opens a theme picker for background themes and
+ * accent colors. Persists choices to localStorage and applies CSS classes
+ * to the document element.
+ * Exports: ThemeToggle (React component)
+ */
 import { Palette } from "lucide-react";
 import { useEffect, useState, useRef } from 'react';
 import { cn } from "@/lib/utils";
