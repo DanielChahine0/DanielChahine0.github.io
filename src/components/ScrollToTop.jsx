@@ -1,3 +1,8 @@
+/**
+ * ScrollToTop.jsx
+ * Route-aware utility component that scrolls the window to top when
+ * the pathname changes (used with react-router). Exports: ScrollToTop.
+ */
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
