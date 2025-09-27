@@ -1,3 +1,9 @@
+/**
+ * ProjectsSection.jsx
+ * Renders a grid of featured projects with images, tags and links to
+ * live demos and source repositories.
+ * Exports: ProjectsSection (React component)
+ */
 import { ArrowRight, ExternalLink, Github, FolderOpen } from "lucide-react";
 import { cn } from '@/lib/utils';
 
