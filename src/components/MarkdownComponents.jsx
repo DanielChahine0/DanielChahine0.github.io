@@ -1,3 +1,9 @@
+/**
+ * MarkdownComponents.jsx
+ * Custom components used when rendering Markdown content to add
+ * deterministic id attributes to headings (h1..h6) for linking and TOC.
+ * Exports: MarkdownComponents (object of components)
+ */
 // Custom markdown components for adding IDs to headings
 export const MarkdownComponents = {
     h1: ({ children, ...props }) => {
