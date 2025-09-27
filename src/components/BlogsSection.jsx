@@ -1,3 +1,9 @@
+/**
+ * BlogsSection.jsx
+ * Section component that displays the latest blog posts and a link
+ * to view all blogs. Uses BlogCard for individual post previews.
+ * Exports: BlogsSection (React component)
+ */
 import { ArrowRight, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 import { getLatestBlogs } from "../data/blogs";
