@@ -1,3 +1,9 @@
+/**
+ * BlogCard.jsx
+ * Small card component that renders a blog summary used in lists/grids.
+ * Handles keyboard accessibility and navigates to the blog detail page.
+ * Exports: BlogCard (React component)
+ */
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
