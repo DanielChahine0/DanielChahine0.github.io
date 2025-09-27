@@ -1,3 +1,9 @@
+/**
+ * TableOfContents.jsx
+ * Generates a Table of Contents from markdown content. Provides a
+ * desktop sticky TOC with reading progress and a mobile collapsible
+ * version. Exports: default TableOfContents component.
+ */
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FileText, ChevronUp, ChevronDown, Hash } from 'lucide-react';
