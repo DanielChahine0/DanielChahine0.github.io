@@ -21,8 +21,6 @@ const ControlPanel = memo(function ControlPanel({
     onApplyPreset,
     isVisible = true
 }) {
-    if (!isVisible) return null;
-
     // Check if browser supports canvas filters
     const supportsCanvasFilters = useMemo(() => {
         const canvas = document.createElement('canvas');
@@ -30,6 +28,8 @@ const ControlPanel = memo(function ControlPanel({
         ctx.filter = 'brightness(1)';
         return ctx.filter !== 'none';
     }, []);
+
+    if (!isVisible) return null;
 
     const presets = [
         { name: 'vintage', label: 'Vintage' },
