@@ -15,16 +15,16 @@ import { useGlowEffect } from "@/hooks/use-glow-effect";
 
 export const Footer = () => {
     const {toast} = useToast();
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [_isSubmitting, _setIsSubmitting] = useState(false);
     
     // Use the custom glow effect hook for both sections
     const contactCardGlow = useGlowEffect();
     const footerGlow = useGlowEffect();
 
-    const handleSubmit = (e) => {
+    const _handleSubmit = (e) => {
         e.preventDefault();
 
-        setIsSubmitting(true);
+        _setIsSubmitting(true);
 
         setTimeout(() => {
             toast({
@@ -34,7 +34,7 @@ export const Footer = () => {
                 variant: "success",
             });
             
-        setIsSubmitting(false);
+        _setIsSubmitting(false);
         }, 1000);
 
     }
