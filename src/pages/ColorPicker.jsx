@@ -179,20 +179,21 @@ export default function ColorPicker() {
                 title: "Copied!",
                 description: `${formattedColor} copied to clipboard`,
             });
-        } catch (err) {
-            // Fallback for older browsers
-            const textArea = document.createElement("textarea");
-            textArea.value = formatColor(color);
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
+        } catch (error) {
+                console.error('copyToClipboard fallback error:', error);
+                // Fallback for older browsers
+                const textArea = document.createElement("textarea");
+                textArea.value = formatColor(color);
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
             
-            toast({
-                title: "Copied!",
-                description: `${formatColor(color)} copied to clipboard`,
-            });
-        }
+                toast({
+                    title: "Copied!",
+                    description: `${formatColor(color)} copied to clipboard`,
+                });
+            }
     }, [formatColor, toast]);
 
     // Add color to palette with duplicate check
