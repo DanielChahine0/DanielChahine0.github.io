@@ -20,7 +20,7 @@ import TextAnalyzer from "./pages/TextAnalyzer"
 import ResumeBuilder from "./pages/ResumeBuilder"
 import ImageEditor from "./pages/ImageEditor"
 import CodePlayground from "./pages/CodePlayground"
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "./components/ui/toaster"
 import { ScrollToTop } from "./components/ScrollToTop"
 
 /**
