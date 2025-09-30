@@ -54,7 +54,8 @@ export const copyToClipboard = async (content, toast) => {
             title: "Copied to clipboard!",
             description: "The analysis has been copied to your clipboard."
         });
-    } catch (err) {
+    } catch (error) {
+        console.error('copyToClipboard error:', error);
         toast({
             title: "Failed to copy",
             description: "Could not copy to clipboard.",
