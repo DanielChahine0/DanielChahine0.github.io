@@ -51,7 +51,9 @@ export function useMarkdownActions(markdown, setMarkdown, previewRef, toast) {
                 description: "Markdown content copied to clipboard",
                 duration: 2000,
             });
-        } catch (err) {
+        } catch (error) {
+            // Log the error for debugging while providing user feedback
+            console.error('copyToClipboard error:', error);
             toast({
                 title: "Error",
                 description: "Failed to copy to clipboard",
