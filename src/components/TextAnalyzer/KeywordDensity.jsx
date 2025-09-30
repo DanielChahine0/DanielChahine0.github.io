@@ -43,7 +43,7 @@ export function KeywordDensity({ analysis, showKeywords, setShowKeywords }) {
                     transition={{ duration: 0.3 }}
                     className="space-y-2"
                 >
-                    {analysis.keywordDensity.slice(0, 5).map((item, _index) => (
+                        {analysis.keywordDensity.slice(0, 5).map((kw) => (
                         <div key={item.word} className="flex items-center justify-between p-2 bg-background/50 rounded-lg">
                             <span className="text-foreground font-medium">{item.word}</span>
                             <div className="flex items-center gap-2">

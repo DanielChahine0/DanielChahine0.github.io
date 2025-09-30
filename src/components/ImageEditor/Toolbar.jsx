@@ -57,7 +57,7 @@ const Toolbar = memo(function Toolbar({
     isProcessing = false,
     canUndo = false,
     canRedo = false,
-    _showStats = true
+    // showStats intentionally omitted; not used in this toolbar
 }) {
     return (
         <div className="bg-card rounded-lg p-4 mb-6 border border-border">

@@ -25,7 +25,10 @@ export default defineConfig([
     rules: {
       // Allow certain lowercase helper imports that are used in JSX but may be
       // flagged by the linter (for example `motion` from framer-motion).
-      'no-unused-vars': ['error', { varsIgnorePattern: '^(motion|[A-Z_])' }],
+      // Ignore helper imports like `motion` and any variables that start with an
+      // uppercase letter or underscore (commonly React components or intentionally
+      // unused placeholders like `_var`). This reduces false positives.
+      'no-unused-vars': ['error', { varsIgnorePattern: '^(motion|[A-Z_].*)' }],
     },
   },
 ])
