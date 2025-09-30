@@ -44,14 +44,14 @@ export function KeywordDensity({ analysis, showKeywords, setShowKeywords }) {
                     className="space-y-2"
                 >
                         {analysis.keywordDensity.slice(0, 5).map((kw) => (
-                        <div key={item.word} className="flex items-center justify-between p-2 bg-background/50 rounded-lg">
-                            <span className="text-foreground font-medium">{item.word}</span>
-                            <div className="flex items-center gap-2">
-                                <span className="text-sm text-foreground/70">{item.count}x</span>
-                                <span className="text-sm font-bold text-teal-600">{item.density}%</span>
+                            <div key={kw.word} className="flex items-center justify-between p-2 bg-background/50 rounded-lg">
+                                <span className="text-foreground font-medium">{kw.word}</span>
+                                <div className="flex items-center gap-2">
+                                    <span className="text-sm text-foreground/70">{kw.count}x</span>
+                                    <span className="text-sm font-bold text-teal-600">{kw.density}%</span>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
                 </motion.div>
             )}
             

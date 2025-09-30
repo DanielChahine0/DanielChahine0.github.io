@@ -17,7 +17,7 @@ import {
 export default function ImageEditor() {
   const { toast } = useToast();
   const [image, setImage] = useState(null);
-  const [originalImage, setOriginalImage] = useState(null);
+  const [_originalImage, setOriginalImage] = useState(null);
   const [filters, setFilters] = useState({
     brightness: 100,
     contrast: 100,
@@ -52,8 +52,8 @@ export default function ImageEditor() {
   }, []);
 
   // Manual filter application for mobile compatibility
-  const applyFiltersManually = useCallback((ctx, imageData, activeFilters) => {
-    const data = imageData.data;
+  const applyFiltersManually = useCallback((ctx, _imageData, activeFilters) => {
+  const data = _imageData.data;
     const brightness = activeFilters.brightness / 100;
     const contrast = activeFilters.contrast / 100;
     const saturation = activeFilters.saturation / 100;
@@ -106,7 +106,7 @@ export default function ImageEditor() {
       data[i + 2] = Math.max(0, Math.min(255, b));
     }
 
-    ctx.putImageData(imageData, 0, 0);
+    ctx.putImageData(_imageData, 0, 0);
   }, []);
 
   const drawImageToCanvas = useCallback((img, customFilters = null) => {
@@ -153,10 +153,10 @@ export default function ImageEditor() {
       // Try CSS filters first (works on desktop)
       if (supportsCanvasFilters() && activeFilters.hue === 0 && activeFilters.blur === 0) {
         // For simple filters that work well with manual application
-        const imageData = ctx.getImageData(0, 0, width, height);
+        const canvasImageData = ctx.getImageData(0, 0, width, height);
         ctx.clearRect(0, 0, width, height);
         ctx.drawImage(img, 0, 0, width, height);
-        applyFiltersManually(ctx, ctx.getImageData(0, 0, width, height), activeFilters);
+        applyFiltersManually(ctx, canvasImageData, activeFilters);
       } else if (supportsCanvasFilters()) {
         // Use CSS filters for complex effects like hue and blur
         ctx.clearRect(0, 0, width, height);
@@ -173,8 +173,8 @@ export default function ImageEditor() {
         ctx.filter = 'none';
       } else {
         // Fallback for mobile: manual filter application
-        const imageData = ctx.getImageData(0, 0, width, height);
-        applyFiltersManually(ctx, imageData, activeFilters);
+        const canvasImageData = ctx.getImageData(0, 0, width, height);
+        applyFiltersManually(ctx, canvasImageData, activeFilters);
       }
     }
   }, [filters, supportsCanvasFilters, applyFiltersManually]);

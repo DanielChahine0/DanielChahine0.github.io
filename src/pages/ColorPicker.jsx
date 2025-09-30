@@ -13,7 +13,7 @@ import ColorHarmony from "../components/ColorPicker/ColorHarmony";
 import SavedPalette from "../components/ColorPicker/SavedPalette";
 
 // Import utilities and constants
-import { hexToRgb, rgbToHsb, hsbToRgb, rgbToHex, hsbToHsl } from "../components/ColorPicker/colorUtils";
+import { hexToRgb, rgbToHsb, hsbToRgb, rgbToHex } from "../components/ColorPicker/colorUtils";
 import { POPULAR_PALETTES } from "../components/ColorPicker/colorPalettes";
 
 

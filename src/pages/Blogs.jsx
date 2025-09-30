@@ -22,33 +22,6 @@ function BlogPost({ blog }) {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
-    const handleBackToList = () => {
-        navigate('/blogs');
-    };
-
-    if (!blog) {
-        return (
-            <div className="min-h-screen bg-background text-foreground">
-                <NavBar />
-                <main className="pt-20 pb-12">
-                    <div className="container mx-auto max-w-7xl px-4">
-                        <div className="text-center py-20">
-                            <p className="text-destructive mb-4">Blog not found</p>
-                            <button
-                                onClick={handleBackToList}
-                                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
-                            >
-                                <ArrowLeft size={16} />
-                                Back to Blogs
-                            </button>
-                        </div>
-                    </div>
-                </main>
-                <Footer />
-            </div>
-        );
-    }
-
     useEffect(() => {
         const loadBlogContent = async () => {
             try {
@@ -56,7 +29,7 @@ function BlogPost({ blog }) {
                 setError(null);
                 
                 // Fetch the markdown file from the public directory
-                const response = await fetch(`/blogs/${blog.filename}`);
+                const response = await fetch(`/blogs/${blog?.filename}`);
                 if (!response.ok) {
                     throw new Error(`Failed to fetch blog: ${response.status} ${response.statusText}`);
                 }
@@ -81,7 +54,37 @@ function BlogPost({ blog }) {
             setError('No blog filename provided');
             setLoading(false);
         }
-    }, [blog.filename]);
+    }, [blog?.filename]);
+
+    const handleBackToList = () => {
+        navigate('/blogs');
+    };
+
+    // If no blog was passed in, render a friendly not-found fallback.
+    if (!blog) {
+        return (
+            <div className="min-h-screen bg-background text-foreground">
+                <NavBar />
+                <main className="pt-20 pb-12">
+                    <div className="container mx-auto max-w-7xl px-4">
+                        <div className="text-center py-20">
+                            <p className="text-destructive mb-4">Blog not found</p>
+                            <button
+                                onClick={handleBackToList}
+                                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+                            >
+                                <ArrowLeft size={16} />
+                                Back to Blogs
+                            </button>
+                        </div>
+                    </div>
+                </main>
+                <Footer />
+            </div>
+        );
+    }
+
+    // Note: blog content loading is handled by the useEffect declared above
 
     if (loading) {
         return (
