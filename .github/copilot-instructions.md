@@ -80,3 +80,18 @@ npm run build; npm run preview
 ---
 
 If anything above looks incorrect or you'd like me to expand a section (e.g., sample PR checklist, common refactor patterns, or examples of how blogs are parsed in code), tell me which area to expand and I'll iterate.
+
+--
+
+Quick PR checklist (add to PR description):
+- Run `npm run lint` and resolve new ESLint warnings/errors introduced by your change.
+- Run `npm run dev` and smoke the affected page(s). Mention which route you tested (e.g., `/tools/markdown-editor`).
+- If you change a global provider or add state at the top-level, update `src/App.jsx` and add a short note why it belongs at app-level.
+- Include one-line testing notes for interactive features (e.g., "Tested Markdown editor: paste markdown → headings render → Table of Contents shows 3 items").
+
+Example: Editing the Markdown Editor
+- Key files: `src/pages/MarkdownEditor.jsx`, `src/components/MarkdownEditor/EditorPanel.jsx`, `src/components/MarkdownEditor/PreviewPanel.jsx`, `src/components/MarkdownEditor/MarkdownComponents.jsx`.
+- Conventions: use `@/` imports, prefer `react-markdown` + `rehype-raw` for rendering, and sanitize with `dompurify` when injecting HTML.
+- Quick dev flow: 1) make a small change, 2) npm run dev, 3) open `#/tools/markdown-editor`, 4) confirm live-preview and that no console XSS warnings appear.
+
+If you'd like I can expand this checklist into a PR template or automatically open a branch+PR for small fixes (lint cleanups, docs)." 

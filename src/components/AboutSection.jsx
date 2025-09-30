@@ -5,7 +5,6 @@
  * Exports: AboutSection (React component)
  */
 import { Briefcase, Code, User, GraduationCap, Award, Target } from "lucide-react";
-import { cn } from '@/lib/utils';
 
 export const AboutSection = () => {
     const handleContactClick = () => {
