@@ -22,6 +22,14 @@ const navItems = [
 ]
 
 export const NavBar = () => {
+    /**
+     * NavBar
+     * Responsive navigation component used across the site.
+     * - Manages scroll state to adjust styling on scroll
+     * - Provides a mobile menu overlay
+     * - Supports route navigation and footer anchor navigation
+     * No props — reads navigation state with React Router hooks.
+     */
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navigate = useNavigate();

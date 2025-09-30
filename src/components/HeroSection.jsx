@@ -11,6 +11,14 @@ import { ArrowDown, Mail, Download, ExternalLink } from "lucide-react";
 import { FiGithub, FiLinkedin, FiInstagram } from "react-icons/fi";
 
 export const HeroSection = () => {
+    /**
+     * HeroSection
+     * Top landing section of the site. Contains:
+     * - Social links array
+     * - scrollToAbout helper which smooth-scrolls to the About section
+     * The component intentionally manipulates the DOM for smooth scrolling
+     * because it needs to scroll to an element outside this component tree.
+     */
     const socials = [
         {
             icon: <FiGithub className="w-5 h-5" />,

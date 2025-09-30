@@ -23,6 +23,7 @@ export const formatDate = (dateString) => {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         return new Date(dateString).toLocaleDateString(undefined, options);
     } catch (error) {
+        // Log unexpected input but fall back gracefully so UI doesn't break
         console.error('Error formatting date:', error);
         return dateString; // fallback to original string
     }
