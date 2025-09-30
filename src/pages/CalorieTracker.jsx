@@ -57,8 +57,9 @@ export default function CalorieTracker() {
       if (savedIntake) {
         setDailyIntake(JSON.parse(savedIntake));
       }
-    } catch (err) {
-      // ignore JSON parsing errors and start fresh
+    } catch (error) {
+      // ignore JSON parsing errors and start fresh, but log for debugging
+      console.error('CalorieTracker load error:', error);
     }
   }, []);
 
@@ -67,8 +68,9 @@ export default function CalorieTracker() {
     try {
       localStorage.setItem('calorieTrackerFormData', JSON.stringify(formData));
       localStorage.setItem('calorieTrackerDailyIntake', JSON.stringify(dailyIntake));
-    } catch (err) {
-      // storage may be unavailable; ignore
+    } catch (error) {
+      // storage may be unavailable; log and ignore
+      console.error('CalorieTracker persist error:', error);
     }
   }, [formData, dailyIntake]);
 
