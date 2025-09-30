@@ -216,6 +216,7 @@ h1 {
                 description: "Share link copied to clipboard",
             });
         } catch (error) {
+            console.error('shareCode error:', error);
             toast({
                 title: "Error",
                 description: "Failed to create share link",
