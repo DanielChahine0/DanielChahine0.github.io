@@ -74,7 +74,7 @@ export const markdownComponents = {
     em: ({ children }) => (
         <em className="text-foreground italic">{children}</em>
     ),
-    code: ({ node, inline, className, children, ...props }) => {
+    code: ({ inline, className, children, ...props }) => {
         const match = /language-(\w+)/.exec(className || '');
         
         if (!inline && match) {
@@ -101,8 +101,8 @@ export const markdownComponents = {
                         toast.style.opacity = '0';
                         setTimeout(() => document.body.removeChild(toast), 300);
                     }, 2000);
-                } catch (err) {
-                    console.error('Failed to copy code:', err);
+                } catch (error) {
+                    console.error('Failed to copy code:', error);
                 }
             };
 
