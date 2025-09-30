@@ -57,7 +57,6 @@ const Toolbar = memo(function Toolbar({
     viewMode,
     onViewModeChange,
     templates = [],
-    isFullscreen = false,
     label = "Code Editor",
     isMobile = false,
     showPreview = false,
