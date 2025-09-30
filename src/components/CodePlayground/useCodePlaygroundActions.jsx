@@ -31,8 +31,7 @@ export const useCodePlaygroundActions = (
     setJs, 
     savedProjects,
     setSavedProjects,
-    toast,
-    setError = null
+    toast
 ) => {
     /**
      * Executes the current code in a sandboxed iframe
