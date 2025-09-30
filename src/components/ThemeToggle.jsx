@@ -33,6 +33,13 @@ const ACCENT_COLORS = [
 ];
 
 export const ThemeToggle = () => {
+    /**
+     * ThemeToggle
+     * Small UI that allows selecting background and accent color themes.
+     * - Loads/saves preferences to localStorage
+     * - Applies classes to document.documentElement for global theming
+     * - Uses helper hexToRgb to compute box-shadows and outlines dynamically
+     */
     const [isOpen, setIsOpen] = useState(false);
     const [selectedBackground, setSelectedBackground] = useState('matcha');
     const [selectedAccent, setSelectedAccent] = useState('blue');

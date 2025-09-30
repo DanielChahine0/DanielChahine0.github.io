@@ -18,6 +18,8 @@ const TableOfContents = ({ content, className = '' }) => {
     useEffect(() => {
         if (!content) return;
 
+        // Regex captures markdown headings like '# Heading' up to '###### Heading'
+        // Group 1: leading hashes (used for level), Group 2: heading text
         const headingRegex = /^(#{1,6})\s+(.+)$/gm;
         const extractedHeadings = [];
         let match;

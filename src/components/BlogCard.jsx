@@ -11,7 +11,8 @@ import { formatDate } from "../lib/utils";
 
 export function BlogCard({ blog, index }) {
     const navigate = useNavigate();
-    
+    // The card can be activated via click or keyboard (Enter / Space).
+    // It navigates to the blog detail page using react-router's navigate.
     if (!blog) {
         return null;
     }
