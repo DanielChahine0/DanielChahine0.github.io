@@ -32,3 +32,43 @@ Where to look first for common changes
 - `src/lib/utils.js` and `src/hooks/` — shared logic and hooks to reuse.
 
 If anything above is unclear or you want extra detail (examples for a particular change, tests, or CI), tell me which area to expand and I will iterate.
+
+Suggested improvements for the website
+- Accessibility
+    - Add keyboard focus styles, meaningful ARIA roles, and ensure all interactive elements are reachable by keyboard.
+    - Run axe/Lighthouse to fix color contrast, missing alt text, and semantic markup issues.
+- Performance & loading
+    - Lazy-load below-the-fold images and components (React.lazy + Suspense).
+    - Use next-gen image formats (WebP/AVIF) and responsive srcset for blog images.
+    - Defer non-critical JS, remove unused deps, and run bundle analysis (e.g., rollup-plugin-visualizer).
+    - Preconnect/prefetch to key origins (fonts, analytics).
+- SEO & social
+    - Add meta tags, Open Graph, Twitter Cards and canonical links per page.
+    - Generate sitemap.xml and robots.txt during build.
+    - Add JSON-LD structured data for the author and blog posts.
+- Blog features & editor experience
+    - Add tags, categories, and a client-side tag filter.
+    - Show reading time and estimated word count for posts.
+    - Enable search over blog posts (Fuse.js) and/or implement server-side search index.
+    - Add syntax highlighting (Shiki or Prism) and code copy buttons.
+- UX & content
+    - Improve mobile navigation (accessible menu) and tune animations for reduced-motion users.
+    - Add a dark-mode toggle with persisted preference (prefers-color-scheme fallback).
+    - Add project case studies with screenshots, tech stack, and links to source/live demos.
+- Forms & contact
+    - Add a simple contact form integrated with Formspree/Netlify/Serverless endpoint and spam protection.
+- Analytics & feedback
+    - Add privacy-friendly analytics (Plausible / Matomo) and optional consent banner.
+    - Add an unobtrusive feedback or “report typo” link on blog posts.
+- Reliability & infra
+    - Add GitHub Actions CI: lint, build, and run a preview deployment before gh-pages deploy.
+    - Add basic unit / integration tests for core components (React Testing Library + Vitest).
+- Progressive Web App (optional)
+    - Add manifest.json and service worker to enable installable PWA with offline caching for static pages.
+- Developer DX
+    - Consider migrating critical files to TypeScript incrementally.
+    - Document local dev checks (Lighthouse score targets, lint rules, build size budget) in README.
+- Security & privacy
+    - Add Content Security Policy headers for deployed site and avoid embedding third-party scripts without review.
+
+If you want, I can insert this section into the file now or trim/add items tailored to priorities (performance, SEO, or blog features).
