@@ -2,96 +2,71 @@
      Purpose: Short, repo-specific instructions for AI coding agents (Copilot-like)
 -->
 
-# Copilot / AI Agent Instructions — DanielChahine0.github.io
+# Copilot / AI Agent Instructions — DanielChahine0.github.io (Improved)
 
-This document captures the essential, discoverable facts an automated coding agent needs to be productive in this repository.
+Purpose: concise, actionable instructions so automated agents make small, safe, testable edits.
 
-Keep edits small, run quick local checks (lint/build/dev) and prefer editing files referenced below.
+## 1 — Quick summary
+- Vite + React (React 19) single-page portfolio.
+- Entry: `src/main.jsx`; App + routing: `src/App.jsx` (uses HashRouter for GitHub Pages).
+- Use `@/` alias for imports (see `vite.config.js`).
 
-1. Project summary
- - Vite + React (React 19) single-page portfolio with interactive tools and animations.
- - Entry points: `src/main.jsx` (boot) and `src/App.jsx` (routing + global providers).
- - Routing uses HashRouter (see `src/App.jsx`) — important for GitHub Pages deployment.
+## 2 — Commands (run from repo root)
+- Dev: `npm run dev`
+- Build: `npm run build`
+- Preview build: `npm run preview`
+- Lint: `npm run lint`
+- Deploy: `npm run deploy`
 
-2. Where code lives / important folders
- - `src/` — all app source. Key subfolders:
-   - `src/components/` — reusable UI + feature components (many features in subfolders).
-   - `src/components/ui/` — UI primitives (toaster, small atoms). Example: `@/components/ui/toaster.jsx`.
-   - `src/pages/` — route pages mapped in `src/App.jsx` (e.g. `Home.jsx`, `Blogs.jsx`, `Tools.jsx`).
-   - `src/hooks/` — custom hooks (`use-glow-effect.js`, `use-toast.js`).
-   - `src/lib/` — utilities (shared helper functions).
-   - `public/blogs/` — markdown posts used by the blogs UI (blog1.md, blog2.md, ...).
+## 3 — Key locations
+- src/: app source
+  - src/components/
+  - src/components/ui/
+  - src/pages/
+  - src/hooks/
+  - src/lib/
+- public/blogs/: markdown posts
+- vite.config.js: alias `@` → `src`
+- package.json: exact scripts
 
-3. Build / run / CI commands (exact, from package.json)
- - Run dev server: `npm run dev` (Vite)
- - Build production: `npm run build` (Vite build -> output `dist`)
- - Preview production build locally: `npm run preview`
- - Lint: `npm run lint` (ESLint)
- - Deploy to GitHub Pages: `npm run deploy` (calls `predeploy` then `gh-pages -d dist`)
+## 4 — Conventions to follow
+- Prefer `@/` imports for intra-repo changes.
+- Tailwind + tailwind-merge for styling; prefer `clsx` / `twMerge`.
+- Animations: use existing Framer Motion/PageTransition components.
+- Markdown: `react-markdown` + rehype/remark; sanitize with `dompurify` before injecting HTML.
+- Global UI: add small providers in `src/App.jsx` when state must be app-wide.
 
-Examples (run in repo root):
-```powershell
-npm run dev
-npm run lint
-npm run build; npm run preview
-```
+## 5 — Safety & verification (mandatory checklist)
+- Keep edits small and focused.
+- Run `npm run lint` and fix new ESLint issues.
+- Run `npm run dev` and test affected route(s) — list the route in PR notes.
+- For production changes, run `npm run build` then `npm run preview` and smoke test.
+- If you modify markdown/HTML rendering, confirm `dompurify` is used and no XSS risks exist.
 
-4. Important config and conventions
- - Vite alias: `@` → `src` (see `vite.config.js`). Prefer `import X from '@/path'` for intra-repo imports.
- - Styling: Tailwind CSS is used (`index.css`) and `tailwind-merge` is used for class merging. Expect many utility-class patterns.
- - Animation and routing: Framer Motion + `AnimatePresence` is used for page transitions (see `src/App.jsx` and `src/components/PageTransition.jsx`).
- - Markdown rendering: `react-markdown` + rehype/remark plugins and `highlight.js` styles are imported in `src/main.jsx`; blog content lives in `public/blogs/` and pages render those markdown files.
- - DOM sanitization: `dompurify` is included in dependencies — look for it if you modify markdown/HTML rendering.
+## 6 — PR guidance (what to include)
+- One-line summary of change.
+- Commands you ran locally (lint/dev/build/preview).
+- Routes or pages you tested (e.g., `#/tools/markdown-editor`).
+- Notes about added global providers or breaking API changes.
+- If adding tests, include test scripts in package.json and a brief CI note.
 
-5. Data & integration points
- - Static blogs: `public/blogs/*.md` — Blogs page reads these (see `src/pages/Blogs.jsx` and `src/data/blogs.js`).
- - Global UI providers: App mounts global providers/components at the root (example: `<Toaster />` is included in `src/App.jsx`). When adding global components, prefer editing `src/App.jsx`.
- - Deploy target: GitHub Pages — repository uses `gh-pages` to publish `dist`. Because routing uses HashRouter, client-side routing works without special server configuration.
+## 7 — When adding features
+- Prefer small providers in `src/App.jsx` rather than global singletons.
+- Follow existing component patterns in `src/components/`.
+- Reuse PageTransition for page-level animations.
+- Use `@/` imports and Tailwind utilities; avoid inline styles where possible.
 
-6. Project-specific patterns agents should follow
- - Use `@` imports instead of relative deep paths (keeps diffs small and consistent).
- - When adding UI state shared across pages, prefer adding a small provider at `src/App.jsx` rather than scattering global singletons.
- - Prefer composing Tailwind classes with `clsx` / `tailwind-merge` rather than large inline style objects. Search `tailwind-merge` or `clsx` usage to mirror style.
- - For animations use Framer Motion components already present (e.g. `PageTransition.jsx`) to keep transitions consistent.
+## 8 — Security & secrets
+- Never commit secrets or credentials.
+- If a change requires new environment vars, document them in README and .env.example (do not include real secrets).
 
-7. Quick file pointers (examples you will reference)
- - App + routing: `src/App.jsx`
- - App entry: `src/main.jsx`
- - Vite config / alias: `vite.config.js`
- - Scripts & deps: `package.json`
- - UI primitives: `src/components/ui/` (toaster, toast)
- - Page components: `src/pages/` (each page exported as default or named export)
- - Blogs (content): `public/blogs/*.md` and `src/data/blogs.js`
-
-8. Tests & quality
- - There are no `test` scripts in `package.json` and no obvious test runner configuration. If you add tests, include a script and CI step.
- - Run `npm run lint` before opening PRs; expect ESLint to be configured (see `eslint.config.js`).
-
-9. Safety & verification checklist for changes
- - Run `npm run dev` and open the app locally. For production-target changes, run `npm run build` and `npm run preview` to smoke test.
- - Run `npm run lint` and fix warnings/errors reported by ESLint.
- - If modifying markdown rendering or HTML injection paths, validate sanitization (dompurify) is used.
- - Use HashRouter awareness: modifying routing should account for hash-based paths used by GitHub Pages.
-
-10. If you need more info
- - Many directories include `README.md` files (e.g. `src/README.md`, `src/components/README.md`) — consult these for component-level details.
- - If behaviour is unclear, run the app locally and inspect the page that uses the file you changed (fast feedback loop).
+## 9 — Extra notes for maintainers
+- If adding tests, create a runnable script and document how to run them.
+- Keep diffs small for quick reviews.
+- For blog changes, update `public/blogs/` and `src/data/blogs.js` if metadata changes.
 
 ---
 
-If anything above looks incorrect or you'd like me to expand a section (e.g., sample PR checklist, common refactor patterns, or examples of how blogs are parsed in code), tell me which area to expand and I'll iterate.
-
---
-
-Quick PR checklist (add to PR description):
-- Run `npm run lint` and resolve new ESLint warnings/errors introduced by your change.
-- Run `npm run dev` and smoke the affected page(s). Mention which route you tested (e.g., `/tools/markdown-editor`).
-- If you change a global provider or add state at the top-level, update `src/App.jsx` and add a short note why it belongs at app-level.
-- Include one-line testing notes for interactive features (e.g., "Tested Markdown editor: paste markdown → headings render → Table of Contents shows 3 items").
-
-Example: Editing the Markdown Editor
-- Key files: `src/pages/MarkdownEditor.jsx`, `src/components/MarkdownEditor/EditorPanel.jsx`, `src/components/MarkdownEditor/PreviewPanel.jsx`, `src/components/MarkdownEditor/MarkdownComponents.jsx`.
-- Conventions: use `@/` imports, prefer `react-markdown` + `rehype-raw` for rendering, and sanitize with `dompurify` when injecting HTML.
-- Quick dev flow: 1) make a small change, 2) npm run dev, 3) open `#/tools/markdown-editor`, 4) confirm live-preview and that no console XSS warnings appear.
-
-If you'd like I can expand this checklist into a PR template or automatically open a branch+PR for small fixes (lint cleanups, docs)." 
+If you want, I can:
+- Provide a short PR template using this checklist.
+- Open a small branch with suggested edits (include target branch name).
