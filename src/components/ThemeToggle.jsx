@@ -133,13 +133,18 @@ export const ThemeToggle = () => {
                     "p-2 rounded-full transition-all duration-300 flex items-center gap-1",
                     "focus:outline-none hover:bg-primary/10"
                 )}
-                aria-label="Open theme picker"
+                aria-haspopup="true"
+                aria-expanded={isOpen}
+                aria-controls="theme-picker"
+                aria-label={isOpen ? "Close theme picker" : "Open theme picker"}
+                onClick={() => setIsOpen((v) => !v)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setIsOpen((v) => !v); } }}
             > 
                 <Palette className="h-6 w-6" />
             </button>
 
             {/* Theme Picker Dropdown */}
-            <div className={cn(
+            <div id="theme-picker" className={cn(
                 "absolute top-full right-0 mt-2 w-100 max-w-[calc(100vw-2rem)]",
                 "bg-card/95 backdrop-blur-xl border border-border/30",
                 "rounded-lg shadow-xl transition-all duration-150 ease-out",
@@ -151,7 +156,7 @@ export const ThemeToggle = () => {
                 // Ensure dropdown stays within viewport
                 "max-h-[80vh] overflow-y-auto"
             )}>
-                <div className="p-4">
+                <div className="p-4" role="dialog" aria-modal="false" aria-label="Theme picker">
                     {/* Background Selection */}
                     <div className="mb-4">
                         <div className="flex bg-muted/30 rounded-md p-1 border border-border/20">
@@ -161,11 +166,12 @@ export const ThemeToggle = () => {
                                     onClick={() => handleBackgroundSelect(theme.value)}
                                     className={cn(
                                         "flex-1 px-1.5 py-2 text-xs font-medium rounded-sm transition-all duration-200",
-                                        "tracking-wide relative",
+                                        "tracking-wide relative focus:outline-none",
                                         selectedBackground === theme.value
                                             ? "text-foreground shadow-sm"
                                             : "text-foreground/70 hover:text-foreground/90 hover:bg-muted/20"
                                     )}
+                                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleBackgroundSelect(theme.value); } }}
                                     style={{
                                         backgroundColor: selectedBackground === theme.value 
                                             ? `rgba(${getCurrentAccentRgb()}, 0.08)` 
@@ -175,6 +181,7 @@ export const ThemeToggle = () => {
                                             : 'none',
                                         outlineOffset: selectedBackground === theme.value ? '2px' : '0'
                                     }}
+                                    aria-pressed={selectedBackground === theme.value}
                                 >
                                     {theme.name}
                                 </button>

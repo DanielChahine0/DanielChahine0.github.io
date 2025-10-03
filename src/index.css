@@ -372,6 +372,22 @@
     --accent-rgb: 59, 130, 246;
   }
 
+  /* Accessible focus styles: use focus-visible so mouse users aren't affected */
+  :focus {
+    outline: none;
+  }
+
+  :focus-visible,
+  button:focus-visible,
+  a:focus-visible,
+  [role="button"]:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--ring) 90%, transparent);
+    outline-offset: 3px;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.12);
+  }
+
   .accent-red {
     --primary: #ef4444;
     --ring: #ef4444;

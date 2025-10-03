@@ -44,16 +44,19 @@ const ColorSwatch = ({
     onDelete = null,
     ...props 
 }) => (
-    <div className={`${size} rounded-lg border-2 border-border cursor-pointer transition-all duration-200 hover:scale-110 hover:shadow-lg relative group ${className}`}>
+    <div
+        role="button"
+        tabIndex={tabIndex}
+        onClick={onClick}
+        onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick(); } }}
+        title={label}
+        aria-label={label}
+        className={`${size} rounded-lg border-2 border-border cursor-pointer transition-all duration-200 hover:scale-110 hover:shadow-lg relative group ${className}`}
+        {...props}
+    >
         <div
             className="w-full h-full rounded-lg"
             style={{ backgroundColor: color }}
-            onClick={onClick}
-            title={label}
-            aria-label={label}
-            tabIndex={tabIndex}
-            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onClick(); }}
-            {...props}
         />
         {showDelete && onDelete && (
             <button

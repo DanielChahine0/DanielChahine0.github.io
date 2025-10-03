@@ -70,6 +70,8 @@ export const NavBar = () => {
                     ? "pt-5"
                     : "py-4"
             )}
+            role="navigation"
+            aria-label="Main Navigation"
         >
             <div className={cn(
                 'container flex items-center justify-between px-5 py-2 transition-all duration-300 relative',
@@ -79,8 +81,11 @@ export const NavBar = () => {
             )}
             >
                 <button 
-                    className='text-4xl font-bold flex items-center hover:scale-105 transition-transform duration-300 relative z-10 bg-transparent border-none cursor-pointer'
+                    className='text-4xl font-bold flex items-center hover:scale-105 transition-transform duration-300 relative z-10 bg-transparent border-none cursor-pointer focus:outline-none'
+                    type="button"
                     onClick={() => handleNavigation('/', true)}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleNavigation('/', true); } }}
+                    aria-label="Go to home"
                 >
                     <span className='relative z-10 flex items-center gap-2'>
                         <CodeXml size={isScrolled ? 45 : 45}/>
@@ -97,7 +102,9 @@ export const NavBar = () => {
                             <button
                                 onClick={() => handleNavigation(item.href, true)} 
                                 key={key} 
-                                className='text-foreground/80 transition-transform duration-300 hover:scale-120 cursor-pointer bg-transparent border-none'
+                                className='text-foreground/80 transition-transform duration-300 hover:scale-120 cursor-pointer bg-transparent border-none focus:outline-none'
+                                type="button"
+                                aria-label={`Navigate to ${item.name}`}
                             >
                                 {item.name}
                             </button>
@@ -105,7 +112,9 @@ export const NavBar = () => {
                             <button
                                 onClick={() => handleNavigation(item.href, 'footer')}
                                 key={key}
-                                className='text-foreground/80 transition-transform duration-300 hover:scale-120 cursor-pointer bg-transparent border-none'
+                                className='text-foreground/80 transition-transform duration-300 hover:scale-120 cursor-pointer bg-transparent border-none focus:outline-none'
+                                type="button"
+                                aria-label={`Navigate to ${item.name}`}
                             >
                                 {item.name}
                             </button>
@@ -131,24 +140,29 @@ export const NavBar = () => {
                         <ThemeToggle />
                     </div>
                     <button
+                        type="button"
                         onClick={() => setIsMenuOpen((prev) => !prev)}
-                        className="p-2 text-foreground z-50 hover:scale-130 transition-transform duration-300"
+                        className="p-2 text-foreground z-50 hover:scale-130 transition-transform duration-300 focus:outline-none"
+                        aria-expanded={isMenuOpen}
+                        aria-controls="mobile-menu"
                         aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
+                        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setIsMenuOpen((prev) => !prev); } }}
                     >
                         {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
                 </div>
             </div>
             {/* Mobile menu overlay */}
-            <div className={cn(
+            <div id="mobile-menu" className={cn(
                 "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col",
                 "items-center justify-center transition-all md:hidden",
                 isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
             )}>
                 {/* Close button inside overlay */}
                 <button
+                    type="button"
                     onClick={() => setIsMenuOpen(false)}
-                    className="absolute top-6 right-6 p-2 text-foreground hover:scale-130 transition-transform duration-300"
+                    className="absolute top-6 right-6 p-2 text-foreground hover:scale-130 transition-transform duration-300 focus:outline-none"
                     aria-label="Close Menu"
                 >
                     <X size={32} />
@@ -159,7 +173,8 @@ export const NavBar = () => {
                             <button
                                 onClick={() => handleNavigation(item.href, true)} 
                                 key={key} 
-                                className='text-foreground/80 transition-transform duration-300 hover:scale-120 cursor-pointer bg-transparent border-none text-xl'
+                                className='text-foreground/80 transition-transform duration-300 hover:scale-120 cursor-pointer bg-transparent border-none text-xl focus:outline-none'
+                                type="button"
                             >
                                 {item.name}
                             </button>
@@ -167,7 +182,8 @@ export const NavBar = () => {
                             <button
                                 onClick={() => handleNavigation(item.href, 'footer')}
                                 key={key}
-                                className='text-foreground/80 transition-transform duration-300 hover:scale-120 cursor-pointer bg-transparent border-none text-xl'
+                                className='text-foreground/80 transition-transform duration-300 hover:scale-120 cursor-pointer bg-transparent border-none text-xl focus:outline-none'
+                                type="button"
                             >
                                 {item.name}
                             </button>

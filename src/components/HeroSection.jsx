@@ -89,7 +89,14 @@ export const HeroSection = () => {
                         <p className="text-foreground/90">
                             I'm a Computer Science student and Software Engineering enthusiast
                             based in{" "}
-                            <span className="text-primary font-semibold hover:scale-105 inline-block transition-transform duration-200 cursor-pointer">
+                            <span
+                                className="text-primary font-semibold hover:scale-105 inline-block transition-transform duration-200 cursor-pointer focus:outline-none"
+                                role="link"
+                                tabIndex={0}
+                                onClick={() => { const el = document.getElementById('contact'); el?.scrollIntoView({ behavior: 'smooth' }); }}
+                                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); const el = document.getElementById('contact'); el?.scrollIntoView({ behavior: 'smooth' }); } }}
+                                aria-label="Scroll to contact section"
+                            >
                                 Toronto
                             </span>{" "}
                             with over 6 years of coding experience and a
@@ -146,7 +153,9 @@ export const HeroSection = () => {
                     <div className="flex flex-col sm:flex-row gap-4 pt-4">
                         <button 
                             onClick={scrollToAbout}
-                            className="modern-button inline-flex items-center gap-2 group"
+                            className="modern-button inline-flex items-center gap-2 group focus:outline-none"
+                            aria-label="Explore my work"
+                            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); scrollToAbout(); } }}
                         >
                             <span>Explore My Work</span>
                             <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform duration-300" />
@@ -163,21 +172,22 @@ export const HeroSection = () => {
 
                     {/* Enhanced Social Links */}
                     <div className="flex flex-wrap gap-6 pt-4 items-center">
-                        {socials.map((social) => (
-                            <a
-                                key={social.name}
-                                href={social.link}
-                                target={social.link.startsWith("http") ? "_blank" : undefined}
-                                rel={social.link.startsWith("http") ? "noopener noreferrer" : undefined}
-                                className="group inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110"
-                            >
-                                <div className="p-2 rounded-lg bg-card border border-border/50 group-hover:border-primary/50 group-hover:bg-primary/10 transition-all duration-300">
-                                    {social.icon}
-                                </div>
-                                <span className="font-medium">{social.name}</span>
-                            </a>
-                        ))}
-                    </div>
+                            {socials.map((social) => (
+                                <a
+                                    key={social.name}
+                                    href={social.link}
+                                    target={social.link.startsWith("http") ? "_blank" : undefined}
+                                    rel={social.link.startsWith("http") ? "noopener noreferrer" : undefined}
+                                    className="group inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110 focus:outline-none"
+                                    aria-label={social.name}
+                                >
+                                    <div className="p-2 rounded-lg bg-card border border-border/50 group-hover:border-primary/50 group-hover:bg-primary/10 transition-all duration-300">
+                                        {social.icon}
+                                    </div>
+                                    <span className="font-medium">{social.name}</span>
+                                </a>
+                            ))}
+                        </div>
                 </div>
             </div>
 
