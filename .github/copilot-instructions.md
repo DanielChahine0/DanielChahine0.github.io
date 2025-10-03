@@ -35,7 +35,7 @@ If anything above is unclear or you want extra detail (examples for a particular
 
 Suggested improvements for the website
 - Accessibility
-    - Add keyboard focus styles, meaningful ARIA roles, and ensure all interactive elements are reachable by keyboard.
+    - [x] Add keyboard focus styles, meaningful ARIA roles, and ensure all interactive elements are reachable by keyboard.
     - Run axe/Lighthouse to fix color contrast, missing alt text, and semantic markup issues.
 - Performance & loading
     - Lazy-load below-the-fold images and components (React.lazy + Suspense).
