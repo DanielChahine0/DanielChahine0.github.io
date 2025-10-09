@@ -29,23 +29,125 @@ Welcome to my modern, interactive portfolio showcasing my projects, skills, and 
 
 ## Features
 
-- **Modern UI/UX**: Responsive, accessible, and visually appealing design with smooth transitions
-- **Animated Page Transitions**: Seamless navigation using Framer Motion and React Router
-- **Interactive Playground**: Collection of mini-projects and tools including:
-  - Calorie Tracker
-  - Clock Timer
-  - Color Picker
-  - Life in Weeks Visualizer
-  - Markdown Editor
-  - Text Analyzer
-- **Project Showcase**: Highlighted projects with images, tech stack, and links to live demos and source code
-- **Experience Timeline**: Chronological view of experience, projects, and extracurricular activities
-- **Skills Section**: Categorized list of programming languages, technologies, and tools
-- **Contact Section**: Easy ways to reach out via email or social media links
-- **Downloadable Resume**: Quick access to a PDF resume
-- **Dark/Light Theme Toggle**: Instantly switch between dark and light modes with persistent preferences
-- **Toast Notifications**: User feedback for actions and interactions
-- **Star & Cloud Backgrounds**: Animated background effects for enhanced visual appeal
+### 🎨 Core Portfolio Features
+- **Modern UI/UX**: Fully responsive design with smooth transitions, accessible navigation, and polished visual aesthetics
+- **Animated Page Transitions**: Seamless route transitions using Framer Motion and React Router with HashRouter for GitHub Pages compatibility
+- **Dark/Light Theme Toggle**: Instantly switch between dark and light modes with persistent localStorage preferences
+- **Interactive Backgrounds**: Dynamic star field and cloud animations that respond to user interaction
+- **Project Showcase**: Highlighted projects with images, detailed tech stack breakdowns, and direct links to live demos and source code
+- **Experience Timeline**: Chronological visualization of professional experience, projects, and extracurricular activities
+- **Skills Section**: Organized display of programming languages, frameworks, tools, and technologies with visual proficiency indicators
+- **Blog System**: Markdown-based blog with structured metadata, easy content management, and reading-optimized styles
+- **Downloadable Resume**: One-click PDF resume download with up-to-date professional information
+- **Toast Notifications**: Non-intrusive user feedback for actions, errors, and success messages
+- **Contact Integration**: Multiple contact channels with email, LinkedIn, GitHub, and social media links
+
+### 🧮 Calorie Tracker
+**Location:** `/calorie-tracker`
+- **BMR & TDEE Calculator**: Compute Basal Metabolic Rate and Total Daily Energy Expenditure using Mifflin-St Jeor equation
+- **Activity Level Customization**: Select from sedentary to extra active with accurate multipliers
+- **Goal-Based Recommendations**: Calculate calorie targets for weight loss, maintenance, or muscle gain
+- **Macronutrient Breakdown**: Detailed protein, carbs, and fat distribution with customizable ratios
+- **Daily Intake Tracker**: Log meals throughout the day with running totals and remaining calorie budgets
+- **Meal History**: Track multiple meals with timestamps and cumulative nutrition data
+- **Visual Progress Bars**: Real-time visual feedback on calorie consumption vs. goals
+- **Persistent Storage**: LocalStorage integration to save user preferences and meal logs
+
+### ⏰ Clock & Timer Suite
+**Location:** `/clock-timer`
+- **World Clock**: Display current time across multiple time zones simultaneously with automatic DST handling
+- **Pomodoro Timer**: Productivity timer with customizable work/break intervals (25/5 default)
+- **Session Tracking**: Count completed Pomodoro sessions with visual progress indicators
+- **Alarm System**: Set multiple alarms with custom labels and snooze functionality
+- **Visual & Audio Alerts**: Browser notifications and sound alerts for timer completion
+- **Countdown Timer**: Flexible countdown with hours, minutes, and seconds precision
+- **Time Zone Converter**: Quick reference for major cities worldwide (NYC, London, Tokyo, Sydney, etc.)
+
+### 🎨 Color Studio
+**Location:** `/color-picker`
+- **Interactive Color Picker**: Full HSL/RGB/HEX color selector with live preview
+- **Color Harmony Generator**: Automatic generation of complementary, analogous, triadic, and split-complementary palettes
+- **Popular Palettes Library**: Curated collection of trending and professional color schemes
+- **Palette Management**: Save, name, and organize custom color palettes with localStorage persistence
+- **Color Swatch Export**: Copy individual colors or entire palettes in multiple formats (HEX, RGB, HSL)
+- **Accessibility Contrast Checker**: WCAG contrast ratio calculator for text readability
+- **Color Blindness Simulator**: Preview palettes through different types of color blindness
+- **Gradient Generator**: Create and export CSS gradients from palette colors
+
+### 🖼️ Image Editor
+**Location:** `/image-editor`
+- **File Upload**: Drag-and-drop or click to upload images (JPEG, PNG, WebP support)
+- **Brightness & Contrast**: Adjust image brightness and contrast with real-time preview
+- **Saturation & Hue**: Modify color saturation and shift hue values
+- **Filters**: Apply preset filters (Grayscale, Sepia, Invert, Blur, Sharpen)
+- **Rotation & Flip**: Rotate 90°/180°/270° and flip horizontally or vertically
+- **Crop Tool**: Select and crop specific image regions with visual guides
+- **Resize**: Scale images to specific dimensions or by percentage
+- **Undo/Redo**: Full history stack for all edits with keyboard shortcuts
+- **Export Options**: Download edited images in PNG or JPEG with quality control
+
+### 📝 Code Playground
+**Location:** `/code-playground`
+- **Multi-Language Support**: Write and execute HTML, CSS, and JavaScript in isolated environments
+- **Live Preview**: Real-time rendering of HTML/CSS/JS with automatic iframe refresh
+- **Split-Pane Editor**: Resizable panels for code and preview with customizable layouts
+- **Syntax Highlighting**: Color-coded syntax with line numbers and indentation guides
+- **Code Templates**: Quick-start templates for common patterns (HTML5 boilerplate, React component, etc.)
+- **Project Management**: Save and load multiple projects with localStorage persistence
+- **Error Console**: Display JavaScript errors and console.log output in the preview pane
+- **Export Projects**: Download projects as ZIP files with proper file structure
+- **Keyboard Shortcuts**: Tab indentation, auto-close brackets, and common editor commands
+
+### 📊 Life in Weeks Visualizer
+**Location:** `/life-in-weeks`
+- **Life Grid Visualization**: 4,680-week grid representing 90 years of human life
+- **Age Input**: Calculate weeks lived based on birthdate with leap year accuracy
+- **Milestone Markers**: Highlight significant life events (graduation, career starts, retirement)
+- **Color-Coded Phases**: Visual distinction between childhood, education, career, and retirement years
+- **Statistical Context**: Compare human lifespan to animals, historical figures, and global averages
+- **Societal Milestones**: Timeline of major world events and technological advancements
+- **Natural World Comparisons**: Lifespan context with trees, animals, and geological time
+- **Interactive Highlights**: Click weeks to add personal notes and memories
+- **Export & Share**: Download life grid as PNG image for social sharing
+
+### ✍️ Markdown Editor
+**Location:** `/markdown-editor`
+- **Live Preview**: Side-by-side markdown editing and rendered HTML preview
+- **Full Markdown Support**: CommonMark standard with GitHub Flavored Markdown extensions
+- **Syntax Highlighting**: Code blocks with automatic language detection and highlighting
+- **Table Support**: Parse and render markdown tables with proper alignment
+- **Task Lists**: Interactive checkboxes for to-do lists and task tracking
+- **Auto-Save**: Continuous localStorage backup to prevent data loss
+- **Template Library**: Quick-start templates for README, blog posts, documentation, and meeting notes
+- **Export Options**: Download as Markdown (.md) or rendered HTML (.html)
+- **Word & Character Count**: Real-time statistics for content length
+- **Custom Styling**: Apply custom CSS themes to preview pane
+
+### 📈 Text Analyzer
+**Location:** `/text-analyzer`
+- **Comprehensive Statistics**: Word count, character count (with/without spaces), sentence count, paragraph count
+- **Reading Time Estimate**: Calculate reading time based on average reading speed (200-250 WPM)
+- **Readability Scores**: Flesch Reading Ease, Flesch-Kincaid Grade Level, and SMOG index
+- **Keyword Extraction**: Identify most frequent words and phrases with occurrence counts
+- **Sentiment Analysis**: Basic positive/negative/neutral sentiment detection
+- **Text Density**: Average words per sentence, characters per word, and syllable analysis
+- **Grammar Suggestions**: Basic checks for common errors (repeated words, spacing issues)
+- **Case Conversion**: Quick convert to UPPERCASE, lowercase, Title Case, or Sentence case
+- **Text Cleanup**: Remove extra spaces, trim whitespace, and normalize line breaks
+- **Export Reports**: Download analysis results as formatted text or JSON
+
+### 📄 Resume Builder
+**Location:** `/resume-builder`
+- **Interactive Form Builder**: Step-by-step wizard for entering resume information
+- **Multiple Templates**: Choose from professional, modern, and creative resume designs
+- **Section Management**: Add/remove/reorder sections (Education, Experience, Skills, Projects, etc.)
+- **Real-Time Preview**: See formatted resume update as you type
+- **PDF Export**: Generate print-ready PDF with proper formatting and page breaks
+- **JSON Import/Export**: Save resume data as JSON for backup and editing
+- **Custom Styling**: Adjust fonts, colors, spacing, and layout options
+- **Auto-Format**: Intelligent date formatting, bullet point alignment, and spacing
+- **Skills Visualization**: Bar charts or tag clouds for technical skills
+- **ATS Optimization**: Tips and warnings for Applicant Tracking System compatibility
 
 ---
 
