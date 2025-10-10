@@ -21,6 +21,15 @@ const ControlPanel = memo(function ControlPanel({
     onApplyPreset,
     isVisible = true
 }) {
+    console.log('⚙️ [CONTROL_PANEL] Rendered with:', {
+        isVisible,
+        filters,
+        hasCallbacks: {
+            onFilterChange: typeof onFilterChange === 'function',
+            onApplyPreset: typeof onApplyPreset === 'function'
+        }
+    });
+
     // Check if browser supports canvas filters
     const supportsCanvasFilters = useMemo(() => {
         const canvas = document.createElement('canvas');
@@ -63,7 +72,10 @@ const ControlPanel = memo(function ControlPanel({
                     {presets.map((preset) => (
                         <button
                             key={preset.name}
-                            onClick={() => onApplyPreset(preset.name)}
+                            onClick={() => {
+                                console.log('⚙️ [CONTROL_PANEL] Preset clicked:', preset.name);
+                                onApplyPreset?.(preset.name);
+                            }}
                             className={`px-3 py-2 text-sm bg-secondary text-secondary-foreground rounded hover:bg-secondary/80 transition-colors text-left flex items-center justify-between
                                 ${preset.limitedMobile && !supportsCanvasFilters ? 'opacity-60' : ''}`}
                         >
@@ -103,7 +115,15 @@ const ControlPanel = memo(function ControlPanel({
                                 min={key === 'hue' ? -180 : key === 'blur' ? 0 : 0}
                                 max={key === 'hue' ? 180 : key === 'blur' ? 10 : key === 'brightness' || key === 'contrast' ? 200 : 100}
                                 value={value}
-                                onChange={(e) => onFilterChange(key, parseInt(e.target.value))}
+                                onChange={(e) => {
+                                    const newValue = parseInt(e.target.value);
+                                    console.log('⚙️ [CONTROL_PANEL] Slider changed:', {
+                                        filter: key,
+                                        oldValue: value,
+                                        newValue: newValue
+                                    });
+                                    onFilterChange?.(key, newValue);
+                                }}
                                 className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer"
                             />
                         </div>

@@ -515,63 +515,95 @@ export default function ImageEditor() {
   }, [filters, image, drawImageToCanvas, supportsCanvasFilters, toast]);
 
   const handleFilterChange = (filterName, value) => {
-    setFilters(prev => ({
-      ...prev,
-      [filterName]: value
-    }));
+    console.log('🎛️ [FILTER] Filter change requested:', { filterName, value });
+    setFilters(prev => {
+      const newFilters = {
+        ...prev,
+        [filterName]: value
+      };
+      console.log('🎛️ [FILTER] New filter state:', newFilters);
+      return newFilters;
+    });
   };
 
   const undo = () => {
+    console.log('↩️ [HISTORY] Undo requested', { historyIndex, historyLength: history.length });
     if (historyIndex > 0) {
       const previousIndex = historyIndex - 1;
       const previousImageData = history[previousIndex];
       
+      console.log('↩️ [HISTORY] Loading previous state:', { previousIndex });
       const img = new Image();
       img.onload = () => {
         setImage(img);
         setHistoryIndex(previousIndex);
         // Redraw with current filters after undo
         setTimeout(() => drawImageToCanvas(img), 0);
+        console.log('✅ [HISTORY] Undo complete');
+      };
+      img.onerror = () => {
+        console.error('❌ [HISTORY] Failed to load previous image');
       };
       img.src = previousImageData;
+    } else {
+      console.log('⚠️ [HISTORY] Cannot undo - at oldest state');
     }
   };
 
   const redo = () => {
+    console.log('↪️ [HISTORY] Redo requested', { historyIndex, historyLength: history.length });
     if (historyIndex < history.length - 1) {
       const nextIndex = historyIndex + 1;
       const nextImageData = history[nextIndex];
       
+      console.log('↪️ [HISTORY] Loading next state:', { nextIndex });
       const img = new Image();
       img.onload = () => {
         setImage(img);
         setHistoryIndex(nextIndex);
         // Redraw with current filters after redo
         setTimeout(() => drawImageToCanvas(img), 0);
+        console.log('✅ [HISTORY] Redo complete');
+      };
+      img.onerror = () => {
+        console.error('❌ [HISTORY] Failed to load next image');
       };
       img.src = nextImageData;
+    } else {
+      console.log('⚠️ [HISTORY] Cannot redo - at newest state');
     }
   };
 
   const toggleFullscreen = () => {
+    console.log('🖥️ [FULLSCREEN] Toggle requested', { currentState: isFullscreen });
     if (!isFullscreen) {
       // Enter fullscreen
       if (containerRef.current?.requestFullscreen) {
         containerRef.current.requestFullscreen();
+        console.log('✅ [FULLSCREEN] Entering fullscreen');
       } else if (containerRef.current?.webkitRequestFullscreen) {
         containerRef.current.webkitRequestFullscreen();
+        console.log('✅ [FULLSCREEN] Entering fullscreen (webkit)');
       } else if (containerRef.current?.msRequestFullscreen) {
         containerRef.current.msRequestFullscreen();
+        console.log('✅ [FULLSCREEN] Entering fullscreen (ms)');
+      } else {
+        console.error('❌ [FULLSCREEN] Fullscreen API not supported');
       }
       setIsFullscreen(true);
     } else {
       // Exit fullscreen
       if (document.exitFullscreen) {
         document.exitFullscreen();
+        console.log('✅ [FULLSCREEN] Exiting fullscreen');
       } else if (document.webkitExitFullscreen) {
         document.webkitExitFullscreen();
+        console.log('✅ [FULLSCREEN] Exiting fullscreen (webkit)');
       } else if (document.msExitFullscreen) {
         document.msExitFullscreen();
+        console.log('✅ [FULLSCREEN] Exiting fullscreen (ms)');
+      } else {
+        console.error('❌ [FULLSCREEN] Exit fullscreen API not supported');
       }
       setIsFullscreen(false);
     }
