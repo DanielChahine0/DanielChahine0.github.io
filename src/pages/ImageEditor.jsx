@@ -267,22 +267,35 @@ export default function ImageEditor() {
   }, []);
 
   const drawImageToCanvas = useCallback((img, customFilters = null) => {
+    console.log('🎨 [CANVAS] drawImageToCanvas called');
     const canvas = canvasRef.current;
+    
     if (!canvas || !img) {
-      console.log('Canvas or image not ready:', { canvas: !!canvas, img: !!img });
+      console.error('❌ [CANVAS] Canvas or image not ready:', { 
+        canvas: !!canvas, 
+        canvasRef: canvasRef,
+        img: !!img,
+        imgDimensions: img ? { width: img.width, height: img.height } : null
+      });
       return;
     }
+    
+    console.log('✅ [CANVAS] Canvas and image ready');
 
     const ctx = canvas.getContext('2d');
     if (!ctx) {
-      console.log('Could not get canvas context');
+      console.error('❌ [CANVAS] Could not get canvas context');
       return;
     }
+    
+    console.log('✅ [CANVAS] Canvas context obtained');
     
     // Calculate dimensions to fit canvas while maintaining aspect ratio
     const maxWidth = 800;
     const maxHeight = 600;
     let { width, height } = img;
+    
+    console.log('🎨 [CANVAS] Original dimensions:', { width, height });
     
     if (width > maxWidth) {
       height = (height * maxWidth) / width;
@@ -293,13 +306,30 @@ export default function ImageEditor() {
       height = maxHeight;
     }
     
+    console.log('🎨 [CANVAS] Calculated canvas dimensions:', { width, height });
+    
     canvas.width = width;
     canvas.height = height;
+    
+    console.log('✅ [CANVAS] Canvas dimensions set');
 
     // Clear canvas
     ctx.clearRect(0, 0, width, height);
+    console.log('✅ [CANVAS] Canvas cleared');
+    
+    // Log canvas visibility
+    console.log('🎨 [CANVAS] Canvas visibility check:', {
+      canvasDisplay: window.getComputedStyle(canvas).display,
+      canvasVisibility: window.getComputedStyle(canvas).visibility,
+      canvasOpacity: window.getComputedStyle(canvas).opacity,
+      canvasWidth: canvas.width,
+      canvasHeight: canvas.height,
+      canvasOffsetWidth: canvas.offsetWidth,
+      canvasOffsetHeight: canvas.offsetHeight
+    });
 
     const activeFilters = customFilters || filters;
+    console.log('🎨 [CANVAS] Active filters:', activeFilters);
     
     // Check if we need any filters
     const hasFilters = activeFilters.brightness !== 100 || 
@@ -311,17 +341,27 @@ export default function ImageEditor() {
                       activeFilters.grayscale !== 0;
 
     // Draw image first
-    ctx.drawImage(img, 0, 0, width, height);
+    console.log('🎨 [CANVAS] Drawing image to canvas...');
+    try {
+      ctx.drawImage(img, 0, 0, width, height);
+      console.log('✅ [CANVAS] Image drawn successfully');
+    } catch (error) {
+      console.error('❌ [CANVAS] Error drawing image:', error);
+      return;
+    }
 
     if (hasFilters) {
+      console.log('🎨 [CANVAS] Applying filters...');
       // Try CSS filters first (works on desktop)
       if (supportsCanvasFilters() && activeFilters.hue === 0 && activeFilters.blur === 0) {
+        console.log('🎨 [CANVAS] Using manual filter application');
         // For simple filters that work well with manual application
         const canvasImageData = ctx.getImageData(0, 0, width, height);
         ctx.clearRect(0, 0, width, height);
         ctx.drawImage(img, 0, 0, width, height);
         applyFiltersManually(ctx, canvasImageData, activeFilters);
       } else if (supportsCanvasFilters()) {
+        console.log('🎨 [CANVAS] Using CSS filters');
         // Use CSS filters for complex effects like hue and blur
         ctx.clearRect(0, 0, width, height);
         ctx.filter = `
@@ -336,11 +376,17 @@ export default function ImageEditor() {
         ctx.drawImage(img, 0, 0, width, height);
         ctx.filter = 'none';
       } else {
+        console.log('🎨 [CANVAS] Using mobile fallback filters');
         // Fallback for mobile: manual filter application
         const canvasImageData = ctx.getImageData(0, 0, width, height);
         applyFiltersManually(ctx, canvasImageData, activeFilters);
       }
+      console.log('✅ [CANVAS] Filters applied');
+    } else {
+      console.log('ℹ️ [CANVAS] No filters to apply');
     }
+    
+    console.log('✅ [CANVAS] drawImageToCanvas complete!');
   }, [filters, supportsCanvasFilters, applyFiltersManually]);
 
   // Use custom hooks
@@ -425,16 +471,31 @@ export default function ImageEditor() {
 
   // Initialize layer when image is first loaded
   useEffect(() => {
+    console.log('🔷 [LAYER] Layer initialization effect triggered:', {
+      hasImage: !!image,
+      layersLength: layers.length
+    });
+    
     if (image && layers.length === 0) {
+      console.log('🔷 [LAYER] Adding image layer...');
       addImageLayer(image);
+      console.log('✅ [LAYER] Image layer added');
     }
   }, [image, layers.length, addImageLayer]);
 
   // Redraw canvas when filters or image change
   useEffect(() => {
+    console.log('🔄 [REDRAW] Redraw effect triggered:', {
+      hasImage: !!image,
+      hasCanvas: !!canvasRef.current,
+      filters
+    });
+    
     if (image && canvasRef.current) {
+      console.log('🔄 [REDRAW] Scheduling redraw with requestAnimationFrame...');
       // Small delay to ensure canvas is ready
       requestAnimationFrame(() => {
+        console.log('🔄 [REDRAW] requestAnimationFrame callback - redrawing...');
         drawImageToCanvas(image);
       });
       
@@ -447,6 +508,8 @@ export default function ImageEditor() {
           variant: "default"
         });
       }
+    } else {
+      console.log('⚠️ [REDRAW] Skipping redraw - missing image or canvas');
     }
   }, [filters, image, drawImageToCanvas, supportsCanvasFilters, toast]);
 

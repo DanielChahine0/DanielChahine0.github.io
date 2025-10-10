@@ -30,13 +30,22 @@ export const useImageActions = (
     toast
 ) => {
     const handleImageUpload = useCallback(async (event) => {
+        console.log('🔵 [UPLOAD] Step 1: handleImageUpload called');
         const file = event.target.files[0];
+        
         if (file) {
+            console.log('🔵 [UPLOAD] Step 2: File selected:', {
+                name: file.name,
+                type: file.type,
+                size: file.size
+            });
+            
             // Check if it's a valid image file or HEIC
             const isHeic = file.type === 'image/heic' || file.type === 'image/heif' || 
                           file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif');
             
             if (!file.type.startsWith('image/') && !isHeic) {
+                console.error('❌ [UPLOAD] Invalid file type:', file.type);
                 toast({
                     title: "Error",
                     description: "Please select a valid image file",
@@ -50,6 +59,7 @@ export const useImageActions = (
                 
                 // Convert HEIC to JPEG if needed
                 if (isHeic) {
+                    console.log('🔵 [UPLOAD] Step 3: Converting HEIC file...');
                     toast({
                         title: "Processing",
                         description: "Converting HEIC file, please wait...",
@@ -64,21 +74,37 @@ export const useImageActions = (
                     processedFile = new File([convertedBlob], file.name.replace(/\.(heic|heif)$/i, '.jpg'), {
                         type: 'image/jpeg'
                     });
+                    console.log('✅ [UPLOAD] HEIC conversion complete');
                 }
 
+                console.log('🔵 [UPLOAD] Step 4: Reading file as DataURL...');
                 const reader = new FileReader();
+                
                 reader.onload = (e) => {
+                    console.log('🔵 [UPLOAD] Step 5: FileReader loaded, creating Image object...');
                     const img = new Image();
+                    
                     img.onload = () => {
+                        console.log('✅ [UPLOAD] Step 6: Image loaded successfully:', {
+                            width: img.width,
+                            height: img.height,
+                            src_length: e.target.result.length
+                        });
+                        
+                        console.log('🔵 [UPLOAD] Step 7: Setting image state...');
                         setImage(img);
                         setOriginalImage(img);
                         
+                        console.log('🔵 [UPLOAD] Step 8: Scheduling canvas draw with requestAnimationFrame...');
                         // Use requestAnimationFrame to ensure canvas is ready
                         requestAnimationFrame(() => {
+                            console.log('🔵 [UPLOAD] Step 9: requestAnimationFrame callback - calling drawImageToCanvas...');
                             drawImageToCanvas(img);
+                            console.log('🔵 [UPLOAD] Step 10: Adding to history...');
                             addToHistory(e.target.result);
                         });
                         
+                        console.log('🔵 [UPLOAD] Step 11: Resetting filters...');
                         setFilters({
                             brightness: 100,
                             contrast: 100,
@@ -95,9 +121,20 @@ export const useImageActions = (
                                 description: "HEIC file converted and loaded successfully",
                             });
                         }
+                        console.log('✅ [UPLOAD] Upload process complete!');
                     };
+                    
+                    img.onerror = (error) => {
+                        console.error('❌ [UPLOAD] Image failed to load:', error);
+                    };
+                    
                     img.src = e.target.result;
                 };
+                
+                reader.onerror = (error) => {
+                    console.error('❌ [UPLOAD] FileReader error:', error);
+                };
+                
                 reader.readAsDataURL(processedFile);
                 
             } catch (error) {

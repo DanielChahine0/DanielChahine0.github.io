@@ -210,46 +210,78 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
 
     // Sync canvas dimensions when image changes
     useEffect(() => {
+        console.log('🖼️ [ENHANCED_CANVAS] Dimension sync effect triggered:', {
+            hasImage: !!image,
+            hasMainCanvas: !!mainCanvasRef.current,
+            mainCanvasDimensions: mainCanvasRef.current 
+                ? { width: mainCanvasRef.current.width, height: mainCanvasRef.current.height }
+                : null
+        });
+        
         if (image && mainCanvasRef.current) {
             const canvas = mainCanvasRef.current;
             const ctx = canvas.getContext('2d');
             
             // If canvas has no dimensions yet, it means this is first load
             if (canvas.width === 0 || canvas.height === 0) {
+                console.log('⚠️ [ENHANCED_CANVAS] Canvas not sized yet, skipping dimension sync');
                 // Canvas will be sized by drawImageToCanvas
                 return;
             }
             
             const { width, height } = canvas;
             
+            console.log('🖼️ [ENHANCED_CANVAS] Syncing overlay canvas dimensions:', { width, height });
+            
             if (drawingCanvasRef.current) {
                 drawingCanvasRef.current.width = width;
                 drawingCanvasRef.current.height = height;
+                console.log('✅ [ENHANCED_CANVAS] Drawing canvas dimensions synced');
             }
             
             if (overlayCanvasRef.current) {
                 overlayCanvasRef.current.width = width;
                 overlayCanvasRef.current.height = height;
+                console.log('✅ [ENHANCED_CANVAS] Overlay canvas dimensions synced');
             }
         }
     }, [image, mainCanvasRef]);
 
     // Load existing drawing when active layer changes
     useEffect(() => {
+        console.log('🖼️ [ENHANCED_CANVAS] Active layer changed:', {
+            activeLayerId,
+            hasDrawingCanvas: !!drawingCanvasRef.current,
+            layersCount: layers.length
+        });
+        
         if (!drawingCanvasRef.current || !activeLayerId) return;
         
         const activeLayer = layers.find(l => l.id === activeLayerId);
-        if (!activeLayer || activeLayer.type !== 'drawing') return;
+        
+        console.log('🖼️ [ENHANCED_CANVAS] Active layer details:', activeLayer);
+        
+        if (!activeLayer || activeLayer.type !== 'drawing') {
+            console.log('ℹ️ [ENHANCED_CANVAS] Active layer is not a drawing layer');
+            return;
+        }
         
         const ctx = drawingCanvasRef.current.getContext('2d');
         ctx.clearRect(0, 0, drawingCanvasRef.current.width, drawingCanvasRef.current.height);
         
         if (activeLayer.dataUrl) {
+            console.log('🖼️ [ENHANCED_CANVAS] Loading drawing layer data...');
             const img = new Image();
             img.onload = () => {
                 ctx.drawImage(img, 0, 0);
+                console.log('✅ [ENHANCED_CANVAS] Drawing layer loaded');
+            };
+            img.onerror = (error) => {
+                console.error('❌ [ENHANCED_CANVAS] Failed to load drawing layer:', error);
             };
             img.src = activeLayer.dataUrl;
+        } else {
+            console.log('ℹ️ [ENHANCED_CANVAS] No drawing data for active layer');
         }
     }, [activeLayerId, layers]);
 
@@ -278,7 +310,7 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
                     <div className="text-center">
                         <div 
                             ref={containerRef}
-                            className="relative inline-block"
+                            className="relative inline-block min-h-[300px]"
                             onMouseMove={draggedTextId ? handleTextMouseMove : draw}
                             onMouseUp={draggedTextId ? handleTextMouseUp : stopDrawing}
                             onMouseLeave={draggedTextId ? handleTextMouseUp : stopDrawing}
@@ -288,8 +320,8 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
                             {/* Main canvas with image and filters */}
                             <canvas
                                 ref={mainCanvasRef}
-                                className="max-w-full max-h-[600px] border border-border rounded-lg shadow-lg absolute top-0 left-0"
-                                style={{ pointerEvents: 'none' }}
+                                className="max-w-full max-h-[600px] border border-border rounded-lg shadow-lg"
+                                style={{ display: 'block', position: 'relative', zIndex: 1 }}
                             />
                             
                             {/* Drawing layer canvas */}
@@ -300,7 +332,8 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
                                 onTouchStart={startDrawing}
                                 style={{ 
                                     pointerEvents: activeTool !== 'select' ? 'auto' : 'none',
-                                    cursor: activeTool === 'eraser' ? 'crosshair' : 'default'
+                                    cursor: activeTool === 'eraser' ? 'crosshair' : 'default',
+                                    zIndex: 2
                                 }}
                             />
                             
@@ -308,6 +341,7 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
                             <canvas
                                 ref={overlayCanvasRef}
                                 className="max-w-full max-h-[600px] absolute top-0 left-0 pointer-events-none"
+                                style={{ zIndex: 3 }}
                             />
                             
                             {/* Text layers rendered as DOM elements for easy interaction */}
