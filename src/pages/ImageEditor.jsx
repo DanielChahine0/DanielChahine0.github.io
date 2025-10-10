@@ -130,11 +130,16 @@ export default function ImageEditor() {
   }, []);
 
   const deleteLayer = useCallback((layerId) => {
-    setLayers(prev => prev.filter(layer => layer.id !== layerId));
-    if (activeLayerId === layerId) {
-      setActiveLayerId(layers.find(l => l.id !== layerId)?.id || null);
-    }
-  }, [activeLayerId, layers]);
+    setLayers(prev => {
+      const filtered = prev.filter(layer => layer.id !== layerId);
+      // Update active layer if deleted
+      if (activeLayerId === layerId) {
+        const newActiveLayer = filtered.find(l => l.type === 'image') || filtered[0];
+        setActiveLayerId(newActiveLayer?.id || null);
+      }
+      return filtered;
+    });
+  }, [activeLayerId]);
 
   const moveLayer = useCallback((layerId, direction) => {
     setLayers(prev => {
@@ -169,22 +174,22 @@ export default function ImageEditor() {
   }, []);
 
   const updateDrawingLayer = useCallback((dataUrl) => {
-    const drawingLayer = layers.find(l => l.type === 'drawing' && l.id === activeLayerId);
-    if (drawingLayer) {
-      setLayers(prev => prev.map(layer => 
-        layer.id === activeLayerId ? { ...layer, dataUrl } : layer
-      ));
-    }
-  }, [activeLayerId, layers]);
+    if (!activeLayerId) return;
+    setLayers(prev => prev.map(layer => 
+      layer.id === activeLayerId && layer.type === 'drawing' 
+        ? { ...layer, dataUrl } 
+        : layer
+    ));
+  }, [activeLayerId]);
 
   const clearDrawing = useCallback(() => {
-    const drawingLayer = layers.find(l => l.type === 'drawing' && l.id === activeLayerId);
-    if (drawingLayer) {
-      setLayers(prev => prev.map(layer => 
-        layer.id === activeLayerId ? { ...layer, dataUrl: null } : layer
-      ));
-    }
-  }, [activeLayerId, layers]);
+    if (!activeLayerId) return;
+    setLayers(prev => prev.map(layer => 
+      layer.id === activeLayerId && layer.type === 'drawing' 
+        ? { ...layer, dataUrl: null } 
+        : layer
+    ));
+  }, [activeLayerId]);
 
   // Listen for layer opacity changes from LayerPanel
   useEffect(() => {
@@ -356,15 +361,9 @@ export default function ImageEditor() {
   );
 
   // Wrap image upload to initialize layer system
-  const handleImageUpload = useCallback(async (event) => {
-    await originalHandleImageUpload(event);
-    // Image will be set via the original handler, then we create layer
-    setTimeout(() => {
-      if (image) {
-        addImageLayer(image);
-      }
-    }, 100);
-  }, [originalHandleImageUpload, image, addImageLayer]);
+  const handleImageUpload = useCallback((event) => {
+    originalHandleImageUpload(event);
+  }, [originalHandleImageUpload]);
 
   // Enhanced download that merges all layers
   const downloadImage = useCallback(() => {
@@ -417,14 +416,17 @@ export default function ImageEditor() {
     });
   }, [canvasRef, layers, toast]);
 
+  // Initialize layer when image is first loaded
+  useEffect(() => {
+    if (image && layers.length === 0) {
+      addImageLayer(image);
+    }
+  }, [image, layers.length, addImageLayer]);
+
+  // Redraw canvas when filters or image change
   useEffect(() => {
     if (image) {
       drawImageToCanvas(image);
-      
-      // Initialize layer system if not already done
-      if (layers.length === 0) {
-        addImageLayer(image);
-      }
       
       // Show mobile compatibility notice once
       if (!supportsCanvasFilters() && !sessionStorage.getItem('mobile-filter-notice')) {
@@ -436,7 +438,7 @@ export default function ImageEditor() {
         });
       }
     }
-  }, [filters, image, drawImageToCanvas, supportsCanvasFilters, toast, layers.length, addImageLayer]);
+  }, [filters, image, drawImageToCanvas, supportsCanvasFilters, toast]);
 
   const handleFilterChange = (filterName, value) => {
     setFilters(prev => ({

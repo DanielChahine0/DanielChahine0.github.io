@@ -58,7 +58,11 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
 
     // Initialize drawing on the overlay canvas
     const startDrawing = useCallback((e) => {
-        if (!drawingCanvasRef.current) return;
+        if (!drawingCanvasRef.current || !activeLayerId) return;
+        
+        // Check if active layer is a drawing layer
+        const activeLayer = layers.find(l => l.id === activeLayerId);
+        if (!activeLayer || activeLayer.type !== 'drawing') return;
         
         const coords = getCanvasCoordinates(e, drawingCanvasRef.current);
         setIsDrawing(true);
@@ -76,7 +80,7 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
             ctx.beginPath();
             ctx.moveTo(coords.x, coords.y);
         }
-    }, [activeTool, drawingSettings, getCanvasCoordinates]);
+    }, [activeTool, drawingSettings, getCanvasCoordinates, activeLayerId, layers]);
 
     // Continue drawing
     const draw = useCallback((e) => {
@@ -172,7 +176,8 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
 
     // Handle text drag start
     const handleTextMouseDown = useCallback((e, textLayer) => {
-        if (activeTool !== 'select' && activeTool !== 'brush') return;
+        e.stopPropagation();
+        e.preventDefault();
         
         const canvas = mainCanvasRef.current;
         if (!canvas) return;
@@ -183,7 +188,7 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
             x: coords.x - textLayer.x,
             y: coords.y - textLayer.y
         });
-    }, [activeTool, getCanvasCoordinates, mainCanvasRef]);
+    }, [getCanvasCoordinates, mainCanvasRef]);
 
     // Handle text drag
     const handleTextMouseMove = useCallback((e) => {
@@ -219,6 +224,25 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
             }
         }
     }, [image, mainCanvasRef]);
+
+    // Load existing drawing when active layer changes
+    useEffect(() => {
+        if (!drawingCanvasRef.current || !activeLayerId) return;
+        
+        const activeLayer = layers.find(l => l.id === activeLayerId);
+        if (!activeLayer || activeLayer.type !== 'drawing') return;
+        
+        const ctx = drawingCanvasRef.current.getContext('2d');
+        ctx.clearRect(0, 0, drawingCanvasRef.current.width, drawingCanvasRef.current.height);
+        
+        if (activeLayer.dataUrl) {
+            const img = new Image();
+            img.onload = () => {
+                ctx.drawImage(img, 0, 0);
+            };
+            img.src = activeLayer.dataUrl;
+        }
+    }, [activeLayerId, layers]);
 
     return (
         <div className={`${image ? 'lg:col-span-3' : 'lg:col-span-4'}`}>
