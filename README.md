@@ -116,4 +116,60 @@ npm run preview
 # Deploy to GitHub Pages
 npm run deploy
 ````
+---
+## Project Structure
 
+```
+src/
+├── components/        # UI components (NavBar, Footer, HeroSection, etc.)
+│   └── ui/           # Primitives (toast, toaster)
+├── hooks/            # Custom hooks (use-glow-effect, use-toast)
+├── lib/              # Utilities (utils.js)
+├── pages/            # Route pages and interactive tools
+├── App.jsx           # Main app with AnimatedRoutes
+├── index.css         # Global styles
+└── main.jsx          # Entry point
+```
+
+**Full documentation**: src/README.md
+
+---
+
+## Planned Features
+🎯Short-term
+- Image Editor Enhancements: Layer system, text overlays, drawing tools
+- Code Playground V2: Multi-file projects, npm package imports, React preview
+- Resume Builder: Interactive resume creator with PDF export
+- Animation Library: Reusable micro-interactions and transitions showcase
+- Blog Comments: Integration with GitHub Discussions or similar
+- Search Functionality: Global search for projects, skills, and blog posts
+  
+🚀 Long-term
+- Portfolio Analytics: Visitor statistics and interaction heatmaps
+- Content Management: Admin panel for blog posts and project updates
+- API Integration: GitHub stats, WakaTime coding activity
+- 3D Elements: Three.js background scenes and interactive models
+- Collaboration Tools: Real-time code playground sharing
+- Progressive Web App: Offline support and installable app
+- Multi-language Support: i18n for portfolio content
+- Guest Book: Visitor messages with moderation
+- Project Deep Dives: Interactive case studies with embedded demos
+- Developer Blog Platform: RSS feed, categories, tags, and series
+
+🧪 Experimental
+- AI Code Assistant: In-browser code suggestions and documentation lookup
+- Voice Commands: Navigate portfolio using speech recognition
+- AR Business Card: WebXR experience for mobile devices
+- Live Coding Streams: Embedded Twitch/YouTube integration
+- Gamification: Achievement system for exploring portfolio features
+
+--- 
+### Contact
+Email: Chahinedaniel0@gmail.com
+LinkedIn: [Daniel Chahine](https://www.linkedin.com/in/danielchahine/)
+GitHub: [DanielChahine0](https://github.com/DanielChahine0)
+Instagram: [@dxni.ch](https://www.instagram.com/dxni.ch/)
+
+--- 
+### License
+Personal and educational use. Feel free to explore and get inspired!
