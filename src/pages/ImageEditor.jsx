@@ -3,12 +3,15 @@ import { Footer } from '../components/Footer';
 import { NavBar } from '../components/NavBar';
 import { PageTransition } from '../components/PageTransition';
 import { motion } from 'framer-motion';
-import { Image as ImageIcon } from 'lucide-react';
+import { Image as ImageIcon, Layers as LayersIcon, Type, PenTool } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
 import { 
   Toolbar, 
   ControlPanel, 
-  EditorCanvas, 
+  EnhancedEditorCanvas,
+  LayerPanel,
+  TextToolPanel,
+  DrawingToolPanel,
   HelpSection,
   useImageTransforms,
   useImageActions 
@@ -27,6 +30,24 @@ export default function ImageEditor() {
     sepia: 0,
     grayscale: 0
   });
+  
+  // Layer system state
+  const [layers, setLayers] = useState([]);
+  const [activeLayerId, setActiveLayerId] = useState(null);
+  const [layerIdCounter, setLayerIdCounter] = useState(1);
+  
+  // Drawing tools state
+  const [activeTool, setActiveTool] = useState('brush');
+  const [drawingSettings, setDrawingSettings] = useState({
+    brushSize: 5,
+    color: '#000000',
+    opacity: 1,
+    fill: false
+  });
+  
+  // UI state
+  const [activePanel, setActivePanel] = useState('filters'); // 'filters', 'layers', 'text', 'drawing'
+  
   const [history, setHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -42,6 +63,137 @@ export default function ImageEditor() {
     setHistory(newHistory);
     setHistoryIndex(newHistory.length - 1);
   }, [history, historyIndex]);
+
+  // Layer management functions
+  const addImageLayer = useCallback((img) => {
+    const newLayer = {
+      id: layerIdCounter,
+      type: 'image',
+      name: 'Image Layer',
+      visible: true,
+      opacity: 100,
+      image: img
+    };
+    setLayers([newLayer]);
+    setActiveLayerId(newLayer.id);
+    setLayerIdCounter(prev => prev + 1);
+  }, [layerIdCounter]);
+
+  const addTextLayer = useCallback((textConfig) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const newLayer = {
+      id: layerIdCounter,
+      type: 'text',
+      name: `Text ${layerIdCounter}`,
+      visible: true,
+      opacity: 100,
+      x: canvas.width / 2 - 100,
+      y: canvas.height / 2,
+      ...textConfig
+    };
+    setLayers(prev => [...prev, newLayer]);
+    setActiveLayerId(newLayer.id);
+    setLayerIdCounter(prev => prev + 1);
+  }, [layerIdCounter]);
+
+  const addDrawingLayer = useCallback(() => {
+    const newLayer = {
+      id: layerIdCounter,
+      type: 'drawing',
+      name: `Drawing ${layerIdCounter}`,
+      visible: true,
+      opacity: 100,
+      dataUrl: null
+    };
+    setLayers(prev => [...prev, newLayer]);
+    setActiveLayerId(newLayer.id);
+    setLayerIdCounter(prev => prev + 1);
+    setActivePanel('drawing');
+    toast({
+      title: "Drawing Layer Added",
+      description: "Use the drawing tools to create on this layer.",
+    });
+  }, [layerIdCounter, toast]);
+
+  const updateLayerOpacity = useCallback((layerId, opacity) => {
+    setLayers(prev => prev.map(layer => 
+      layer.id === layerId ? { ...layer, opacity } : layer
+    ));
+  }, []);
+
+  const toggleLayerVisibility = useCallback((layerId) => {
+    setLayers(prev => prev.map(layer => 
+      layer.id === layerId ? { ...layer, visible: !layer.visible } : layer
+    ));
+  }, []);
+
+  const deleteLayer = useCallback((layerId) => {
+    setLayers(prev => prev.filter(layer => layer.id !== layerId));
+    if (activeLayerId === layerId) {
+      setActiveLayerId(layers.find(l => l.id !== layerId)?.id || null);
+    }
+  }, [activeLayerId, layers]);
+
+  const moveLayer = useCallback((layerId, direction) => {
+    setLayers(prev => {
+      const index = prev.findIndex(l => l.id === layerId);
+      if (index === -1) return prev;
+      
+      const newLayers = [...prev];
+      if (direction === 'up' && index < newLayers.length - 1) {
+        [newLayers[index], newLayers[index + 1]] = [newLayers[index + 1], newLayers[index]];
+      } else if (direction === 'down' && index > 0) {
+        [newLayers[index], newLayers[index - 1]] = [newLayers[index - 1], newLayers[index]];
+      }
+      return newLayers;
+    });
+  }, []);
+
+  const updateTextLayer = useCallback((updates) => {
+    if (!activeLayerId) return;
+    setLayers(prev => prev.map(layer => 
+      layer.id === activeLayerId && layer.type === 'text' 
+        ? { ...layer, ...updates } 
+        : layer
+    ));
+  }, [activeLayerId]);
+
+  const moveTextLayer = useCallback((layerId, position) => {
+    setLayers(prev => prev.map(layer => 
+      layer.id === layerId && layer.type === 'text' 
+        ? { ...layer, x: position.x, y: position.y } 
+        : layer
+    ));
+  }, []);
+
+  const updateDrawingLayer = useCallback((dataUrl) => {
+    const drawingLayer = layers.find(l => l.type === 'drawing' && l.id === activeLayerId);
+    if (drawingLayer) {
+      setLayers(prev => prev.map(layer => 
+        layer.id === activeLayerId ? { ...layer, dataUrl } : layer
+      ));
+    }
+  }, [activeLayerId, layers]);
+
+  const clearDrawing = useCallback(() => {
+    const drawingLayer = layers.find(l => l.type === 'drawing' && l.id === activeLayerId);
+    if (drawingLayer) {
+      setLayers(prev => prev.map(layer => 
+        layer.id === activeLayerId ? { ...layer, dataUrl: null } : layer
+      ));
+    }
+  }, [activeLayerId, layers]);
+
+  // Listen for layer opacity changes from LayerPanel
+  useEffect(() => {
+    const handleOpacityChange = (e) => {
+      updateLayerOpacity(e.detail.layerId, e.detail.opacity);
+    };
+    window.addEventListener('layerOpacityChange', handleOpacityChange);
+    return () => window.removeEventListener('layerOpacityChange', handleOpacityChange);
+  }, [updateLayerOpacity]);
 
   // Utility function to detect if browser supports canvas filters
   const supportsCanvasFilters = useCallback(() => {
@@ -188,8 +340,8 @@ export default function ImageEditor() {
   } = useImageTransforms(image, setImage, addToHistory, setIsProcessing);
 
   const {
-    handleImageUpload,
-    downloadImage,
+    handleImageUpload: originalHandleImageUpload,
+    downloadImage: _originalDownloadImage,
     resetFilters,
     applyPreset
   } = useImageActions(
@@ -203,9 +355,76 @@ export default function ImageEditor() {
     toast
   );
 
+  // Wrap image upload to initialize layer system
+  const handleImageUpload = useCallback(async (event) => {
+    await originalHandleImageUpload(event);
+    // Image will be set via the original handler, then we create layer
+    setTimeout(() => {
+      if (image) {
+        addImageLayer(image);
+      }
+    }, 100);
+  }, [originalHandleImageUpload, image, addImageLayer]);
+
+  // Enhanced download that merges all layers
+  const downloadImage = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    // Create a temporary canvas to merge all layers
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = canvas.width;
+    tempCanvas.height = canvas.height;
+    const ctx = tempCanvas.getContext('2d');
+
+    // Draw main image with filters
+    ctx.drawImage(canvas, 0, 0);
+
+    // Draw all visible layers
+    layers.forEach(layer => {
+      if (!layer.visible) return;
+      
+      ctx.globalAlpha = layer.opacity / 100;
+      
+      if (layer.type === 'drawing' && layer.dataUrl) {
+        const img = new Image();
+        img.src = layer.dataUrl;
+        ctx.drawImage(img, 0, 0);
+      } else if (layer.type === 'text') {
+        ctx.font = `${layer.fontStyle} ${layer.fontWeight} ${layer.fontSize}px ${layer.fontFamily}`;
+        ctx.fillStyle = layer.color;
+        ctx.textAlign = layer.textAlign;
+        
+        if (layer.stroke) {
+          ctx.strokeStyle = layer.strokeColor;
+          ctx.lineWidth = layer.strokeWidth;
+          ctx.strokeText(layer.text, layer.x, layer.y);
+        }
+        ctx.fillText(layer.text, layer.x, layer.y);
+      }
+    });
+
+    ctx.globalAlpha = 1;
+
+    const link = document.createElement('a');
+    link.download = 'edited-image.png';
+    link.href = tempCanvas.toDataURL();
+    link.click();
+
+    toast({
+      title: "Success",
+      description: "Image with all layers downloaded successfully",
+    });
+  }, [canvasRef, layers, toast]);
+
   useEffect(() => {
     if (image) {
       drawImageToCanvas(image);
+      
+      // Initialize layer system if not already done
+      if (layers.length === 0) {
+        addImageLayer(image);
+      }
       
       // Show mobile compatibility notice once
       if (!supportsCanvasFilters() && !sessionStorage.getItem('mobile-filter-notice')) {
@@ -217,7 +436,7 @@ export default function ImageEditor() {
         });
       }
     }
-  }, [filters, image, drawImageToCanvas, supportsCanvasFilters, toast]);
+  }, [filters, image, drawImageToCanvas, supportsCanvasFilters, toast, layers.length, addImageLayer]);
 
   const handleFilterChange = (filterName, value) => {
     setFilters(prev => ({
@@ -346,25 +565,119 @@ export default function ImageEditor() {
               canRedo={historyIndex < history.length - 1}
             />
 
+            {/* Panel Tabs */}
+            {image && (
+              <div className="mb-6">
+                <div className="bg-card rounded-lg p-2 border border-border flex gap-2 flex-wrap justify-center">
+                  <button
+                    onClick={() => setActivePanel('filters')}
+                    className={`px-4 py-2 rounded transition-colors flex items-center gap-2 ${
+                      activePanel === 'filters'
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                    }`}
+                  >
+                    <ImageIcon className="w-4 h-4" />
+                    Filters
+                  </button>
+                  <button
+                    onClick={() => setActivePanel('layers')}
+                    className={`px-4 py-2 rounded transition-colors flex items-center gap-2 ${
+                      activePanel === 'layers'
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                    }`}
+                  >
+                    <LayersIcon className="w-4 h-4" />
+                    Layers
+                  </button>
+                  <button
+                    onClick={() => setActivePanel('text')}
+                    className={`px-4 py-2 rounded transition-colors flex items-center gap-2 ${
+                      activePanel === 'text'
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                    }`}
+                  >
+                    <Type className="w-4 h-4" />
+                    Text
+                  </button>
+                  <button
+                    onClick={() => setActivePanel('drawing')}
+                    className={`px-4 py-2 rounded transition-colors flex items-center gap-2 ${
+                      activePanel === 'drawing'
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                    }`}
+                  >
+                    <PenTool className="w-4 h-4" />
+                    Drawing
+                  </button>
+                </div>
+              </div>
+            )}
+
             {/* Enhanced Editor and Control Layout */}
             <div className="flex-1 overflow-hidden">
               <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 h-full">
-                {/* Control Panel */}
-                <ControlPanel
-                  filters={filters}
-                  onFilterChange={handleFilterChange}
-                  onApplyPreset={applyPreset}
-                  isVisible={!!image}
-                />
+                {/* Dynamic Control Panel based on active tab */}
+                {image && (
+                  <div className="lg:col-span-1 space-y-6">
+                    {activePanel === 'filters' && (
+                      <ControlPanel
+                        filters={filters}
+                        onFilterChange={handleFilterChange}
+                        onApplyPreset={applyPreset}
+                        isVisible={true}
+                      />
+                    )}
+                    {activePanel === 'layers' && (
+                      <LayerPanel
+                        layers={layers}
+                        activeLayerId={activeLayerId}
+                        onLayerSelect={setActiveLayerId}
+                        onLayerToggle={toggleLayerVisibility}
+                        onLayerDelete={deleteLayer}
+                        onLayerMove={moveLayer}
+                        onAddLayer={addDrawingLayer}
+                        isVisible={true}
+                      />
+                    )}
+                    {activePanel === 'text' && (
+                      <TextToolPanel
+                        onAddText={addTextLayer}
+                        activeTextLayer={layers.find(l => l.id === activeLayerId && l.type === 'text')}
+                        onUpdateText={updateTextLayer}
+                        isVisible={true}
+                      />
+                    )}
+                    {activePanel === 'drawing' && (
+                      <DrawingToolPanel
+                        activeTool={activeTool}
+                        onToolChange={setActiveTool}
+                        drawingSettings={drawingSettings}
+                        onSettingChange={(key, value) => setDrawingSettings(prev => ({ ...prev, [key]: value }))}
+                        onClearDrawing={clearDrawing}
+                        isVisible={true}
+                      />
+                    )}
+                  </div>
+                )}
 
-                {/* Editor Canvas */}
-                <EditorCanvas
+                {/* Enhanced Editor Canvas */}
+                <EnhancedEditorCanvas
                   ref={canvasRef}
                   image={image}
+                  layers={layers}
                   isProcessing={isProcessing}
                   onUpload={() => fileInputRef.current?.click()}
                   fileInputRef={fileInputRef}
                   onFileChange={handleImageUpload}
+                  activeTool={activeTool}
+                  drawingSettings={drawingSettings}
+                  onDrawingComplete={updateDrawingLayer}
+                  onTextMove={moveTextLayer}
+                  activeLayerId={activeLayerId}
                 />
               </div>
             </div>
