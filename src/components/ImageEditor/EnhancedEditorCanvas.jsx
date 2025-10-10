@@ -211,7 +211,16 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
     // Sync canvas dimensions when image changes
     useEffect(() => {
         if (image && mainCanvasRef.current) {
-            const { width, height } = mainCanvasRef.current;
+            const canvas = mainCanvasRef.current;
+            const ctx = canvas.getContext('2d');
+            
+            // If canvas has no dimensions yet, it means this is first load
+            if (canvas.width === 0 || canvas.height === 0) {
+                // Canvas will be sized by drawImageToCanvas
+                return;
+            }
+            
+            const { width, height } = canvas;
             
             if (drawingCanvasRef.current) {
                 drawingCanvasRef.current.width = width;

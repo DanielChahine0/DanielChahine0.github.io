@@ -72,8 +72,13 @@ export const useImageActions = (
                     img.onload = () => {
                         setImage(img);
                         setOriginalImage(img);
-                        drawImageToCanvas(img);
-                        addToHistory(e.target.result);
+                        
+                        // Use requestAnimationFrame to ensure canvas is ready
+                        requestAnimationFrame(() => {
+                            drawImageToCanvas(img);
+                            addToHistory(e.target.result);
+                        });
+                        
                         setFilters({
                             brightness: 100,
                             contrast: 100,

@@ -268,9 +268,16 @@ export default function ImageEditor() {
 
   const drawImageToCanvas = useCallback((img, customFilters = null) => {
     const canvas = canvasRef.current;
-    if (!canvas || !img) return;
+    if (!canvas || !img) {
+      console.log('Canvas or image not ready:', { canvas: !!canvas, img: !!img });
+      return;
+    }
 
     const ctx = canvas.getContext('2d');
+    if (!ctx) {
+      console.log('Could not get canvas context');
+      return;
+    }
     
     // Calculate dimensions to fit canvas while maintaining aspect ratio
     const maxWidth = 800;
@@ -425,8 +432,11 @@ export default function ImageEditor() {
 
   // Redraw canvas when filters or image change
   useEffect(() => {
-    if (image) {
-      drawImageToCanvas(image);
+    if (image && canvasRef.current) {
+      // Small delay to ensure canvas is ready
+      requestAnimationFrame(() => {
+        drawImageToCanvas(image);
+      });
       
       // Show mobile compatibility notice once
       if (!supportsCanvasFilters() && !sessionStorage.getItem('mobile-filter-notice')) {
