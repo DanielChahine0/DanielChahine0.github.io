@@ -310,7 +310,7 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
                     <div className="text-center">
                         <div 
                             ref={containerRef}
-                            className="relative inline-block min-h-[300px]"
+                            className="relative inline-block min-h-[400px] w-full"
                             onMouseMove={draggedTextId ? handleTextMouseMove : draw}
                             onMouseUp={draggedTextId ? handleTextMouseUp : stopDrawing}
                             onMouseLeave={draggedTextId ? handleTextMouseUp : stopDrawing}
@@ -320,14 +320,14 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
                             {/* Main canvas with image and filters */}
                             <canvas
                                 ref={mainCanvasRef}
-                                className="max-w-full max-h-[600px] border border-border rounded-lg shadow-lg"
-                                style={{ display: 'block', position: 'relative', zIndex: 1 }}
+                                className="w-full h-auto max-h-[800px] border border-border rounded-lg shadow-lg"
+                                style={{ display: 'block', position: 'relative', zIndex: 1, margin: '0 auto' }}
                             />
                             
                             {/* Drawing layer canvas */}
                             <canvas
                                 ref={drawingCanvasRef}
-                                className="max-w-full max-h-[600px] border border-border rounded-lg shadow-lg absolute top-0 left-0"
+                                className="w-full h-auto max-h-[800px] border border-border rounded-lg shadow-lg absolute top-0 left-0"
                                 onMouseDown={startDrawing}
                                 onTouchStart={startDrawing}
                                 style={{ 
@@ -340,7 +340,7 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
                             {/* Overlay canvas for shape preview */}
                             <canvas
                                 ref={overlayCanvasRef}
-                                className="max-w-full max-h-[600px] absolute top-0 left-0 pointer-events-none"
+                                className="w-full h-auto max-h-[800px] absolute top-0 left-0 pointer-events-none"
                                 style={{ zIndex: 3 }}
                             />
                             

@@ -291,8 +291,9 @@ export default function ImageEditor() {
     console.log('✅ [CANVAS] Canvas context obtained');
     
     // Calculate dimensions to fit canvas while maintaining aspect ratio
-    const maxWidth = 800;
-    const maxHeight = 600;
+    // Use larger dimensions to fill the available space
+    const maxWidth = 1200;
+    const maxHeight = 800;
     let { width, height } = img;
     
     console.log('🎨 [CANVAS] Original dimensions:', { width, height });
