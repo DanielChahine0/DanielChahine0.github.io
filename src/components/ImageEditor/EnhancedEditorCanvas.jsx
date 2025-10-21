@@ -120,15 +120,30 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
 
     // Get canvas coordinates from mouse/touch event
     const getCanvasCoordinates = useCallback((e, canvas) => {
+        if (!canvas) return { x: 0, y: 0 };
+        
         const rect = canvas.getBoundingClientRect();
-        const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-        const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+        const clientX = e.type.includes('touch') ? e.touches?.[0]?.clientX : e.clientX;
+        const clientY = e.type.includes('touch') ? e.touches?.[0]?.clientY : e.clientY;
         
         return {
-            x: clientX - rect.left,
-            y: clientY - rect.top
+            x: (clientX ?? 0) - rect.left,
+            y: (clientY ?? 0) - rect.top
         };
     }, []);
+
+    /**
+     * Setup drawing context with current settings
+     */
+    const setupDrawingContext = useCallback((ctx, isEraser = false) => {
+        ctx.strokeStyle = isEraser ? '#FFFFFF' : settings.color;
+        ctx.fillStyle = settings.color;
+        ctx.lineWidth = settings.brushSize;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.globalAlpha = isEraser ? 1 : settings.opacity;
+        ctx.globalCompositeOperation = isEraser ? 'destination-out' : 'source-over';
+    }, [settings]);
 
     // Initialize drawing on the overlay canvas
     const startDrawing = useCallback((e) => {
