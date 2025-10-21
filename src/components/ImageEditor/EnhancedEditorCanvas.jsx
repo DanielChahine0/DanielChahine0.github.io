@@ -302,7 +302,7 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
         
         console.log('🖼️ [ENHANCED_CANVAS] Active layer details:', activeLayer);
         
-        if (!activeLayer || activeLayer.type !== 'drawing') {
+        if (!activeLayer || activeLayer.type !== LAYER_TYPES.DRAWING) {
             console.log('ℹ️ [ENHANCED_CANVAS] Active layer is not a drawing layer');
             return;
         }
@@ -313,13 +313,16 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
         if (activeLayer.dataUrl) {
             console.log('🖼️ [ENHANCED_CANVAS] Loading drawing layer data...');
             const img = new Image();
+            
             img.onload = () => {
                 ctx.drawImage(img, 0, 0);
                 console.log('✅ [ENHANCED_CANVAS] Drawing layer loaded');
             };
+            
             img.onerror = (error) => {
                 console.error('❌ [ENHANCED_CANVAS] Failed to load drawing layer:', error);
             };
+            
             img.src = activeLayer.dataUrl;
         } else {
             console.log('ℹ️ [ENHANCED_CANVAS] No drawing data for active layer');
