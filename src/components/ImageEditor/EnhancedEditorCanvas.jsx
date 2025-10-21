@@ -188,7 +188,7 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
             
             try {
                 drawShapes[activeTool](overlayCtx, startPoint, coords, settings);
-            } catch (error) {
+            } catch {
                 // Silent fail for shape preview errors
             }
         }
