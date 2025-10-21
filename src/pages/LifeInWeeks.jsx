@@ -139,7 +139,7 @@ export default function LifeInWeeks() {
             });
         }
         return arr;
-    }, [birthDate, lifeExpectancy, stats.livedWeeks, stats.totalWeeks]);
+    }, [birthDate, stats.livedWeeks, stats.totalWeeks]);
 
     return (
         <PageTransition>

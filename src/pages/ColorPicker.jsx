@@ -288,7 +288,7 @@ export default function ColorPicker() {
             title: "Palette exported!",
             description: `${paletteData.name} palette downloaded as JSON`,
         });
-    }, [savedPalette, customPaletteName, selectedPalette, formatColor, toast]);
+    }, [savedPalette, customPaletteName, selectedPalette, toast]);
 
     // Update color and history
     const updateColor = useCallback((newColor) => {
