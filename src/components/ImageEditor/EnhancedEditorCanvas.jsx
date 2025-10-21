@@ -199,7 +199,8 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
         const overlayCtx = overlayCanvasRef.current.getContext('2d');
 
         // For shapes, commit the overlay to the drawing canvas
-        if (activeTool !== 'brush' && activeTool !== 'eraser' && startPoint) {
+        const isShape = activeTool !== DRAWING_TOOLS.BRUSH && activeTool !== DRAWING_TOOLS.ERASER;
+        if (isShape && startPoint) {
             ctx.drawImage(overlayCanvasRef.current, 0, 0);
             overlayCtx.clearRect(0, 0, overlayCanvasRef.current.width, overlayCanvasRef.current.height);
         }
@@ -208,7 +209,11 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
         setStartPoint(null);
         
         if (onDrawingComplete) {
-            onDrawingComplete(drawingCanvasRef.current.toDataURL());
+            try {
+                onDrawingComplete(drawingCanvasRef.current.toDataURL());
+            } catch (error) {
+                console.error('[ENHANCED_CANVAS] Error in onDrawingComplete:', error);
+            }
         }
     }, [isDrawing, activeTool, startPoint, onDrawingComplete]);
 
