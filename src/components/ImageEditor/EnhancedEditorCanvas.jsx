@@ -4,7 +4,7 @@
  * Handles multi-layer rendering, user interactions, and tool operations.
  */
 
-import React, { memo, forwardRef, useRef, useEffect, useState, useCallback } from "react";
+import React, { memo, forwardRef, useRef, useEffect, useState, useCallback, useMemo } from "react";
 import { Image as ImageIcon, RefreshCw, Move } from "lucide-react";
 
 // Constants
@@ -329,8 +329,16 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
         }
     }, [activeLayerId, layers]);
 
+    // Filter visible text layers
+    const visibleTextLayers = layers.filter(
+        layer => layer.type === LAYER_TYPES.TEXT && layer.visible
+    );
+
+    // Canvas grid column span
+    const canvasColSpan = image ? 'lg:col-span-3' : 'lg:col-span-4';
+
     return (
-        <div className={`${image ? 'lg:col-span-3' : 'lg:col-span-4'}`}>
+        <div className={canvasColSpan}>
             <div className="bg-card rounded-lg p-6 border border-border">
                 {!image ? (
                     <div className="text-center py-20">
@@ -354,7 +362,8 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
                     <div className="text-center">
                         <div 
                             ref={containerRef}
-                            className="relative inline-block min-h-[400px] w-full"
+                            className="relative inline-block w-full"
+                            style={{ minHeight: `${CANVAS_CONFIG.MIN_HEIGHT}px` }}
                             onMouseMove={draggedTextId ? handleTextMouseMove : draw}
                             onMouseUp={draggedTextId ? handleTextMouseUp : stopDrawing}
                             onMouseLeave={draggedTextId ? handleTextMouseUp : stopDrawing}
@@ -364,70 +373,78 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
                             {/* Main canvas with image and filters */}
                             <canvas
                                 ref={mainCanvasRef}
-                                className="w-full h-auto max-h-[800px] border border-border rounded-lg shadow-lg"
-                                style={{ display: 'block', position: 'relative', zIndex: 1, margin: '0 auto' }}
+                                className="w-full h-auto border border-border rounded-lg shadow-lg"
+                                style={{ 
+                                    display: 'block', 
+                                    position: 'relative', 
+                                    zIndex: CANVAS_CONFIG.Z_INDEX.MAIN, 
+                                    margin: '0 auto',
+                                    maxHeight: `${CANVAS_CONFIG.MAX_HEIGHT}px`
+                                }}
                             />
                             
                             {/* Drawing layer canvas */}
                             <canvas
                                 ref={drawingCanvasRef}
-                                className="w-full h-auto max-h-[800px] border border-border rounded-lg shadow-lg absolute top-0 left-0"
+                                className="w-full h-auto border border-border rounded-lg shadow-lg absolute top-0 left-0"
                                 onMouseDown={startDrawing}
                                 onTouchStart={startDrawing}
                                 style={{ 
-                                    pointerEvents: activeTool !== 'select' ? 'auto' : 'none',
-                                    cursor: activeTool === 'eraser' ? 'crosshair' : 'default',
-                                    zIndex: 2
+                                    pointerEvents: activeTool !== DRAWING_TOOLS.SELECT ? 'auto' : 'none',
+                                    cursor: activeTool === DRAWING_TOOLS.ERASER ? 'crosshair' : 'default',
+                                    zIndex: CANVAS_CONFIG.Z_INDEX.DRAWING,
+                                    maxHeight: `${CANVAS_CONFIG.MAX_HEIGHT}px`
                                 }}
                             />
                             
                             {/* Overlay canvas for shape preview */}
                             <canvas
                                 ref={overlayCanvasRef}
-                                className="w-full h-auto max-h-[800px] absolute top-0 left-0 pointer-events-none"
-                                style={{ zIndex: 3 }}
+                                className="w-full h-auto absolute top-0 left-0 pointer-events-none"
+                                style={{ 
+                                    zIndex: CANVAS_CONFIG.Z_INDEX.OVERLAY,
+                                    maxHeight: `${CANVAS_CONFIG.MAX_HEIGHT}px`
+                                }}
                             />
                             
                             {/* Text layers rendered as DOM elements for easy interaction */}
-                            {layers
-                                .filter(layer => layer.type === 'text' && layer.visible)
-                                .map(textLayer => (
-                                    <div
-                                        key={textLayer.id}
-                                        onMouseDown={(e) => handleTextMouseDown(e, textLayer)}
-                                        onTouchStart={(e) => handleTextMouseDown(e, textLayer)}
-                                        style={{
-                                            position: 'absolute',
-                                            left: `${textLayer.x}px`,
-                                            top: `${textLayer.y}px`,
-                                            fontFamily: textLayer.fontFamily,
-                                            fontSize: `${textLayer.fontSize}px`,
-                                            color: textLayer.color,
-                                            fontWeight: textLayer.fontWeight,
-                                            fontStyle: textLayer.fontStyle,
-                                            textAlign: textLayer.textAlign,
-                                            cursor: 'move',
-                                            userSelect: 'none',
-                                            WebkitUserSelect: 'none',
-                                            pointerEvents: 'auto',
-                                            whiteSpace: 'nowrap',
-                                            WebkitTextStroke: textLayer.stroke 
-                                                ? `${textLayer.strokeWidth}px ${textLayer.strokeColor}` 
-                                                : 'none',
-                                            textStroke: textLayer.stroke 
-                                                ? `${textLayer.strokeWidth}px ${textLayer.strokeColor}` 
-                                                : 'none',
-                                            opacity: textLayer.opacity / 100,
-                                            border: textLayer.id === activeLayerId ? '2px dashed #3b82f6' : 'none',
-                                            padding: '2px 4px'
-                                        }}
-                                    >
-                                        {textLayer.id === activeLayerId && (
-                                            <Move className="w-4 h-4 absolute -top-6 left-0 text-primary" />
-                                        )}
-                                        {textLayer.text}
-                                    </div>
-                                ))}
+                            {visibleTextLayers.map(textLayer => (
+                                <div
+                                    key={textLayer.id}
+                                    onMouseDown={(e) => handleTextMouseDown(e, textLayer)}
+                                    onTouchStart={(e) => handleTextMouseDown(e, textLayer)}
+                                    style={{
+                                        position: 'absolute',
+                                        left: `${textLayer.x}px`,
+                                        top: `${textLayer.y}px`,
+                                        fontFamily: textLayer.fontFamily,
+                                        fontSize: `${textLayer.fontSize}px`,
+                                        color: textLayer.color,
+                                        fontWeight: textLayer.fontWeight,
+                                        fontStyle: textLayer.fontStyle,
+                                        textAlign: textLayer.textAlign,
+                                        cursor: 'move',
+                                        userSelect: 'none',
+                                        WebkitUserSelect: 'none',
+                                        pointerEvents: 'auto',
+                                        whiteSpace: 'nowrap',
+                                        WebkitTextStroke: textLayer.stroke 
+                                            ? `${textLayer.strokeWidth}px ${textLayer.strokeColor}` 
+                                            : 'none',
+                                        textStroke: textLayer.stroke 
+                                            ? `${textLayer.strokeWidth}px ${textLayer.strokeColor}` 
+                                            : 'none',
+                                        opacity: textLayer.opacity / 100,
+                                        border: textLayer.id === activeLayerId ? '2px dashed #3b82f6' : 'none',
+                                        padding: '2px 4px'
+                                    }}
+                                >
+                                    {textLayer.id === activeLayerId && (
+                                        <Move className="w-4 h-4 absolute -top-6 left-0 text-primary" />
+                                    )}
+                                    {textLayer.text}
+                                </div>
+                            ))}
                         </div>
                         
                         {isProcessing && (
