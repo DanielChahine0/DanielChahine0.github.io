@@ -214,7 +214,7 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
         if (onDrawingComplete) {
             try {
                 onDrawingComplete(drawingCanvasRef.current.toDataURL());
-            } catch (error) {
+            } catch {
                 // Silent fail for drawing completion errors
             }
         }
