@@ -261,32 +261,30 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
                 : null
         });
         
-        if (image && mainCanvasRef.current) {
-            const canvas = mainCanvasRef.current;
-            const ctx = canvas.getContext('2d');
-            
-            // If canvas has no dimensions yet, it means this is first load
-            if (canvas.width === 0 || canvas.height === 0) {
-                console.log('⚠️ [ENHANCED_CANVAS] Canvas not sized yet, skipping dimension sync');
-                // Canvas will be sized by drawImageToCanvas
-                return;
-            }
-            
-            const { width, height } = canvas;
-            
-            console.log('🖼️ [ENHANCED_CANVAS] Syncing overlay canvas dimensions:', { width, height });
-            
-            if (drawingCanvasRef.current) {
-                drawingCanvasRef.current.width = width;
-                drawingCanvasRef.current.height = height;
-                console.log('✅ [ENHANCED_CANVAS] Drawing canvas dimensions synced');
-            }
-            
-            if (overlayCanvasRef.current) {
-                overlayCanvasRef.current.width = width;
-                overlayCanvasRef.current.height = height;
-                console.log('✅ [ENHANCED_CANVAS] Overlay canvas dimensions synced');
-            }
+        if (!image || !mainCanvasRef.current) return;
+        
+        const canvas = mainCanvasRef.current;
+        
+        // If canvas has no dimensions yet, it means this is first load
+        if (canvas.width === 0 || canvas.height === 0) {
+            console.log('⚠️ [ENHANCED_CANVAS] Canvas not sized yet, skipping dimension sync');
+            return;
+        }
+        
+        const { width, height } = canvas;
+        
+        console.log('🖼️ [ENHANCED_CANVAS] Syncing overlay canvas dimensions:', { width, height });
+        
+        if (drawingCanvasRef.current) {
+            drawingCanvasRef.current.width = width;
+            drawingCanvasRef.current.height = height;
+            console.log('✅ [ENHANCED_CANVAS] Drawing canvas dimensions synced');
+        }
+        
+        if (overlayCanvasRef.current) {
+            overlayCanvasRef.current.width = width;
+            overlayCanvasRef.current.height = height;
+            console.log('✅ [ENHANCED_CANVAS] Overlay canvas dimensions synced');
         }
     }, [image, mainCanvasRef]);
 
