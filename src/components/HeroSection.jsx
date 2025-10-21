@@ -7,6 +7,7 @@
  * - Smooth scroll navigation
  */
 
+import { useCallback } from "react";
 import { ArrowDown, Mail, Download, ExternalLink } from "lucide-react";
 import { FiGithub, FiLinkedin, FiInstagram } from "react-icons/fi";
 
@@ -42,10 +43,10 @@ export const HeroSection = () => {
         },
     ];
 
-    const scrollToAbout = () => {
+    const scrollToAbout = useCallback(() => {
         const aboutSection = document.getElementById('about');
         aboutSection?.scrollIntoView({ behavior: 'smooth' });
-    };
+    }, []);
 
     return (
         <section
