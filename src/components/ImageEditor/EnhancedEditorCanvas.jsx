@@ -115,8 +115,11 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
     const [draggedTextId, setDraggedTextId] = useState(null);
     const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
 
-    // Merge default drawing settings with provided settings
-    const settings = { ...DEFAULT_DRAWING_SETTINGS, ...drawingSettings };
+    // Merge default drawing settings with provided settings (memoized to prevent re-renders)
+    const settings = useMemo(
+        () => ({ ...DEFAULT_DRAWING_SETTINGS, ...drawingSettings }),
+        [drawingSettings]
+    );
 
     // Get canvas coordinates from mouse/touch event
     const getCanvasCoordinates = useCallback((e, canvas) => {
