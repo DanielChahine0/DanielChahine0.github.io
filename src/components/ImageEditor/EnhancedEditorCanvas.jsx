@@ -7,6 +7,77 @@
 import React, { memo, forwardRef, useRef, useEffect, useState, useCallback } from "react";
 import { Image as ImageIcon, RefreshCw, Move } from "lucide-react";
 
+// Constants
+const CANVAS_CONFIG = {
+    MIN_HEIGHT: 400,
+    MAX_HEIGHT: 800,
+    Z_INDEX: {
+        MAIN: 1,
+        DRAWING: 2,
+        OVERLAY: 3
+    }
+};
+
+const DEFAULT_DRAWING_SETTINGS = {
+    color: '#000000',
+    brushSize: 5,
+    opacity: 1,
+    fill: false
+};
+
+const DRAWING_TOOLS = {
+    BRUSH: 'brush',
+    ERASER: 'eraser',
+    LINE: 'line',
+    RECTANGLE: 'rectangle',
+    CIRCLE: 'circle',
+    TRIANGLE: 'triangle',
+    SELECT: 'select'
+};
+
+const LAYER_TYPES = {
+    DRAWING: 'drawing',
+    TEXT: 'text',
+    IMAGE: 'image'
+};
+
+/**
+ * Shape drawing functions
+ */
+const drawShapes = {
+    [DRAWING_TOOLS.LINE]: (ctx, startPoint, coords) => {
+        ctx.beginPath();
+        ctx.moveTo(startPoint.x, startPoint.y);
+        ctx.lineTo(coords.x, coords.y);
+        ctx.stroke();
+    },
+    [DRAWING_TOOLS.RECTANGLE]: (ctx, startPoint, coords, settings) => {
+        const width = coords.x - startPoint.x;
+        const height = coords.y - startPoint.y;
+        ctx.beginPath();
+        ctx.rect(startPoint.x, startPoint.y, width, height);
+        settings.fill ? ctx.fill() : ctx.stroke();
+    },
+    [DRAWING_TOOLS.CIRCLE]: (ctx, startPoint, coords, settings) => {
+        const width = coords.x - startPoint.x;
+        const height = coords.y - startPoint.y;
+        const radius = Math.sqrt(width * width + height * height);
+        ctx.beginPath();
+        ctx.arc(startPoint.x, startPoint.y, radius, 0, 2 * Math.PI);
+        settings.fill ? ctx.fill() : ctx.stroke();
+    },
+    [DRAWING_TOOLS.TRIANGLE]: (ctx, startPoint, coords, settings) => {
+        const width = coords.x - startPoint.x;
+        const height = coords.y - startPoint.y;
+        ctx.beginPath();
+        ctx.moveTo(startPoint.x, startPoint.y + height);
+        ctx.lineTo(startPoint.x + width / 2, startPoint.y);
+        ctx.lineTo(startPoint.x + width, startPoint.y + height);
+        ctx.closePath();
+        settings.fill ? ctx.fill() : ctx.stroke();
+    }
+};
+
 /**
  * EnhancedEditorCanvas Component
  * @param {Object} props - Component props
@@ -25,11 +96,11 @@ import { Image as ImageIcon, RefreshCw, Move } from "lucide-react";
 const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
     image,
     layers = [],
-    isProcessing,
+    isProcessing = false,
     onUpload,
     fileInputRef,
     onFileChange,
-    activeTool = 'brush',
+    activeTool = DRAWING_TOOLS.BRUSH,
     drawingSettings = {},
     onDrawingComplete,
     onTextMove,
@@ -43,6 +114,9 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
     const [startPoint, setStartPoint] = useState(null);
     const [draggedTextId, setDraggedTextId] = useState(null);
     const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+
+    // Merge default drawing settings with provided settings
+    const settings = { ...DEFAULT_DRAWING_SETTINGS, ...drawingSettings };
 
     // Get canvas coordinates from mouse/touch event
     const getCanvasCoordinates = useCallback((e, canvas) => {
