@@ -151,25 +151,20 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
         
         // Check if active layer is a drawing layer
         const activeLayer = layers.find(l => l.id === activeLayerId);
-        if (!activeLayer || activeLayer.type !== 'drawing') return;
+        if (!activeLayer || activeLayer.type !== LAYER_TYPES.DRAWING) return;
         
         const coords = getCanvasCoordinates(e, drawingCanvasRef.current);
         setIsDrawing(true);
         setStartPoint(coords);
 
         const ctx = drawingCanvasRef.current.getContext('2d');
-        ctx.strokeStyle = activeTool === 'eraser' ? '#FFFFFF' : (drawingSettings.color || '#000000');
-        ctx.lineWidth = drawingSettings.brushSize || 5;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-        ctx.globalAlpha = activeTool === 'eraser' ? 1 : (drawingSettings.opacity || 1);
-        ctx.globalCompositeOperation = activeTool === 'eraser' ? 'destination-out' : 'source-over';
+        setupDrawingContext(ctx, activeTool === DRAWING_TOOLS.ERASER);
 
-        if (activeTool === 'brush' || activeTool === 'eraser') {
+        if (activeTool === DRAWING_TOOLS.BRUSH || activeTool === DRAWING_TOOLS.ERASER) {
             ctx.beginPath();
             ctx.moveTo(coords.x, coords.y);
         }
-    }, [activeTool, drawingSettings, getCanvasCoordinates, activeLayerId, layers]);
+    }, [activeTool, setupDrawingContext, getCanvasCoordinates, activeLayerId, layers]);
 
     // Continue drawing
     const draw = useCallback((e) => {
