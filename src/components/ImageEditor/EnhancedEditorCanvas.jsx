@@ -168,74 +168,28 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
 
     // Continue drawing
     const draw = useCallback((e) => {
-        if (!isDrawing || !drawingCanvasRef.current || !overlayCanvasRef.current) return;
+        if (!isDrawing || !drawingCanvasRef.current || !overlayCanvasRef.current || !startPoint) return;
 
         const coords = getCanvasCoordinates(e, drawingCanvasRef.current);
         const ctx = drawingCanvasRef.current.getContext('2d');
         const overlayCtx = overlayCanvasRef.current.getContext('2d');
 
-        if (activeTool === 'brush' || activeTool === 'eraser') {
+        if (activeTool === DRAWING_TOOLS.BRUSH || activeTool === DRAWING_TOOLS.ERASER) {
             // Freehand drawing
             ctx.lineTo(coords.x, coords.y);
             ctx.stroke();
-        } else {
+        } else if (drawShapes[activeTool]) {
             // Shape preview on overlay
             overlayCtx.clearRect(0, 0, overlayCanvasRef.current.width, overlayCanvasRef.current.height);
-            overlayCtx.strokeStyle = drawingSettings.color || '#000000';
-            overlayCtx.fillStyle = drawingSettings.color || '#000000';
-            overlayCtx.lineWidth = drawingSettings.brushSize || 5;
-            overlayCtx.globalAlpha = drawingSettings.opacity || 1;
-
-            const width = coords.x - startPoint.x;
-            const height = coords.y - startPoint.y;
-
-            switch (activeTool) {
-                case 'line': {
-                    overlayCtx.beginPath();
-                    overlayCtx.moveTo(startPoint.x, startPoint.y);
-                    overlayCtx.lineTo(coords.x, coords.y);
-                    overlayCtx.stroke();
-                    break;
-                }
-                case 'rectangle': {
-                    overlayCtx.beginPath();
-                    overlayCtx.rect(startPoint.x, startPoint.y, width, height);
-                    if (drawingSettings.fill) {
-                        overlayCtx.fill();
-                    } else {
-                        overlayCtx.stroke();
-                    }
-                    break;
-                }
-                case 'circle': {
-                    const radius = Math.sqrt(width * width + height * height);
-                    overlayCtx.beginPath();
-                    overlayCtx.arc(startPoint.x, startPoint.y, radius, 0, 2 * Math.PI);
-                    if (drawingSettings.fill) {
-                        overlayCtx.fill();
-                    } else {
-                        overlayCtx.stroke();
-                    }
-                    break;
-                }
-                case 'triangle': {
-                    overlayCtx.beginPath();
-                    overlayCtx.moveTo(startPoint.x, startPoint.y + height);
-                    overlayCtx.lineTo(startPoint.x + width / 2, startPoint.y);
-                    overlayCtx.lineTo(startPoint.x + width, startPoint.y + height);
-                    overlayCtx.closePath();
-                    if (drawingSettings.fill) {
-                        overlayCtx.fill();
-                    } else {
-                        overlayCtx.stroke();
-                    }
-                    break;
-                }
-                default:
-                    break;
+            setupDrawingContext(overlayCtx);
+            
+            try {
+                drawShapes[activeTool](overlayCtx, startPoint, coords, settings);
+            } catch (error) {
+                console.error('[ENHANCED_CANVAS] Error drawing shape:', error);
             }
         }
-    }, [isDrawing, activeTool, drawingSettings, startPoint, getCanvasCoordinates]);
+    }, [isDrawing, activeTool, settings, startPoint, getCanvasCoordinates, setupDrawingContext]);
 
     // Finish drawing
     const stopDrawing = useCallback(() => {
