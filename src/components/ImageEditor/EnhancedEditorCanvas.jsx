@@ -189,7 +189,7 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
             try {
                 drawShapes[activeTool](overlayCtx, startPoint, coords, settings);
             } catch (error) {
-                console.error('[ENHANCED_CANVAS] Error drawing shape:', error);
+                // Silent fail for shape preview errors
             }
         }
     }, [isDrawing, activeTool, settings, startPoint, getCanvasCoordinates, setupDrawingContext]);
@@ -215,7 +215,7 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
             try {
                 onDrawingComplete(drawingCanvasRef.current.toDataURL());
             } catch (error) {
-                console.error('[ENHANCED_CANVAS] Error in onDrawingComplete:', error);
+                // Silent fail for drawing completion errors
             }
         }
     }, [isDrawing, activeTool, startPoint, onDrawingComplete]);
@@ -256,57 +256,35 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
 
     // Sync canvas dimensions when image changes
     useEffect(() => {
-        console.log('🖼️ [ENHANCED_CANVAS] Dimension sync effect triggered:', {
-            hasImage: !!image,
-            hasMainCanvas: !!mainCanvasRef.current,
-            mainCanvasDimensions: mainCanvasRef.current 
-                ? { width: mainCanvasRef.current.width, height: mainCanvasRef.current.height }
-                : null
-        });
-        
         if (!image || !mainCanvasRef.current) return;
         
         const canvas = mainCanvasRef.current;
         
         // If canvas has no dimensions yet, it means this is first load
         if (canvas.width === 0 || canvas.height === 0) {
-            console.log('⚠️ [ENHANCED_CANVAS] Canvas not sized yet, skipping dimension sync');
             return;
         }
         
         const { width, height } = canvas;
         
-        console.log('🖼️ [ENHANCED_CANVAS] Syncing overlay canvas dimensions:', { width, height });
-        
         if (drawingCanvasRef.current) {
             drawingCanvasRef.current.width = width;
             drawingCanvasRef.current.height = height;
-            console.log('✅ [ENHANCED_CANVAS] Drawing canvas dimensions synced');
         }
         
         if (overlayCanvasRef.current) {
             overlayCanvasRef.current.width = width;
             overlayCanvasRef.current.height = height;
-            console.log('✅ [ENHANCED_CANVAS] Overlay canvas dimensions synced');
         }
     }, [image, mainCanvasRef]);
 
     // Load existing drawing when active layer changes
     useEffect(() => {
-        console.log('🖼️ [ENHANCED_CANVAS] Active layer changed:', {
-            activeLayerId,
-            hasDrawingCanvas: !!drawingCanvasRef.current,
-            layersCount: layers.length
-        });
-        
         if (!drawingCanvasRef.current || !activeLayerId) return;
         
         const activeLayer = layers.find(l => l.id === activeLayerId);
         
-        console.log('🖼️ [ENHANCED_CANVAS] Active layer details:', activeLayer);
-        
         if (!activeLayer || activeLayer.type !== LAYER_TYPES.DRAWING) {
-            console.log('ℹ️ [ENHANCED_CANVAS] Active layer is not a drawing layer');
             return;
         }
         
@@ -314,21 +292,17 @@ const EnhancedEditorCanvas = memo(forwardRef(function EnhancedEditorCanvas({
         ctx.clearRect(0, 0, drawingCanvasRef.current.width, drawingCanvasRef.current.height);
         
         if (activeLayer.dataUrl) {
-            console.log('🖼️ [ENHANCED_CANVAS] Loading drawing layer data...');
             const img = new Image();
             
             img.onload = () => {
                 ctx.drawImage(img, 0, 0);
-                console.log('✅ [ENHANCED_CANVAS] Drawing layer loaded');
             };
             
-            img.onerror = (error) => {
-                console.error('❌ [ENHANCED_CANVAS] Failed to load drawing layer:', error);
+            img.onerror = () => {
+                // Silent fail for layer loading errors
             };
             
             img.src = activeLayer.dataUrl;
-        } else {
-            console.log('ℹ️ [ENHANCED_CANVAS] No drawing data for active layer');
         }
     }, [activeLayerId, layers]);
 
