@@ -32,7 +32,7 @@ Modern, interactive portfolio showcasing projects, skills, and professional jour
 
 ## Features
 
-### 🎨 Core Portfolio
+### Core Portfolio
 - Responsive design with smooth Framer Motion transitions
 - Dark/Light theme toggle with localStorage persistence
 - Interactive star field and cloud backgrounds
@@ -41,55 +41,55 @@ Modern, interactive portfolio showcasing projects, skills, and professional jour
 - Markdown-based blog system
 - Downloadable resume and contact integration
 
-### 🧮 Calorie Tracker (`/calorie-tracker`)
+### Calorie Tracker (`/calorie-tracker`)
 - BMR & TDEE calculator with activity level customization
 - Goal-based calorie recommendations (loss, maintenance, gain)
 - Macronutrient breakdown with customizable ratios
 - Daily meal logging with visual progress tracking
 - Persistent storage for user data
 
-### ⏰ Clock & Timer Suite (`/clock-timer`)
+### Clock & Timer Suite (`/clock-timer`)
 - World clock with multiple time zones
 - Pomodoro timer with session tracking
 - Alarm system with custom labels
 - Countdown timer with audio/visual alerts
 
-### 🎨 Color Studio (`/color-picker`)
+### Color Studio (`/color-picker`)
 - Interactive HSL/RGB/HEX color picker
 - Harmony generator (complementary, analogous, triadic)
 - Popular palettes library with save/export
 - Accessibility contrast checker (WCAG)
 - Color blindness simulator
 
-### 🖼️ Image Editor (`/image-editor`)
+### Image Editor (`/image-editor`)
 - Brightness, contrast, saturation, hue adjustments
 - Preset filters (grayscale, sepia, blur, sharpen)
 - Rotation, flip, crop, and resize tools
 - Undo/redo with full history stack
 - Export in PNG/JPEG with quality control
 
-### 📝 Code Playground (`/code-playground`)
+### Code Playground (`/code-playground`)
 - Multi-language support (HTML, CSS, JavaScript)
 - Live preview with syntax highlighting
 - Project management with localStorage
 - Error console and code templates
 - Export projects as ZIP files
 
-### 📊 Life in Weeks Visualizer (`/life-in-weeks`)
+### Life in Weeks Visualizer (`/life-in-weeks`)
 - 4,680-week grid representing 90 years
 - Age calculation with milestone markers
 - Color-coded life phases
 - Statistical context and societal comparisons
 - Export and share as PNG
 
-### ✍️ Markdown Editor (`/markdown-editor`)
+### Markdown Editor (`/markdown-editor`)
 - Live preview with GitHub Flavored Markdown
 - Syntax highlighting for code blocks
 - Table support and task lists
 - Template library for common formats
 - Export as Markdown or HTML
 
-### 📈 Text Analyzer (`/text-analyzer`)
+### Text Analyzer (`/text-analyzer`)
 - Word, character, sentence, paragraph counts
 - Reading time estimates
 - Readability scores (Flesch, SMOG)
@@ -136,7 +136,7 @@ src/
 ---
 
 ## Planned Features
-🎯Short-term
+Short-term
 - Image Editor Enhancements: Layer system, text overlays, drawing tools
 - Code Playground V2: Multi-file projects, npm package imports, React preview
 - Resume Builder: Interactive resume creator with PDF export
@@ -144,7 +144,7 @@ src/
 - Blog Comments: Integration with GitHub Discussions or similar
 - Search Functionality: Global search for projects, skills, and blog posts
   
-🚀 Long-term
+Long-term
 - Portfolio Analytics: Visitor statistics and interaction heatmaps
 - Content Management: Admin panel for blog posts and project updates
 - API Integration: GitHub stats, WakaTime coding activity
@@ -156,7 +156,7 @@ src/
 - Project Deep Dives: Interactive case studies with embedded demos
 - Developer Blog Platform: RSS feed, categories, tags, and series
 
-🧪 Experimental
+Experimental
 - AI Code Assistant: In-browser code suggestions and documentation lookup
 - Voice Commands: Navigate portfolio using speech recognition
 - AR Business Card: WebXR experience for mobile devices
