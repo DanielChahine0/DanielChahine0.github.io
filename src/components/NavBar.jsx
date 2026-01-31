@@ -1,204 +1,142 @@
 /**
  * NavBar Component
- * A responsive navigation bar that includes:
+ * A clean, minimal navigation bar with:
  * - Navigation links to different sections/pages
- * - Theme toggle functionality
  * - Mobile menu support
  * - Scroll-based styling
- * - Resume download link
  */
 
 import { cn } from '@/lib/utils'
-import { X, Menu, CodeXml } from 'lucide-react';
+import { X, Menu } from 'lucide-react';
 import { useEffect, useState } from 'react'
-import { ThemeToggle } from './ThemeToggle';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const navItems = [
+    { name: 'Work', href: '#projects', isRoute: 'scroll' },
+    { name: 'About', href: '#about', isRoute: 'scroll' },
     { name: 'Timeline', href: '/timeline', isRoute: true },
-    { name: 'Resume', href: '/files/resume.pdf', isRoute: false, download: true },
     { name: 'Tools', href: '/tools', isRoute: true },
     { name: 'Contact', href: '#footer', isRoute: 'footer' },
 ]
 
 export const NavBar = () => {
-    /**
-     * NavBar
-     * Responsive navigation component used across the site.
-     * - Manages scroll state to adjust styling on scroll
-     * - Provides a mobile menu overlay
-     * - Supports route navigation and footer anchor navigation
-     * No props — reads navigation state with React Router hooks.
-     */
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 10);
+            setIsScrolled(window.scrollY > 50);
         };
 
         window.addEventListener('scroll', handleScroll);
-
-        // Cleanup the event listener on component unmount
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     const handleNavigation = (href, isRoute = false) => {
         if (isRoute === true) {
-            setTimeout(() => {
-                navigate(href);
-            }, 50);
+            navigate(href);
         } else if (isRoute === 'footer') {
-            setTimeout(() => {
-                const el = document.querySelector('footer');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }, 50);
+            const el = document.querySelector('footer');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        } else if (isRoute === 'scroll') {
+            const el = document.querySelector(href);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
         }
         setIsMenuOpen(false);
     };
 
     return (
-        <nav 
+        <nav
             className={cn(
                 "fixed w-full z-40 transition-all duration-300",
                 isScrolled
-                    ? "pt-5"
-                    : "py-4"
+                    ? "bg-background/80 backdrop-blur-md border-b border-border"
+                    : "bg-transparent"
             )}
             role="navigation"
             aria-label="Main Navigation"
         >
-            <div className={cn(
-                'container flex items-center justify-between px-5 py-2 transition-all duration-300 relative',
-                isScrolled
-                    ? "w-6/7 mx-auto rounded-lg bg-primary/30 backdrop-blur-3xl shadow-inner"
-                    : "w-full"
-            )}
-            >
-                <button 
-                    className='text-4xl font-bold flex items-center hover:scale-105 transition-transform duration-300 relative z-10 bg-transparent border-none cursor-pointer focus:outline-none'
+            <div className="container mx-auto flex items-center justify-between h-16 px-6">
+                {/* Logo */}
+                <button
+                    className="text-lg font-semibold tracking-tight hover:opacity-70 transition-opacity"
                     type="button"
                     onClick={() => handleNavigation('/', true)}
-                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleNavigation('/', true); } }}
                     aria-label="Go to home"
                 >
-                    <span className='relative z-10 flex items-center gap-2'>
-                        <CodeXml size={isScrolled ? 45 : 45}/>
-                        <span className="text-2xl">
-                            Daniel Chahine
-                        </span>
-                    </span>
+                    Daniel Chahine
                 </button>
 
-                {/* Desktop Version */}
-                <div className='hidden md:flex items-center space-x-6 relative z-10'>
-                    {navItems.map((item, key) => (
-                        item.isRoute === true ? (
-                            <button
-                                onClick={() => handleNavigation(item.href, true)} 
-                                key={key} 
-                                className='text-foreground/80 transition-transform duration-300 hover:scale-120 cursor-pointer bg-transparent border-none focus:outline-none'
-                                type="button"
-                                aria-label={`Navigate to ${item.name}`}
-                            >
-                                {item.name}
-                            </button>
-                        ) : item.isRoute === 'footer' ? (
-                            <button
-                                onClick={() => handleNavigation(item.href, 'footer')}
-                                key={key}
-                                className='text-foreground/80 transition-transform duration-300 hover:scale-120 cursor-pointer bg-transparent border-none focus:outline-none'
-                                type="button"
-                                aria-label={`Navigate to ${item.name}`}
-                            >
-                                {item.name}
-                            </button>
-                        ) : (
-                            <a 
-                                href={item.href} 
-                                key={key} 
-                                className='text-foreground/80 transition-transform duration-300 hover:scale-120'
-                                {...(item.download ? { download: true } : {})}
-                            >
-                                {item.name}
-                            </a>
-                        )
+                {/* Desktop Navigation */}
+                <div className="hidden md:flex items-center gap-8">
+                    {navItems.map((item) => (
+                        <button
+                            key={item.name}
+                            onClick={() => handleNavigation(item.href, item.isRoute)}
+                            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            type="button"
+                        >
+                            {item.name}
+                        </button>
                     ))}
-                    <div className="relative z-50">
-                        <ThemeToggle />
-                    </div>
-                </div>
-        
-                {/* Mobile Version */}
-                <div className="flex items-center md:hidden relative z-10">
-                    <div className="relative z-50">
-                        <ThemeToggle />
-                    </div>
-                    <button
-                        type="button"
-                        onClick={() => setIsMenuOpen((prev) => !prev)}
-                        className="p-2 text-foreground z-50 hover:scale-130 transition-transform duration-300 focus:outline-none"
-                        aria-expanded={isMenuOpen}
-                        aria-controls="mobile-menu"
-                        aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
-                        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setIsMenuOpen((prev) => !prev); } }}
+                    <a
+                        href="/files/resume.pdf"
+                        download
+                        className="text-sm font-medium px-4 py-2 bg-foreground text-background rounded-md hover:opacity-80 transition-opacity"
                     >
-                        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
+                        Resume
+                    </a>
                 </div>
-            </div>
-            {/* Mobile menu overlay */}
-            <div id="mobile-menu" className={cn(
-                "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col",
-                "items-center justify-center transition-all md:hidden",
-                isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-            )}>
-                {/* Close button inside overlay */}
+
+                {/* Mobile Menu Button */}
                 <button
                     type="button"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="absolute top-6 right-6 p-2 text-foreground hover:scale-130 transition-transform duration-300 focus:outline-none"
-                    aria-label="Close Menu"
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    className="md:hidden p-2 text-foreground hover:opacity-70 transition-opacity"
+                    aria-expanded={isMenuOpen}
+                    aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
                 >
-                    <X size={32} />
+                    {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
-                <div className='flex flex-col space-y-8 text-xl'>
-                    {navItems.map((item, key) => (
-                        item.isRoute === true ? (
-                            <button
-                                onClick={() => handleNavigation(item.href, true)} 
-                                key={key} 
-                                className='text-foreground/80 transition-transform duration-300 hover:scale-120 cursor-pointer bg-transparent border-none text-xl focus:outline-none'
-                                type="button"
-                            >
-                                {item.name}
-                            </button>
-                        ) : item.isRoute === 'footer' ? (
-                            <button
-                                onClick={() => handleNavigation(item.href, 'footer')}
-                                key={key}
-                                className='text-foreground/80 transition-transform duration-300 hover:scale-120 cursor-pointer bg-transparent border-none text-xl focus:outline-none'
-                                type="button"
-                            >
-                                {item.name}
-                            </button>
-                        ) : (
-                            <a 
-                                href={item.href} 
-                                key={key} 
-                                className='text-foreground/80 transition-transform duration-300 hover:scale-120'
-                                onClick={() => setIsMenuOpen(false)}
-                                {...(item.download ? { download: true } : {})}
-                            >
-                                {item.name}
-                            </a>
-                        )
+            </div>
+
+            {/* Mobile Menu Overlay */}
+            <div className={cn(
+                "fixed inset-0 bg-background z-40 flex flex-col md:hidden transition-all duration-300",
+                isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+            )}>
+                <div className="flex justify-between items-center h-16 px-6 border-b border-border">
+                    <span className="text-lg font-semibold">Daniel Chahine</span>
+                    <button
+                        type="button"
+                        onClick={() => setIsMenuOpen(false)}
+                        className="p-2 text-foreground hover:opacity-70 transition-opacity"
+                        aria-label="Close Menu"
+                    >
+                        <X size={24} />
+                    </button>
+                </div>
+
+                <div className="flex flex-col p-6 gap-6">
+                    {navItems.map((item) => (
+                        <button
+                            key={item.name}
+                            onClick={() => handleNavigation(item.href, item.isRoute)}
+                            className="text-2xl font-light text-foreground hover:opacity-70 transition-opacity text-left"
+                            type="button"
+                        >
+                            {item.name}
+                        </button>
                     ))}
+                    <a
+                        href="/files/resume.pdf"
+                        download
+                        className="text-2xl font-light text-foreground hover:opacity-70 transition-opacity"
+                        onClick={() => setIsMenuOpen(false)}
+                    >
+                        Resume
+                    </a>
                 </div>
             </div>
         </nav>

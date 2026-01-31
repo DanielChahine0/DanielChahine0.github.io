@@ -1,152 +1,96 @@
 /**
  * AboutSection.jsx
- * Displays the 'About Me' section on the homepage including a brief
- * introduction, action buttons (contact / resume) and achievement cards.
- * Exports: AboutSection (React component)
+ * Clean, minimal about section with key highlights
  */
-import { Briefcase, Code, User, GraduationCap, Award, Target } from "lucide-react";
 
 export const AboutSection = () => {
-    const handleContactClick = () => {
-        setTimeout(() => {
-            const el = document.querySelector('footer');
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }, 50);
-    };
-
-    const achievements = [
+    const highlights = [
         {
-            icon: <GraduationCap className="h-6 w-6 text-primary" />,
-            title: "Education",
-            description: "Spec. Hons. BSc in Computer Science (GPA 3.9)",
-            highlight: "4th Year"
+            label: "Education",
+            value: "BSc Computer Science",
+            detail: "York University, 4th Year, GPA 3.9"
         },
         {
-            icon: <Code className="h-6 w-6 text-primary" />,
-            title: "Experience",
-            description: "Over 6+ years of coding and 3+ years web development",
-            highlight: "Expert Level"
+            label: "Experience",
+            value: "6+ Years Coding",
+            detail: "3+ years web development"
         },
         {
-            icon: <Award className="h-6 w-6 text-primary" />,
-            title: "Specialization",
-            description: "Full-Stack Development, ML & Data Analytics",
-            highlight: "Advanced"
+            label: "Focus",
+            value: "Full-Stack & ML",
+            detail: "React, Node.js, Python"
         }
     ];
 
     return (
-        <section id="about" className="py-3 px-4 relative overflow-hidden">
-            
-            <div className="container mx-auto max-w-7xl">
-                {/* Enhanced Header */}
-                <div className="text-center mb-16 section-fade-in">
-                    <div className="inline-flex items-center gap-3">
-                        <div className="p-2 rounded-xl bg-primary/10 border border-primary/20">
-                            <User size={32} className="text-primary"/>
-                        </div>
-                        <h2 className="text-4xl md:text-5xl font-bold bg-clip-text ">
-                            About Me
+        <section id="about" className="py-24 px-6 bg-card">
+            <div className="container mx-auto max-w-6xl">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                    {/* Left - About Text */}
+                    <div className="space-y-6">
+                        <h2 className="text-3xl md:text-4xl font-semibold">
+                            About
                         </h2>
-                    </div>
-                    
-                </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-                    {/* Left Content - Enhanced */}
-                    <div className="space-y-8 section-fade-in stagger-delay-1">
-                        <div className="space-y-6">
-                            <div className="space-y-2">
-                                <h3 className="text-3xl font-bold leading-tight"> 
-                                    Computer Science Student & Full-Stack Developer
-                                </h3>
-                            </div>
-                            
-                            <div className="space-y-4 text-muted-foreground leading-relaxed">
-                                <p className="text-lg"> 
-                                    I specialize in developing modern web applications using cutting-edge technologies like&nbsp;
-                                    <span className="text-primary font-semibold custom-inline-hover">React</span>,&nbsp;
-                                    <span className="text-primary font-semibold custom-inline-hover">Node.js</span>,&nbsp;
-                                    <span className="text-primary font-semibold custom-inline-hover">Express.js</span>, and&nbsp;
-                                    <span className="text-primary font-semibold custom-inline-hover">MongoDB</span>.
-                                    My projects also leverage&nbsp;
-                                    <span className="text-primary font-semibold custom-inline-hover">Next.js</span>,&nbsp;
-                                    <span className="text-primary font-semibold custom-inline-hover">Vite</span>,&nbsp;
-                                    <span className="text-primary font-semibold custom-inline-hover">Tailwind CSS</span>, and deployment platforms like&nbsp;
-                                    <span className="text-primary font-semibold custom-inline-hover">Vercel</span> and 
-                                    <span className="text-primary font-semibold custom-inline-hover">Render</span>.
-                                </p>
-                                
-                                <p>
-                                    As a 4th-year student at York University pursuing a Specialized Honours 
-                                    Bachelor of Science in Computer Science with a GPA of 3.9/4.0, I focus on&nbsp;
-                                    <span className="text-primary font-semibold custom-inline-hover">Software Engineering</span>,&nbsp;
-                                    <span className="text-primary font-semibold custom-inline-hover">Full-Stack Development</span>,&nbsp;
-                                    <span className="text-primary font-semibold custom-inline-hover">Machine Learning</span>, and&nbsp;
-                                    <span className="text-primary font-semibold custom-inline-hover">Data Analytics</span>.
-                                </p>
-                                
-                                {/* <p>
-                                    Currently working as a Data Analyst at the Institute for Social Research (ISR),
-                                    I specialize in 
-                                    <span className="text-primary font-semibold custom-inline-hover">data collection</span>,&nbsp;
-                                    <span className="text-primary font-semibold custom-inline-hover">data transformation</span>, and&nbsp;
-                                    <span className="text-primary font-semibold custom-inline-hover">data visualization</span>.
-                                </p> */}
-                            </div>
+                        <div className="space-y-4 text-muted-foreground leading-relaxed">
+                            <p>
+                                I'm a 4th-year Computer Science student at York University
+                                pursuing a Specialized Honours Bachelor of Science with a
+                                strong academic record (GPA 3.9/4.0).
+                            </p>
+
+                            <p>
+                                I specialize in developing modern web applications using
+                                technologies like React, Node.js, Express.js, and MongoDB.
+                                My work also extends to Next.js, Vite, Tailwind CSS, and
+                                deployment platforms like Vercel and Render.
+                            </p>
+
+                            <p>
+                                My focus areas include Software Engineering, Full-Stack
+                                Development, Machine Learning, and Data Analytics. I enjoy
+                                building tools that solve real problems and create meaningful
+                                user experiences.
+                            </p>
                         </div>
 
-                        {/* Enhanced Action Buttons */}
-                        <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                            <button 
-                                onClick={handleContactClick}
-                                className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-xl border border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:border-primary group"
+                        {/* Action Buttons */}
+                        <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                            <button
+                                onClick={() => {
+                                    const el = document.querySelector('footer');
+                                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                                className="btn-primary"
                             >
-                                <Target className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
-                                <span>Get In Touch</span>
+                                Get In Touch
                             </button>
-                            <a 
-                                href="/files/resume.pdf" 
-                                download 
-                                className="inline-flex items-center gap-2 px-6 py-3 bg-secondary text-secondary-foreground font-semibold rounded-xl border border-border/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-primary/50 hover:bg-secondary/80"
+                            <a
+                                href="/files/resume.pdf"
+                                download
+                                className="btn-secondary text-center"
                             >
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-                                </svg>
                                 View Resume
                             </a>
                         </div>
                     </div>
 
-                    {/* Right Content - Enhanced Achievement Cards */}
-                    <div className="grid grid-cols-1 gap-6 section-fade-in stagger-delay-2">
-                        {achievements.map((achievement, index) => (
-                            <div 
+                    {/* Right - Highlights */}
+                    <div className="space-y-6">
+                        {highlights.map((item, index) => (
+                            <div
                                 key={index}
-                                className="enhanced-gradient-border p-6 group card-hover"
+                                className="p-6 border border-border rounded-lg hover:border-foreground/20 transition-colors"
                             >
-                                <div className="flex items-start gap-4">
-                                    <div className="relative">
-                                        <div className="absolute inset-0 bg-primary/20 rounded-full blur-sm group-hover:blur-md transition-all duration-300"></div>
-                                        <div className="relative p-3 rounded-full bg-primary/10 border border-primary/20 group-hover:border-primary/40 transition-all duration-300">
-                                            {achievement.icon}
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="flex-1 space-y-2">
-                                        <div className="flex items-center gap-2">
-                                            <h4 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors duration-300">
-                                                {achievement.title}
-                                            </h4>
-                                            <span className="px-2 py-1 text-xs font-medium bg-primary/20 text-primary rounded-full border border-primary/30">
-                                                {achievement.highlight}
-                                            </span>
-                                        </div>
-                                        <p className="leading-relaxed">
-                                            {achievement.description}
-                                        </p>
-                                    </div>
-                                </div>
+                                <p className="text-sm text-muted-foreground mb-1">
+                                    {item.label}
+                                </p>
+                                <p className="text-xl font-medium mb-1">
+                                    {item.value}
+                                </p>
+                                <p className="text-sm text-muted-foreground">
+                                    {item.detail}
+                                </p>
                             </div>
                         ))}
                     </div>

@@ -1,47 +1,69 @@
 /**
  * BlogsSection.jsx
- * Section component that displays the latest blog posts and a link
- * to view all blogs. Uses BlogCard for individual post previews.
- * Exports: BlogsSection (React component)
+ * Clean, minimal blog section
  */
-import { ArrowRight, BookOpen } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { getLatestBlogs } from "../data/blogs";
-import { BlogCard } from "./BlogCard";
 
 export const BlogsSection = () => {
     const latestBlogs = getLatestBlogs(3);
-    
-    return (
-        <section id="blogs" className="py-10 px-4 relative">
-            <div className="container mx-auto max-w-6xl">
-                <div className="text-center mb-10">
-                    <div className="flex items-center justify-center gap-3 mb-4">
-                        <div className="p-2 rounded-xl bg-primary/10 border border-primary/20">
-                            <BookOpen className="text-primary" size={32} />
-                        </div>
-                        <h2 className="text-4xl md:text-5xl font-bold">
-                            My Blogs
-                        </h2>
-                    </div>
 
+    return (
+        <section id="blogs" className="py-24 px-6 bg-card">
+            <div className="container mx-auto max-w-6xl">
+                {/* Section Header */}
+                <div className="mb-16">
+                    <h2 className="text-3xl md:text-4xl font-semibold mb-4">
+                        Writing
+                    </h2>
+                    <p className="text-muted-foreground max-w-lg">
+                        Thoughts on development, technology, and learning.
+                    </p>
                 </div>
 
-                {/* Latest 3 Blog Posts */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-                    {latestBlogs.map((blog, index) => (
-                        <BlogCard key={blog.id} blog={blog} index={index} />
+                {/* Blog Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {latestBlogs.map((blog) => (
+                        <Link
+                            key={blog.id}
+                            to={`/blogs/blog/${blog.id}`}
+                            className="group block"
+                        >
+                            <article className="space-y-3">
+                                {/* Date */}
+                                <p className="text-sm text-muted-foreground">
+                                    {blog.date}
+                                </p>
+
+                                {/* Title */}
+                                <h3 className="text-lg font-medium group-hover:opacity-70 transition-opacity">
+                                    {blog.title}
+                                </h3>
+
+                                {/* Excerpt */}
+                                <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2">
+                                    {blog.excerpt}
+                                </p>
+
+                                {/* Read More */}
+                                <span className="inline-flex items-center gap-1 text-sm font-medium">
+                                    Read more
+                                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                </span>
+                            </article>
+                        </Link>
                     ))}
                 </div>
 
-                {/* View All Blogs Button */}
-                <div className="text-center">
+                {/* View All Link */}
+                <div className="mt-16 text-center">
                     <Link
                         to="/blogs"
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background rounded-md font-medium hover:opacity-80 transition-opacity"
                     >
-                        View All Blogs
-                        <ArrowRight size={18} />
+                        View All Posts
+                        <ArrowUpRight className="w-4 h-4" />
                     </Link>
                 </div>
             </div>

@@ -1,3 +1,7 @@
+/**
+ * Home.jsx
+ * Main landing page with clean, minimal layout
+ */
 import { NavBar } from "../components/NavBar";
 import { HeroSection } from "../components/HeroSection";
 import { AboutSection } from "../components/AboutSection";
@@ -8,27 +12,19 @@ import { Footer } from "../components/Footer";
 import { PageTransition } from "../components/PageTransition";
 
 export const Home = () => {
-  return (
-    <PageTransition className="min-h-screen bg-background text-foreground overflow-x-hidden">
-        {/* Navbar */}
-        <NavBar />
+    return (
+        <PageTransition className="min-h-screen bg-background text-foreground">
+            <NavBar />
 
-        {/* Main Content with Enhanced Spacing */}
-        <main className="space-y-0">
-          {/* Hero takes full screen */}
-          <HeroSection />
-          
-          {/* Other sections with consistent spacing */}
-          <div className="space-y-16">
-            <AboutSection />
-            <SkillsSections />
-            <ProjectsSection />
-            <BlogsSection />
-          </div>
-        </main>
+            <main>
+                <HeroSection />
+                <ProjectsSection />
+                <AboutSection />
+                <SkillsSections />
+                <BlogsSection />
+            </main>
 
-        {/* Footer */}
-        <Footer />
-    </PageTransition>
-  );
+            <Footer />
+        </PageTransition>
+    );
 }

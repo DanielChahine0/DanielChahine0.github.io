@@ -1,101 +1,52 @@
 /**
  * SkillsSection_Enhanced.jsx
- * Shows categorized skills and tools as styled tags. Used on the home
- * page to highlight languages, technologies, tools and specializations.
- * Exports: SkillsSections (React component)
+ * Clean, minimal skills display
  */
-import { cn } from '@/lib/utils';
-import { Code2, Wrench, Layers, Zap } from 'lucide-react';
 
 const skillsData = {
-    "Languages": {
-        icon: <Code2 className="h-6 w-6 text-primary" />,
-        skills: [
-            'Python', 'JavaScript', 'Java', 'C++', 'C#', 'C', 
-            'Bash', 'HTML', 'CSS', 'SQL', 'PHP'
-        ]
-    },
-    "Technologies": {
-        icon: <Layers className="h-6 w-6 text-primary" />,
-        skills: [
-            'pytorch', 'TensorFlow', 'NumPy', 'React', 'Node.js', 'Next.js',
-            'Express', 'Tailwind CSS', 'npm', 'Vite', 'mongoDB', 'Redis',
-            'PostgreSQL', 'Git', 'Figma'
-        ]
-    },
-    "Dev Tools": {
-        icon: <Wrench className="h-6 w-6 text-primary" />,
-        skills: [
-            'Git', 'GitHub', 'Docker', 'Postman', 'VS Code', 'Linux'
-        ]
-    },
-    "Specializations": {
-        icon: <Zap className="h-6 w-6 text-primary" />,
-        skills: [
-            'Full-Stack Development', 'Machine Learning', 'Data Analytics', 
-            'Web Development', 'Software Engineering', 'Image Processing'
-        ]
-    }
+    "Languages": [
+        'Python', 'JavaScript', 'Java', 'C++', 'C#', 'C',
+        'Bash', 'HTML', 'CSS', 'SQL', 'PHP'
+    ],
+    "Technologies": [
+        'PyTorch', 'TensorFlow', 'NumPy', 'React', 'Node.js', 'Next.js',
+        'Express', 'Tailwind CSS', 'MongoDB', 'Redis', 'PostgreSQL', 'Git'
+    ],
+    "Tools": [
+        'Git', 'GitHub', 'Docker', 'Postman', 'VS Code', 'Linux', 'Figma'
+    ],
+    "Specializations": [
+        'Full-Stack Development', 'Machine Learning', 'Data Analytics',
+        'Web Development', 'Software Engineering'
+    ]
 };
 
 export const SkillsSections = () => {
     return (
-        <section id="skills" className="py-15 px-4 relative overflow-hidden">
-            {/* Background Elements */}
-            <div className="absolute inset-0 -z-10">
-                <div className="absolute top-20 right-20 w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-40 left-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
-            </div>
-
-            <div className="container mx-auto max-w-7xl">
-                {/* Enhanced Header */}
-                <div className="text-center mb-10 section-fade-in">
-                    <div className="inline-flex items-center gap-3">
-                        <div className="p-2 rounded-xl bg-primary/10 border border-primary/20">
-                            <Code2 size={32} className="text-primary"/>
-                        </div>
-                        <h2 className="text-4xl md:text-5xl font-bold">
-                            Skills & Technologies
-                        </h2>
-                    </div>
+        <section id="skills" className="py-24 px-6">
+            <div className="container mx-auto max-w-6xl">
+                {/* Section Header */}
+                <div className="mb-16">
+                    <h2 className="text-3xl md:text-4xl font-semibold mb-4">
+                        Skills & Technologies
+                    </h2>
+                    <p className="text-muted-foreground max-w-lg">
+                        Technologies and tools I work with regularly.
+                    </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    {Object.entries(skillsData).map(([category, data], index) => (
-                        <div 
-                            key={category} 
-                            className={cn(
-                                "enhanced-gradient-border p-4 group card-hover section-fade-in",
-                                index === 1 && "stagger-delay-1",
-                                index === 2 && "stagger-delay-2",
-                                index === 3 && "stagger-delay-3"
-                            )}
-                        >
-                            {/* Category Header */}
-                            <div className="flex items-center gap-3 mb-6">
-                                <div className="p-2 rounded-lg bg-primary/10 border border-primary/20 group-hover:border-primary/40 transition-all duration-300">
-                                    {data.icon}
-                                </div>
-                                <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-                                    {category}
-                                </h3>
-                            </div>
-
-                            {/* Skills Tags */}
-                            <div className="flex flex-wrap gap-3">
-                                {data.skills.map((skill, skillIndex) => (
+                {/* Skills Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    {Object.entries(skillsData).map(([category, skills]) => (
+                        <div key={category}>
+                            <h3 className="text-lg font-medium mb-4">
+                                {category}
+                            </h3>
+                            <div className="flex flex-wrap gap-2">
+                                {skills.map((skill) => (
                                     <span
                                         key={skill}
-                                        className={cn(
-                                            "px-4 py-2 rounded-lg text-sm font-medium",
-                                            "bg-primary/10 text-foreground border border-primary/20",
-                                            "transition-all duration-300 hover:scale-105 hover:bg-primary/20 hover:border-primary/40",
-                                            "hover:shadow-lg cursor-default",
-                                            "animate-fade-in"
-                                        )}
-                                        style={{
-                                            animationDelay: `${(index * 0.1 + skillIndex * 0.05)}s`
-                                        }}
+                                        className="px-3 py-1.5 text-sm bg-secondary text-foreground rounded-md"
                                     >
                                         {skill}
                                     </span>

@@ -1,10 +1,14 @@
+/**
+ * Blogs.jsx
+ * Clean, minimal blog listing and post pages
+ */
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { NavBar } from "../components/NavBar";
 import { Footer } from "../components/Footer";
 import { PageTransition } from "../components/PageTransition";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, Clock, ArrowRight, BookOpen, ArrowLeft, Loader2 } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, ArrowUpRight, Loader2 } from "lucide-react";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
@@ -13,7 +17,6 @@ import { formatDate } from "../lib/utils";
 import TableOfContents from "../components/TableOfContents";
 import { MarkdownComponents } from "../components/MarkdownComponents";
 import { blogPosts, getBlogById } from "../data/blogs";
-import { BlogCard } from "../components/BlogCard";
 import '../assets/blog-styles.css';
 
 function BlogPost({ blog }) {
@@ -27,18 +30,17 @@ function BlogPost({ blog }) {
             try {
                 setLoading(true);
                 setError(null);
-                
-                // Fetch the markdown file from the public directory
+
                 const response = await fetch(`/blogs/${blog?.filename}`);
                 if (!response.ok) {
-                    throw new Error(`Failed to fetch blog: ${response.status} ${response.statusText}`);
+                    throw new Error(`Failed to fetch blog: ${response.status}`);
                 }
                 const markdownContent = await response.text();
-                
+
                 if (!markdownContent.trim()) {
                     throw new Error('Blog content is empty');
                 }
-                
+
                 setContent(markdownContent);
             } catch (err) {
                 console.error('Error loading blog content:', err);
@@ -60,23 +62,20 @@ function BlogPost({ blog }) {
         navigate('/blogs');
     };
 
-    // If no blog was passed in, render a friendly not-found fallback.
     if (!blog) {
         return (
             <div className="min-h-screen bg-background text-foreground">
                 <NavBar />
-                <main className="pt-20 pb-12">
-                    <div className="container mx-auto max-w-7xl px-4">
-                        <div className="text-center py-20">
-                            <p className="text-destructive mb-4">Blog not found</p>
-                            <button
-                                onClick={handleBackToList}
-                                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
-                            >
-                                <ArrowLeft size={16} />
-                                Back to Blogs
-                            </button>
-                        </div>
+                <main className="pt-24 pb-16 px-6">
+                    <div className="container mx-auto max-w-3xl text-center">
+                        <p className="text-muted-foreground mb-4">Blog not found</p>
+                        <button
+                            onClick={handleBackToList}
+                            className="inline-flex items-center gap-2 hover:opacity-70 transition-opacity"
+                        >
+                            <ArrowLeft size={16} />
+                            Back to Blogs
+                        </button>
                     </div>
                 </main>
                 <Footer />
@@ -84,20 +83,13 @@ function BlogPost({ blog }) {
         );
     }
 
-    // Note: blog content loading is handled by the useEffect declared above
-
     if (loading) {
         return (
             <div className="min-h-screen bg-background text-foreground">
                 <NavBar />
-                <main className="pt-20 pb-12">
-                    <div className="container mx-auto max-w-7xl px-4">
-                        <div className="flex items-center justify-center py-20">
-                            <div className="text-center">
-                                <Loader2 className="animate-spin text-primary mx-auto mb-4" size={48} />
-                                <p className="text-muted-foreground">Loading blog content...</p>
-                            </div>
-                        </div>
+                <main className="pt-24 pb-16 px-6">
+                    <div className="container mx-auto max-w-3xl flex items-center justify-center py-20">
+                        <Loader2 className="animate-spin text-muted-foreground" size={32} />
                     </div>
                 </main>
                 <Footer />
@@ -109,18 +101,16 @@ function BlogPost({ blog }) {
         return (
             <div className="min-h-screen bg-background text-foreground">
                 <NavBar />
-                <main className="pt-20 pb-12">
-                    <div className="container mx-auto max-w-7xl px-4">
-                        <div className="text-center py-20">
-                            <p className="text-destructive mb-4">{error}</p>
-                            <button
-                                onClick={handleBackToList}
-                                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
-                            >
-                                <ArrowLeft size={16} />
-                                Back to Blogs
-                            </button>
-                        </div>
+                <main className="pt-24 pb-16 px-6">
+                    <div className="container mx-auto max-w-3xl text-center">
+                        <p className="text-muted-foreground mb-4">{error}</p>
+                        <button
+                            onClick={handleBackToList}
+                            className="inline-flex items-center gap-2 hover:opacity-70 transition-opacity"
+                        >
+                            <ArrowLeft size={16} />
+                            Back to Blogs
+                        </button>
                     </div>
                 </main>
                 <Footer />
@@ -131,18 +121,18 @@ function BlogPost({ blog }) {
     return (
         <div className="min-h-screen bg-background text-foreground">
             <NavBar />
-            
-            <main className="pt-16 pb-12">
-                {/* Hero Section with Back Button */}
-                <div className="border-b border-border/50">
-                    <div className="container mx-auto max-w-7xl px-4 py-6 lg:pl-80 xl:pl-96">
+
+            <main className="pt-24 pb-16">
+                {/* Header */}
+                <div className="border-b border-border mb-8">
+                    <div className="container mx-auto max-w-3xl px-6 pb-8">
                         <motion.button
-                            initial={{ opacity: 0, x: -20 }}
+                            initial={{ opacity: 0, x: -10 }}
                             animate={{ opacity: 1, x: 0 }}
                             onClick={handleBackToList}
-                            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-4 group"
+                            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-6"
                         >
-                            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+                            <ArrowLeft size={16} />
                             Back to Blogs
                         </motion.button>
 
@@ -151,34 +141,29 @@ function BlogPost({ blog }) {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
                         >
-                            <h1 className="text-3xl md:text-4xl font-bold mb-3 leading-tight">
+                            <h1 className="text-3xl md:text-4xl font-semibold mb-4 leading-tight">
                                 {blog.title}
                             </h1>
-                            
-                            <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-3">
+
+                            <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-4">
                                 <div className="flex items-center gap-2">
-                                    <Calendar size={16} />
+                                    <Calendar size={14} />
                                     <span>{formatDate(blog.date)}</span>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <Clock size={16} />
-                                    <span>{blog.readTime} read</span>
+                                    <Clock size={14} />
+                                    <span>{blog.readTime}</span>
                                 </div>
-                                {blog.tags && (
-                                    <div className="flex items-center gap-2 flex-wrap">
-                                        {blog.tags.map((tag, index) => (
-                                            <span key={index} className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                )}
                             </div>
 
-                            {blog.summary && (
-                                <p className="text-base text-muted-foreground leading-relaxed max-w-3xl">
-                                    {blog.summary}
-                                </p>
+                            {blog.tags && (
+                                <div className="flex flex-wrap gap-2">
+                                    {blog.tags.map((tag, index) => (
+                                        <span key={index} className="text-xs text-muted-foreground">
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
                             )}
                         </motion.header>
                     </div>
@@ -188,34 +173,27 @@ function BlogPost({ blog }) {
                 <TableOfContents content={content} />
 
                 {/* Blog Content */}
-                <div className="container mx-auto max-w-7xl px-4 lg:pl-80 xl:pl-96">
+                <div className="container mx-auto max-w-3xl px-6">
                     <motion.article
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="py-8"
                     >
-                        <div className="prose prose-lg dark:prose-invert max-w-none text-left
-                            prose-headings:font-bold prose-headings:text-foreground prose-headings:leading-tight prose-headings:text-left
-                            prose-h1:text-4xl prose-h1:mb-6 prose-h1:mt-8 prose-h1:pb-3 prose-h1:border-b prose-h1:border-border/30 prose-h1:text-left
-                            prose-h2:text-3xl prose-h2:mb-4 prose-h2:mt-8 prose-h2:text-primary prose-h2:text-left
-                            prose-h3:text-2xl prose-h3:mb-3 prose-h3:mt-6 prose-h3:text-left
-                            prose-h4:text-xl prose-h4:mb-2 prose-h4:mt-4 prose-h4:text-left
-                            prose-p:text-foreground prose-p:leading-relaxed prose-p:mb-4 prose-p:text-base prose-p:text-left
-                            prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+                        <div className="prose prose-lg max-w-none text-left
+                            prose-headings:font-semibold prose-headings:text-foreground
+                            prose-h1:text-3xl prose-h1:mb-6 prose-h1:mt-8
+                            prose-h2:text-2xl prose-h2:mb-4 prose-h2:mt-8
+                            prose-h3:text-xl prose-h3:mb-3 prose-h3:mt-6
+                            prose-p:text-foreground prose-p:leading-relaxed prose-p:mb-4
+                            prose-a:text-foreground prose-a:underline hover:prose-a:opacity-70
                             prose-strong:text-foreground prose-strong:font-semibold
-                            prose-em:text-muted-foreground
-                            prose-code:text-primary prose-code:bg-muted/70 prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:text-sm prose-code:font-mono
-                            prose-pre:bg-muted/70 prose-pre:border prose-pre:border-border/50 prose-pre:rounded-lg prose-pre:p-3 prose-pre:overflow-x-auto
-                            prose-blockquote:border-l-4 prose-blockquote:border-l-primary prose-blockquote:pl-3 prose-blockquote:py-1 prose-blockquote:bg-muted/30 prose-blockquote:rounded-r-lg prose-blockquote:text-muted-foreground prose-blockquote:italic prose-blockquote:text-left
+                            prose-code:text-foreground prose-code:bg-secondary prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm
+                            prose-pre:bg-secondary prose-pre:border prose-pre:border-border prose-pre:rounded-lg
+                            prose-blockquote:border-l-2 prose-blockquote:border-l-foreground prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground
                             prose-ul:mb-4 prose-ul:list-disc prose-ul:pl-5
                             prose-ol:mb-4 prose-ol:list-decimal prose-ol:pl-5
-                            prose-li:text-foreground prose-li:mb-1 prose-li:leading-relaxed prose-li:marker:text-primary prose-li:text-base
-                            prose-table:border prose-table:border-border/50 prose-table:rounded-lg prose-table:overflow-hidden
-                            prose-th:bg-muted/50 prose-th:text-foreground prose-th:font-semibold prose-th:p-2 prose-th:border-b prose-th:border-border/50 prose-th:text-sm
-                            prose-td:p-2 prose-td:border-b prose-td:border-border/30 prose-td:text-sm
-                            prose-img:rounded-lg prose-img:shadow-lg prose-img:border prose-img:border-border/30
-                            prose-hr:border-border/50 prose-hr:my-8"
+                            prose-li:text-foreground prose-li:mb-1
+                            prose-img:rounded-lg"
                         >
                             <ReactMarkdown
                                 remarkPlugins={[remarkGfm]}
@@ -235,88 +213,84 @@ function BlogPost({ blog }) {
 
 export const Blogs = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [isInitialized, setIsInitialized] = useState(false);
-    
-    // Sort blogs by date (newest first) and initialize
+
     const sortedBlogs = [...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
 
     useEffect(() => {
-        // Initialize the component
         setIsInitialized(true);
     }, []);
 
-    // Show loading state during initialization
     if (!isInitialized) {
         return (
             <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
-                <Loader2 className="animate-spin text-primary" size={48} />
+                <Loader2 className="animate-spin text-muted-foreground" size={32} />
             </div>
         );
     }
 
-    // If there's an ID in the URL, show the blog post
     if (id) {
         const selectedBlog = getBlogById(id);
         return <BlogPost blog={selectedBlog} />;
     }
 
-    // Show the blog list
     return (
         <PageTransition className="min-h-screen bg-background text-foreground">
             <NavBar />
-            
-            <main className="pt-16 pb-8">
-                <div className="container mx-auto max-w-7xl px-4">
-                    {/* Header Section */}
+
+            <main className="pt-24 pb-16 px-6">
+                <div className="container mx-auto max-w-4xl">
+                    {/* Header */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="mb-6 text-center"
+                        className="mb-12"
                     >
-                        <h1 className="text-4xl font-bold">
-                            My Blogs
+                        <h1 className="text-3xl md:text-4xl font-semibold mb-4">
+                            Writing
                         </h1>
+                        <p className="text-muted-foreground">
+                            {sortedBlogs.length} articles on development, technology, and learning.
+                        </p>
                     </motion.div>
 
-                    {/* Blog Stats */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 24 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                        className="flex justify-center mb-6"
-                    >
-                        <div className="bg-card/60 backdrop-blur-md rounded-xl px-4 py-2 border border-border/50">
-                            <span className="text-sm text-muted-foreground">
-                                {sortedBlogs.length} articles published
-                            </span>
-                        </div>
-                    </motion.div>
-
-                    {/* Blog Posts Grid */}
+                    {/* Blog List */}
                     <AnimatePresence>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="space-y-8">
                             {sortedBlogs.map((blog, index) => (
-                                <BlogCard 
-                                    key={blog.id} 
-                                    blog={blog} 
-                                    index={index}
-                                />
+                                <motion.article
+                                    key={blog.id}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: index * 0.05 }}
+                                    className="group cursor-pointer"
+                                    onClick={() => navigate(`/blogs/blog/${blog.id}`)}
+                                >
+                                    <div className="pb-8 border-b border-border">
+                                        <p className="text-sm text-muted-foreground mb-2">
+                                            {formatDate(blog.date)}
+                                        </p>
+                                        <h2 className="text-xl font-medium mb-2 group-hover:opacity-70 transition-opacity">
+                                            {blog.title}
+                                        </h2>
+                                        <p className="text-muted-foreground mb-3 leading-relaxed">
+                                            {blog.summary}
+                                        </p>
+                                        <span className="inline-flex items-center gap-1 text-sm font-medium">
+                                            Read more
+                                            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                        </span>
+                                    </div>
+                                </motion.article>
                             ))}
                         </div>
                     </AnimatePresence>
 
-                    {/* Empty State Message (if no blogs) */}
                     {sortedBlogs.length === 0 && (
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="text-center py-12"
-                        >
-                            <BookOpen className="mx-auto mb-4 text-muted-foreground" size={48} />
-                            <h3 className="text-xl font-semibold mb-2">No blogs yet</h3>
-                            <p className="text-muted-foreground">Check back soon for new articles!</p>
-                        </motion.div>
+                        <div className="text-center py-12">
+                            <p className="text-muted-foreground">No articles yet. Check back soon!</p>
+                        </div>
                     )}
                 </div>
             </main>

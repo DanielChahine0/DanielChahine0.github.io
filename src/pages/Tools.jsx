@@ -1,105 +1,104 @@
-
+/**
+ * Tools.jsx
+ * Clean, minimal tools hub page
+ */
 import { Footer } from "../components/Footer";
 import { NavBar } from "../components/NavBar";
 import { PageTransition } from "../components/PageTransition";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { 
-    Calculator, Clock, Calendar, ArrowRight, FileText, Palette, FileSearch,
+import {
+    Calculator, Clock, Calendar, ArrowUpRight, FileText, Palette, FileSearch,
     User, Image, Code
 } from "lucide-react";
 
-// ToolCard component for better separation of concerns
 function ToolCard({ tool, index }) {
     const IconComponent = tool.icon;
     return (
         <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.08 }}
+            transition={{ duration: 0.4, delay: index * 0.05 }}
         >
             <Link
                 to={tool.path}
+                className="group block h-full"
                 aria-label={`Open ${tool.title} tool`}
-                tabIndex={0}
-                className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary rounded-2xl group"
             >
-                <div className="bg-card/80 backdrop-blur-md rounded-2xl p-5 border border-border/50 shadow-lg shadow-black/5 flex flex-col h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-primary/60 group focus-within:border-primary/80">
-                    <div className="bg-primary w-14 h-14 rounded-xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform">
-                        <IconComponent className="text-primary-foreground" size={30} aria-hidden="true" />
+                <div className="h-full p-6 border border-border rounded-lg hover:border-foreground/20 transition-all duration-200">
+                    <div className="flex items-start gap-4">
+                        <div className="p-2 bg-secondary rounded-md">
+                            <IconComponent className="w-5 h-5" aria-hidden="true" />
+                        </div>
+                        <div className="flex-1">
+                            <h3 className="font-medium mb-2 group-hover:opacity-70 transition-opacity">
+                                {tool.title}
+                            </h3>
+                            <p className="text-sm text-muted-foreground leading-relaxed">
+                                {tool.description}
+                            </p>
+                        </div>
+                        <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
-                    <h3 className="text-lg font-bold mb-2 text-foreground text-center">{tool.title}</h3>
-                    <p className="text-foreground/70 text-sm mb-4 leading-relaxed text-center">
-                        {tool.description}
-                    </p>
-                    <span className="sr-only">Go to {tool.title}</span>
-                    <button
-                        className="mt-auto px-4 py-2 bg-primary text-primary-foreground rounded-lg shadow hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all text-sm font-medium opacity-0 group-hover:opacity-100 group-focus-within:opacity-100"
-                        tabIndex={-1}
-                        aria-label={`Try out ${tool.title}`}
-                    >
-                        Try it out <ArrowRight className="inline ml-1" size={16} />
-                    </button>
                 </div>
             </Link>
         </motion.div>
     );
 }
 
-
 export default function Tools() {
     const tools = [
         {
             title: "Calorie Tracker",
-            description: "Track your daily calorie intake and monitor your nutrition goals with an easy-to-use interface.",
+            description: "Track your daily calorie intake and monitor your nutrition goals.",
             icon: Calculator,
             path: "/tools/calorie-tracker"
         },
         {
             title: "Clock & Timer",
-            description: "A digital clock with a built-in Pomodoro timer to help you stay productive and manage your time.",
+            description: "Digital clock with Pomodoro timer for productivity.",
             icon: Clock,
             path: "/tools/clock-timer"
         },
         {
             title: "Life in Weeks",
-            description: "Visualize your entire life as a grid of weeks to gain perspective on time and make every week count.",
+            description: "Visualize your life as a grid of weeks.",
             icon: Calendar,
             path: "/tools/life-in-weeks"
         },
         {
             title: "Markdown Editor",
-            description: "A powerful markdown editor with live preview, syntax highlighting, and export capabilities to MD and PDF.",
+            description: "Write markdown with live preview and export options.",
             icon: FileText,
             path: "/tools/markdown-editor"
         },
         {
             title: "Color Picker",
-            description: "Create color palettes with complementary colors and HEX/RGB/HSB modes.",
+            description: "Create color palettes with various color modes.",
             icon: Palette,
             path: "/tools/color-picker"
         },
         {
             title: "Text Analyzer",
-            description: "Analyze your text for word count, character count, reading time, and sentiment.",
+            description: "Analyze text for word count, reading time, and more.",
             icon: FileSearch,
             path: "/tools/text-analyzer"
         },
         {
             title: "Resume Builder",
-            description: "Create professional resumes with customizable templates and easy-to-use interface.",
+            description: "Create professional resumes with customizable templates.",
             icon: User,
             path: "/tools/resume-builder"
         },
         {
             title: "Image Editor",
-            description: "Edit images with filters, adjustments, and basic manipulation tools.",
+            description: "Edit images with filters and adjustments.",
             icon: Image,
             path: "/tools/image-editor"
         },
         {
             title: "Code Editor",
-            description: "Online code editor with live preview for HTML, CSS, and JavaScript.",
+            description: "Online HTML, CSS, and JavaScript editor with live preview.",
             icon: Code,
             path: "/tools/code-playground"
         },
@@ -107,27 +106,32 @@ export default function Tools() {
 
     return (
         <PageTransition>
-            <div className="min-h-screen flex flex-col bg-background relative overflow-hidden">
+            <div className="min-h-screen flex flex-col bg-background">
                 <NavBar />
-                <main className="mt-14 flex-1 container mx-auto px-2 py-8 relative z-10">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="max-w-6xl mx-auto"
-                    >
-                        <div className="text-center mb-8">
-                            <h1 className="text-4xl font-bold mb-2 tracking-tight text-foreground">
+                <main className="flex-1 pt-24 pb-16 px-6">
+                    <div className="container mx-auto max-w-6xl">
+                        {/* Header */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.4 }}
+                            className="mb-12"
+                        >
+                            <h1 className="text-3xl md:text-4xl font-semibold mb-4">
                                 Tools
                             </h1>
-                        </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                            <p className="text-muted-foreground max-w-lg">
+                                A collection of useful tools I've built for productivity and development.
+                            </p>
+                        </motion.div>
+
+                        {/* Tools Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {tools.map((tool, index) => (
                                 <ToolCard key={tool.title} tool={tool} index={index} />
                             ))}
                         </div>
-                        
-                    </motion.div>
+                    </div>
                 </main>
                 <Footer />
             </div>
