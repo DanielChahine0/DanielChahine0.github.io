@@ -1,6 +1,6 @@
 /**
  * BlogsSection.jsx
- * Clean, minimal blog section
+ * Editorial blog section with mono dates and refined typography.
  */
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -14,53 +14,60 @@ export const BlogsSection = () => {
             <div className="container mx-auto max-w-6xl">
                 {/* Section Header */}
                 <div className="mb-16">
-                    <h2 className="text-3xl md:text-4xl font-semibold mb-4">
+                    <p className="section-label mb-5">Thoughts & Ideas</p>
+                    <h2 className="font-display text-4xl md:text-5xl font-semibold leading-tight">
                         Writing
                     </h2>
-                    <p className="text-muted-foreground max-w-lg">
-                        Thoughts on development, technology, and learning.
-                    </p>
                 </div>
 
                 {/* Blog Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {latestBlogs.map((blog) => (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    {latestBlogs.map((blog, i) => (
                         <Link
                             key={blog.id}
                             to={`/blogs/blog/${blog.id}`}
                             className="group block"
                         >
-                            <article className="space-y-3">
-                                {/* Date */}
-                                <p className="text-sm text-muted-foreground">
-                                    {blog.date}
-                                </p>
+                            <article className="space-y-4 pb-8 border-b border-border">
+                                {/* Number + Date row */}
+                                <div className="flex items-center justify-between">
+                                    <span
+                                        className="font-code text-4xl font-bold leading-none opacity-15 select-none"
+                                        style={{ color: "var(--accent-color)", opacity: 0.12 }}
+                                        aria-hidden="true"
+                                    >
+                                        {String(i + 1).padStart(2, '0')}
+                                    </span>
+                                    <p className="font-code text-[11px] text-muted-foreground tracking-wide">
+                                        {blog.date}
+                                    </p>
+                                </div>
 
                                 {/* Title */}
-                                <h3 className="text-lg font-medium group-hover:opacity-70 transition-opacity">
+                                <h3 className="font-display text-xl font-semibold leading-snug group-hover:opacity-70 transition-opacity">
                                     {blog.title}
                                 </h3>
 
                                 {/* Excerpt */}
-                                <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2">
+                                <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2 font-light">
                                     {blog.excerpt}
                                 </p>
 
                                 {/* Read More */}
-                                <span className="inline-flex items-center gap-1 text-sm font-medium">
+                                <span className="link-accent text-sm">
                                     Read more
-                                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                    <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                                 </span>
                             </article>
                         </Link>
                     ))}
                 </div>
 
-                {/* View All Link */}
-                <div className="mt-16 text-center">
+                {/* View All */}
+                <div className="mt-14 text-center">
                     <Link
                         to="/blogs"
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background rounded-md font-medium hover:opacity-80 transition-opacity"
+                        className="btn-primary"
                     >
                         View All Posts
                         <ArrowUpRight className="w-4 h-4" />

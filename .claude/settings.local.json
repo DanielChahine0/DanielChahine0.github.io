@@ -5,7 +5,9 @@
       "WebSearch",
       "WebFetch(domain:nhiyngo.com)",
       "Bash(npm run build:*)",
-      "Bash(npm audit fix:*)"
+      "Bash(npm audit fix:*)",
+      "Bash(npx vite:*)",
+      "Bash(npm install:*)"
     ]
   }
 }

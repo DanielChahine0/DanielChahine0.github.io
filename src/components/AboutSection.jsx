@@ -1,6 +1,7 @@
 /**
  * AboutSection.jsx
- * Clean, minimal about section with key highlights
+ * Editorial about section with left-accent stat cards
+ * and Cormorant display heading.
  */
 
 export const AboutSection = () => {
@@ -8,31 +9,35 @@ export const AboutSection = () => {
         {
             label: "Education",
             value: "BSc Computer Science",
-            detail: "York University, 4th Year, GPA 3.9"
+            detail: "York University · 4th Year · GPA 3.9"
         },
         {
             label: "Experience",
             value: "6+ Years Coding",
-            detail: "3+ years web development"
+            detail: "3+ years professional web development"
         },
         {
             label: "Focus",
             value: "Full-Stack & ML",
-            detail: "React, Node.js, Python"
+            detail: "React · Node.js · Python · PyTorch"
         }
     ];
 
     return (
         <section id="about" className="py-24 px-6 bg-card">
             <div className="container mx-auto max-w-6xl">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                    {/* Left - About Text */}
-                    <div className="space-y-6">
-                        <h2 className="text-3xl md:text-4xl font-semibold">
-                            About
-                        </h2>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
 
-                        <div className="space-y-4 text-muted-foreground leading-relaxed">
+                    {/* Left — About Text */}
+                    <div className="space-y-8">
+                        <div>
+                            <p className="section-label mb-5">Who I Am</p>
+                            <h2 className="font-display text-4xl md:text-5xl font-semibold leading-tight">
+                                About Me
+                            </h2>
+                        </div>
+
+                        <div className="space-y-4 text-muted-foreground leading-relaxed font-light">
                             <p>
                                 I'm a 4th-year Computer Science student at York University
                                 pursuing a Specialized Honours Bachelor of Science with a
@@ -55,11 +60,10 @@ export const AboutSection = () => {
                         </div>
 
                         {/* Action Buttons */}
-                        <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                        <div className="flex flex-col sm:flex-row gap-3 pt-2">
                             <button
                                 onClick={() => {
-                                    const el = document.querySelector('footer');
-                                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                                    document.querySelector('footer')?.scrollIntoView({ behavior: 'smooth' });
                                 }}
                                 className="btn-primary"
                             >
@@ -75,20 +79,38 @@ export const AboutSection = () => {
                         </div>
                     </div>
 
-                    {/* Right - Highlights */}
-                    <div className="space-y-6">
+                    {/* Right — Highlights */}
+                    <div className="space-y-5">
                         {highlights.map((item, index) => (
                             <div
                                 key={index}
-                                className="p-6 border border-border rounded-lg hover:border-foreground/20 transition-colors"
+                                className="relative group p-6 rounded-lg border border-border bg-background hover:border-transparent transition-all duration-300 overflow-hidden"
+                                style={{
+                                    boxShadow: "none",
+                                    transition: "all 0.3s ease",
+                                }}
+                                onMouseEnter={e => {
+                                    e.currentTarget.style.boxShadow = `0 0 0 1px var(--accent-color), 0 8px 30px -8px rgba(var(--accent-color-rgb), 0.2)`;
+                                }}
+                                onMouseLeave={e => {
+                                    e.currentTarget.style.boxShadow = "none";
+                                    e.currentTarget.style.border = "";
+                                }}
                             >
-                                <p className="text-sm text-muted-foreground mb-1">
+                                {/* Left accent bar */}
+                                <div
+                                    className="absolute left-0 top-4 bottom-4 w-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                    style={{ background: "var(--accent-color)" }}
+                                    aria-hidden="true"
+                                />
+
+                                <p className="font-code text-[10px] uppercase tracking-[0.18em] text-muted-foreground mb-2">
                                     {item.label}
                                 </p>
-                                <p className="text-xl font-medium mb-1">
+                                <p className="font-display text-2xl font-semibold mb-1 leading-tight">
                                     {item.value}
                                 </p>
-                                <p className="text-sm text-muted-foreground">
+                                <p className="text-sm text-muted-foreground font-light">
                                     {item.detail}
                                 </p>
                             </div>

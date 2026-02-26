@@ -1,12 +1,12 @@
 /**
  * Global CSS Styles
- * Minimal, clean portfolio design with light/neutral theme
+ * Refined Technical Editorial — Cormorant + JetBrains Mono + Outfit
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
 
-/* Syntax highlighting styles for code blocks using highlight.js */
+/* Syntax highlighting */
 @import "highlight.js/styles/github.css";
 
 @layer utilities {
@@ -47,17 +47,12 @@
     opacity: 0;
     transform: translateX(-10px);
   }
-
   .toc-item-enter-active {
     opacity: 1;
     transform: translateX(0);
     transition: opacity 0.3s, transform 0.3s;
   }
-
-  .toc-item-exit {
-    opacity: 1;
-  }
-
+  .toc-item-exit { opacity: 1; }
   .toc-item-exit-active {
     opacity: 0;
     transition: opacity 0.2s;
@@ -68,23 +63,17 @@
     scrollbar-width: thin;
     scrollbar-color: var(--neutral-300) var(--neutral-100);
   }
+  .toc-scroll::-webkit-scrollbar { width: 4px; }
+  .toc-scroll::-webkit-scrollbar-track { background: var(--neutral-100); border-radius: 4px; }
+  .toc-scroll::-webkit-scrollbar-thumb { background: var(--neutral-300); border-radius: 4px; }
+  .toc-scroll::-webkit-scrollbar-thumb:hover { background: var(--neutral-400); }
 
-  .toc-scroll::-webkit-scrollbar {
-    width: 4px;
+  /* Font utilities */
+  .font-display {
+    font-family: 'Cormorant Garamond', Georgia, serif;
   }
-
-  .toc-scroll::-webkit-scrollbar-track {
-    background: var(--neutral-100);
-    border-radius: 4px;
-  }
-
-  .toc-scroll::-webkit-scrollbar-thumb {
-    background: var(--neutral-300);
-    border-radius: 4px;
-  }
-
-  .toc-scroll::-webkit-scrollbar-thumb:hover {
-    background: var(--neutral-400);
+  .font-code {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
   }
 }
 
@@ -100,92 +89,222 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent-color: var(--accent-color);
 
   --animate-fade-in: fade-in 0.6s ease-out forwards;
   --animate-fade-in-up: fade-in-up 0.6s ease-out forwards;
+  --animate-slide-in-left: slide-in-left 0.6s ease-out forwards;
 
   @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   @keyframes fade-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slide-in-left {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes line-grow {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  @keyframes accent-pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
   }
 }
 
 @layer base {
+  /* ================================================
+     DEFAULT THEME — Warm Paper
+  ================================================ */
   :root {
-    /* Light neutral palette */
-    --background: #fafafa;
-    --foreground: #171717;
+    --background: #fdfaf6;
+    --foreground: #1a1714;
     --card: #ffffff;
-    --card-foreground: #171717;
-    --primary: #171717;
-    --primary-foreground: #fafafa;
-    --secondary: #f5f5f5;
-    --secondary-foreground: #171717;
-    --muted: #f5f5f5;
-    --muted-foreground: #737373;
-    --accent: #f5f5f5;
-    --accent-foreground: #171717;
-    --border: #e5e5e5;
-    --input: #e5e5e5;
-    --ring: #171717;
+    --card-foreground: #1a1714;
+    --primary: #1a1714;
+    --primary-foreground: #fdfaf6;
+    --secondary: #f2ede6;
+    --secondary-foreground: #1a1714;
+    --muted: #f2ede6;
+    --muted-foreground: #7c6e60;
+    --accent: #f2ede6;
+    --accent-foreground: #1a1714;
+    --border: #e0d9d0;
+    --input: #e0d9d0;
+    --ring: var(--accent-color);
 
-    /* Neutral shades for utility */
-    --neutral-50: #fafafa;
-    --neutral-100: #f5f5f5;
-    --neutral-200: #e5e5e5;
-    --neutral-300: #d4d4d4;
-    --neutral-400: #a3a3a3;
-    --neutral-500: #737373;
-    --neutral-600: #525252;
-    --neutral-700: #404040;
-    --neutral-800: #262626;
-    --neutral-900: #171717;
+    /* Accent color — warm amber default */
+    --accent-color: #c87533;
+    --accent-color-rgb: 200, 117, 51;
+
+    /* Neutral shades */
+    --neutral-50: #fdfaf6;
+    --neutral-100: #f2ede6;
+    --neutral-200: #e0d9d0;
+    --neutral-300: #c8bfb4;
+    --neutral-400: #a8998c;
+    --neutral-500: #7c6e60;
+    --neutral-600: #5c5048;
+    --neutral-700: #44392e;
+    --neutral-800: #2a2018;
+    --neutral-900: #1a1410;
   }
+
+  /* ================================================
+     MATCHA THEME
+  ================================================ */
+  html.matcha {
+    --background: #f0e8d8;
+    --foreground: #1c1812;
+    --card: #f8f1e4;
+    --card-foreground: #1c1812;
+    --primary: #1c1812;
+    --primary-foreground: #f0e8d8;
+    --secondary: #e4dace;
+    --secondary-foreground: #1c1812;
+    --muted: #e4dace;
+    --muted-foreground: #7a6b58;
+    --border: #cfc6b8;
+    --input: #cfc6b8;
+    --neutral-50: #f0e8d8;
+    --neutral-100: #e4dace;
+    --neutral-200: #cfc6b8;
+    --neutral-300: #b8aca0;
+    --neutral-400: #9a9080;
+  }
+
+  /* ================================================
+     PURE / LIGHT THEME — applied when no class added
+     (handled by :root default above)
+  ================================================ */
+
+  /* ================================================
+     DARK THEME — Midnight
+  ================================================ */
+  html.dark {
+    --background: #100f0d;
+    --foreground: #f0e8d8;
+    --card: #1a1816;
+    --card-foreground: #f0e8d8;
+    --primary: #f0e8d8;
+    --primary-foreground: #100f0d;
+    --secondary: #262320;
+    --secondary-foreground: #f0e8d8;
+    --muted: #262320;
+    --muted-foreground: #9a9080;
+    --accent: #262320;
+    --accent-foreground: #f0e8d8;
+    --border: #2e2c28;
+    --input: #2e2c28;
+    --neutral-50: #1a1816;
+    --neutral-100: #262320;
+    --neutral-200: #2e2c28;
+    --neutral-300: #3e3c38;
+    --neutral-400: #5a5850;
+    --neutral-500: #9a9080;
+    --neutral-600: #c0b8a8;
+    --neutral-700: #d8d0c0;
+    --neutral-800: #e8e0d0;
+    --neutral-900: #f0e8d8;
+  }
+
+  /* ================================================
+     SLATE THEME — Dark Gray
+  ================================================ */
+  html.dark-gray {
+    --background: #2a2a2a;
+    --foreground: #f0ece8;
+    --card: #343434;
+    --card-foreground: #f0ece8;
+    --primary: #f0ece8;
+    --primary-foreground: #2a2a2a;
+    --secondary: #404040;
+    --secondary-foreground: #f0ece8;
+    --muted: #404040;
+    --muted-foreground: #a8a4a0;
+    --border: #4a4a4a;
+    --input: #4a4a4a;
+    --neutral-50: #343434;
+    --neutral-100: #404040;
+    --neutral-200: #4a4a4a;
+    --neutral-300: #5c5c5c;
+    --neutral-400: #787878;
+    --neutral-500: #a8a4a0;
+  }
+
+  /* ================================================
+     OCEAN THEME
+  ================================================ */
+  html.ocean {
+    --background: #0d1f35;
+    --foreground: #ccd6f6;
+    --card: #142238;
+    --card-foreground: #ccd6f6;
+    --primary: #ccd6f6;
+    --primary-foreground: #0d1f35;
+    --secondary: #1a3050;
+    --secondary-foreground: #ccd6f6;
+    --muted: #1a3050;
+    --muted-foreground: #8892b0;
+    --border: #1e3050;
+    --input: #1e3050;
+    --neutral-50: #142238;
+    --neutral-100: #1a3050;
+    --neutral-200: #1e3460;
+    --neutral-300: #2a4272;
+    --neutral-400: #4a6290;
+    --neutral-500: #8892b0;
+  }
+
+  /* ================================================
+     ACCENT COLOR OVERRIDES
+  ================================================ */
+  html.accent-red    { --accent-color: #ef4444; --accent-color-rgb: 239, 68, 68; }
+  html.accent-rose   { --accent-color: #f43f5e; --accent-color-rgb: 244, 63, 94; }
+  html.accent-pink   { --accent-color: #ec4899; --accent-color-rgb: 236, 72, 153; }
+  html.accent-purple { --accent-color: #a855f7; --accent-color-rgb: 168, 85, 247; }
+  html.accent-indigo { --accent-color: #6366f1; --accent-color-rgb: 99, 102, 241; }
+  html.accent-blue   { --accent-color: #3b82f6; --accent-color-rgb: 59, 130, 246; }
+  html.accent-teal   { --accent-color: #14b8a6; --accent-color-rgb: 20, 184, 166; }
+  html.accent-emerald{ --accent-color: #10b981; --accent-color-rgb: 16, 185, 129; }
+  html.accent-green  { --accent-color: #22c55e; --accent-color-rgb: 34, 197, 94; }
+  html.accent-gold   { --accent-color: #d4a017; --accent-color-rgb: 212, 160, 23; }
+  html.accent-yellow { --accent-color: #eab308; --accent-color-rgb: 234, 179, 8; }
+  html.accent-orange { --accent-color: #f97316; --accent-color-rgb: 249, 115, 22; }
 
   /* Accessible focus styles */
-  :focus {
-    outline: none;
-  }
-
+  :focus { outline: none; }
   :focus-visible,
   button:focus-visible,
   a:focus-visible,
   [role="button"]:focus-visible,
   [tabindex]:focus-visible {
-    outline: 2px solid var(--foreground);
+    outline: 2px solid var(--accent-color);
     outline-offset: 2px;
     border-radius: 4px;
   }
 
-  * {
-    @apply border-border;
-  }
+  * { @apply border-border; }
 
-  html {
-    @apply scroll-smooth;
-  }
+  html { @apply scroll-smooth; }
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Outfit', system-ui, -apple-system, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+    line-height: 1.65;
   }
 }
 
@@ -193,46 +312,123 @@
   margin-inline: auto;
   padding-inline: 1.5rem;
 
-  @media (width >= 640px) {
-    max-width: 640px;
-  }
-  @media (width >= 768px) {
-    max-width: 768px;
-  }
-  @media (width >= 1024px) {
-    max-width: 1024px;
-  }
-  @media (width >= 1280px) {
-    max-width: 1200px;
-  }
+  @media (width >= 640px)  { max-width: 640px; }
+  @media (width >= 768px)  { max-width: 768px; }
+  @media (width >= 1024px) { max-width: 1024px; }
+  @media (width >= 1280px) { max-width: 1200px; }
 }
 
 @layer utilities {
-  /* Simple card hover */
-  .card-hover {
-    @apply transition-all duration-300;
-  }
-  .card-hover:hover {
-    @apply -translate-y-1;
-    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Clean button styles */
+  /* ================================================
+     BUTTON STYLES
+  ================================================ */
   .btn-primary {
-    @apply px-6 py-3 bg-foreground text-background font-medium rounded-md transition-all duration-200;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--accent-color);
+    color: #ffffff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    border-radius: 6px;
+    border: 2px solid var(--accent-color);
+    transition: all 0.2s ease;
+    cursor: pointer;
   }
   .btn-primary:hover {
-    @apply opacity-80;
+    background: transparent;
+    color: var(--accent-color);
   }
 
   .btn-secondary {
-    @apply px-6 py-3 bg-transparent text-foreground font-medium rounded-md border border-border transition-all duration-200;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    color: var(--foreground);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 6px;
+    border: 2px solid var(--border);
+    transition: all 0.2s ease;
+    cursor: pointer;
   }
   .btn-secondary:hover {
-    @apply bg-muted;
+    border-color: var(--accent-color);
+    color: var(--accent-color);
   }
 
-  /* Section fade animation */
+  /* ================================================
+     CARD STYLES
+  ================================================ */
+  .card-hover {
+    transition: all 0.3s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px -12px rgba(var(--accent-color-rgb, 0, 0, 0), 0.15);
+  }
+
+  /* ================================================
+     SECTION LABEL STYLE
+  ================================================ */
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent-color);
+    flex-shrink: 0;
+  }
+
+  /* ================================================
+     ACCENT UNDERLINE LINK
+  ================================================ */
+  .link-accent {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--foreground);
+    transition: color 0.2s ease;
+    text-decoration: none;
+  }
+  .link-accent::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+  }
+  .link-accent:hover { color: var(--accent-color); }
+  .link-accent:hover::after { width: 100%; }
+
+  /* ================================================
+     SECTION FADE ANIMATION
+  ================================================ */
   .section-fade-in {
     animation: fade-in-up 0.6s ease-out forwards;
     opacity: 0;
@@ -242,9 +438,27 @@
   .stagger-delay-3 { animation-delay: 0.3s; }
   .stagger-delay-4 { animation-delay: 0.4s; }
 
-  /* Simple inline hover */
+  /* Inline hover */
   .custom-inline-hover {
     @apply inline-block transition-opacity duration-200 hover:opacity-70;
+  }
+
+  /* Skill tag */
+  .skill-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 400;
+    background: var(--secondary);
+    color: var(--muted-foreground);
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    transition: all 0.2s ease;
+  }
+  .skill-tag:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
   }
 }
 
@@ -254,28 +468,11 @@
   padding: 0;
 }
 
-/* Custom Scrollbar - minimal style */
+/* Custom Scrollbar */
 @layer base {
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--neutral-100);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--neutral-300);
-    border-radius: 4px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--neutral-400);
-  }
-
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: var(--neutral-300) var(--neutral-100);
-  }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--neutral-100); }
+  ::-webkit-scrollbar-thumb { background: var(--neutral-300); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--neutral-400); }
+  * { scrollbar-width: thin; scrollbar-color: var(--neutral-300) var(--neutral-100); }
 }

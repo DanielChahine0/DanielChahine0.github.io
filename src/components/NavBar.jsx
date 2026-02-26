@@ -1,9 +1,7 @@
 /**
  * NavBar Component
- * A clean, minimal navigation bar with:
- * - Navigation links to different sections/pages
- * - Mobile menu support
- * - Scroll-based styling
+ * Refined navigation with display font logo, accent underlines,
+ * and a clean mobile overlay.
  */
 
 import { cn } from '@/lib/utils'
@@ -12,23 +10,20 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 const navItems = [
-    { name: 'Work', href: '#projects', isRoute: 'scroll' },
-    { name: 'About', href: '#about', isRoute: 'scroll' },
+    { name: 'Work',     href: '#projects', isRoute: 'scroll' },
+    { name: 'About',    href: '#about',    isRoute: 'scroll' },
     { name: 'Timeline', href: '/timeline', isRoute: true },
-    { name: 'Tools', href: '/tools', isRoute: true },
-    { name: 'Contact', href: '#footer', isRoute: 'footer' },
+    { name: 'Tools',    href: '/tools',    isRoute: true },
+    { name: 'Contact',  href: '#footer',   isRoute: 'footer' },
 ]
 
 export const NavBar = () => {
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const navigate = useNavigate();
+    const [isScrolled, setIsScrolled]   = useState(false);
+    const [isMenuOpen, setIsMenuOpen]   = useState(false);
+    const navigate                       = useNavigate();
 
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
-        };
-
+        const handleScroll = () => setIsScrolled(window.scrollY > 50);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
@@ -37,11 +32,9 @@ export const NavBar = () => {
         if (isRoute === true) {
             navigate(href);
         } else if (isRoute === 'footer') {
-            const el = document.querySelector('footer');
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
+            document.querySelector('footer')?.scrollIntoView({ behavior: 'smooth' });
         } else if (isRoute === 'scroll') {
-            const el = document.querySelector(href);
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
+            document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
         }
         setIsMenuOpen(false);
     };
@@ -49,18 +42,28 @@ export const NavBar = () => {
     return (
         <nav
             className={cn(
-                "fixed w-full z-40 transition-all duration-300",
+                "fixed w-full z-40 transition-all duration-400",
                 isScrolled
-                    ? "bg-background/80 backdrop-blur-md border-b border-border"
+                    ? "bg-background/90 backdrop-blur-md border-b border-border"
                     : "bg-transparent"
             )}
             role="navigation"
             aria-label="Main Navigation"
         >
+            {/* Accent top-line when scrolled */}
+            <div
+                className="absolute top-0 left-0 right-0 h-[2px] transition-opacity duration-300"
+                style={{
+                    background: "var(--accent-color)",
+                    opacity: isScrolled ? 1 : 0,
+                }}
+                aria-hidden="true"
+            />
+
             <div className="container mx-auto flex items-center justify-between h-16 px-6">
                 {/* Logo */}
                 <button
-                    className="text-lg font-semibold tracking-tight hover:opacity-70 transition-opacity"
+                    className="font-display text-xl font-bold tracking-tight hover:opacity-70 transition-opacity"
                     type="button"
                     onClick={() => handleNavigation('/', true)}
                     aria-label="Go to home"
@@ -74,16 +77,21 @@ export const NavBar = () => {
                         <button
                             key={item.name}
                             onClick={() => handleNavigation(item.href, item.isRoute)}
-                            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors py-1"
                             type="button"
                         >
                             {item.name}
+                            <span
+                                className="absolute bottom-0 left-0 w-0 h-[1px] group-hover:w-full transition-all duration-300"
+                                style={{ background: "var(--accent-color)" }}
+                                aria-hidden="true"
+                            />
                         </button>
                     ))}
                     <a
                         href="/files/resume.pdf"
                         download
-                        className="text-sm font-medium px-4 py-2 bg-foreground text-background rounded-md hover:opacity-80 transition-opacity"
+                        className="btn-primary !py-2 !px-4 text-xs"
                     >
                         Resume
                     </a>
@@ -97,7 +105,7 @@ export const NavBar = () => {
                     aria-expanded={isMenuOpen}
                     aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
                 >
-                    {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
                 </button>
             </div>
 
@@ -107,24 +115,25 @@ export const NavBar = () => {
                 isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
             )}>
                 <div className="flex justify-between items-center h-16 px-6 border-b border-border">
-                    <span className="text-lg font-semibold">Daniel Chahine</span>
+                    <span className="font-display text-xl font-bold">Daniel Chahine</span>
                     <button
                         type="button"
                         onClick={() => setIsMenuOpen(false)}
                         className="p-2 text-foreground hover:opacity-70 transition-opacity"
                         aria-label="Close Menu"
                     >
-                        <X size={24} />
+                        <X size={22} />
                     </button>
                 </div>
 
-                <div className="flex flex-col p-6 gap-6">
-                    {navItems.map((item) => (
+                <div className="flex flex-col p-8 gap-8">
+                    {navItems.map((item, i) => (
                         <button
                             key={item.name}
                             onClick={() => handleNavigation(item.href, item.isRoute)}
-                            className="text-2xl font-light text-foreground hover:opacity-70 transition-opacity text-left"
+                            className="font-display text-3xl font-semibold text-foreground hover:opacity-60 transition-opacity text-left"
                             type="button"
+                            style={{ animationDelay: `${i * 0.05}s` }}
                         >
                             {item.name}
                         </button>
@@ -132,11 +141,18 @@ export const NavBar = () => {
                     <a
                         href="/files/resume.pdf"
                         download
-                        className="text-2xl font-light text-foreground hover:opacity-70 transition-opacity"
+                        className="font-display text-3xl font-semibold text-foreground hover:opacity-60 transition-opacity"
                         onClick={() => setIsMenuOpen(false)}
                     >
                         Resume
                     </a>
+
+                    {/* Accent line at bottom */}
+                    <div
+                        className="mt-auto h-[2px] w-16"
+                        style={{ background: "var(--accent-color)" }}
+                        aria-hidden="true"
+                    />
                 </div>
             </div>
         </nav>

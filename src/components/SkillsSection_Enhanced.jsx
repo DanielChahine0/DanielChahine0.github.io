@@ -1,6 +1,6 @@
 /**
  * SkillsSection_Enhanced.jsx
- * Clean, minimal skills display
+ * Clean skills display with monospace tags and accent category labels.
  */
 
 const skillsData = {
@@ -10,7 +10,7 @@ const skillsData = {
     ],
     "Technologies": [
         'PyTorch', 'TensorFlow', 'NumPy', 'React', 'Node.js', 'Next.js',
-        'Express', 'Tailwind CSS', 'MongoDB', 'Redis', 'PostgreSQL', 'Git'
+        'Express', 'Tailwind CSS', 'MongoDB', 'Redis', 'PostgreSQL'
     ],
     "Tools": [
         'Git', 'GitHub', 'Docker', 'Postman', 'VS Code', 'Linux', 'Figma'
@@ -27,27 +27,25 @@ export const SkillsSections = () => {
             <div className="container mx-auto max-w-6xl">
                 {/* Section Header */}
                 <div className="mb-16">
-                    <h2 className="text-3xl md:text-4xl font-semibold mb-4">
+                    <p className="section-label mb-5">Technical Toolkit</p>
+                    <h2 className="font-display text-4xl md:text-5xl font-semibold leading-tight">
                         Skills & Technologies
                     </h2>
-                    <p className="text-muted-foreground max-w-lg">
-                        Technologies and tools I work with regularly.
-                    </p>
                 </div>
 
                 {/* Skills Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                     {Object.entries(skillsData).map(([category, skills]) => (
                         <div key={category}>
-                            <h3 className="text-lg font-medium mb-4">
+                            <h3
+                                className="font-code text-xs font-medium tracking-[0.2em] uppercase mb-5 pb-3 border-b border-border"
+                                style={{ color: "var(--accent-color)" }}
+                            >
                                 {category}
                             </h3>
                             <div className="flex flex-wrap gap-2">
                                 {skills.map((skill) => (
-                                    <span
-                                        key={skill}
-                                        className="px-3 py-1.5 text-sm bg-secondary text-foreground rounded-md"
-                                    >
+                                    <span key={skill} className="skill-tag">
                                         {skill}
                                     </span>
                                 ))}
