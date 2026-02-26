@@ -169,24 +169,27 @@ export const Timeline = () => {
                         <div className="space-y-12">
                             {filteredEvents.map((event, index) => {
                                 const cat = categories.find(c => c.name === event.category);
+                                const isLeft = index % 2 === 0;
                                 return (
                                     <motion.div
                                         key={index}
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: index * 0.05 }}
-                                        className={`relative pl-8 md:pl-0 ${
-                                            index % 2 === 0 ? "md:pr-1/2 md:text-right" : "md:pl-1/2 md:ml-auto"
+                                        className={`relative pl-8 md:pl-0 md:flex ${
+                                            isLeft ? "md:justify-start" : "md:justify-end"
                                         }`}
                                     >
                                         {/* Dot */}
                                         <div
-                                            className="absolute left-0 md:left-1/2 top-2 w-3 h-3 rounded-full transform md:-translate-x-1/2 border-2 border-background"
+                                            className="absolute left-0 md:left-1/2 top-2 w-3 h-3 rounded-full transform md:-translate-x-1/2 border-2 border-background z-10"
                                             style={{ backgroundColor: cat?.color || "#171717" }}
                                         />
 
                                         {/* Content */}
-                                        <div className={`md:w-[calc(50%-2rem)] ${index % 2 === 0 ? "md:mr-8" : "md:ml-8"}`}>
+                                        <div className={`md:w-[calc(50%-2rem)] ${
+                                            isLeft ? "md:mr-8" : "md:ml-8"
+                                        }`}>
                                             <div className="p-6 border border-border rounded-lg hover:border-foreground/20 transition-colors">
                                                 <div className="flex items-center gap-2 mb-2">
                                                     <span className="text-sm text-muted-foreground">
@@ -199,10 +202,10 @@ export const Timeline = () => {
                                                         {event.category}
                                                     </span>
                                                 </div>
-                                                <h3 className="text-lg font-medium mb-2 text-left">
+                                                <h3 className="text-lg font-medium mb-2">
                                                     {event.title}
                                                 </h3>
-                                                <p className="text-sm text-muted-foreground text-left">
+                                                <p className="text-sm text-muted-foreground">
                                                     {event.description}
                                                 </p>
                                             </div>

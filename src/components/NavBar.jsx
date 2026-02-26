@@ -7,7 +7,7 @@
 import { cn } from '@/lib/utils'
 import { X, Menu } from 'lucide-react';
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const navItems = [
     { name: 'Work',     href: '#projects', isRoute: 'scroll' },
@@ -21,6 +21,7 @@ export const NavBar = () => {
     const [isScrolled, setIsScrolled]   = useState(false);
     const [isMenuOpen, setIsMenuOpen]   = useState(false);
     const navigate                       = useNavigate();
+    const location                       = useLocation();
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -32,9 +33,19 @@ export const NavBar = () => {
         if (isRoute === true) {
             navigate(href);
         } else if (isRoute === 'footer') {
-            document.querySelector('footer')?.scrollIntoView({ behavior: 'smooth' });
+            if (location.pathname !== '/') {
+                navigate('/');
+                setTimeout(() => document.querySelector('footer')?.scrollIntoView({ behavior: 'smooth' }), 400);
+            } else {
+                document.querySelector('footer')?.scrollIntoView({ behavior: 'smooth' });
+            }
         } else if (isRoute === 'scroll') {
-            document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+            if (location.pathname !== '/') {
+                navigate('/');
+                setTimeout(() => document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' }), 400);
+            } else {
+                document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+            }
         }
         setIsMenuOpen(false);
     };
