@@ -27,19 +27,29 @@ export const DarkModeToggle = () => {
         return () => observer.disconnect();
     }, []);
 
+    // Read the active background theme directly from the html classList.
+    const getActiveTheme = () => {
+        const cl = document.documentElement.classList;
+        if (cl.contains('dark'))      return 'dark';
+        if (cl.contains('dark-gray')) return 'dark-gray';
+        if (cl.contains('matcha'))    return 'matcha';
+        if (cl.contains('ocean'))     return 'ocean';
+        return 'light'; // no class = default Warm Paper
+    };
+
     const toggle = () => {
         const html = document.documentElement;
 
         if (isDark) {
-            // Restore the last light theme (default: matcha)
-            const prev = localStorage.getItem('prev-light-theme') || 'matcha';
+            // Restore the last light theme (default: light = Warm Paper)
+            const prev = localStorage.getItem('prev-light-theme') || 'light';
             html.classList.remove('dark', 'dark-gray', 'matcha', 'ocean');
             if (prev !== 'light') html.classList.add(prev);
             localStorage.setItem('theme-background', prev);
         } else {
-            // Save current light theme, then go dark
-            const current = localStorage.getItem('theme-background') || 'matcha';
-            if (current !== 'dark') localStorage.setItem('prev-light-theme', current);
+            // Save the ACTUAL current theme from classList, then go dark
+            const current = getActiveTheme();
+            localStorage.setItem('prev-light-theme', current);
             html.classList.remove('dark-gray', 'matcha', 'ocean');
             html.classList.add('dark');
             localStorage.setItem('theme-background', 'dark');

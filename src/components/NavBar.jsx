@@ -14,7 +14,6 @@ const navItems = [
     { name: 'Work',     href: '#projects', isRoute: 'scroll' },
     { name: 'About',    href: '#about',    isRoute: 'scroll' },
     { name: 'Timeline', href: '/timeline', isRoute: true },
-    { name: 'Tools',    href: '/tools',    isRoute: true },
     { name: 'Contact',  href: '#footer',   isRoute: 'footer' },
 ]
 
