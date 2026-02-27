@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils'
 import { X, Menu } from 'lucide-react';
 import { useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
+import { DarkModeToggle } from './DarkModeToggle';
 
 const navItems = [
     { name: 'Work',     href: '#projects', isRoute: 'scroll' },
@@ -99,13 +100,16 @@ export const NavBar = () => {
                             />
                         </button>
                     ))}
-                    <a
-                        href="/files/resume.pdf"
-                        download
-                        className="btn-primary !py-2 !px-4 text-xs"
-                    >
-                        Resume
-                    </a>
+                    <div className="flex items-center gap-3">
+                        <DarkModeToggle />
+                        <a
+                            href="/files/resume.pdf"
+                            download
+                            className="btn-primary !py-2 !px-4 text-xs"
+                        >
+                            Resume
+                        </a>
+                    </div>
                 </div>
 
                 {/* Mobile Menu Button */}
@@ -127,14 +131,17 @@ export const NavBar = () => {
             )}>
                 <div className="flex justify-between items-center h-16 px-6 border-b border-border">
                     <span className="font-display text-xl font-bold">Daniel Chahine</span>
-                    <button
-                        type="button"
-                        onClick={() => setIsMenuOpen(false)}
-                        className="p-2 text-foreground hover:opacity-70 transition-opacity"
-                        aria-label="Close Menu"
-                    >
-                        <X size={22} />
-                    </button>
+                    <div className="flex items-center gap-3">
+                        <DarkModeToggle />
+                        <button
+                            type="button"
+                            onClick={() => setIsMenuOpen(false)}
+                            className="p-2 text-foreground hover:opacity-70 transition-opacity"
+                            aria-label="Close Menu"
+                        >
+                            <X size={22} />
+                        </button>
+                    </div>
                 </div>
 
                 <div className="flex flex-col p-8 gap-8">
