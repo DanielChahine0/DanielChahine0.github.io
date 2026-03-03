@@ -85,7 +85,7 @@ export const NavBar = () => {
             )}>
                 <div className={cn(
                     "flex items-center justify-between transition-all duration-300",
-                    scrolled ? "px-6 pt-5 items-start" : "px-8 py-3"
+                    scrolled ? "px-6 py-3" : "px-8 py-3"
                 )}>
 
                     {/* Logo */}

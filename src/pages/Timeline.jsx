@@ -2,7 +2,7 @@
  * Timeline.jsx
  * Clean, minimal timeline page
  */
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { NavBar } from "../components/NavBar";
 import { Footer } from "../components/Footer";
 import { PageTransition } from "../components/PageTransition";
@@ -110,6 +110,77 @@ const categories = [
     { name: "Education", color: "#f43f5e" },
 ];
 
+const TimelineCard = ({ event, cat }) => {
+    const [tilt, setTilt] = useState({ x: 0, y: 0 });
+    const [active, setActive] = useState(false);
+    const ref = useRef(null);
+
+    const onMove = (e) => {
+        const el = ref.current;
+        if (!el) return;
+        const { left, top, width, height } = el.getBoundingClientRect();
+        setTilt({
+            x: ((e.clientY - top)  / height - 0.5) * -14,
+            y: ((e.clientX - left) / width  - 0.5) *  14,
+        });
+    };
+
+    const onLeave = () => {
+        setTilt({ x: 0, y: 0 });
+        setActive(false);
+    };
+
+    return (
+        <div
+            ref={ref}
+            onMouseMove={onMove}
+            onMouseEnter={() => setActive(true)}
+            onMouseLeave={onLeave}
+            className="relative p-6 rounded-2xl bg-background/80 backdrop-blur-md border border-border/50 overflow-hidden"
+            style={{
+                transform: `perspective(900px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateZ(${active ? 8 : 0}px)`,
+                transition: active
+                    ? 'transform 0.08s linear, box-shadow 0.2s ease'
+                    : 'transform 0.6s cubic-bezier(0.23,1,0.32,1), box-shadow 0.4s ease',
+                willChange: 'transform',
+                boxShadow: active
+                    ? [
+                        'inset 0 1px 0 rgba(255,255,255,0.18)',
+                        '0 2px 8px -2px rgba(0,0,0,0.08)',
+                        '0 16px 32px -8px rgba(0,0,0,0.10)',
+                      ].join(', ')
+                    : [
+                        'inset 0 1px 0 rgba(255,255,255,0.10)',
+                        '0 2px 6px -2px rgba(0,0,0,0.05)',
+                        '0 8px 20px -6px rgba(0,0,0,0.07)',
+                      ].join(', '),
+            }}
+        >
+            {/* Glass sheen — top-left gloss, like light hitting a surface */}
+            <div
+                className="absolute inset-0 rounded-2xl pointer-events-none"
+                style={{
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 55%)',
+                }}
+            />
+
+            <div className="relative">
+                <div className="flex items-center gap-2 mb-2">
+                    <span className="text-sm text-muted-foreground">{event.year}</span>
+                    <span
+                        className="px-2 py-0.5 text-xs rounded-full text-white"
+                        style={{ backgroundColor: cat?.color || 'var(--foreground)' }}
+                    >
+                        {event.category}
+                    </span>
+                </div>
+                <h3 className="text-lg font-medium mb-2">{event.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{event.description}</p>
+            </div>
+        </div>
+    );
+};
+
 export const Timeline = () => {
     const [selectedCategory, setSelectedCategory] = useState("All");
 
@@ -190,25 +261,7 @@ export const Timeline = () => {
                                         <div className={`md:w-[calc(50%-2rem)] ${
                                             isLeft ? "md:mr-8" : "md:ml-8"
                                         }`}>
-                                            <div className="p-6 border border-border rounded-lg hover:border-foreground/20 transition-colors">
-                                                <div className="flex items-center gap-2 mb-2">
-                                                    <span className="text-sm text-muted-foreground">
-                                                        {event.year}
-                                                    </span>
-                                                    <span
-                                                        className="px-2 py-0.5 text-xs rounded-full text-white"
-                                                        style={{ backgroundColor: cat?.color || "#171717" }}
-                                                    >
-                                                        {event.category}
-                                                    </span>
-                                                </div>
-                                                <h3 className="text-lg font-medium mb-2">
-                                                    {event.title}
-                                                </h3>
-                                                <p className="text-sm text-muted-foreground">
-                                                    {event.description}
-                                                </p>
-                                            </div>
+                                            <TimelineCard event={event} cat={cat} />
                                         </div>
                                     </motion.div>
                                 );
