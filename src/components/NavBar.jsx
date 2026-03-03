@@ -1,7 +1,7 @@
 /**
  * NavBar Component
- * Glass dock navigation — macOS-inspired floating pill with
- * icon-based items, spring-scale hover, and animated tooltips.
+ * Full-width bar at top of page → compact glass dock on scroll.
+ * Tooltips appear below icons in compact mode.
  */
 
 import { cn } from '@/lib/utils'
@@ -29,8 +29,15 @@ const mobileNavItems = [
 export const NavBar = () => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [isMenuOpen, setIsMenuOpen]     = useState(false);
+    const [scrolled, setScrolled]         = useState(false);
     const navigate                        = useNavigate();
     const location                        = useLocation();
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const handleNavigation = (item) => {
         if (item.isDownload) {
@@ -69,13 +76,21 @@ export const NavBar = () => {
 
     return (
         <>
-            {/* ── Desktop glass dock ─────────────────────────────── */}
-            <div className="fixed top-0 left-0 right-0 z-40 pointer-events-none">
-                <div className="flex items-start justify-between px-6 pt-5">
+            {/* ── Desktop nav ─────────────────────────────────────── */}
+            <div className={cn(
+                "fixed top-0 left-0 right-0 z-40 transition-all duration-300",
+                scrolled
+                    ? "pointer-events-none"
+                    : "pointer-events-auto bg-background/85 backdrop-blur-xl border-b border-border/40"
+            )}>
+                <div className={cn(
+                    "flex items-center justify-between transition-all duration-300",
+                    scrolled ? "px-6 pt-5 items-start" : "px-8 py-3"
+                )}>
 
                     {/* Logo */}
                     <button
-                        className="pointer-events-auto font-display text-xl font-bold tracking-tight hover:opacity-70 transition-opacity pt-1"
+                        className="pointer-events-auto font-display text-xl font-bold tracking-tight hover:opacity-70 transition-opacity"
                         type="button"
                         onClick={() => navigate('/')}
                         aria-label="Go to home"
@@ -85,7 +100,12 @@ export const NavBar = () => {
 
                     {/* Glass dock — desktop only */}
                     <nav
-                        className="pointer-events-auto hidden md:flex relative items-center gap-0.5 px-3 py-2.5 rounded-2xl glass-border bg-background/80 backdrop-blur-xl shadow-2xl"
+                        className={cn(
+                            "pointer-events-auto hidden md:flex relative items-center transition-all duration-300",
+                            scrolled
+                                ? "gap-0.5 px-3 py-2.5 rounded-2xl glass-border bg-background/80 backdrop-blur-xl shadow-2xl"
+                                : "gap-1"
+                        )}
                         aria-label="Main Navigation"
                         onMouseLeave={() => setHoveredIndex(null)}
                     >
@@ -99,11 +119,11 @@ export const NavBar = () => {
                                     className="relative flex items-center justify-center"
                                     onMouseEnter={() => setHoveredIndex(index)}
                                 >
-                                    {/* Tooltip */}
+                                    {/* Tooltip — compact mode only, appears below icon */}
                                     <AnimatePresence>
-                                        {isHovered && (
+                                        {scrolled && isHovered && (
                                             <motion.div
-                                                className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 pointer-events-none z-50 px-3 py-1.5 rounded-lg"
+                                                className="absolute top-full left-1/2 -translate-x-1/2 mt-3 pointer-events-none z-50 px-3 py-1.5 rounded-lg"
                                                 style={{
                                                     background: 'var(--foreground)',
                                                     color: 'var(--background)',
@@ -113,9 +133,9 @@ export const NavBar = () => {
                                                     letterSpacing: '0.025em',
                                                     fontFamily: "'Outfit', sans-serif",
                                                 }}
-                                                initial={{ opacity: 0, y: 8, scale: 0.88 }}
+                                                initial={{ opacity: 0, y: -6, scale: 0.88 }}
                                                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                                                exit={{ opacity: 0, y: 8, scale: 0.88 }}
+                                                exit={{ opacity: 0, y: -6, scale: 0.88 }}
                                                 transition={{ duration: 0.13, ease: 'easeOut' }}
                                             >
                                                 {item.title}
@@ -128,15 +148,20 @@ export const NavBar = () => {
                                         type="button"
                                         onClick={() => handleNavigation(item)}
                                         aria-label={item.title}
-                                        className="relative w-10 h-10 flex items-center justify-center cursor-pointer rounded-xl"
+                                        className={cn(
+                                            "relative flex items-center cursor-pointer rounded-xl transition-all duration-300",
+                                            scrolled
+                                                ? "w-10 h-10 justify-center"
+                                                : "h-9 px-2 gap-1.5"
+                                        )}
                                         animate={{
-                                            scale: isHovered ? 1.15 : 1,
-                                            y: isHovered ? -3 : 0,
+                                            scale: isHovered ? (scrolled ? 1.15 : 1.05) : 1,
+                                            y: scrolled && isHovered ? -3 : 0,
                                         }}
                                         transition={{ type: 'spring', stiffness: 320, damping: 22 }}
                                         whileTap={{ scale: 0.9 }}
                                     >
-                                        {/* Subtle hover bg */}
+                                        {/* Hover bg */}
                                         <AnimatePresence>
                                             {isHovered && (
                                                 <motion.span
@@ -151,28 +176,58 @@ export const NavBar = () => {
                                         </AnimatePresence>
 
                                         <Icon
-                                            size={19}
+                                            size={18}
                                             strokeWidth={1.75}
                                             style={{
                                                 color: isHovered ? 'var(--foreground)' : 'var(--muted-foreground)',
                                                 transition: 'color 0.18s ease',
                                                 position: 'relative',
+                                                flexShrink: 0,
                                             }}
                                         />
+
+                                        {/* Label — visible in expanded (top) mode only */}
+                                        <span
+                                            style={{
+                                                display: 'inline-block',
+                                                maxWidth: scrolled ? '0px' : '120px',
+                                                opacity: scrolled ? 0 : 1,
+                                                overflow: 'hidden',
+                                                transition: 'max-width 0.3s ease, opacity 0.25s ease',
+                                                whiteSpace: 'nowrap',
+                                                fontSize: '14px',
+                                                fontWeight: 500,
+                                                fontFamily: "'Outfit', sans-serif",
+                                                color: isHovered ? 'var(--foreground)' : 'var(--muted-foreground)',
+                                                position: 'relative',
+                                            }}
+                                            aria-hidden={scrolled}
+                                        >
+                                            {item.title}
+                                        </span>
                                     </motion.button>
                                 </div>
                             );
                         })}
 
-                        {/* Divider */}
+                        {/* Divider — compact mode only */}
                         <div
-                            className="w-px h-5 mx-1.5 flex-shrink-0 rounded-full"
-                            style={{ background: 'var(--border)' }}
+                            className="h-5 flex-shrink-0 rounded-full transition-all duration-300"
+                            style={{
+                                width: scrolled ? '1px' : '0px',
+                                marginLeft: scrolled ? '6px' : '0px',
+                                marginRight: scrolled ? '6px' : '0px',
+                                opacity: scrolled ? 1 : 0,
+                                background: 'var(--border)',
+                            }}
                             aria-hidden="true"
                         />
 
                         {/* Dark mode toggle */}
-                        <div className="w-10 h-10 flex items-center justify-center">
+                        <div className={cn(
+                            "flex items-center justify-center transition-all duration-300",
+                            scrolled ? "w-10 h-10" : "h-9 w-9"
+                        )}>
                             <DarkModeToggle />
                         </div>
                     </nav>
@@ -181,7 +236,7 @@ export const NavBar = () => {
                     <button
                         type="button"
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className="pointer-events-auto md:hidden p-2 text-foreground hover:opacity-70 transition-opacity mt-1"
+                        className="pointer-events-auto md:hidden p-2 text-foreground hover:opacity-70 transition-opacity"
                         aria-expanded={isMenuOpen}
                         aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                     >
