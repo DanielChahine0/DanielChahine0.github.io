@@ -119,6 +119,12 @@
     0%, 100% { opacity: 0.6; }
     50% { opacity: 1; }
   }
+
+  @keyframes aurora-bg {
+    0%   { background-position: 0% 50%, 0% 50%; }
+    50%  { background-position: 100% 50%, 100% 50%; }
+    100% { background-position: 0% 50%, 0% 50%; }
+  }
 }
 
 @layer base {
@@ -128,6 +134,12 @@
   :root {
     --background: #fdfaf6;
     --foreground: #1a1714;
+
+    /* Aurora hero background */
+    --aurora-1: 28 70% 55%;
+    --aurora-2: 15 60% 52%;
+    --aurora-3: 45 80% 58%;
+    --aurora-stripe: rgba(255, 255, 255, 0.07);
     --card: #ffffff;
     --card-foreground: #1a1714;
     --primary: #1a1714;
@@ -192,6 +204,7 @@
   ================================================ */
   html.dark {
     --background: #100f0d;
+    --aurora-stripe: rgba(0, 0, 0, 0.2);
     --foreground: #f0e8d8;
     --card: #1a1816;
     --card-foreground: #f0e8d8;
@@ -222,6 +235,7 @@
   ================================================ */
   html.dark-gray {
     --background: #2a2a2a;
+    --aurora-stripe: rgba(0, 0, 0, 0.2);
     --foreground: #f0ece8;
     --card: #343434;
     --card-foreground: #f0ece8;
@@ -246,6 +260,7 @@
   ================================================ */
   html.ocean {
     --background: #0d1f35;
+    --aurora-stripe: rgba(0, 0, 0, 0.2);
     --foreground: #ccd6f6;
     --card: #142238;
     --card-foreground: #ccd6f6;
@@ -443,6 +458,71 @@
     @apply inline-block transition-opacity duration-200 hover:opacity-70;
   }
 
+  /* ================================================
+     AURORA HERO BACKGROUND
+  ================================================ */
+  .animate-aurora-bg {
+    animation: aurora-bg 15s ease infinite;
+  }
+
+  .aurora-bg-layer {
+    background-image:
+      repeating-linear-gradient(
+        100deg,
+        var(--aurora-stripe) 0%, var(--aurora-stripe) 7%,
+        transparent 10%, transparent 12%, var(--aurora-stripe) 16%
+      ),
+      repeating-linear-gradient(
+        100deg,
+        hsl(var(--aurora-1)) 10%, hsl(var(--aurora-2)) 15%,
+        hsl(var(--aurora-1)) 20%, hsl(var(--aurora-3)) 25%,
+        hsl(var(--aurora-1)) 30%
+      );
+    background-size: 300%, 200%;
+    filter: blur(10px) opacity(0.15) saturate(1.5);
+    -webkit-mask-image:
+      linear-gradient(to bottom, black 50%, transparent 92%),
+      radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+    mask-image:
+      linear-gradient(to bottom, black 50%, transparent 92%),
+      radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+
+  html.dark .aurora-bg-layer,
+  html.dark-gray .aurora-bg-layer,
+  html.ocean .aurora-bg-layer {
+    filter: blur(10px) opacity(0.35) saturate(2);
+  }
+
+  .aurora-animated-layer {
+    background-image:
+      repeating-linear-gradient(
+        100deg,
+        var(--aurora-stripe) 0%, var(--aurora-stripe) 7%,
+        transparent 10%, transparent 12%, var(--aurora-stripe) 16%
+      ),
+      repeating-linear-gradient(
+        100deg,
+        hsl(var(--aurora-1)) 10%, hsl(var(--aurora-2)) 15%,
+        hsl(var(--aurora-1)) 20%, hsl(var(--aurora-3)) 25%,
+        hsl(var(--aurora-1)) 30%
+      );
+    background-size: 200%, 100%;
+    background-attachment: fixed;
+    mix-blend-mode: soft-light;
+    opacity: 0.35;
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 90%);
+    mask-image: linear-gradient(to bottom, black 50%, transparent 90%);
+  }
+
+  html.dark .aurora-animated-layer,
+  html.dark-gray .aurora-animated-layer,
+  html.ocean .aurora-animated-layer {
+    opacity: 0.55;
+  }
+
   /* Skill tag */
   .skill-tag {
     display: inline-block;
@@ -475,4 +555,14 @@
   ::-webkit-scrollbar-thumb { background: var(--neutral-300); border-radius: 4px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--neutral-400); }
   * { scrollbar-width: thin; scrollbar-color: var(--neutral-300) var(--neutral-100); }
+}
+
+/* Glass dock border */
+.glass-border {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+html.dark .glass-border,
+html.dark-gray .glass-border,
+html.ocean .glass-border {
+  border: 1px solid rgba(255, 255, 255, 0.14);
 }

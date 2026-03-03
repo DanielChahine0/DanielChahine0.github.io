@@ -38,6 +38,12 @@ export const HeroSection = () => {
             id="hero"
             className="min-h-screen flex flex-col justify-center pt-16 relative overflow-hidden"
         >
+            {/* Aurora animated background */}
+            <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+                <div className="absolute inset-0 aurora-bg-layer" />
+                <div className="absolute inset-0 aurora-animated-layer animate-aurora-bg" />
+            </div>
+
             {/* Background watermark */}
             <div
                 className="absolute inset-0 pointer-events-none overflow-hidden select-none"
