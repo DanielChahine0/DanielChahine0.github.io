@@ -1,16 +1,20 @@
 /**
  * Footer.jsx
- * Elegant footer with large display CTA and refined social links.
+ * Elegant footer with large display CTA and glass dock social links.
  */
+import { useState } from "react";
 import { ArrowUp, ArrowUpRight } from "lucide-react";
 import { FiGithub, FiLinkedin, FiInstagram, FiMail } from "react-icons/fi";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const Footer = () => {
+    const [hoveredIndex, setHoveredIndex] = useState(null);
+
     const socials = [
-        { icon: <FiGithub size={18} />, href: "https://github.com/DanielChahine0",           label: "GitHub" },
-        { icon: <FiLinkedin size={18} />, href: "https://www.linkedin.com/in/danielchahine", label: "LinkedIn" },
-        { icon: <FiInstagram size={18} />, href: "http://instagram.com/dxni.ch",             label: "Instagram" },
-        { icon: <FiMail size={18} />, href: "mailto:chahinedaniel0@gmail.com",               label: "Email" },
+        { Icon: FiGithub,    href: "https://github.com/DanielChahine0",           label: "GitHub" },
+        { Icon: FiLinkedin,  href: "https://www.linkedin.com/in/danielchahine",   label: "LinkedIn" },
+        { Icon: FiInstagram, href: "http://instagram.com/dxni.ch",                label: "Instagram" },
+        { Icon: FiMail,      href: "mailto:chahinedaniel0@gmail.com",             label: "Email" },
     ];
 
     return (
@@ -62,32 +66,86 @@ export const Footer = () => {
                             </p>
                         </div>
 
-                        {/* Social Links */}
-                        <div className="flex items-center gap-4">
-                            {socials.map((social) => (
-                                <a
-                                    key={social.label}
-                                    href={social.href}
-                                    target={social.href.startsWith("http") ? "_blank" : undefined}
-                                    rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                                    className="p-2 text-muted-foreground rounded-md border border-transparent hover:border-border transition-all duration-200"
-                                    style={{
-                                        transition: "all 0.2s ease",
-                                    }}
-                                    onMouseEnter={e => {
-                                        e.currentTarget.style.color = "var(--accent-color)";
-                                        e.currentTarget.style.borderColor = "var(--accent-color)";
-                                    }}
-                                    onMouseLeave={e => {
-                                        e.currentTarget.style.color = "";
-                                        e.currentTarget.style.borderColor = "";
-                                    }}
-                                    aria-label={social.label}
-                                >
-                                    {social.icon}
-                                </a>
-                            ))}
-                        </div>
+                        {/* Social Links — glass dock */}
+                        <nav
+                            className="relative flex gap-0.5 items-center px-3 py-2.5 rounded-2xl glass-border bg-background/80 backdrop-blur-xl shadow-2xl"
+                            onMouseLeave={() => setHoveredIndex(null)}
+                            aria-label="Social Links"
+                        >
+                            {socials.map((social, index) => {
+                                const { Icon, href, label } = social;
+                                const isHovered = hoveredIndex === index;
+                                return (
+                                    <div
+                                        key={label}
+                                        className="relative flex items-center justify-center"
+                                        onMouseEnter={() => setHoveredIndex(index)}
+                                    >
+                                        {/* Tooltip — appears above */}
+                                        <AnimatePresence>
+                                            {isHovered && (
+                                                <motion.div
+                                                    className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 pointer-events-none z-50 px-3 py-1.5 rounded-lg"
+                                                    style={{
+                                                        background: 'var(--foreground)',
+                                                        color: 'var(--background)',
+                                                        fontSize: '12px',
+                                                        fontWeight: 500,
+                                                        whiteSpace: 'nowrap',
+                                                        letterSpacing: '0.025em',
+                                                        fontFamily: "'Outfit', sans-serif",
+                                                    }}
+                                                    initial={{ opacity: 0, y: 6, scale: 0.88 }}
+                                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                                    exit={{ opacity: 0, y: 6, scale: 0.88 }}
+                                                    transition={{ duration: 0.13, ease: 'easeOut' }}
+                                                >
+                                                    {label}
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+
+                                        <motion.a
+                                            href={href}
+                                            target={href.startsWith("http") ? "_blank" : undefined}
+                                            rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                                            aria-label={label}
+                                            className="relative w-10 h-10 flex items-center justify-center rounded-xl cursor-pointer"
+                                            animate={{
+                                                scale: isHovered ? 1.15 : 1,
+                                                y: isHovered ? -3 : 0,
+                                            }}
+                                            transition={{ type: 'spring', stiffness: 320, damping: 22 }}
+                                            whileTap={{ scale: 0.9 }}
+                                        >
+                                            {/* Hover bg */}
+                                            <AnimatePresence>
+                                                {isHovered && (
+                                                    <motion.span
+                                                        className="absolute inset-0 rounded-xl"
+                                                        style={{ background: 'rgba(var(--accent-color-rgb), 0.09)' }}
+                                                        initial={{ opacity: 0 }}
+                                                        animate={{ opacity: 1 }}
+                                                        exit={{ opacity: 0 }}
+                                                        transition={{ duration: 0.15 }}
+                                                    />
+                                                )}
+                                            </AnimatePresence>
+
+                                            <Icon
+                                                size={18}
+                                                style={{
+                                                    color: isHovered ? 'var(--foreground)' : 'var(--muted-foreground)',
+                                                    transition: 'color 0.18s ease',
+                                                    position: 'relative',
+                                                    flexShrink: 0,
+                                                }}
+                                            />
+                                        </motion.a>
+                                    </div>
+                                );
+                            })}
+                        </nav>
 
                         {/* Back to Top */}
                         <button
