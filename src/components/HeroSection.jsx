@@ -4,10 +4,20 @@
  * framer-motion entrance animations, and accent-color photo brackets.
  */
 
-import { useCallback } from "react";
+import { useCallback, useState, useEffect, useRef } from "react";
 import { Download } from "lucide-react";
 import { FiGithub, FiLinkedin, FiInstagram, FiMail } from "react-icons/fi";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+
+const PHOTOS = [
+    "/photos/IMG_0268.jpeg",
+    "/photos/IMG_0659.JPG",
+    "/photos/IMG_1045.JPG",
+    "/photos/IMG_1211.JPG",
+    "/photos/IMG_5914.jpeg",
+    "/photos/Photos-350.jpeg",
+    "/photos/XYZ_2216.jpeg",
+];
 
 const fadeUp = (delay = 0, duration = 0.75) => ({
     initial: { opacity: 0, y: 28 },
@@ -22,6 +32,24 @@ const fadeIn = (delay = 0) => ({
 });
 
 export const HeroSection = () => {
+    const [activeIndex, setActiveIndex] = useState(0);
+    const cooldown = useRef(false);
+
+    // Preload all photos so hover switches are instant
+    useEffect(() => {
+        PHOTOS.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+        });
+    }, []);
+
+    const handlePhotoHover = useCallback(() => {
+        if (cooldown.current) return;
+        cooldown.current = true;
+        setActiveIndex((prev) => (prev + 1) % PHOTOS.length);
+        setTimeout(() => { cooldown.current = false; }, 400);
+    }, []);
+
     const socials = [
         { icon: <FiGithub size={18} />, name: "GitHub", link: "https://github.com/DanielChahine0" },
         { icon: <FiLinkedin size={18} />, name: "LinkedIn", link: "https://linkedin.com/in/DanielChahine" },
@@ -157,34 +185,45 @@ export const HeroSection = () => {
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.9, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
                         >
-                            <div className="relative">
+                            <div
+                                className="relative w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 cursor-pointer"
+                                onMouseEnter={handlePhotoHover}
+                            >
                                 {/* Corner accent brackets */}
                                 <div
-                                    className="absolute -top-2.5 -left-2.5 w-7 h-7 border-t-2 border-l-2"
+                                    className="absolute -top-2.5 -left-2.5 w-7 h-7 border-t-2 border-l-2 z-[200]"
                                     style={{ borderColor: "var(--accent-color)" }}
                                     aria-hidden="true"
                                 />
                                 <div
-                                    className="absolute -top-2.5 -right-2.5 w-7 h-7 border-t-2 border-r-2"
+                                    className="absolute -top-2.5 -right-2.5 w-7 h-7 border-t-2 border-r-2 z-[200]"
                                     style={{ borderColor: "var(--accent-color)" }}
                                     aria-hidden="true"
                                 />
                                 <div
-                                    className="absolute -bottom-2.5 -left-2.5 w-7 h-7 border-b-2 border-l-2"
+                                    className="absolute -bottom-2.5 -left-2.5 w-7 h-7 border-b-2 border-l-2 z-[200]"
                                     style={{ borderColor: "var(--accent-color)" }}
                                     aria-hidden="true"
                                 />
                                 <div
-                                    className="absolute -bottom-2.5 -right-2.5 w-7 h-7 border-b-2 border-r-2"
+                                    className="absolute -bottom-2.5 -right-2.5 w-7 h-7 border-b-2 border-r-2 z-[200]"
                                     style={{ borderColor: "var(--accent-color)" }}
                                     aria-hidden="true"
                                 />
 
-                                <img
-                                    src="/photos/HeroPhoto.png"
-                                    alt="Daniel Chahine"
-                                    className="w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 object-cover rounded-xl"
-                                />
+                                <AnimatePresence mode="sync">
+                                    <motion.img
+                                        key={activeIndex}
+                                        src={PHOTOS[activeIndex]}
+                                        alt="Daniel Chahine"
+                                        className="absolute inset-0 w-full h-full object-cover rounded-xl"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.4 }}
+                                        draggable={false}
+                                    />
+                                </AnimatePresence>
                             </div>
                         </motion.div>
                     </div>
