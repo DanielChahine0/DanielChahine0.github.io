@@ -7,7 +7,7 @@
 import { useCallback, useState, useEffect, useRef } from "react";
 import { Download } from "lucide-react";
 import { FiGithub, FiLinkedin, FiInstagram, FiMail } from "react-icons/fi";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const PHOTOS = [
     "/photos/IMG_0268.jpeg",
@@ -220,41 +220,37 @@ export const HeroSection = () => {
                                         aria-hidden="true"
                                     />
 
-                                    <AnimatePresence mode="sync">
-                                        <motion.img
-                                            key={activeIndex}
-                                            src={PHOTOS[activeIndex]}
+                                    {PHOTOS.map((src, i) => (
+                                        <img
+                                            key={src}
+                                            src={src}
                                             alt="Daniel Chahine"
                                             className="absolute inset-0 w-full h-full object-cover rounded-xl"
-                                            initial={{ opacity: 0, scale: 1.05 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            exit={{ opacity: 0, scale: 0.96 }}
-                                            transition={{ duration: 0.4 }}
+                                            style={{
+                                                opacity: i === activeIndex ? 1 : 0,
+                                                transition: "opacity 0.35s ease",
+                                            }}
                                             draggable={false}
                                         />
-                                    </AnimatePresence>
+                                    ))}
                                 </div>
 
-                                {/* Counter + dot navigation */}
-                                <div className="flex items-center justify-between w-full px-1">
-                                    <span className="font-code text-[10px] tracking-[0.2em] text-muted-foreground opacity-60 select-none">
-                                        {String(activeIndex + 1).padStart(2, "0")} / {String(PHOTOS.length).padStart(2, "0")}
-                                    </span>
-                                    <div className="flex gap-1.5 items-center">
-                                        {PHOTOS.map((_, i) => (
-                                            <button
-                                                key={i}
-                                                onClick={() => setActiveIndex(i)}
-                                                className="rounded-full transition-all duration-300 focus:outline-none"
-                                                style={{
-                                                    width: i === activeIndex ? "16px" : "6px",
-                                                    height: "6px",
-                                                    background: i === activeIndex ? "var(--accent-color)" : "var(--border)",
-                                                }}
-                                                aria-label={`Photo ${i + 1}`}
-                                            />
-                                        ))}
-                                    </div>
+                                {/* Dot navigation */}
+                                <div className="flex gap-1.5 items-center justify-center">
+                                    {PHOTOS.map((_, i) => (
+                                        <button
+                                            key={i}
+                                            onClick={() => setActiveIndex(i)}
+                                            className="rounded-full focus:outline-none"
+                                            style={{
+                                                width: i === activeIndex ? "16px" : "6px",
+                                                height: "6px",
+                                                background: i === activeIndex ? "var(--accent-color)" : "var(--border)",
+                                                transition: "width 0.3s ease, background 0.3s ease",
+                                            }}
+                                            aria-label={`Photo ${i + 1}`}
+                                        />
+                                    ))}
                                 </div>
                             </div>
                         </motion.div>
