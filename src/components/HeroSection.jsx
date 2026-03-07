@@ -185,45 +185,77 @@ export const HeroSection = () => {
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.9, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
                         >
-                            <div
-                                className="relative w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 cursor-pointer"
-                                onMouseEnter={handlePhotoHover}
-                            >
-                                {/* Corner accent brackets */}
+                            <div className="flex flex-col items-center gap-5">
                                 <div
-                                    className="absolute -top-2.5 -left-2.5 w-7 h-7 border-t-2 border-l-2 z-[200]"
-                                    style={{ borderColor: "var(--accent-color)" }}
-                                    aria-hidden="true"
-                                />
-                                <div
-                                    className="absolute -top-2.5 -right-2.5 w-7 h-7 border-t-2 border-r-2 z-[200]"
-                                    style={{ borderColor: "var(--accent-color)" }}
-                                    aria-hidden="true"
-                                />
-                                <div
-                                    className="absolute -bottom-2.5 -left-2.5 w-7 h-7 border-b-2 border-l-2 z-[200]"
-                                    style={{ borderColor: "var(--accent-color)" }}
-                                    aria-hidden="true"
-                                />
-                                <div
-                                    className="absolute -bottom-2.5 -right-2.5 w-7 h-7 border-b-2 border-r-2 z-[200]"
-                                    style={{ borderColor: "var(--accent-color)" }}
-                                    aria-hidden="true"
-                                />
-
-                                <AnimatePresence mode="sync">
-                                    <motion.img
-                                        key={activeIndex}
-                                        src={PHOTOS[activeIndex]}
-                                        alt="Daniel Chahine"
-                                        className="absolute inset-0 w-full h-full object-cover rounded-xl"
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        exit={{ opacity: 0 }}
-                                        transition={{ duration: 0.4 }}
-                                        draggable={false}
+                                    className="relative w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 cursor-pointer"
+                                    onMouseEnter={handlePhotoHover}
+                                    onClick={handlePhotoHover}
+                                >
+                                    {/* Decorative offset background */}
+                                    <div
+                                        className="absolute inset-0 rounded-xl translate-x-3 translate-y-3"
+                                        style={{ background: "var(--accent-color)", opacity: 0.22 }}
+                                        aria-hidden="true"
                                     />
-                                </AnimatePresence>
+
+                                    {/* Corner accent brackets */}
+                                    <div
+                                        className="absolute -top-3 -left-3 w-8 h-8 border-t-2 border-l-2 z-[200]"
+                                        style={{ borderColor: "var(--accent-color)" }}
+                                        aria-hidden="true"
+                                    />
+                                    <div
+                                        className="absolute -top-3 -right-3 w-8 h-8 border-t-2 border-r-2 z-[200]"
+                                        style={{ borderColor: "var(--accent-color)" }}
+                                        aria-hidden="true"
+                                    />
+                                    <div
+                                        className="absolute -bottom-3 -left-3 w-8 h-8 border-b-2 border-l-2 z-[200]"
+                                        style={{ borderColor: "var(--accent-color)" }}
+                                        aria-hidden="true"
+                                    />
+                                    <div
+                                        className="absolute -bottom-3 -right-3 w-8 h-8 border-b-2 border-r-2 z-[200]"
+                                        style={{ borderColor: "var(--accent-color)" }}
+                                        aria-hidden="true"
+                                    />
+
+                                    <AnimatePresence mode="sync">
+                                        <motion.img
+                                            key={activeIndex}
+                                            src={PHOTOS[activeIndex]}
+                                            alt="Daniel Chahine"
+                                            className="absolute inset-0 w-full h-full object-cover rounded-xl"
+                                            initial={{ opacity: 0, scale: 1.05 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            exit={{ opacity: 0, scale: 0.96 }}
+                                            transition={{ duration: 0.4 }}
+                                            draggable={false}
+                                        />
+                                    </AnimatePresence>
+                                </div>
+
+                                {/* Counter + dot navigation */}
+                                <div className="flex items-center justify-between w-full px-1">
+                                    <span className="font-code text-[10px] tracking-[0.2em] text-muted-foreground opacity-60 select-none">
+                                        {String(activeIndex + 1).padStart(2, "0")} / {String(PHOTOS.length).padStart(2, "0")}
+                                    </span>
+                                    <div className="flex gap-1.5 items-center">
+                                        {PHOTOS.map((_, i) => (
+                                            <button
+                                                key={i}
+                                                onClick={() => setActiveIndex(i)}
+                                                className="rounded-full transition-all duration-300 focus:outline-none"
+                                                style={{
+                                                    width: i === activeIndex ? "16px" : "6px",
+                                                    height: "6px",
+                                                    background: i === activeIndex ? "var(--accent-color)" : "var(--border)",
+                                                }}
+                                                aria-label={`Photo ${i + 1}`}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
                         </motion.div>
                     </div>
