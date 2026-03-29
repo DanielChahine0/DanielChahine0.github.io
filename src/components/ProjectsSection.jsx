@@ -267,27 +267,40 @@ const FeaturedProject = ({ project }) => {
         >
             {/* Featured image with parallax */}
             <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[380px] overflow-hidden rounded-lg bg-muted border border-border">
-                <motion.img
-                    src={project.image}
-                    alt={project.title}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    style={{ y: imageY }}
-                    draggable={false}
-                />
+                {project.image ? (
+                    <motion.img
+                        src={project.image}
+                        alt={project.title}
+                        className="absolute inset-0 w-full h-full object-cover"
+                        style={{ y: imageY }}
+                        draggable={false}
+                    />
+                ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <span
+                            className="font-display text-[6rem] md:text-[8rem] font-bold leading-none select-none opacity-10"
+                            style={{ color: "var(--accent-color)" }}
+                        >
+                            {project.title.charAt(0)}
+                        </span>
+                    </div>
+                )}
                 <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-500" />
 
                 {/* Hover overlay links */}
                 <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 px-5 py-2.5 bg-background/95 backdrop-blur-sm rounded-md text-sm font-medium text-foreground hover:bg-background transition-colors shadow-lg"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        Live
-                        <ArrowUpRight className="w-3.5 h-3.5" />
-                    </a>
+                    {project.link && (
+                        <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1.5 px-5 py-2.5 bg-background/95 backdrop-blur-sm rounded-md text-sm font-medium text-foreground hover:bg-background transition-colors shadow-lg"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            Live
+                            <ArrowUpRight className="w-3.5 h-3.5" />
+                        </a>
+                    )}
                     <a
                         href={project.githubUrl}
                         target="_blank"
@@ -341,15 +354,17 @@ const FeaturedProject = ({ project }) => {
 
                 {/* Links */}
                 <div className="flex gap-6 pt-2">
-                    <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="link-accent"
-                    >
-                        View Project
-                        <ArrowUpRight className="w-3.5 h-3.5" />
-                    </a>
+                    {project.link && (
+                        <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="link-accent"
+                        >
+                            View Project
+                            <ArrowUpRight className="w-3.5 h-3.5" />
+                        </a>
+                    )}
                     <a
                         href={project.githubUrl}
                         target="_blank"
@@ -391,27 +406,40 @@ const ProjectCard = ({ project, index }) => {
             <div className="relative z-10">
                 {/* Project Image */}
                 <div className="relative aspect-[4/3] overflow-hidden rounded-lg mb-5 bg-muted border border-border">
-                    <motion.img
-                        src={project.image}
-                        alt={project.title}
-                        className="absolute inset-0 w-full h-full object-cover"
-                        style={{ y: imageY }}
-                        draggable={false}
-                    />
+                    {project.image ? (
+                        <motion.img
+                            src={project.image}
+                            alt={project.title}
+                            className="absolute inset-0 w-full h-full object-cover"
+                            style={{ y: imageY }}
+                            draggable={false}
+                        />
+                    ) : (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <span
+                                className="font-display text-[5rem] font-bold leading-none select-none opacity-10"
+                                style={{ color: "var(--accent-color)" }}
+                            >
+                                {project.title.charAt(0)}
+                            </span>
+                        </div>
+                    )}
                     <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-500" />
 
                     {/* Hover overlay links */}
                     <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <a
-                            href={project.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1.5 px-4 py-2 bg-background/95 backdrop-blur-sm rounded-md text-sm font-medium text-foreground hover:bg-background transition-colors shadow-lg"
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            Live
-                            <ArrowUpRight className="w-3.5 h-3.5" />
-                        </a>
+                        {project.link && (
+                            <a
+                                href={project.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-1.5 px-4 py-2 bg-background/95 backdrop-blur-sm rounded-md text-sm font-medium text-foreground hover:bg-background transition-colors shadow-lg"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                Live
+                                <ArrowUpRight className="w-3.5 h-3.5" />
+                            </a>
+                        )}
                         <a
                             href={project.githubUrl}
                             target="_blank"
@@ -456,15 +484,17 @@ const ProjectCard = ({ project, index }) => {
 
                     {/* Links */}
                     <div className="flex gap-5 pt-1">
-                        <a
-                            href={project.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="link-accent"
-                        >
-                            View Project
-                            <ArrowUpRight className="w-3.5 h-3.5" />
-                        </a>
+                        {project.link && (
+                            <a
+                                href={project.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="link-accent"
+                            >
+                                View Project
+                                <ArrowUpRight className="w-3.5 h-3.5" />
+                            </a>
+                        )}
                         <a
                             href={project.githubUrl}
                             target="_blank"
