@@ -1,230 +1,15 @@
 /**
  * ProjectsSection.jsx
- * Editorial project showcase with featured hero project,
- * scroll-triggered reveals, and accent-colored interactions.
+ * Home page featured projects preview — editorial staggered grid
+ * with bold typography, accent-driven interactions, and a "View All" CTA.
  */
-import { ArrowUpRight, Github } from "lucide-react";
+import { ArrowUpRight, Github, ArrowRight } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
+import { getFeaturedProjects } from "../data/projects";
 
-const projects = [
-    {
-        id: 1,
-        title: 'Intern Compass',
-        description: 'An AI onboarding assistant that converts company documentation into a knowledge base, letting new employees get citation-backed answers through conversation.',
-        image: '/projects/intern-compass.jpg',
-        tags: ['TypeScript', 'AI', 'RAG'],
-        link: 'https://intern-compass-frontend.onrender.com',
-        githubUrl: 'https://github.com/DanielChahine0/Intern-Compass',
-    },
-    {
-        id: 2,
-        title: 'Wealth Planner OS',
-        description: 'An AI-powered wealth planning engine using real-time Monte Carlo simulation, dynamic risk modeling, and adaptive strategy optimization.',
-        image: '/projects/wealth-planner.jpg',
-        tags: ['TypeScript', 'AI', 'Finance'],
-        link: 'https://frontend-dusky-chi-44.vercel.app/',
-        githubUrl: 'https://github.com/DanielChahine0/Wealth-Planner-OS',
-    },
-    {
-        id: 3,
-        title: 'Neuro',
-        description: 'A macOS focus tracker with distraction detection, app blocking, and social accountability to help you stay productive.',
-        image: '/projects/neuro.jpg',
-        tags: ['Swift', 'macOS', 'AI'],
-        link: null,
-        githubUrl: 'https://github.com/DanielChahine0/Neuro',
-    },
-    {
-        id: 4,
-        title: 'Think Board',
-        description: 'A full-stack web application for capturing notes, brainstorming ideas, and organizing projects in real time.',
-        image: '/projects/think-board.jpg',
-        tags: ['React', 'Express', 'MongoDB'],
-        link: 'https://webapp-think-board.onrender.com/',
-        githubUrl: 'https://github.com/DanielChahine0/Webapp-Think_Board',
-    },
-    {
-        id: 5,
-        title: 'Emotion Prediction',
-        description: 'Fine-tunes GPT-2 on DailyDialog chats to predict the next emotion in a conversation using PyTorch and Hugging Face.',
-        image: '/projects/emotion-prediction.jpg',
-        tags: ['Python', 'PyTorch', 'NLP'],
-        link: null,
-        githubUrl: 'https://github.com/DanielChahine0/Emotion-Prediction',
-    },
-    {
-        id: 6,
-        title: 'Savour',
-        description: 'A hackathon project built at ConUHacks 2026 — a food-focused web application for discovering and sharing recipes.',
-        image: '/projects/savour.jpg',
-        tags: ['TypeScript', 'Hackathon'],
-        link: 'https://www.savourapp.tech',
-        githubUrl: 'https://github.com/DanielChahine0/savour-conuhacks-2026',
-    },
-    {
-        id: 7,
-        title: 'YU Trade',
-        description: 'A verified campus marketplace for York University where students and faculty can buy and sell items within a trusted community.',
-        image: '/projects/yu-trade.jpg',
-        tags: ['Python', 'Full-Stack'],
-        link: 'https://yu-trade.vercel.app',
-        githubUrl: 'https://github.com/DanielChahine0/YUTrade',
-    },
-    {
-        id: 8,
-        title: 'Fix The 6ix',
-        description: 'A civic tech project for reporting and tracking urban infrastructure issues across the Greater Toronto Area.',
-        image: '/projects/fix-the-6ix.jpg',
-        tags: ['TypeScript', 'Civic Tech'],
-        link: null,
-        githubUrl: 'https://github.com/DanielChahine0/FixThe6ix',
-    },
-    {
-        id: 9,
-        title: 'My Calendar',
-        description: 'A self-hosted Google Calendar-style web app with drag-and-drop scheduling, multi-view layouts, and recurring events.',
-        image: '/projects/my-calendar.jpg',
-        tags: ['JavaScript', 'PHP', 'PostgreSQL'],
-        link: null,
-        githubUrl: 'https://github.com/DanielChahine0/Webapp-MyCalendar',
-    },
-    {
-        id: 10,
-        title: 'Fitness Website',
-        description: 'A fitness platform with calorie calculator, customizable workout programs, diet tips, and progress tracking tools.',
-        image: '/projects/fitness.jpg',
-        tags: ['Python', 'Flask', 'JavaScript'],
-        link: null,
-        githubUrl: 'https://github.com/DanielChahine0/Fitness_website',
-    },
-    {
-        id: 11,
-        title: 'Visual Debugger',
-        description: 'A visual debugging tool that helps developers step through and understand code execution flow graphically.',
-        image: '/projects/visual-debugger.jpg',
-        tags: ['TypeScript', 'Dev Tools'],
-        link: null,
-        githubUrl: 'https://github.com/DanielChahine0/visualDebugger',
-    },
-    {
-        id: 12,
-        title: 'Weather Trend Forecasting',
-        description: 'Analyzes global daily climate data with anomaly detection, time-series forecasting, spatial visualization, and environmental insights.',
-        image: '/projects/weather-forecast.jpg',
-        tags: ['Python', 'FastAPI', 'PostgreSQL'],
-        link: null,
-        githubUrl: 'https://github.com/DanielChahine0/PM-Accelerator-Data-Science-Assessment',
-    },
-    {
-        id: 13,
-        title: 'Weather App',
-        description: 'Full-stack weather application with real-time API integration, 5-day forecasts, CRUD persistence, and location-based insights.',
-        image: '/projects/weather-app.jpg',
-        tags: ['Python', 'Full-Stack', 'API'],
-        link: null,
-        githubUrl: 'https://github.com/DanielChahine0/PM-Accelerator-Full-Stack-Assessment',
-    },
-    {
-        id: 14,
-        title: 'Webpage Resource Analyzer',
-        description: 'Fetches a webpage, identifies all embedded resources, and calculates their individual and total sizes with redirect handling.',
-        image: '/projects/webpage-analyzer.jpg',
-        tags: ['JavaScript', 'Networking'],
-        link: 'https://danielchahine0.github.io/Webpage-Resource-Fetch-Analyzer/',
-        githubUrl: 'https://github.com/DanielChahine0/Webpage-Resource-Fetch-Analyzer',
-    },
-    {
-        id: 15,
-        title: 'eCommerce Store',
-        description: 'A full-featured eCommerce web application with product browsing, cart management, and checkout functionality.',
-        image: '/projects/ecommerce.jpg',
-        tags: ['JavaScript', 'Full-Stack'],
-        link: null,
-        githubUrl: 'https://github.com/DanielChahine0/eCommerce',
-    },
-    {
-        id: 16,
-        title: 'Chess 2D',
-        description: 'A fully playable 2D chess game with all standard rules, piece movement validation, and game state management.',
-        image: '/projects/chess.jpg',
-        tags: ['Python', 'Pygame'],
-        link: null,
-        githubUrl: 'https://github.com/DanielChahine0/Game-Chess_2D',
-    },
-    {
-        id: 17,
-        title: 'Platformer Game',
-        description: 'A Pygame platformer with four switchable characters, double-jumping, tile levels, collectible fruit, and a lives system.',
-        image: '/projects/platformer.jpg',
-        tags: ['Python', 'Pygame'],
-        link: null,
-        githubUrl: 'https://github.com/DanielChahine0/Game-Platformer',
-    },
-    {
-        id: 18,
-        title: 'MindMaze',
-        description: 'Quest for Genius — a puzzle game combining math, logic, and coding challenges into an interactive adventure.',
-        image: '/projects/mindmaze.jpg',
-        tags: ['Python', 'Game'],
-        link: null,
-        githubUrl: 'https://github.com/DanielChahine0/Game-MindMaze',
-    },
-    {
-        id: 19,
-        title: 'Flappy Bird',
-        description: 'A browser-based Flappy Bird clone with smooth physics, score tracking, and responsive controls.',
-        image: '/projects/flappy-bird.jpg',
-        tags: ['HTML', 'JavaScript', 'Game'],
-        link: null,
-        githubUrl: 'https://github.com/DanielChahine0/Game-Flappy_Bird_2D',
-    },
-    {
-        id: 20,
-        title: 'Pong',
-        description: 'A classic Pong game recreation with two-player support, score tracking, and adjustable difficulty.',
-        image: '/projects/pong.jpg',
-        tags: ['HTML', 'JavaScript', 'Game'],
-        link: null,
-        githubUrl: 'https://github.com/DanielChahine0/Game-Pong_2D',
-    },
-    {
-        id: 21,
-        title: 'Snake Game',
-        description: 'The classic Snake game built with Pygame — eat, grow, and try not to crash into yourself.',
-        image: '/projects/snake.jpg',
-        tags: ['Python', 'Pygame'],
-        link: null,
-        githubUrl: 'https://github.com/DanielChahine0/Game-Snake_2D',
-    },
-    {
-        id: 22,
-        title: 'Design Patterns',
-        description: 'Open-source Java examples for classic design patterns inspired by Head First Design Patterns.',
-        image: '/projects/design-patterns.jpg',
-        tags: ['Java', 'Design Patterns'],
-        link: null,
-        githubUrl: 'https://github.com/DanielChahine0/Examples-Design_Patterns',
-    },
-    {
-        id: 23,
-        title: 'Turing Machines',
-        description: 'A curated collection of educational Turing Machines in YAML with step-by-step READMEs and interactive demos.',
-        image: '/projects/turing-machines.jpg',
-        tags: ['YAML', 'Theory', 'Education'],
-        link: null,
-        githubUrl: 'https://github.com/DanielChahine0/Examples-Turing_Machine',
-    },
-    {
-        id: 24,
-        title: 'WebGL Examples',
-        description: 'A collection of WebGL programming examples demonstrating 3D rendering, shaders, and graphics fundamentals.',
-        image: '/projects/webgl.jpg',
-        tags: ['JavaScript', 'WebGL', '3D'],
-        link: null,
-        githubUrl: 'https://github.com/DanielChahine0/Examples-WebGL',
-    },
-]
+const featured = getFeaturedProjects();
 
 const sectionReveal = {
     hidden: { opacity: 0, y: 40 },
@@ -238,7 +23,7 @@ const sectionReveal = {
 const staggerContainer = {
     hidden: {},
     visible: {
-        transition: { staggerChildren: 0.15 },
+        transition: { staggerChildren: 0.12 },
     },
 };
 
@@ -251,7 +36,8 @@ const cardReveal = {
     },
 };
 
-const FeaturedProject = ({ project }) => {
+/* ─── Hero Featured Card (first project, large) ─── */
+const HeroCard = ({ project }) => {
     const ref = useRef(null);
     const { scrollYProgress } = useScroll({
         target: ref,
@@ -263,31 +49,29 @@ const FeaturedProject = ({ project }) => {
         <motion.article
             ref={ref}
             variants={cardReveal}
-            className="group relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12"
+            className="group relative grid grid-cols-1 lg:grid-cols-5 gap-0 overflow-hidden rounded-xl border border-border bg-card"
         >
-            {/* Featured image with parallax */}
-            <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[380px] overflow-hidden rounded-lg bg-muted border border-border">
-                {project.image ? (
-                    <motion.img
-                        src={project.image}
-                        alt={project.title}
-                        className="absolute inset-0 w-full h-full object-cover"
-                        style={{ y: imageY }}
-                        draggable={false}
-                    />
-                ) : (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        <span
-                            className="font-display text-[6rem] md:text-[8rem] font-bold leading-none select-none opacity-10"
-                            style={{ color: "var(--accent-color)" }}
-                        >
-                            {project.title.charAt(0)}
-                        </span>
-                    </div>
-                )}
+            {/* Image — spans 3 cols */}
+            <div className="relative lg:col-span-3 aspect-[16/10] lg:aspect-auto lg:min-h-[420px] overflow-hidden">
+                <motion.img
+                    src={project.image}
+                    alt={project.title}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    style={{ y: imageY }}
+                    draggable={false}
+                />
                 <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-500" />
 
-                {/* Hover overlay links */}
+                {/* Number watermark */}
+                <span
+                    className="font-code absolute bottom-4 left-6 text-[7rem] font-bold leading-none select-none pointer-events-none"
+                    style={{ color: "var(--accent-color)", opacity: 0.08 }}
+                    aria-hidden="true"
+                >
+                    01
+                </span>
+
+                {/* Hover overlay */}
                 <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     {project.link && (
                         <a
@@ -297,8 +81,7 @@ const FeaturedProject = ({ project }) => {
                             className="flex items-center gap-1.5 px-5 py-2.5 bg-background/95 backdrop-blur-sm rounded-md text-sm font-medium text-foreground hover:bg-background transition-colors shadow-lg"
                             onClick={(e) => e.stopPropagation()}
                         >
-                            Live
-                            <ArrowUpRight className="w-3.5 h-3.5" />
+                            Live <ArrowUpRight className="w-3.5 h-3.5" />
                         </a>
                     )}
                     <a
@@ -308,24 +91,13 @@ const FeaturedProject = ({ project }) => {
                         className="flex items-center gap-1.5 px-5 py-2.5 bg-background/95 backdrop-blur-sm rounded-md text-sm font-medium text-foreground hover:bg-background transition-colors shadow-lg"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <Github className="w-3.5 h-3.5" />
-                        Code
+                        <Github className="w-3.5 h-3.5" /> Code
                     </a>
                 </div>
-
-                {/* Large number watermark */}
-                <span
-                    className="font-code absolute -bottom-6 -right-2 text-[8rem] font-bold leading-none select-none pointer-events-none z-0"
-                    style={{ color: "var(--accent-color)", opacity: 0.06 }}
-                    aria-hidden="true"
-                >
-                    01
-                </span>
             </div>
 
-            {/* Featured text content */}
-            <div className="flex flex-col justify-center space-y-5">
-                {/* Tags */}
+            {/* Text content — spans 2 cols */}
+            <div className="lg:col-span-2 flex flex-col justify-center p-8 lg:p-10 space-y-5">
                 <div className="flex flex-wrap gap-1.5">
                     {project.tags.map((tag) => (
                         <span
@@ -342,18 +114,25 @@ const FeaturedProject = ({ project }) => {
                     ))}
                 </div>
 
-                {/* Title */}
                 <h3 className="font-display text-3xl md:text-4xl font-semibold leading-tight">
                     {project.title}
                 </h3>
 
-                {/* Description */}
-                <p className="text-muted-foreground leading-relaxed font-light max-w-md">
+                <p className="text-sm text-muted-foreground font-code tracking-wide uppercase">
+                    {project.subtitle}
+                </p>
+
+                <p className="text-muted-foreground leading-relaxed font-light">
                     {project.description}
                 </p>
 
-                {/* Links */}
-                <div className="flex gap-6 pt-2">
+                <div className="flex gap-5 pt-2">
+                    <Link
+                        to={`/projects/${project.slug}`}
+                        className="link-accent"
+                    >
+                        Read More <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
                     {project.link && (
                         <a
                             href={project.link}
@@ -361,26 +140,17 @@ const FeaturedProject = ({ project }) => {
                             rel="noopener noreferrer"
                             className="link-accent"
                         >
-                            View Project
-                            <ArrowUpRight className="w-3.5 h-3.5" />
+                            Live Demo <ArrowUpRight className="w-3.5 h-3.5" />
                         </a>
                     )}
-                    <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="link-accent"
-                    >
-                        <Github className="w-3.5 h-3.5" />
-                        Source
-                    </a>
                 </div>
             </div>
         </motion.article>
     );
 };
 
-const ProjectCard = ({ project, index }) => {
+/* ─── Compact Card (remaining featured) ─── */
+const CompactCard = ({ project, index }) => {
     const ref = useRef(null);
     const { scrollYProgress } = useScroll({
         target: ref,
@@ -394,40 +164,30 @@ const ProjectCard = ({ project, index }) => {
             variants={cardReveal}
             className="group relative"
         >
-            {/* Project number */}
+            {/* Number watermark */}
             <span
-                className="font-code absolute -top-4 -left-1 text-7xl font-bold leading-none select-none pointer-events-none z-0 transition-opacity duration-300 group-hover:opacity-100"
+                className="font-code absolute -top-5 -left-1 text-7xl font-bold leading-none select-none pointer-events-none z-0 transition-opacity duration-300 group-hover:opacity-100"
                 style={{ color: "var(--accent-color)", opacity: 0.08 }}
                 aria-hidden="true"
             >
-                {String(index + 2).padStart(2, '0')}
+                {String(index + 2).padStart(2, "0")}
             </span>
 
-            <div className="relative z-10">
-                {/* Project Image */}
-                <div className="relative aspect-[4/3] overflow-hidden rounded-lg mb-5 bg-muted border border-border">
-                    {project.image ? (
-                        <motion.img
-                            src={project.image}
-                            alt={project.title}
-                            className="absolute inset-0 w-full h-full object-cover"
-                            style={{ y: imageY }}
-                            draggable={false}
-                        />
-                    ) : (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <span
-                                className="font-display text-[5rem] font-bold leading-none select-none opacity-10"
-                                style={{ color: "var(--accent-color)" }}
-                            >
-                                {project.title.charAt(0)}
-                            </span>
-                        </div>
-                    )}
+            <div className="relative z-10 overflow-hidden rounded-xl border border-border bg-card transition-shadow duration-300 group-hover:shadow-lg"
+                 style={{ '--tw-shadow-color': 'rgba(var(--accent-color-rgb), 0.08)' }}>
+                {/* Image */}
+                <div className="relative aspect-[16/10] overflow-hidden">
+                    <motion.img
+                        src={project.image}
+                        alt={project.title}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                        style={{ y: imageY }}
+                        draggable={false}
+                    />
                     <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-500" />
 
-                    {/* Hover overlay links */}
-                    <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         {project.link && (
                             <a
                                 href={project.link}
@@ -436,8 +196,7 @@ const ProjectCard = ({ project, index }) => {
                                 className="flex items-center gap-1.5 px-4 py-2 bg-background/95 backdrop-blur-sm rounded-md text-sm font-medium text-foreground hover:bg-background transition-colors shadow-lg"
                                 onClick={(e) => e.stopPropagation()}
                             >
-                                Live
-                                <ArrowUpRight className="w-3.5 h-3.5" />
+                                Live <ArrowUpRight className="w-3.5 h-3.5" />
                             </a>
                         )}
                         <a
@@ -447,15 +206,13 @@ const ProjectCard = ({ project, index }) => {
                             className="flex items-center gap-1.5 px-4 py-2 bg-background/95 backdrop-blur-sm rounded-md text-sm font-medium text-foreground hover:bg-background transition-colors shadow-lg"
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <Github className="w-3.5 h-3.5" />
-                            Code
+                            <Github className="w-3.5 h-3.5" /> Code
                         </a>
                     </div>
                 </div>
 
-                {/* Project Info */}
-                <div className="space-y-3">
-                    {/* Tags */}
+                {/* Content */}
+                <div className="p-6 space-y-3">
                     <div className="flex flex-wrap gap-1.5">
                         {project.tags.map((tag) => (
                             <span
@@ -472,38 +229,21 @@ const ProjectCard = ({ project, index }) => {
                         ))}
                     </div>
 
-                    {/* Title */}
-                    <h3 className="font-display text-2xl font-semibold leading-tight group-hover:opacity-80 transition-opacity">
+                    <h3 className="font-display text-2xl font-semibold leading-tight">
                         {project.title}
                     </h3>
 
-                    {/* Description */}
-                    <p className="text-muted-foreground text-sm leading-relaxed font-light">
+                    <p className="text-muted-foreground text-sm leading-relaxed font-light line-clamp-2">
                         {project.description}
                     </p>
 
-                    {/* Links */}
                     <div className="flex gap-5 pt-1">
-                        {project.link && (
-                            <a
-                                href={project.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="link-accent"
-                            >
-                                View Project
-                                <ArrowUpRight className="w-3.5 h-3.5" />
-                            </a>
-                        )}
-                        <a
-                            href={project.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <Link
+                            to={`/projects/${project.slug}`}
                             className="link-accent"
                         >
-                            <Github className="w-3.5 h-3.5" />
-                            Source
-                        </a>
+                            Details <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -511,8 +251,9 @@ const ProjectCard = ({ project, index }) => {
     );
 };
 
+/* ─── Main Section ─── */
 export const ProjectsSection = () => {
-    const [featured, ...rest] = projects;
+    const [hero, ...rest] = featured;
 
     return (
         <section id="projects" className="py-24 px-6">
@@ -526,36 +267,44 @@ export const ProjectsSection = () => {
                     viewport={{ once: true, margin: "-80px" }}
                 >
                     <p className="section-label mb-4">Selected Work</p>
-                    <h2 className="font-display text-4xl md:text-5xl font-semibold leading-tight">
-                        Featured Projects
-                    </h2>
+                    <div className="flex items-end justify-between flex-wrap gap-4">
+                        <h2 className="font-display text-4xl md:text-5xl font-semibold leading-tight">
+                            Featured Projects
+                        </h2>
+                        <Link
+                            to="/projects"
+                            className="link-accent text-muted-foreground text-sm mb-1"
+                        >
+                            View all projects <ArrowRight className="w-4 h-4" />
+                        </Link>
+                    </div>
                 </motion.div>
 
-                {/* Featured Project — large editorial layout */}
+                {/* Hero featured project */}
                 <motion.div
-                    className="mb-16"
+                    className="mb-12"
                     variants={staggerContainer}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-60px" }}
                 >
-                    <FeaturedProject project={featured} />
+                    <HeroCard project={hero} />
                 </motion.div>
 
-                {/* Remaining Projects Grid */}
+                {/* Remaining featured projects — 3-col grid */}
                 <motion.div
-                    className="grid grid-cols-1 md:grid-cols-2 gap-10"
+                    className="grid grid-cols-1 md:grid-cols-3 gap-8"
                     variants={staggerContainer}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-60px" }}
                 >
                     {rest.map((project, i) => (
-                        <ProjectCard key={project.id} project={project} index={i} />
+                        <CompactCard key={project.id} project={project} index={i} />
                     ))}
                 </motion.div>
 
-                {/* View More */}
+                {/* View All CTA */}
                 <motion.div
                     className="mt-16 flex justify-center"
                     variants={sectionReveal}
@@ -563,17 +312,15 @@ export const ProjectsSection = () => {
                     whileInView="visible"
                     viewport={{ once: true }}
                 >
-                    <a
-                        href="https://github.com/DanielChahine0"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="link-accent text-muted-foreground text-sm"
+                    <Link
+                        to="/projects"
+                        className="btn-primary"
                     >
-                        View all projects on GitHub
-                        <ArrowUpRight className="w-4 h-4" />
-                    </a>
+                        View All Projects
+                        <ArrowRight className="w-4 h-4" />
+                    </Link>
                 </motion.div>
             </div>
         </section>
-    )
-}
+    );
+};

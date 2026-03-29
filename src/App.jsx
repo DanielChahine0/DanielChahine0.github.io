@@ -17,6 +17,8 @@ import { Home } from "./pages/Home"
 const NotFound = lazy(() => import("./pages/NotFound").then(m => ({ default: m.NotFound })))
 const Timeline = lazy(() => import("./pages/Timeline").then(m => ({ default: m.Timeline })))
 const Blogs = lazy(() => import("./pages/Blogs").then(m => ({ default: m.Blogs })))
+const Projects = lazy(() => import("./pages/Projects").then(m => ({ default: m.Projects })))
+const ProjectDetail = lazy(() => import("./pages/ProjectDetail").then(m => ({ default: m.ProjectDetail })))
 
 // Loading fallback component
 const PageLoader = () => (
@@ -40,6 +42,8 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait" initial={false}>
       <Routes location={location} key={location.pathname}>
         <Route index element={<Home />} />
+        <Route path="/projects" element={<Suspense fallback={<PageLoader />}><Projects /></Suspense>} />
+        <Route path="/projects/:slug" element={<Suspense fallback={<PageLoader />}><ProjectDetail /></Suspense>} />
         <Route path="/timeline" element={<Suspense fallback={<PageLoader />}><Timeline /></Suspense>} />
         <Route path="/blogs" element={<Suspense fallback={<PageLoader />}><Blogs /></Suspense>} />
         <Route path="/blogs/blog/:id" element={<Suspense fallback={<PageLoader />}><Blogs /></Suspense>} />
