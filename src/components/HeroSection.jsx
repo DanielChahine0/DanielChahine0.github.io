@@ -267,16 +267,18 @@ export const HeroSection = () => {
             >
                 <button
                     onClick={scrollToProjects}
-                    className="group flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+                    className="group flex flex-col items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
                     aria-label="Scroll to projects"
                 >
                     <span className="font-code text-[10px] tracking-[0.25em] uppercase opacity-60 group-hover:opacity-100 transition-opacity">
                         Scroll
                     </span>
-                    <div className="w-px h-10 bg-border relative overflow-hidden rounded-full">
-                        <div
-                            className="absolute inset-x-0 top-0 h-full translate-y-[-100%] group-hover:translate-y-[100%] transition-transform duration-700"
+                    <div className="relative w-[1.5px] h-14 bg-border/50 rounded-full overflow-hidden">
+                        <motion.div
+                            className="absolute inset-x-0 top-0 h-1/3 rounded-full"
                             style={{ background: "var(--accent-color)" }}
+                            animate={{ y: ["0%", "200%", "0%"] }}
+                            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
                         />
                     </div>
                 </button>

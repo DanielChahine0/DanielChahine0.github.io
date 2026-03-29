@@ -1,11 +1,37 @@
 /**
  * Footer.jsx
- * Elegant footer with large display CTA and glass dock social links.
+ * Elegant footer with large display CTA, glass dock social links,
+ * and scroll-triggered entrance animation.
  */
 import { useState } from "react";
 import { ArrowUp, ArrowUpRight } from "lucide-react";
 import { FiGithub, FiLinkedin, FiInstagram, FiMail } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
+
+const sectionReveal = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
+    },
+};
+
+const staggerContainer = {
+    hidden: {},
+    visible: {
+        transition: { staggerChildren: 0.1 },
+    },
+};
+
+const itemReveal = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
+    },
+};
 
 export const Footer = () => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -30,32 +56,48 @@ export const Footer = () => {
 
             <div className="container mx-auto max-w-6xl relative">
                 {/* Main CTA */}
-                <div className="mb-16">
-                    <p className="section-label mb-6">Let's Connect</p>
+                <motion.div
+                    className="mb-16"
+                    variants={staggerContainer}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-80px" }}
+                >
+                    <motion.p variants={itemReveal} className="section-label mb-6">Let's Connect</motion.p>
 
-                    <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight mb-8 max-w-3xl">
+                    <motion.h2
+                        variants={itemReveal}
+                        className="font-display text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight mb-8 max-w-3xl"
+                    >
                         Have a project in mind?
                         <br />
                         <span style={{ color: "var(--accent-color)" }}>Let's talk.</span>
-                    </h2>
+                    </motion.h2>
 
-                    <p className="text-muted-foreground mb-8 max-w-md font-light leading-relaxed">
+                    <motion.p variants={itemReveal} className="text-muted-foreground mb-8 max-w-md font-light leading-relaxed">
                         I'm always open to discussing new projects, creative ideas,
                         or opportunities to collaborate.
-                    </p>
+                    </motion.p>
 
-                    <a
+                    <motion.a
+                        variants={itemReveal}
                         href="mailto:chahinedaniel0@gmail.com"
                         className="btn-primary inline-flex"
                     >
                         <FiMail size={16} />
                         chahinedaniel0@gmail.com
                         <ArrowUpRight className="w-4 h-4 ml-1" />
-                    </a>
-                </div>
+                    </motion.a>
+                </motion.div>
 
                 {/* Divider */}
-                <div className="border-t border-border pt-8">
+                <motion.div
+                    className="border-t border-border pt-8"
+                    variants={sectionReveal}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                >
                     <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                         {/* Copyright */}
                         <div className="flex items-center gap-3">
@@ -161,7 +203,7 @@ export const Footer = () => {
                             </div>
                         </button>
                     </div>
-                </div>
+                </motion.div>
             </div>
         </footer>
     );
